@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CTCoreAccount.h"
 
 @interface BattlefieldModel : NSObject{
 
