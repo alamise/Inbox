@@ -15,31 +15,38 @@
 
 #import "RootViewController.h"
 #import "GameConfig.h"
-
+#import "Plop.h"
 @implementation RootViewController
 
-/*
+
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
  - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-	// Custom initialization
 	}
 	return self;
  }
- */
+-(void)viewDidAppear:(BOOL)animated{
+    static Boolean p;
+    if (!p){
+       // Plop* plop = [[Plop alloc] initWithNibName:@"Plop" bundle:nil];
+        //[self presentModalViewController:plop animated:YES];
+        //p=true;
+    }
+}
 
-/*
+
  // Implement loadView to create a view hierarchy programmatically, without using a nib.
  - (void)loadView {
  }
- */
 
-/*
+
+
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
 	[super viewDidLoad];
+  
  }
- */
+
 
 
 // Override to allow orientations other than the default portrait orientation.

@@ -82,7 +82,7 @@ still sags, but this is better than infinite forces.
 
 Recommendations
 Pseudo Velocities are not really worthwhile because the bridge and chain cannot
-recover from joint separation. In other cases the benefit over Baumgarte is small.
+recover from joint  separation. In other cases the benefit over Baumgarte is small.
 
 Modified NGS is not a robust method for the revolute joint due to the violent
 instability seen in the simple pendulum. Perhaps it is viable with other constraint

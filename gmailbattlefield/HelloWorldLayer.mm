@@ -60,17 +60,18 @@ enum {
 		
 		// Define the gravity vector.
 		b2Vec2 gravity;
-		gravity.Set(0.0f, -10.0f);
+		gravity.Set(0.0f, 0.0f);
 		
 		// Do we want to let bodies sleep?
 		// This will speed up the physics simulation
 		bool doSleep = true;
 		
 		// Construct a world object, which will hold and simulate the rigid bodies.
+
 		world = new b2World(gravity, doSleep);
 		
 		world->SetContinuousPhysics(true);
-		
+		 
 		// Debug Draw functions
 		m_debugDraw = new GLESDebugDraw( PTM_RATIO );
 		world->SetDebugDraw(m_debugDraw);
@@ -159,16 +160,19 @@ enum {
 	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
 	CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
 	[batch addChild:sprite];
-	
+
 	sprite.position = ccp( p.x, p.y);
 	
 	// Define the dynamic body.
 	//Set up a 1m squared box in the physics world
 	b2BodyDef bodyDef;
+    
 	bodyDef.type = b2_dynamicBody;
 
 	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
 	bodyDef.userData = sprite;
+    bodyDef.linearVelocity=b2Vec2(0,2);
+    bodyDef.linearDamping=1;
 	b2Body *body = world->CreateBody(&bodyDef);
 	
 	// Define another box shape for our dynamic body.
@@ -214,12 +218,12 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
 	//Add a new body/atlas sprite at the touched location
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
-		
 		[self addNewSpriteWithCoords: location];
 	}
 }

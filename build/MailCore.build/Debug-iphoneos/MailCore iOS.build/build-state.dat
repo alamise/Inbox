@@ -1,0 +1,1906 @@
+TMailCore iOS
+v3
+r1
+cCheck dependencies
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cLibtool /Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/libmailcore.a normal armv7
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
+c000000004EBF9DB00000000000000154
+t1321180592
+s340
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D93E1E60000000000001466
+t1301537254
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/arpa/inet.h
+c000000004D93D5EB0000000000001533
+t1301534187
+s5427
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/inttypes.h
+c000000004D4F6E900000000000002674
+t1297051280
+s9844
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/netinet/in.h
+c000000004D93DB990000000000006BAC
+t1301535641
+s27564
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdio.h
+c000000004D4F6E910000000000004763
+t1297051281
+s18275
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/param.h
+c000000004D93DB9F00000000000027BE
+t1301535647
+s10174
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/socket.h
+c000000004D93DBA00000000000005ACF
+t1301535648
+s23247
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/time.h
+c000000004D93DBA10000000000001E64
+t1301535649
+s7780
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/types.h
+c000000004D93DBA10000000000002905
+t1301535649
+s10501
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/time.h
+c000000004D4F6E91000000000000178E
+t1297051281
+s6030
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/unistd.h
+c000000004D4F6E910000000000006662
+t1297051281
+s26210
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/gcc/arm-apple-darwin10/4.2.1/include/limits.h
+c000000004D09AC6C0000000000000C7E
+t1292479596
+s3198
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/libmailcore.a
+t1321204222
+s4139096
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o
+t1321204221
+s24556
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o
+t1321204221
+s11328
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o
+t1321204221
+s33012
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o
+t1321204221
+s15656
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o
+t1321204221
+s12900
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o
+t1321204221
+s60464
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o
+t1321204221
+s70608
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o
+t1321204221
+s17856
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o
+t1321204221
+s23728
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o
+t1321204221
+s20008
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o
+t1321204221
+s11628
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o
+t1321204221
+s21064
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o
+t1321204221
+s21360
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o
+t1321204221
+s33468
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o
+t1321204221
+s24232
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o
+t1321204221
+s17732
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o
+t1321204221
+s39888
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o
+t1321204221
+s20168
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o
+t1321204221
+s21484
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o
+t1321204221
+s11156
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/mailcore.LinkFileList
+c000000004EBFF9FB0000000000000BFE
+t1321204219
+s3070
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.h
+c000000004EBFE38B00000000000007E1
+t1321198475
+s2017
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m
+c000000004EBFE38B0000000000000C1D
+t1321198475
+s3101
+i"CTBareAttachment.h"
+i"MailCoreTypes.h"
+i"CTMIME_SinglePart.h"
+i"CTCoreAttachment.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.h
+c000000004EBFE38B000000000000076B
+t1321198475
+s1899
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m
+c000000004EBFE38B0000000000000831
+t1321198475
+s2097
+i"CTBareMessage.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.h
+c000000004EBFE38B0000000000000F3E
+t1321198475
+s3902
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m
+c000000004EBFE38B00000000000019D0
+t1321198475
+s6608
+i"CTCoreAccount.h"
+i"CTCoreFolder.h"
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.h
+c000000004EBFE38B0000000000000B49
+t1321198475
+s2889
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m
+c000000004EBFE38B0000000000000D95
+t1321198475
+s3477
+i"CTCoreAddress.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.h
+c000000004EBFE38B000000000000078F
+t1321198475
+s1935
+i<Foundation/Foundation.h>
+i"CTBareAttachment.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m
+c000000004EBFE38B0000000000000B56
+t1321198475
+s2902
+i"CTCoreAttachment.h"
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.h
+c000000004EBFE38B0000000000001A5E
+t1321198475
+s6750
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m
+c000000004EBFE38B00000000000049AF
+t1321198475
+s18863
+i"CTCoreFolder.h"
+i<libetpan/libetpan.h>
+i"CTCoreMessage.h"
+i"CTCoreAccount.h"
+i"MailCoreTypes.h"
+i"CTBareMessage.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.h
+c000000004EBFE38B0000000000001F07
+t1321198475
+s7943
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m
+c000000004EBFE38B0000000000005731
+t1321198475
+s22321
+i"CTCoreMessage.h"
+i"CTCoreFolder.h"
+i"MailCoreTypes.h"
+i"CTCoreAddress.h"
+i"CTMIMEFactory.h"
+i"CTMIME_MessagePart.h"
+i"CTMIME_TextPart.h"
+i"CTMIME_MultiPart.h"
+i"CTMIME_SinglePart.h"
+i"CTBareAttachment.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.h
+c000000004EBFE38B00000000000007FB
+t1321198475
+s2043
+i<Foundation/Foundation.h>
+i"CTSMTP.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m
+c000000004EBFE38B0000000000001722
+t1321198475
+s5922
+i"CTESMTP.h"
+i"CTCoreAddress.h"
+i"CTCoreMessage.h"
+i"MailCoreTypes.h"
+i<sys/types.h>
+i<sys/socket.h>
+i<netinet/in.h>
+i<arpa/inet.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.h
+c000000004EBFE38B00000000000007CF
+t1321198475
+s1999
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m
+c000000004EBFE38B0000000000001033
+t1321198475
+s4147
+i"CTMIME.h"
+i"CTMIME_Enumerator.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.h
+c000000004EBFE38B000000000000078B
+t1321198475
+s1931
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m
+c000000004EBFE38B0000000000000CA5
+t1321198475
+s3237
+i"CTMIMEFactory.h"
+i"MailCoreTypes.h"
+i<libetpan/libetpan.h>
+i"CTMIME_SinglePart.h"
+i"CTMIME_MessagePart.h"
+i"CTMIME_MultiPart.h"
+i"CTMIME_TextPart.h"
+i"CTMIME.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.h
+c000000004EBFE38B000000000000071F
+t1321198475
+s1823
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m
+c000000004EBFE38B0000000000000A51
+t1321198475
+s2641
+i"CTMIME_Enumerator.h"
+i"CTMIME.h"
+i"CTMIME_MultiPart.h"
+i"CTMIME_MessagePart.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.h
+c000000004EBFE38B00000000000007A3
+t1321198475
+s1955
+i<Foundation/Foundation.h>
+i"CTMIME.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m
+c000000004EBFE38B0000000000000B8B
+t1321198475
+s2955
+i"CTMIME_MessagePart.h"
+i<libetpan/libetpan.h>
+i"MailCoreTypes.h"
+i"CTMIMEFactory.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.h
+c000000004EBFE38B00000000000006E6
+t1321198475
+s1766
+i<Foundation/Foundation.h>
+i"CTMIME.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m
+c000000004EBFE38B0000000000000C03
+t1321198475
+s3075
+i"CTMIME_MultiPart.h"
+i"CTMIME_MessagePart.h"
+i<libetpan/libetpan.h>
+i"MailCoreTypes.h"
+i"CTMIMEFactory.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.h
+c000000004EBFE38B0000000000000818
+t1321198475
+s2072
+i<Foundation/Foundation.h>
+i"CTMIME.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m
+c000000004EBFE38B00000000000015EC
+t1321198475
+s5612
+i"CTMIME_SinglePart.h"
+i<libetpan/libetpan.h>
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.h
+c000000004EBFE38B000000000000071C
+t1321198475
+s1820
+i<Foundation/Foundation.h>
+i"CTMIME_SinglePart.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m
+c000000004EBFE38B0000000000000FDF
+t1321198475
+s4063
+i"CTMIME_TextPart.h"
+i<libetpan/libetpan.h>
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.h
+c000000004EBFE38B0000000000000964
+t1321198475
+s2404
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m
+c000000004EBFE38B0000000000000F0D
+t1321198475
+s3853
+i"CTSMTP.h"
+i"CTCoreAddress.h"
+i"CTCoreMessage.h"
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.h
+c000000004EBFE38B000000000000053C
+t1321198475
+s1340
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+i"MailCoreTypes.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m
+c000000004EBFE38B0000000000001BC6
+t1321198475
+s7110
+i<libetpan/libetpan.h>
+i"CTCoreAddress.h"
+i"CTCoreMessage.h"
+i"CTESMTP.h"
+i"CTSMTP.h"
+i"CTSMTPAsyncConnection.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.h
+c000000004EBFE38B0000000000000B07
+t1321198475
+s2823
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m
+c000000004EBFE38B0000000000000B82
+t1321198475
+s2946
+i"CTSMTPConnection.h"
+i<libetpan/libetpan.h>
+i"CTCoreAddress.h"
+i"CTCoreMessage.h"
+i"MailCoreTypes.h"
+i"CTSMTP.h"
+i"CTESMTP.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.h
+c000000004EBFE38B00000000000009E3
+t1321198475
+s2531
+i<Foundation/Foundation.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m
+c000000004EBFE38B0000000000001EEB
+t1321198475
+s7915
+i"JRLog.h"
+i<unistd.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreTypes.h
+c000000004EBFE38B000000000000114B
+t1321198475
+s4427
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.h
+c000000004EBFE38B0000000000000835
+t1321198475
+s2101
+i<Foundation/Foundation.h>
+i<libetpan/libetpan.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m
+c000000004EBFE38B0000000000000BFB
+t1321198475
+s3067
+i"MailCoreUtilities.h"
+i"JRLog.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/build/Debug-iphoneos/libetpan_ios.a
+c000000004EBFEA430000000000373ED0
+t1321200195
+s3620560
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/acl.h
+c000000004EBFE3AA0000000000001337
+t1321198506
+s4919
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap_extension.h>
+i<libetpan/acl_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/acl_types.h
+c000000004EBFE3AA000000000000148A
+t1321198506
+s5258
+i<libetpan/libetpan-config.h>
+i<libetpan/mailstream.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/annotatemore.h
+c000000004EBFE3AA0000000000000E57
+t1321198506
+s3671
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap_extension.h>
+i<libetpan/annotatemore_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/annotatemore_types.h
+c000000004EBFE3AA000000000000237F
+t1321198506
+s9087
+i<libetpan/libetpan-config.h>
+i<libetpan/mailstream.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/carray.h
+c000000004EBFE3AA0000000000001100
+t1321198506
+s4352
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/charconv.h
+c000000004EBFE3AA0000000000000B02
+t1321198506
+s2818
+i<sys/types.h>
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/chash.h
+c000000004EBFE3AA00000000000015E1
+t1321198506
+s5601
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/clist.h
+c000000004EBFE3AA0000000000001326
+t1321198506
+s4902
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/data_message_driver.h
+c000000004EBFE3AA00000000000007DD
+t1321198506
+s2013
+i<libetpan/mailmessage.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/dbdriver.h
+c000000004EBFE3AA000000000000077C
+t1321198506
+s1916
+i<libetpan/dbdriver_message.h>
+i<libetpan/dbdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/dbdriver_message.h
+c000000004EBFE3AA000000000000076D
+t1321198506
+s1901
+i<libetpan/dbdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/dbdriver_types.h
+c000000004EBFE3AA00000000000008D6
+t1321198506
+s2262
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/generic_cache_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/dbstorage.h
+c000000004EBFE3AA0000000000000848
+t1321198506
+s2120
+i<libetpan/dbdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/feeddriver.h
+c000000004EBFE3AA000000000000075F
+t1321198506
+s1887
+i<libetpan/feeddriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/feeddriver_message.h
+c000000004EBFE3AA0000000000000777
+t1321198506
+s1911
+i<libetpan/feeddriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/feeddriver_types.h
+c000000004EBFE3AA00000000000008A4
+t1321198506
+s2212
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/mailstorage_types.h>
+i<libetpan/newsfeed.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/feedstorage.h
+c000000004EBFE3AA000000000000096F
+t1321198506
+s2415
+i<libetpan/feeddriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/generic_cache_types.h
+c000000004EBFE3AA000000000000079E
+t1321198506
+s1950
+i<libetpan/carray.h>
+i<libetpan/chash.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/hotmailstorage.h
+c000000004EBFE3AA0000000000000814
+t1321198506
+s2068
+i"mailstorage_types.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/idle.h
+c000000004EBFE3AA0000000000000239
+t1321198506
+s569
+i"mailimap_types.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapdriver.h
+c000000004EBFE3AA0000000000000760
+t1321198506
+s1888
+i<libetpan/imapdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapdriver_cached.h
+c000000004EBFE3AA000000000000077C
+t1321198506
+s1916
+i<libetpan/imapdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapdriver_cached_message.h
+c000000004EBFE3AA0000000000000793
+t1321198506
+s1939
+i<libetpan/imapdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapdriver_message.h
+c000000004EBFE3AA0000000000000777
+t1321198506
+s1911
+i<libetpan/imapdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapdriver_types.h
+c000000004EBFE3AA000000000000131C
+t1321198506
+s4892
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/generic_cache_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/imapstorage.h
+c000000004EBFE3AA00000000000010E4
+t1321198506
+s4324
+i<libetpan/imapdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/libetpan-config.h
+c000000004EBFE3AA00000000000001CF
+t1321198506
+s463
+i<limits.h>
+i<sys/param.h>
+i<inttypes.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/libetpan.h
+c000000004EBFE3AA0000000000001022
+t1321198506
+s4130
+i<libetpan/libetpan_version.h>
+i<libetpan/maildriver.h>
+i<libetpan/mailmessage.h>
+i<libetpan/mailfolder.h>
+i<libetpan/mailstorage.h>
+i<libetpan/mailthread.h>
+i<libetpan/mailsmtp.h>
+i<libetpan/charconv.h>
+i<libetpan/mailsem.h>
+i<libetpan/carray.h>
+i<libetpan/chash.h>
+i<libetpan/maillock.h>
+i<libetpan/mboxdriver.h>
+i<libetpan/mboxdriver_message.h>
+i<libetpan/mboxdriver_cached.h>
+i<libetpan/mboxdriver_cached_message.h>
+i<libetpan/mboxstorage.h>
+i<libetpan/mhdriver.h>
+i<libetpan/mhdriver_message.h>
+i<libetpan/mhdriver_cached.h>
+i<libetpan/mhdriver_cached_message.h>
+i<libetpan/mhstorage.h>
+i<libetpan/imapdriver.h>
+i<libetpan/imapdriver_message.h>
+i<libetpan/imapdriver_cached.h>
+i<libetpan/imapdriver_cached_message.h>
+i<libetpan/imapstorage.h>
+i<libetpan/pop3driver.h>
+i<libetpan/pop3driver_message.h>
+i<libetpan/pop3driver_cached.h>
+i<libetpan/pop3driver_cached_message.h>
+i<libetpan/pop3storage.h>
+i<libetpan/hotmailstorage.h>
+i<libetpan/nntpdriver.h>
+i<libetpan/nntpdriver_message.h>
+i<libetpan/nntpdriver_cached.h>
+i<libetpan/nntpdriver_cached_message.h>
+i<libetpan/nntpstorage.h>
+i<libetpan/maildirdriver.h>
+i<libetpan/maildirdriver_message.h>
+i<libetpan/maildirdriver_cached.h>
+i<libetpan/maildirdriver_cached_message.h>
+i<libetpan/maildirstorage.h>
+i<libetpan/dbdriver.h>
+i<libetpan/dbdriver_message.h>
+i<libetpan/dbstorage.h>
+i<libetpan/feeddriver.h>
+i<libetpan/feeddriver_message.h>
+i<libetpan/feedstorage.h>
+i<libetpan/mime_message_driver.h>
+i<libetpan/data_message_driver.h>
+i<libetpan/mailprivacy.h>
+i<libetpan/mailengine.h>
+i<libetpan/mailprivacy_gnupg.h>
+i<libetpan/mailprivacy_smime.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/libetpan_version.h
+c000000004EBFE3AA00000000000007B6
+t1321198506
+s1974
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildir.h
+c000000004EBFE3AA00000000000009BA
+t1321198506
+s2490
+i<libetpan/maildir_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildir_types.h
+c000000004EBFE3AA0000000000000AE1
+t1321198506
+s2785
+i<sys/types.h>
+i<libetpan/libetpan-config.h>
+i<libetpan/chash.h>
+i<libetpan/carray.h>
+i<inttypes.h>
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirdriver.h
+c000000004EBFE3AA000000000000078F
+t1321198506
+s1935
+i<libetpan/maildriver.h>
+i<libetpan/maildirdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirdriver_cached.h
+c000000004EBFE3AA00000000000007AB
+t1321198506
+s1963
+i<libetpan/maildriver.h>
+i<libetpan/maildirdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirdriver_cached_message.h
+c000000004EBFE3AA00000000000007A2
+t1321198506
+s1954
+i<libetpan/maildirdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirdriver_message.h
+c000000004EBFE3AA0000000000000786
+t1321198506
+s1926
+i<libetpan/maildirdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirdriver_types.h
+c000000004EBFE3AA0000000000000B75
+t1321198506
+s2933
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/maildir.h>
+i<libetpan/generic_cache_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildirstorage.h
+c000000004EBFE3AA0000000000000993
+t1321198506
+s2451
+i<libetpan/maildirdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildriver.h
+c000000004EBFE3AA00000000000042CB
+t1321198506
+s17099
+i<libetpan/maildriver_types.h>
+i<libetpan/maildriver_types_helper.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildriver_errors.h
+c000000004EBFE3AA0000000000000C6F
+t1321198506
+s3183
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildriver_types.h
+c000000004EBFE3AA0000000000006650
+t1321198506
+s26192
+i<inttypes.h>
+i<sys/types.h>
+i<libetpan/mailstream.h>
+i<libetpan/mailimf.h>
+i<libetpan/mailmime.h>
+i<libetpan/carray.h>
+i<libetpan/mailthread_types.h>
+i<libetpan/maildriver_errors.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maildriver_types_helper.h
+c000000004EBFE3AA0000000000000C8D
+t1321198506
+s3213
+i<libetpan/maildriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailengine.h
+c000000004EBFE3AA00000000000013D7
+t1321198506
+s5079
+i<libetpan/mailmessage.h>
+i<libetpan/mailfolder.h>
+i<libetpan/mailprivacy_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailfolder.h
+c000000004EBFE3AA0000000000000B1C
+t1321198506
+s2844
+i"mailstorage_types.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap.h
+c000000004EBFE3AA0000000000004442
+t1321198506
+s17474
+i<libetpan/mailimap_types.h>
+i<libetpan/mailimap_types_helper.h>
+i<libetpan/mailimap_helper.h>
+i<libetpan/mailimap_socket.h>
+i<libetpan/mailimap_ssl.h>
+i<libetpan/acl.h>
+i<libetpan/annotatemore.h>
+i<libetpan/uidplus.h>
+i<libetpan/idle.h>
+i<libetpan/quota.h>
+i<libetpan/namespace.h>
+i<libetpan/xlist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_extension.h
+c000000004EBFE3AA0000000000000E4B
+t1321198506
+s3659
+i<libetpan/mailimap_types.h>
+i<libetpan/mailimap_extension_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_extension_types.h
+c000000004EBFE3AA0000000000000836
+t1321198506
+s2102
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_helper.h
+c000000004EBFE3AA0000000000000935
+t1321198506
+s2357
+i<libetpan/mailimap_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_socket.h
+c000000004EBFE3AA00000000000008B7
+t1321198506
+s2231
+i<inttypes.h>
+i<libetpan/mailimap_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_ssl.h
+c000000004EBFE3AA000000000000088E
+t1321198506
+s2190
+i<inttypes.h>
+i<libetpan/mailimap_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_types.h
+c000000004EBFE3AA0000000000018BB4
+t1321198506
+s101300
+i<libetpan/libetpan-config.h>
+i<libetpan/mailstream.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimap_types_helper.h
+c000000004EBFE3AA0000000000004929
+t1321198506
+s18729
+i<libetpan/mailimap_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf.h
+c000000004EBFE3AA0000000000002E38
+t1321198506
+s11832
+i<libetpan/mailimf_types.h>
+i<libetpan/mailimf_write_generic.h>
+i<libetpan/mailimf_write_file.h>
+i<libetpan/mailimf_write_mem.h>
+i<libetpan/mailimf_types_helper.h>
+i<inttypes.h>
+i<sys/types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf_types.h
+c000000004EBFE3AA0000000000005337
+t1321198506
+s21303
+i<libetpan/libetpan-config.h>
+i<libetpan/clist.h>
+i<sys/types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf_types_helper.h
+c000000004EBFE3AA0000000000002F62
+t1321198506
+s12130
+i<libetpan/mailimf_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf_write_file.h
+c000000004EBFE3AA0000000000001548
+t1321198506
+s5448
+i<stdio.h>
+i<libetpan/mailimf_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf_write_generic.h
+c000000004EBFE3AA0000000000001305
+t1321198506
+s4869
+i<stdio.h>
+i<libetpan/mailimf_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailimf_write_mem.h
+c000000004EBFE3AA0000000000001113
+t1321198506
+s4371
+i<stdio.h>
+i<libetpan/mailimf_types.h>
+i<libetpan/mmapstring.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/maillock.h
+c000000004EBFE3AA00000000000007E2
+t1321198506
+s2018
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmbox.h
+c000000004EBFE3AA00000000000010D6
+t1321198506
+s4310
+i<libetpan/mailmbox_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmbox_types.h
+c000000004EBFE3AA0000000000000F07
+t1321198506
+s3847
+i<sys/types.h>
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimf.h>
+i<libetpan/carray.h>
+i<libetpan/chash.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmessage.h
+c000000004EBFE3AA0000000000002B03
+t1321198506
+s11011
+i<libetpan/mailmessage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmessage_types.h
+c000000004EBFE3AA0000000000000742
+t1321198506
+s1858
+i<libetpan/maildriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmh.h
+c000000004EBFE3AA000000000000117C
+t1321198506
+s4476
+i<sys/types.h>
+i<libetpan/libetpan-config.h>
+i<libetpan/carray.h>
+i<libetpan/chash.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime.h
+c000000004EBFE3AA0000000000000ED8
+t1321198506
+s3800
+i<libetpan/mailimf.h>
+i<libetpan/mailmime_types.h>
+i<libetpan/mailmime_types_helper.h>
+i<libetpan/mailmime_content.h>
+i<libetpan/mailmime_decode.h>
+i<libetpan/mailmime_disposition.h>
+i<libetpan/mailmime_write_file.h>
+i<libetpan/mailmime_write_mem.h>
+i<libetpan/mailmime_write_generic.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_content.h
+c000000004EBFE3AA0000000000000C62
+t1321198506
+s3170
+i<libetpan/mailmime_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_decode.h
+c000000004EBFE3AA00000000000007F3
+t1321198506
+s2035
+i<libetpan/mailmime_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_disposition.h
+c000000004EBFE3AA00000000000008C8
+t1321198506
+s2248
+i<libetpan/mailmime_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_types.h
+c000000004EBFE3AA0000000000002F86
+t1321198506
+s12166
+i<libetpan/libetpan-config.h>
+i<inttypes.h>
+i<libetpan/mailimf.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_types_helper.h
+c000000004EBFE3AA000000000000177C
+t1321198506
+s6012
+i<libetpan/mailmime_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_write_file.h
+c000000004EBFE3AA0000000000000E09
+t1321198506
+s3593
+i<libetpan/mailmime_types.h>
+i<stdio.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_write_generic.h
+c000000004EBFE3AA0000000000000B7B
+t1321198506
+s2939
+i<libetpan/mailmime_types.h>
+i<stdio.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailmime_write_mem.h
+c000000004EBFE3AA0000000000000A9E
+t1321198506
+s2718
+i<libetpan/mailmime_types.h>
+i<libetpan/mmapstring.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailpop3.h
+c000000004EBFE3AA0000000000000E34
+t1321198506
+s3636
+i<libetpan/mailpop3_types.h>
+i<libetpan/mailpop3_helper.h>
+i<libetpan/mailpop3_socket.h>
+i<libetpan/mailpop3_ssl.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailpop3_helper.h
+c000000004EBFE3AA0000000000000865
+t1321198506
+s2149
+i"mailpop3.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailpop3_socket.h
+c000000004EBFE3AA00000000000008B7
+t1321198506
+s2231
+i<inttypes.h>
+i<libetpan/mailpop3_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailpop3_ssl.h
+c000000004EBFE3AA000000000000088E
+t1321198506
+s2190
+i<inttypes.h>
+i<libetpan/mailpop3_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailpop3_types.h
+c000000004EBFE3AA0000000000000D8E
+t1321198506
+s3470
+i<libetpan/libetpan-config.h>
+i<libetpan/mailstream.h>
+i<libetpan/mmapstring.h>
+i<libetpan/carray.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailprivacy.h
+c000000004EBFE3AA000000000000123E
+t1321198506
+s4670
+i<libetpan/mailmessage.h>
+i<libetpan/mailprivacy_types.h>
+i<libetpan/mailprivacy_tools.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailprivacy_gnupg.h
+c000000004EBFE3AA00000000000008FB
+t1321198506
+s2299
+i<libetpan/mailprivacy_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailprivacy_smime.h
+c000000004EBFE3AA0000000000000C77
+t1321198506
+s3191
+i<libetpan/mailprivacy_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailprivacy_tools.h
+c000000004EBFE3AA000000000000102C
+t1321198506
+s4140
+i<libetpan/mailmessage.h>
+i<libetpan/mailprivacy_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailprivacy_types.h
+c000000004EBFE3AA0000000000000B8D
+t1321198506
+s2957
+i<libetpan/chash.h>
+i<libetpan/carray.h>
+i<libetpan/mailmessage.h>
+i<libetpan/mailmime.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsem.h
+c000000004EBFE3AA000000000000078B
+t1321198506
+s1931
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsmtp.h
+c000000004EBFE3AA000000000000110D
+t1321198506
+s4365
+i<libetpan/mailsmtp_types.h>
+i<libetpan/mailsmtp_helper.h>
+i<libetpan/mailsmtp_socket.h>
+i<libetpan/mailsmtp_ssl.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsmtp_helper.h
+c000000004EBFE3AA00000000000009D7
+t1321198506
+s2519
+i"mailsmtp_types.h"
+i"clist.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsmtp_socket.h
+c000000004EBFE3AA00000000000008BD
+t1321198506
+s2237
+i<libetpan/libetpan-config.h>
+i<libetpan/mailsmtp_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsmtp_ssl.h
+c000000004EBFE3AA00000000000008A2
+t1321198506
+s2210
+i<inttypes.h>
+i<libetpan/mailsmtp_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailsmtp_types.h
+c000000004EBFE3AA00000000000010EA
+t1321198506
+s4330
+i<libetpan/mailstream.h>
+i<libetpan/mmapstring.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstorage.h
+c000000004EBFE3AA0000000000000CA9
+t1321198506
+s3241
+i<libetpan/maildriver_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstorage_types.h
+c000000004EBFE3AA0000000000001922
+t1321198506
+s6434
+i<libetpan/maildriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream.h
+c000000004EBFE3AA0000000000000DAA
+t1321198506
+s3498
+i<sys/time.h>
+i<libetpan/mailstream_low.h>
+i<libetpan/mailstream_helper.h>
+i<libetpan/mailstream_socket.h>
+i<libetpan/mailstream_ssl.h>
+i<libetpan/mailstream_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream_helper.h
+c000000004EBFE3AA0000000000000CBA
+t1321198506
+s3258
+i<libetpan/mmapstring.h>
+i<libetpan/mailstream.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream_low.h
+c000000004EBFE3AA0000000000000B3E
+t1321198506
+s2878
+i<sys/types.h>
+i<libetpan/mailstream_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream_socket.h
+c000000004EBFE3AA0000000000000830
+t1321198506
+s2096
+i<libetpan/mailstream.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream_ssl.h
+c000000004EBFE3AA0000000000000E8A
+t1321198506
+s3722
+i<libetpan/mailstream.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailstream_types.h
+c000000004EBFE3AA0000000000000C79
+t1321198506
+s3193
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailthread.h
+c000000004EBFE3AA0000000000000E8E
+t1321198506
+s3726
+i<libetpan/mailthread_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mailthread_types.h
+c000000004EBFE3AA000000000000093E
+t1321198506
+s2366
+i<libetpan/maildriver_types.h>
+i<libetpan/mailmessage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxdriver.h
+c000000004EBFE3AA0000000000000760
+t1321198506
+s1888
+i<libetpan/mboxdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxdriver_cached.h
+c000000004EBFE3AA00000000000007A3
+t1321198506
+s1955
+i<libetpan/libetpan-config.h>
+i<libetpan/mboxdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxdriver_cached_message.h
+c000000004EBFE3AA000000000000078E
+t1321198506
+s1934
+i<libetpan/mailmessage.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxdriver_message.h
+c000000004EBFE3AA0000000000000777
+t1321198506
+s1911
+i<libetpan/mboxdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxdriver_types.h
+c000000004EBFE3AA0000000000000C3A
+t1321198506
+s3130
+i<libetpan/maildriver_types.h>
+i<libetpan/mailmbox.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mboxstorage.h
+c000000004EBFE3AA000000000000097D
+t1321198506
+s2429
+i<libetpan/mboxdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhdriver.h
+c000000004EBFE3AA0000000000000752
+t1321198506
+s1874
+i<libetpan/maildriver.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhdriver_cached.h
+c000000004EBFE3AA0000000000000772
+t1321198506
+s1906
+i<libetpan/mhdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhdriver_cached_message.h
+c000000004EBFE3AA0000000000000789
+t1321198506
+s1929
+i<libetpan/mhdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhdriver_message.h
+c000000004EBFE3AA000000000000076D
+t1321198506
+s1901
+i<libetpan/mhdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhdriver_types.h
+c000000004EBFE3AA0000000000000B74
+t1321198506
+s2932
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/mailmh.h>
+i<libetpan/clist.h>
+i<libetpan/generic_cache_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mhstorage.h
+c000000004EBFE3AA0000000000000943
+t1321198506
+s2371
+i<libetpan/mhdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mime_message_driver.h
+c000000004EBFE3AA000000000000080D
+t1321198506
+s2061
+i<libetpan/mailmessage.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/mmapstring.h
+c000000004EBFE3AA0000000000001014
+t1321198506
+s4116
+i<sys/types.h>
+i<libetpan/libetpan-config.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/namespace.h
+c000000004EBFE3AA0000000000000834
+t1321198506
+s2100
+i<libetpan/libetpan-config.h>
+i<libetpan/namespace_types.h>
+i<libetpan/mailimap_extension.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/namespace_types.h
+c000000004EBFE3AA0000000000000D30
+t1321198506
+s3376
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsfeed.h
+c000000004EBFE3AA0000000000000CF8
+t1321198506
+s3320
+i<libetpan/newsfeed_types.h>
+i<libetpan/newsfeed_item.h>
+i<libetpan/newsfeed_item_enclosure.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsfeed_item.h
+c000000004EBFE3AA0000000000000D11
+t1321198506
+s3345
+i<libetpan/newsfeed_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsfeed_item_enclosure.h
+c000000004EBFE3AA000000000000033C
+t1321198506
+s828
+i<libetpan/newsfeed_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsfeed_types.h
+c000000004EBFE3AA0000000000000541
+t1321198506
+s1345
+i<libetpan/carray.h>
+i<sys/types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsnntp.h
+c000000004EBFE3AA00000000000015C1
+t1321198506
+s5569
+i<inttypes.h>
+i<sys/types.h>
+i<time.h>
+i<libetpan/clist.h>
+i<libetpan/mailstream.h>
+i<libetpan/newsnntp_socket.h>
+i<libetpan/newsnntp_ssl.h>
+i<libetpan/newsnntp_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsnntp_socket.h
+c000000004EBFE3AA00000000000007E8
+t1321198506
+s2024
+i<sys/types.h>
+i<inttypes.h>
+i<libetpan/newsnntp_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsnntp_ssl.h
+c000000004EBFE3AA00000000000008A5
+t1321198506
+s2213
+i<sys/types.h>
+i<inttypes.h>
+i<libetpan/newsnntp_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/newsnntp_types.h
+c000000004EBFE3AA0000000000000FB3
+t1321198506
+s4019
+i<libetpan/libetpan-config.h>
+i<libetpan/clist.h>
+i<libetpan/mailstream.h>
+i<libetpan/mmapstring.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpdriver.h
+c000000004EBFE3AA0000000000000760
+t1321198506
+s1888
+i<libetpan/nntpdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpdriver_cached.h
+c000000004EBFE3AA000000000000077C
+t1321198506
+s1916
+i<libetpan/nntpdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpdriver_cached_message.h
+c000000004EBFE3AA0000000000000794
+t1321198506
+s1940
+i<libetpan/mailmessage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpdriver_message.h
+c000000004EBFE3AA0000000000000777
+t1321198506
+s1911
+i<libetpan/nntpdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpdriver_types.h
+c000000004EBFE3AA0000000000001009
+t1321198506
+s4105
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/newsnntp.h>
+i<libetpan/clist.h>
+i<libetpan/generic_cache_types.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/nntpstorage.h
+c000000004EBFE3AA0000000000000EC9
+t1321198506
+s3785
+i<libetpan/nntpdriver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3driver.h
+c000000004EBFE3AA0000000000000760
+t1321198506
+s1888
+i<libetpan/pop3driver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3driver_cached.h
+c000000004EBFE3AA000000000000077C
+t1321198506
+s1916
+i<libetpan/pop3driver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3driver_cached_message.h
+c000000004EBFE3AA0000000000000793
+t1321198506
+s1939
+i<libetpan/pop3driver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3driver_message.h
+c000000004EBFE3AA0000000000000777
+t1321198506
+s1911
+i<libetpan/pop3driver_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3driver_types.h
+c000000004EBFE3AA0000000000001520
+t1321198506
+s5408
+i<libetpan/libetpan-config.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/mailpop3.h>
+i<libetpan/maildriver_types.h>
+i<libetpan/chash.h>
+i<libetpan/mailstorage_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/pop3storage.h
+c000000004EBFE3AA00000000000011F9
+t1321198506
+s4601
+i<libetpan/pop3driver_types.h>
+i<libetpan/pop3driver.h>
+i<libetpan/pop3driver_cached.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/quota.h
+c000000004EBFE3AA0000000000000855
+t1321198506
+s2133
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap_extension.h>
+i<libetpan/quota_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/quota_types.h
+c000000004EBFE3AA0000000000000D23
+t1321198506
+s3363
+i<libetpan/libetpan-config.h>
+i<libetpan/mailstream.h>
+i<libetpan/clist.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/uidplus.h
+c000000004EBFE3AA000000000000057C
+t1321198506
+s1404
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap_types.h>
+i<libetpan/uidplus_types.h>
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/uidplus_types.h
+c000000004EBFE3AA000000000000048F
+t1321198506
+s1167
+i<inttypes.h>
+i"mailimap_types.h"
+
+N/Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/include/libetpan/xlist.h
+c000000004EBFE3AA000000000000088E
+t1321198506
+s2190
+i<libetpan/libetpan-config.h>
+i<libetpan/mailimap_extension.h>
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m
+r0
+
+CBuild AST from /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m
+r0
+
+CCheck dependencies
+r0
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciese6b0bfa03170b441^8715c2a03170b441^---0#1#0#--18"Check dependencies
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.463875
+e342897021.783422
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m47e9767d3170b441^ee77d07d3170b441^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m0000000000000000^2107"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o" Source/CTBareAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareAttachment.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareAttachment.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.352476
+e342897021.632502
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m5b615a7d3170b441^11e0c07d3170b441^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m0000000000000000^2095"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o" Source/CTBareMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTBareMessage.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTBareMessage.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.131605
+e342897021.530550
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m49da217d3170b441^b4cac07d3170b441^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m0000000000000000^2095"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o" Source/CTCoreAccount.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAccount.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAccount.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.136438
+e342897021.463403
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.mdb18237d3170b441^0f0c807d3170b441^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m0000000000000000^2095"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o" Source/CTCoreAddress.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAddress.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAddress.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.104170
+e342897021.462548
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.mc0cd1a7d3170b441^2104807d3170b441^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m0000000000000000^2107"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o" Source/CTCoreAttachment.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreAttachment.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreAttachment.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.186148
+e342897021.712885
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m6bd82f7d3170b441^d55ad07d3170b441^---0#0#0#-19%DVTDocumentLocation2@95"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m0000000000000000^2091"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o" Source/CTCoreFolder.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreFolder.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreFolder.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.300209
+e342897021.841396
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m: In function '-[CTCoreMessage sentDateGMT]':
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m:350: warning: 'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m: In function '-[CTCoreMessage sentDateLocalTimeZone]':
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m:354: warning: 'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m4b054d7d3170b441^a263d77d3170b441^-820"/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m: In function '-[CTCoreMessage sentDateGMT]':/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m:350: warning: 'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m: In function '-[CTCoreMessage sentDateLocalTimeZone]':/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m:354: warning: 'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)2(21%IDEActivityLogMessage2@183"'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)-342897021#126#279#-1#-23%DVTTextDocumentLocation3@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m0000000000000000^349#18446744073709551615#349#18446744073709551615#18446744073709551615#0#33"'*' is deprecated (declared at *)--2@183"'addTimeInterval:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h:27)-342897021#541#279#-1#-3@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m0000000000000000^353#18446744073709551615#353#18446744073709551615#18446744073709551615#0#33"'*' is deprecated (declared at *)--0#0#0#-19%DVTDocumentLocation4@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m0000000000000000^2095"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o" Source/CTCoreMessage.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTCoreMessage.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTCoreMessage.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793493
+e342897021.298494
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.me640cb7b3170b441^a1b97e7d3170b441^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m0000000000000000^2071"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o" Source/CTESMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTESMTP.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTESMTP.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.098731
+e342897021.541898
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.mb664197d3170b441^99d4c07d3170b441^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m0000000000000000^2067"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o" Source/CTMIME.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793497
+e342897021.102973
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m7846cb7b3170b441^a75b1a7d3170b441^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m0000000000000000^2095"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o" Source/CTMIMEFactory.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIMEFactory.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIMEFactory.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.100640
+e342897021.565439
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.md5e8197d3170b441^88d8c07d3170b441^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m0000000000000000^2111"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o" Source/CTMIME_Enumerator.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_Enumerator.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_Enumerator.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793529
+e342897021.097372
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m3849cb7b3170b441^c0ea187d3170b441^---0#0#0#-19%DVTDocumentLocation2@101"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m0000000000000000^2115"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o" Source/CTMIME_MessagePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MessagePart.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MessagePart.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793551
+e342897021.099469
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m564acb7b3170b441^7976197d3170b441^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m0000000000000000^2107"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o" Source/CTMIME_MultiPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_MultiPart.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_MultiPart.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793544
+e342897021.184752
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m: In function '-[CTMIME_SinglePart buildMIMEStruct]':
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m:133: warning: unused variable 'disposition'
+o/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m:128: warning: unused variable 'encoding'
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m5646cb7b3170b441^965a2f7d3170b441^-393"/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m: In function '-[CTMIME_SinglePart buildMIMEStruct]':/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m:133: warning: unused variable 'disposition'/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m:128: warning: unused variable 'encoding'2(21%IDEActivityLogMessage2@29"Unused variable 'disposition'-342897021#138#129#-1#-23%DVTTextDocumentLocation3@100"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m0000000000000000^132#18446744073709551615#132#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--2@26"Unused variable 'encoding'-342897021#267#126#-1#-3@100"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m0000000000000000^127#18446744073709551615#127#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--0#0#0#-19%DVTDocumentLocation4@100"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m0000000000000000^2111"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o" Source/CTMIME_SinglePart.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_SinglePart.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_SinglePart.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.037567
+e342897021.351077
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection90"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.mc9c8097d3170b441^ebc37e7d3170b441^---0#0#0#-19%DVTDocumentLocation2@98"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m0000000000000000^2103"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o" Source/CTMIME_TextPart.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTMIME_TextPart.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTMIME_TextPart.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793017
+e342897021.130215
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m931dcb7b3170b441^9c53217d3170b441^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m0000000000000000^2067"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o" Source/CTSMTP.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTP.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTP.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.531953
+e342897021.876287
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection96"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m5359887d3170b441^d652e07d3170b441^---0#0#0#-19%DVTDocumentLocation2@104"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m0000000000000000^2127"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o" Source/CTSMTPAsyncConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPAsyncConnection.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPAsyncConnection.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793032
+e342897021.135175
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.me71dcb7b3170b441^9599227d3170b441^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m0000000000000000^2107"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o" Source/CTSMTPConnection.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/CTSMTPConnection.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/CTSMTPConnection.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897019.793007
+e342897021.036169
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.md61dcb7b3170b441^3540097d3170b441^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m0000000000000000^2063"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o" Source/JRLog.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/JRLog.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/JRLog.o"
+
+CCompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o" /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s342897021.464776
+e342897021.802722
+r1
+xCompileC
+x../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.mf776777d3170b441^1c7dd07d3170b441^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m0000000000000000^2111"CompileC "../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o" Source/MailCoreUtilities.m normal armv7 objective-c com.apple.compilers.gcc.4_2    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-generated-files.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-own-target-headers.hmap" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-all-target-headers.hmap" -iquote "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/mailcore-project-headers.hmap" -I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/include -Ilibetpan/build-mac/include -Ilibetpan/build-mac/include/libetpan "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources/armv7" "-I/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/DerivedSources" -F/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -c /Users/simon/Documents/projects/gmailbattlefield/MailCore/Source/MailCoreUtilities.m -o "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/MailCoreUtilities.o"
+
+CLibtool /Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/libmailcore.a normal armv7
+s342897021.882792
+e342897022.103286
+r1
+xLibtool
+x/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/libmailcore.a
+xnormal
+xarmv7
+o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: file: /Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/build/Debug-iphoneos/libetpan_ios.a(mailimap_print.o) has no symbols
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection58"Libtool ../build/Debug-iphoneos/libmailcore.a normal armv71b13e27d3170b441^936f1a7e3170b441^---0#0#0#--933"Libtool ../build/Debug-iphoneos/libmailcore.a normal armv7    cd /Users/simon/Documents/projects/gmailbattlefield/MailCore    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv7 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos -filelist "/Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/MailCore.build/Debug-iphoneos/MailCore iOS.build/Objects-normal/armv7/mailcore.LinkFileList" /Users/simon/Documents/projects/gmailbattlefield/MailCore/libetpan/build-mac/build/Debug-iphoneos/libetpan_ios.a -o /Users/simon/Documents/projects/gmailbattlefield/MailCore/../build/Debug-iphoneos/libmailcore.a
+

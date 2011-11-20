@@ -12,7 +12,8 @@
 #import "GameConfig.h"
 #import "HelloWorldLayer.h"
 #import "RootViewController.h"
-
+#import "BattlefieldLayer.h"
+#import "CTCoreAccount.h"
 @implementation AppDelegate
 
 @synthesize window;
@@ -26,21 +27,27 @@
 	//
 #if GAME_AUTOROTATION == kGameAutorotationUIViewController
 	
-	//	CC_ENABLE_DEFAULT_GL_STATES();
-	//	CCDirector *director = [CCDirector sharedDirector];
-	//	CGSize size = [director winSize];
-	//	CCSprite *sprite = [CCSprite spriteWithFile:@"Default.png"];
-	//	sprite.position = ccp(size.width/2, size.height/2);
-	//	sprite.rotation = -90;
-	//	[sprite visit];
-	//	[[director openGLView] swapBuffers];
-	//	CC_ENABLE_DEFAULT_GL_STATES();
+		CC_ENABLE_DEFAULT_GL_STATES();
+		CCDirector *director = [CCDirector sharedDirector];
+		CGSize size = [director winSize];
+		CCSprite *sprite = [CCSprite spriteWithFile:@"Default.png"];
+		sprite.position = ccp(size.width/2, size.height/2);
+		sprite.rotation = -90;
+		[sprite visit];
+		[[director openGLView] swapBuffers];
+		CC_ENABLE_DEFAULT_GL_STATES();
 	
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController	
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
+    
+    
+    CTCoreAccount *account = [[CTCoreAccount alloc] init];
+    [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:@"sim.w80@gmail.com" password:@"Picardia80!"];
+    
+    
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
@@ -111,7 +118,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [BattlefieldLayer scene]];
 }
 
 
