@@ -1286,7 +1286,7 @@
 		F44F060C1478F1CB008DE7CF /* MailCore */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = MailCore;
+			path = MailCore.framework;
 			remoteRef = F44F060B1478F1CB008DE7CF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
