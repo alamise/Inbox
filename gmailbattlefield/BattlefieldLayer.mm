@@ -8,6 +8,8 @@
 
 #import "BattlefieldLayer.h"
 #import "GPLoadingBar.h"
+#import "CTCoreAccount.h"
+#import "CCNode.h"
 #define PTM_RATIO 32
 enum {
 	tagBadZone = 1,
@@ -23,9 +25,29 @@ enum {
 	return scene;
 }
 
+-(void)redraw{
+    for (CCLabelTTF* node in _draggableElements){        
+        CGRect rect = node.boundingBox;
+        CGSize windowSize = [CCDirector sharedDirector].winSize;
+        if (!CGRectContainsRect(CGRectMake(0, 0, windowSize.width, windowSize.height),rect)){
+            for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
+                if (b->GetUserData() ==node) {
+                    b->SetTransform(b2Vec2(windowSize.width/PTM_RATIO/2, windowSize.height/PTM_RATIO/2), b->GetAngle());
+                    b->SetAwake(true);
+                }	
+            }
+        }
+    }
+
+    [self drawGround];
+    [self drawBadDropZone];
+    [self drawGoodDropZone];
+}
+
 -(id) init{
 	if( (self=[super init])) {
-		self.isTouchEnabled = YES;
+
+        self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		world = new b2World(b2Vec2(0,0), true);
@@ -41,27 +63,8 @@ enum {
         //		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
-		b2BodyDef groundBodyDef;
-		groundBodyDef.position.Set(0, 0);
-		b2Body* groundBody = world->CreateBody(&groundBodyDef);
-		b2PolygonShape groundBox;		
-		
-		// bottom
-		groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// top
-		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// left
-		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// right
-		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
 		_draggableElements = [[NSMutableArray alloc] init];
+
         [self addWord:@"merde"];
 		[self schedule: @selector(tick:)];
         [self drawBackground];
@@ -85,9 +88,39 @@ enum {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
+-(void)drawGround{
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
+		if (b->GetUserData() == nil) {
+            world->DestroyBody(b);
+		}	
+	}
+
+    b2BodyDef groundBodyDef;
+    groundBodyDef.userData = nil;
+    groundBodyDef.position.Set(0, 0);
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+    b2PolygonShape groundBox;		
+    // bottom
+    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(windowSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // top
+    groundBox.SetAsEdge(b2Vec2(0,windowSize.height/PTM_RATIO), b2Vec2(windowSize.width/PTM_RATIO,windowSize.height/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // left
+    groundBox.SetAsEdge(b2Vec2(0,windowSize.height/PTM_RATIO), b2Vec2(0,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // right
+    groundBox.SetAsEdge(b2Vec2(windowSize.width/PTM_RATIO,windowSize.height/PTM_RATIO), b2Vec2(windowSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+}
+
 -(void)drawBackground{
-    CCSprite* sprite = [CCSprite spriteWithFile:@"background.png"];
-    [self addChild:sprite z:0];
+    //CCSprite* sprite = [CCSprite spriteWithFile:@"background.png"];
+    //[self addChild:sprite z:0];
 }
 -(void)drawLoadingBar{
     GPLoadingBar *loadingBar = [GPLoadingBar loadingBarWithBar:@"bar.png" inset:@"inset.png" mask:@"mask.png"];
@@ -97,6 +130,9 @@ enum {
 }
 
 -(void)drawBadDropZone{
+    if ([self getChildByTag:tagBadZone]){
+        [self removeChildByTag:tagBadZone cleanup:YES];
+    }
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     
     CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
@@ -105,6 +141,9 @@ enum {
 }
 
 -(void)drawGoodDropZone{
+    if ([self getChildByTag:tagGoodZone]){
+        [self removeChildByTag:tagGoodZone cleanup:YES];
+    }
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     
     CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
@@ -115,16 +154,19 @@ enum {
 -(void) addWord:(NSString*)word{
     
     CGSize maxSize = [word sizeWithFont:[UIFont fontWithName:@"Marker Felt" size:24]];
+    CCNode* node = [[CCNode alloc] init];
     CCLabelTTF *label = [CCLabelTTF labelWithString:word fontName:@"Marker Felt" fontSize:24];
-
-    [self addChild:label z:1];    
+    label.position=CGPointMake(100, 100);
+    [node addChild:label];
+    [node setContentSizeInPixels:CGSizeMake(100, 100)];
+    [self addChild:node z:1];    
 	b2BodyDef bodyDef;
 
 	bodyDef.type = b2_dynamicBody;
 
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
-	bodyDef.userData = label;
-    bodyDef.linearVelocity=b2Vec2(0,2);
+	bodyDef.userData = node;
+    bodyDef.linearVelocity=b2Vec2(1,1);
     bodyDef.linearDamping=1;
 	b2Body *body = world->CreateBody(&bodyDef);
 	
@@ -132,11 +174,11 @@ enum {
 	dynamicBox.SetAsBox(maxSize.width/PTM_RATIO, maxSize.height/PTM_RATIO);//These are mid points for our 1m 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 0.3f;
 	fixtureDef.friction = 0.3f;
 	body->CreateFixture(&fixtureDef);
     
-    [_draggableElements addObject:label];
+    [_draggableElements addObject:node];
 }
 
 
@@ -174,7 +216,7 @@ enum {
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
 
-    for (CCLabelTTF* node in _draggableElements){        
+    for (CCNode* node in _draggableElements){        
         CGRect rect = node.boundingBox;
         if (CGRectContainsPoint(rect, location)) {            
             _touchedNode = [node retain];

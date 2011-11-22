@@ -172,7 +172,7 @@
 		F4FB8644146D2FF200B08513 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8643146D2FF200B08513 /* b2WeldJoint.cpp */; };
 		F4FB864A146D2FF200B08513 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8649146D2FF200B08513 /* main.m */; };
 		F4FB864D146D2FF200B08513 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864C146D2FF200B08513 /* AppDelegate.mm */; };
-		F4FB8650146D2FF200B08513 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864F146D2FF200B08513 /* RootViewController.m */; };
+		F4FB8650146D2FF200B08513 /* BattlefieldViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */; };
 		F4FB8653146D2FF200B08513 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */; };
 		F4FB8656146D2FF200B08513 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8655146D2FF200B08513 /* GLES-Render.mm */; };
 		F4FB8659146D2FF200B08513 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB8658146D2FF200B08513 /* blocks.png */; };
@@ -534,8 +534,8 @@
 		F4FB8649146D2FF200B08513 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F4FB864B146D2FF200B08513 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4FB864C146D2FF200B08513 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		F4FB864E146D2FF200B08513 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		F4FB864F146D2FF200B08513 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		F4FB864E146D2FF200B08513 /* BattlefieldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattlefieldViewController.h; sourceTree = "<group>"; };
+		F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BattlefieldViewController.mm; sourceTree = "<group>"; };
 		F4FB8651146D2FF200B08513 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		F4FB8654146D2FF200B08513 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
@@ -633,8 +633,8 @@
 				F4FB865F146D3CAB00B08513 /* layers */,
 				F4FB864B146D2FF200B08513 /* AppDelegate.h */,
 				F4FB864C146D2FF200B08513 /* AppDelegate.mm */,
-				F4FB864E146D2FF200B08513 /* RootViewController.h */,
-				F4FB864F146D2FF200B08513 /* RootViewController.m */,
+				F4FB864E146D2FF200B08513 /* BattlefieldViewController.h */,
+				F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */,
 				F4FB8651146D2FF200B08513 /* HelloWorldLayer.h */,
 				F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */,
 				F4FB8654146D2FF200B08513 /* GLES-Render.h */,
@@ -1359,7 +1359,7 @@
 				F4FB8644146D2FF200B08513 /* b2WeldJoint.cpp in Sources */,
 				F4FB864A146D2FF200B08513 /* main.m in Sources */,
 				F4FB864D146D2FF200B08513 /* AppDelegate.mm in Sources */,
-				F4FB8650146D2FF200B08513 /* RootViewController.m in Sources */,
+				F4FB8650146D2FF200B08513 /* BattlefieldViewController.mm in Sources */,
 				F4FB8653146D2FF200B08513 /* HelloWorldLayer.mm in Sources */,
 				F4FB8656146D2FF200B08513 /* GLES-Render.mm in Sources */,
 				F4FB8668146D412400B08513 /* BattlefieldLayer.mm in Sources */,
@@ -1468,25 +1468,16 @@
 				GCC_PREFIX_HEADER = gmailbattlefield/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = YES;
 				HEADER_SEARCH_PATHS = (
-					"../MailCore/Source/**",
-					"\"$(SRCROOT)/binaries/$(SDKROOT)/$(CONFIGURATION)/include\"/**",
-					"../MailCore/libetpan/build-mac/include/**",
+					"\"$(SRCROOT)/MailCore/libetpan/build-mac/include\"/**",
+					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Debug/include\"/**",
+					"\"$(SRCROOT)/MailCore/Source\"/**",
 				);
 				INFOPLIST_FILE = gmailbattlefield/Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/binaries/$(SDKROOT)/$(CONFIGURATION)/lib\"",
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../MailCore/libetpan/binaries/$(SDKROOT)/$(CONFIGURATION)/lib\"",
-					"\"$(SRCROOT)/../MailCore/binaries/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/Debug/lib\"",
-					"\"$(SRCROOT)/../MailCore/libetpan/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Release/lib\"",
-					"\"$(SRCROOT)/../MailCore/libetpan/binaries/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/Debug/lib\"",
-					"\"$(SRCROOT)/../MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
+					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Debug/lib\"",
+					"\"$(SRCROOT)\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";

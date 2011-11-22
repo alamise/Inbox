@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class RootViewController;
+@class BattlefieldViewController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
-	RootViewController	*viewController;
+	BattlefieldViewController	*viewController;
 }
 
 @property (nonatomic, retain) UIWindow *window;
