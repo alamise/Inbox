@@ -46,7 +46,6 @@ enum {
 
 -(id) init{
 	if( (self=[super init])) {
-
         self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -95,7 +94,6 @@ enum {
             world->DestroyBody(b);
 		}	
 	}
-
     b2BodyDef groundBodyDef;
     groundBodyDef.userData = nil;
     groundBodyDef.position.Set(0, 0);
@@ -155,10 +153,14 @@ enum {
     
     CGSize maxSize = [word sizeWithFont:[UIFont fontWithName:@"Marker Felt" size:24]];
     CCNode* node = [[CCNode alloc] init];
+    CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
+    sprite.position=CGPointMake(50,50);
     CCLabelTTF *label = [CCLabelTTF labelWithString:word fontName:@"Marker Felt" fontSize:24];
-    label.position=CGPointMake(100, 100);
+    label.position=CGPointMake(50, 50);
+    [node addChild:sprite];
     [node addChild:label];
-    [node setContentSizeInPixels:CGSizeMake(100, 100)];
+    [node setContentSize:CGSizeMake(100, 100)];
+    [node setAnchorPoint:CGPointMake(0.5, 0.5)];
     [self addChild:node z:1];    
 	b2BodyDef bodyDef;
 
@@ -169,9 +171,10 @@ enum {
     bodyDef.linearVelocity=b2Vec2(1,1);
     bodyDef.linearDamping=1;
 	b2Body *body = world->CreateBody(&bodyDef);
-	
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(maxSize.width/PTM_RATIO, maxSize.height/PTM_RATIO);//These are mid points for our 1m 
+
+	b2CircleShape dynamicBox;
+    dynamicBox.m_radius=1.5;
+	//dynamicBox.SetAsBox(maxSize.width/PTM_RATIO, maxSize.height/PTM_RATIO);//These are mid points for our 1m 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;	
 	fixtureDef.density = 0.3f;
