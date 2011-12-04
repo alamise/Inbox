@@ -13,10 +13,10 @@
 - (id)initWithWord:(NSString*)w{
     self = [super init];
     if (self) {
-        word = w;
+        word = [w retain];
         CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
         sprite.position=CGPointMake(50,50);
-        label = [CCLabelTTF labelWithString:word fontName:@"Marker Felt" fontSize:24];
+        label = [[CCLabelTTF labelWithString:word fontName:@"Marker Felt" fontSize:24] retain];
         label.position=CGPointMake(50, 50);
         [self addChild:sprite];
         [self addChild:label];
@@ -27,8 +27,16 @@
 }
 
 -(void)setWord:(NSString *)w{
-    self.word = w;
-    [label setString:word];
+    if (word){
+        [word release];
+    }
+    if (w){
+        word = [w retain];
+        [label setString:word];
+    }else{
+        word=nil;
+    }
+    
 }
 -(void)dealloc{
     self.word=nil;

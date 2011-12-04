@@ -36,7 +36,9 @@
     firstView = [[LoginController alloc] init];
     
     if (!infos){
-        firstView = [[TutorialController alloc] init];
+        infos = [[NSMutableDictionary alloc] init];
+        [infos writeToFile:[self getPlistPath] atomically:YES];
+        firstView = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
     }else{
         firstView = [[LoginController alloc] init];
     }

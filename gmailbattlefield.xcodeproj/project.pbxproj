@@ -11,14 +11,14 @@
 		F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */; };
 		F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4B5148BAE16009F3185 /* TutorialController.m */; };
 		F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B6148BAE16009F3185 /* TutorialView.xib */; };
+		F44DC4BC148BB2E0009F3185 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B9148BB2E0009F3185 /* Login.xib */; };
+		F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4BB148BB2E0009F3185 /* LoginController.mm */; };
 		F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EEEFE14859FC900CE9D9F /* WordNode.m */; };
 		F44F06201478FADA008DE7CF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061E1478FAD9008DE7CF /* libcrypto.a */; };
 		F44F06211478FADA008DE7CF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061F1478FAD9008DE7CF /* libssl.a */; };
 		F44F06261478FB04008DE7CF /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06251478FB04008DE7CF /* libsasl2.a */; };
 		F44F06271478FBBC008DE7CF /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06101478F1CB008DE7CF /* libmailcore.a */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
-		F48920AB14828ECF00150122 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F48920A914828ECF00150122 /* LoginController.mm */; };
-		F48920AC14828ECF00150122 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48920AA14828ECF00150122 /* Login.xib */; };
 		F4CDC13F146EEAFA003C2D4D /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC13E146EEAFA003C2D4D /* round.png */; };
 		F4CDC142146EF41D003C2D4D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC141146EF41D003C2D4D /* background.png */; };
 		F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC144146EF5DE003C2D4D /* GPLoadingBar.m */; };
@@ -222,6 +222,9 @@
 		F44DC4B4148BAE16009F3185 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
 		F44DC4B5148BAE16009F3185 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
 		F44DC4B6148BAE16009F3185 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
+		F44DC4B9148BB2E0009F3185 /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
+		F44DC4BA148BB2E0009F3185 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		F44DC4BB148BB2E0009F3185 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
 		F44EEEFC14859D6C00CE9D9F /* BFDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDelegateProtocol.h; sourceTree = "<group>"; };
 		F44EEEFD14859FC900CE9D9F /* WordNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordNode.h; sourceTree = "<group>"; };
 		F44EEEFE14859FC900CE9D9F /* WordNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordNode.m; sourceTree = "<group>"; };
@@ -230,9 +233,6 @@
 		F44F061F1478FAD9008DE7CF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator/libssl.a"; sourceTree = "<group>"; };
 		F44F06251478FB04008DE7CF /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsasl2.a; path = "MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphonesimulator/libsasl2.a"; sourceTree = "<group>"; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		F48920A814828ECF00150122 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = battlefield/LoginController.h; sourceTree = "<group>"; };
-		F48920A914828ECF00150122 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LoginController.mm; path = battlefield/LoginController.mm; sourceTree = "<group>"; };
-		F48920AA14828ECF00150122 /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Login.xib; path = battlefield/Login.xib; sourceTree = "<group>"; };
 		F4CDC13E146EEAFA003C2D4D /* round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round.png; sourceTree = "<group>"; };
 		F4CDC141146EF41D003C2D4D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		F4CDC143146EF5DE003C2D4D /* GPLoadingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLoadingBar.h; sourceTree = "<group>"; };
@@ -630,9 +630,9 @@
 		F48920A714828EA300150122 /* login */ = {
 			isa = PBXGroup;
 			children = (
-				F48920A814828ECF00150122 /* LoginController.h */,
-				F48920A914828ECF00150122 /* LoginController.mm */,
-				F48920AA14828ECF00150122 /* Login.xib */,
+				F44DC4B9148BB2E0009F3185 /* Login.xib */,
+				F44DC4BA148BB2E0009F3185 /* LoginController.h */,
+				F44DC4BB148BB2E0009F3185 /* LoginController.mm */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -1270,9 +1270,9 @@
 				F4CDC14F146EF797003C2D4D /* inset.png in Resources */,
 				F4CDC150146EF797003C2D4D /* inset-hd.png in Resources */,
 				F4CDC151146EF797003C2D4D /* bar-hd.png in Resources */,
-				F48920AC14828ECF00150122 /* Login.xib in Resources */,
 				F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */,
 				F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */,
+				F44DC4BC148BB2E0009F3185 /* Login.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1419,10 +1419,10 @@
 				F4FB8668146D412400B08513 /* BattlefieldLayer.mm in Sources */,
 				F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */,
 				F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */,
-				F48920AB14828ECF00150122 /* LoginController.mm in Sources */,
 				F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */,
 				F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */,
 				F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */,
+				F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

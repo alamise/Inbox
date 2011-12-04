@@ -25,10 +25,11 @@ enum {
     -(void) sortingDone;
     -(void) displayLoading;
     -(void) wakeup;
+@property(nonatomic,retain) WordNode* draggedNode;
 @end
 
 @implementation BattlefieldLayer
-@synthesize delegate;
+@synthesize delegate, draggedNode;
 
 +(CCScene *) scene{
 	CCScene *scene = [CCScene node];
@@ -36,6 +37,7 @@ enum {
 	[scene addChild: layer];
 	return scene;
 }
+
 -(id) init{
 	if( (self=[super init])) {
         self.isTouchEnabled = YES;
@@ -65,8 +67,10 @@ enum {
 }
 
 -(void) putWord:(NSString*)word{
-    WordNode* node = [[WordNode alloc] initWithWord:@"booom"];
+    WordNode* node = [[WordNode alloc] initWithWord:word];
     [self addChild:node z:1];
+    
+    
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
@@ -86,21 +90,22 @@ enum {
 	body->CreateFixture(&fixtureDef);
     
     [draggableNodes addObject:node];
-
+    [node release];
 }
 
 #pragma mark - drag & drop
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    self.draggedNode = nil;
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
     
     for (WordNode* node in draggableNodes){        
         CGRect rect = node.boundingBox;
         if (CGRectContainsPoint(rect, location)) {            
-            draggedNode = [node retain];
+            self.draggedNode = node;
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
-                if (b->GetUserData() ==draggedNode) {
+                if (b->GetUserData() == draggedNode) {
                     b->SetLinearVelocity(b2Vec2(0,0));
                     b->SetAngularVelocity(0);
                     b->SetAwake(true);
@@ -112,7 +117,7 @@ enum {
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    if (!draggedNode){
+    if (!self.draggedNode){
         return;
     }
     
@@ -123,13 +128,13 @@ enum {
     oldTouchLocation = [self convertToNodeSpace:oldTouchLocation];
     
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);    
-    CGPoint newPos = ccpAdd(draggedNode.position, translation);
-    draggedNode.position = touchLocation;
+    CGPoint newPos = ccpAdd(self.draggedNode.position, translation);
+    self.draggedNode.position = touchLocation;
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     CGRect bounding = CGRectMake(0, 0, windowSize.width, windowSize.height);
     if (!CGRectContainsPoint(bounding, newPos)) return;
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
-		if (b->GetUserData() ==draggedNode) {
+		if (b->GetUserData() == self.draggedNode) {
             b->SetTransform(b2Vec2(newPos.x/PTM_RATIO, newPos.y/PTM_RATIO), b->GetAngle());
             b->SetAwake(true);
 		}	
@@ -137,17 +142,19 @@ enum {
 }
 
 -(void)removeChildAndBody:(CCNode*)node{
-    [self removeChild:node cleanup:YES];
+
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData()==node){
             world->DestroyBody(b);
             break;
         }
     }
+    [self removeChild:node cleanup:YES];
+    [draggableNodes removeObject:node];
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    if (!draggedNode){
+    if (self.draggedNode==nil){
         return;
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
@@ -155,16 +162,14 @@ enum {
     BOOL sorted = false;
     if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, location)){
         sorted = true;
-        [self.delegate sortedWord:draggedNode.word isGood:YES];
-        [self removeChildAndBody:draggedNode];
+        [self.delegate sortedWord:self.draggedNode.word isGood:YES];
+        [self removeChildAndBody:self.draggedNode];
     }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, location)){
         sorted = false;
-        [self.delegate sortedWord:draggedNode.word isGood:NO];
-        [self removeChildAndBody:draggedNode];
+        [self.delegate sortedWord:self.draggedNode.word isGood:NO];
+        [self removeChildAndBody:self.draggedNode];
     }else{
     }
-    [draggedNode release];
-    draggedNode=nil;
 }
 
 
@@ -287,7 +292,7 @@ enum {
 	world = NULL;	
 	delete m_debugDraw;
     [draggableNodes release];
-    [draggedNode release];
+    self.draggedNode = nil;
 	[super dealloc];
 }
 @end

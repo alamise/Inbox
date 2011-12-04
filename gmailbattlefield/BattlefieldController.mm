@@ -18,12 +18,19 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        model  = [[BattlefieldModel alloc] initWithEmail:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
-        
+        model = [[BattlefieldModel alloc] initWithEmail:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
+        model.delegate = self;
         
         [plistDic release];
 	}
 	return self;
+}
+
+
+- (void)dealloc {
+    [model end];
+    [model release];
+    [super dealloc];
 }
 
 
@@ -70,8 +77,10 @@
     }else{
         NSString* nextWord = [model getNextWord];
         if (nextWord){
+            [nextWord retain];
             isLoading = false;
             [self.layer putWord:nextWord];
+            [nextWord release];
         }else{
             isLoading = true;
             [self.layer showLoadingView];
@@ -80,7 +89,7 @@
 }
 
 - (void)nextWordReady{
-    if (!isLoading){
+    if (isLoading){
         [self loop];
     }
 }
@@ -119,9 +128,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 @end
