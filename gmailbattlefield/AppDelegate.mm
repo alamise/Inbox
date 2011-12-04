@@ -10,17 +10,14 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
-#import "BattlefieldViewController.h"
+#import "BattlefieldController.h"
 #import "BattlefieldLayer.h"
 #import "CTCoreAccount.h"
+#import "BattlefieldModel.h"
+#import "LoginController.h"
+#import "TutorialController.h"
 @implementation AppDelegate
-
-@synthesize window;
-
-- (void) removeStartupFlicker{
-
-}
+@synthesize window,navigationController;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
@@ -29,17 +26,30 @@
     CCDirector *director = [CCDirector sharedDirector];
     [director setAnimationInterval:1.0/60];
     [director setDisplayFPS:YES];
-
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    [director setDeviceOrientation:kCCDeviceOrientationPortrait];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	viewController = [[BattlefieldViewController alloc] initWithNibName:nil bundle:nil];
+
+    UIViewController* firstView = nil;
+    NSDictionary* infos = [NSMutableDictionary dictionaryWithContentsOfFile:[self getPlistPath]];
     
-	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:viewController];
-	[window addSubview: nav.view];
+    firstView = [[LoginController alloc] init];
+    
+    if (!infos){
+        firstView = [[TutorialController alloc] init];
+    }else{
+        firstView = [[LoginController alloc] init];
+    }
+    
+	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
+	[window addSubview: navigationController.view];
 	[window makeKeyAndVisible];
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-	[self removeStartupFlicker];
 }
 
+-(NSString*)getPlistPath{
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:@"infos.plist"];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[[CCDirector sharedDirector] pause];
@@ -63,14 +73,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	CCDirector *director = [CCDirector sharedDirector];
-	
-	[[director openGLView] removeFromSuperview];
-	
-	[viewController release];
-	
+	[[director openGLView] removeFromSuperview];	
+    [director end];	
 	[window release];
-	
-	[director end];	
+	[navigationController release];
 }
 
 - (void)applicationSignificantTimeChange:(UIApplication *)application {
@@ -80,6 +86,7 @@
 - (void)dealloc {
 	[[CCDirector sharedDirector] end];
 	[window release];
+    [navigationController release];
 	[super dealloc];
 }
 

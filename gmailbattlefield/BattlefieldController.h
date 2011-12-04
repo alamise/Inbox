@@ -7,8 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BattlefieldLayer.h"
-@interface BattlefieldViewController : UIViewController {
+#import "BFDelegateProtocol.h"
+#import "BattlefieldModel.h"
+@interface BattlefieldController : UIViewController<BFDelegateProtocol> {
+    BattlefieldModel* model;
     BattlefieldLayer* layer;
+    BOOL isLoading;
+    EAGLView* glView;
 }
 @property(nonatomic,retain) BattlefieldLayer* layer;
 @end

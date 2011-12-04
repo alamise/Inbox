@@ -8,12 +8,26 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GLES-Render.h"
+
+#import "BFDelegateProtocol.h"
+@class WordNode;
 @interface BattlefieldLayer : CCLayer{
 	b2World* world;
 	GLESDebugDraw *m_debugDraw;
-    NSMutableArray *_draggableElements;
-    CCNode *_touchedNode;
+    NSMutableArray *draggableNodes;
+    WordNode *draggedNode;
+    id<BFDelegateProtocol> delegate;
 }
-+(CCScene *) scene;
--(void)redraw;
+@property(nonatomic,retain) id<BFDelegateProtocol> delegate;
+
+-(void)showLoadingView;
+-(void)showDoneView;
+-(void) putWord:(NSString*)word;
+
+-(void)didRotate;
+-(void)willRotate;
+-(void)willAppear;
+-(void)didAppear;
+
 @end
+

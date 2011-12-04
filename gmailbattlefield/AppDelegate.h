@@ -11,10 +11,11 @@
 @class BattlefieldViewController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
-	UIWindow			*window;
-	BattlefieldViewController	*viewController;
+	UIWindow *window;
+    UINavigationController* navigationController;
 }
 
 @property (nonatomic, retain) UIWindow *window;
-
+@property (nonatomic, retain) UINavigationController* navigationController;
+-(NSString*)getPlistPath;
 @end

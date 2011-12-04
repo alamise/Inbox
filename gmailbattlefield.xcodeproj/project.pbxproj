@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */; };
+		F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */; };
+		F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4B5148BAE16009F3185 /* TutorialController.m */; };
+		F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B6148BAE16009F3185 /* TutorialView.xib */; };
+		F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EEEFE14859FC900CE9D9F /* WordNode.m */; };
 		F44F06201478FADA008DE7CF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061E1478FAD9008DE7CF /* libcrypto.a */; };
 		F44F06211478FADA008DE7CF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061F1478FAD9008DE7CF /* libssl.a */; };
 		F44F06261478FB04008DE7CF /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06251478FB04008DE7CF /* libsasl2.a */; };
 		F44F06271478FBBC008DE7CF /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06101478F1CB008DE7CF /* libmailcore.a */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
+		F48920AB14828ECF00150122 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F48920A914828ECF00150122 /* LoginController.mm */; };
+		F48920AC14828ECF00150122 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48920AA14828ECF00150122 /* Login.xib */; };
 		F4CDC13F146EEAFA003C2D4D /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC13E146EEAFA003C2D4D /* round.png */; };
 		F4CDC142146EF41D003C2D4D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC141146EF41D003C2D4D /* background.png */; };
 		F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC144146EF5DE003C2D4D /* GPLoadingBar.m */; };
@@ -21,8 +28,6 @@
 		F4CDC14F146EF797003C2D4D /* inset.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC149146EF797003C2D4D /* inset.png */; };
 		F4CDC150146EF797003C2D4D /* inset-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC14A146EF797003C2D4D /* inset-hd.png */; };
 		F4CDC151146EF797003C2D4D /* bar-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC14B146EF797003C2D4D /* bar-hd.png */; };
-		F4CDC155146F005D003C2D4D /* Plop.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC153146F005D003C2D4D /* Plop.m */; };
-		F4CDC156146F005D003C2D4D /* Plop.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC154146F005D003C2D4D /* Plop.xib */; };
 		F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */; };
 		F4FB8477146D2FEE00B08513 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8476146D2FEE00B08513 /* QuartzCore.framework */; };
 		F4FB8479146D2FEE00B08513 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8478146D2FEE00B08513 /* OpenGLES.framework */; };
@@ -172,8 +177,7 @@
 		F4FB8644146D2FF200B08513 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8643146D2FF200B08513 /* b2WeldJoint.cpp */; };
 		F4FB864A146D2FF200B08513 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8649146D2FF200B08513 /* main.m */; };
 		F4FB864D146D2FF200B08513 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864C146D2FF200B08513 /* AppDelegate.mm */; };
-		F4FB8650146D2FF200B08513 /* BattlefieldViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */; };
-		F4FB8653146D2FF200B08513 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */; };
+		F4FB8650146D2FF200B08513 /* BattlefieldController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB864F146D2FF200B08513 /* BattlefieldController.mm */; };
 		F4FB8656146D2FF200B08513 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8655146D2FF200B08513 /* GLES-Render.mm */; };
 		F4FB8659146D2FF200B08513 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB8658146D2FF200B08513 /* blocks.png */; };
 		F4FB8668146D412400B08513 /* BattlefieldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4FB8667146D412400B08513 /* BattlefieldLayer.mm */; };
@@ -211,11 +215,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFModelProtocol.h; path = gmailbattlefield/BFModelProtocol.h; sourceTree = "<group>"; };
+		F44DC4AE148BADCA009F3185 /* SortedEmailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedEmailsController.h; sourceTree = "<group>"; };
+		F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedEmailsController.m; sourceTree = "<group>"; };
+		F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortedEmailsView.xib; sourceTree = "<group>"; };
+		F44DC4B4148BAE16009F3185 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
+		F44DC4B5148BAE16009F3185 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
+		F44DC4B6148BAE16009F3185 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
+		F44EEEFC14859D6C00CE9D9F /* BFDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDelegateProtocol.h; sourceTree = "<group>"; };
+		F44EEEFD14859FC900CE9D9F /* WordNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordNode.h; sourceTree = "<group>"; };
+		F44EEEFE14859FC900CE9D9F /* WordNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordNode.m; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F44F061E1478FAD9008DE7CF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator/libcrypto.a"; sourceTree = "<group>"; };
 		F44F061F1478FAD9008DE7CF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator/libssl.a"; sourceTree = "<group>"; };
 		F44F06251478FB04008DE7CF /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsasl2.a; path = "MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphonesimulator/libsasl2.a"; sourceTree = "<group>"; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		F48920A814828ECF00150122 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = battlefield/LoginController.h; sourceTree = "<group>"; };
+		F48920A914828ECF00150122 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LoginController.mm; path = battlefield/LoginController.mm; sourceTree = "<group>"; };
+		F48920AA14828ECF00150122 /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Login.xib; path = battlefield/Login.xib; sourceTree = "<group>"; };
 		F4CDC13E146EEAFA003C2D4D /* round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round.png; sourceTree = "<group>"; };
 		F4CDC141146EF41D003C2D4D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		F4CDC143146EF5DE003C2D4D /* GPLoadingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLoadingBar.h; sourceTree = "<group>"; };
@@ -226,9 +243,6 @@
 		F4CDC149146EF797003C2D4D /* inset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inset.png; sourceTree = "<group>"; };
 		F4CDC14A146EF797003C2D4D /* inset-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inset-hd.png"; sourceTree = "<group>"; };
 		F4CDC14B146EF797003C2D4D /* bar-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-hd.png"; sourceTree = "<group>"; };
-		F4CDC152146F005D003C2D4D /* Plop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plop.h; sourceTree = "<group>"; };
-		F4CDC153146F005D003C2D4D /* Plop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plop.m; sourceTree = "<group>"; };
-		F4CDC154146F005D003C2D4D /* Plop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Plop.xib; sourceTree = "<group>"; };
 		F4CDC4EF146FC13B003C2D4D /* BattlefieldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BattlefieldModel.h; path = gmailbattlefield/BattlefieldModel.h; sourceTree = "<group>"; };
 		F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BattlefieldModel.m; path = gmailbattlefield/BattlefieldModel.m; sourceTree = "<group>"; };
 		F4FB8472146D2FEE00B08513 /* gmailbattlefield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gmailbattlefield.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -534,10 +548,8 @@
 		F4FB8649146D2FF200B08513 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F4FB864B146D2FF200B08513 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4FB864C146D2FF200B08513 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		F4FB864E146D2FF200B08513 /* BattlefieldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattlefieldViewController.h; sourceTree = "<group>"; };
-		F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BattlefieldViewController.mm; sourceTree = "<group>"; };
-		F4FB8651146D2FF200B08513 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
+		F4FB864E146D2FF200B08513 /* BattlefieldController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattlefieldController.h; sourceTree = "<group>"; };
+		F4FB864F146D2FF200B08513 /* BattlefieldController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BattlefieldController.mm; sourceTree = "<group>"; };
 		F4FB8654146D2FF200B08513 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		F4FB8655146D2FF200B08513 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		F4FB8657146D2FF200B08513 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -570,6 +582,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F44DC4AD148BAD0F009F3185 /* sortedEmails */ = {
+			isa = PBXGroup;
+			children = (
+				F44DC4AE148BADCA009F3185 /* SortedEmailsController.h */,
+				F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */,
+				F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */,
+			);
+			name = sortedEmails;
+			sourceTree = "<group>";
+		};
+		F44DC4B3148BADEF009F3185 /* tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				F44DC4B4148BAE16009F3185 /* TutorialController.h */,
+				F44DC4B5148BAE16009F3185 /* TutorialController.m */,
+				F44DC4B6148BAE16009F3185 /* TutorialView.xib */,
+			);
+			name = tutorial;
+			sourceTree = "<group>";
+		};
 		F44F05F71478F1C9008DE7CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,12 +612,46 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F48920A614828E2300150122 /* battlefield */ = {
+			isa = PBXGroup;
+			children = (
+				F48920B01482913B00150122 /* model */,
+				F4FB864E146D2FF200B08513 /* BattlefieldController.h */,
+				F4FB864F146D2FF200B08513 /* BattlefieldController.mm */,
+				F4FB8666146D412400B08513 /* BattlefieldLayer.h */,
+				F4FB8667146D412400B08513 /* BattlefieldLayer.mm */,
+				F44EEEFC14859D6C00CE9D9F /* BFDelegateProtocol.h */,
+				F44EEEFD14859FC900CE9D9F /* WordNode.h */,
+				F44EEEFE14859FC900CE9D9F /* WordNode.m */,
+			);
+			name = battlefield;
+			sourceTree = "<group>";
+		};
+		F48920A714828EA300150122 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				F48920A814828ECF00150122 /* LoginController.h */,
+				F48920A914828ECF00150122 /* LoginController.mm */,
+				F48920AA14828ECF00150122 /* Login.xib */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		F48920B01482913B00150122 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F4CDC4EF146FC13B003C2D4D /* BattlefieldModel.h */,
+				F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */,
+				F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */,
+			);
+			name = model;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		F4FB8467146D2FEE00B08513 = {
 			isa = PBXGroup;
 			children = (
 				F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */,
-				F4CDC4EF146FC13B003C2D4D /* BattlefieldModel.h */,
-				F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */,
 				F4FB8486146D2FEE00B08513 /* gmailbattlefield */,
 				F4FB8475146D2FEE00B08513 /* Frameworks */,
 				F4FB8473146D2FEE00B08513 /* Products */,
@@ -622,6 +688,10 @@
 		F4FB8486146D2FEE00B08513 /* gmailbattlefield */ = {
 			isa = PBXGroup;
 			children = (
+				F44DC4B3148BADEF009F3185 /* tutorial */,
+				F44DC4AD148BAD0F009F3185 /* sortedEmails */,
+				F48920A714828EA300150122 /* login */,
+				F48920A614828E2300150122 /* battlefield */,
 				F4CDC146146EF797003C2D4D /* mask-hd.png */,
 				F4CDC147146EF797003C2D4D /* mask.png */,
 				F4CDC148146EF797003C2D4D /* bar.png */,
@@ -630,23 +700,13 @@
 				F4CDC14B146EF797003C2D4D /* bar-hd.png */,
 				F4CDC141146EF41D003C2D4D /* background.png */,
 				F4CDC13E146EEAFA003C2D4D /* round.png */,
-				F4FB865F146D3CAB00B08513 /* layers */,
 				F4FB864B146D2FF200B08513 /* AppDelegate.h */,
 				F4FB864C146D2FF200B08513 /* AppDelegate.mm */,
-				F4FB864E146D2FF200B08513 /* BattlefieldViewController.h */,
-				F4FB864F146D2FF200B08513 /* BattlefieldViewController.mm */,
-				F4FB8651146D2FF200B08513 /* HelloWorldLayer.h */,
-				F4FB8652146D2FF200B08513 /* HelloWorldLayer.mm */,
-				F4FB8654146D2FF200B08513 /* GLES-Render.h */,
-				F4FB8655146D2FF200B08513 /* GLES-Render.mm */,
 				F4FB8657146D2FF200B08513 /* GameConfig.h */,
 				F4FB8487146D2FEE00B08513 /* Resources */,
 				F4FB849B146D2FEE00B08513 /* libs */,
 				F4FB8647146D2FF200B08513 /* Supporting Files */,
 				F4CDC144146EF5DE003C2D4D /* GPLoadingBar.m */,
-				F4CDC152146F005D003C2D4D /* Plop.h */,
-				F4CDC153146F005D003C2D4D /* Plop.m */,
-				F4CDC154146F005D003C2D4D /* Plop.xib */,
 			);
 			path = gmailbattlefield;
 			sourceTree = "<group>";
@@ -672,6 +732,8 @@
 		F4FB849B146D2FEE00B08513 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				F4FB8654146D2FF200B08513 /* GLES-Render.h */,
+				F4FB8655146D2FF200B08513 /* GLES-Render.mm */,
 				F4FB8591146D2FF100B08513 /* LICENSE_cocos2d.txt */,
 				F4FB85A0146D2FF100B08513 /* LICENSE_CocosDenshion.txt */,
 				F4FB85AB146D2FF100B08513 /* LICENSE_TouchJSON.txt */,
@@ -1110,15 +1172,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F4FB865F146D3CAB00B08513 /* layers */ = {
-			isa = PBXGroup;
-			children = (
-				F4FB8666146D412400B08513 /* BattlefieldLayer.h */,
-				F4FB8667146D412400B08513 /* BattlefieldLayer.mm */,
-			);
-			name = layers;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1217,7 +1270,9 @@
 				F4CDC14F146EF797003C2D4D /* inset.png in Resources */,
 				F4CDC150146EF797003C2D4D /* inset-hd.png in Resources */,
 				F4CDC151146EF797003C2D4D /* bar-hd.png in Resources */,
-				F4CDC156146F005D003C2D4D /* Plop.xib in Resources */,
+				F48920AC14828ECF00150122 /* Login.xib in Resources */,
+				F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */,
+				F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1359,13 +1414,15 @@
 				F4FB8644146D2FF200B08513 /* b2WeldJoint.cpp in Sources */,
 				F4FB864A146D2FF200B08513 /* main.m in Sources */,
 				F4FB864D146D2FF200B08513 /* AppDelegate.mm in Sources */,
-				F4FB8650146D2FF200B08513 /* BattlefieldViewController.mm in Sources */,
-				F4FB8653146D2FF200B08513 /* HelloWorldLayer.mm in Sources */,
+				F4FB8650146D2FF200B08513 /* BattlefieldController.mm in Sources */,
 				F4FB8656146D2FF200B08513 /* GLES-Render.mm in Sources */,
 				F4FB8668146D412400B08513 /* BattlefieldLayer.mm in Sources */,
 				F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */,
-				F4CDC155146F005D003C2D4D /* Plop.m in Sources */,
 				F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */,
+				F48920AB14828ECF00150122 /* LoginController.mm in Sources */,
+				F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */,
+				F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */,
+				F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1441,6 +1498,7 @@
 					"\"$(SRCROOT)/MailCore/libetpan/build-mac/include\"/**",
 				);
 				INFOPLIST_FILE = gmailbattlefield/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/Debug/lib\"",
@@ -1450,6 +1508,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/libs/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1473,6 +1532,7 @@
 					"\"$(SRCROOT)/MailCore/Source\"/**",
 				);
 				INFOPLIST_FILE = gmailbattlefield/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
@@ -1482,6 +1542,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/libs/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

@@ -1,14 +1,14 @@
 //
-//  Plop.m
+//  SortedEmailsController.m
 //  gmailbattlefield
 //
-//  Created by Simon Watiau on 11/12/11.
+//  Created by Simon Watiau on 12/4/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "Plop.h"
+#import "SortedEmailsController.h"
 
-@implementation Plop
+@implementation SortedEmailsController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,10 +27,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
--(IBAction)dismiss:(id)sender{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -46,8 +42,10 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
