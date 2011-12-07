@@ -16,5 +16,4 @@
     BOOL isLoading;
     EAGLView* glView;
 }
-@property(nonatomic,retain) BattlefieldLayer* layer;
 @end

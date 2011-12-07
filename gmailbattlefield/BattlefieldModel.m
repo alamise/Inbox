@@ -23,12 +23,20 @@
         shouldEnd = false;
         wordsToSort = [[NSMutableArray alloc] init];
         threadLock = [[NSLock alloc] init];
-        NSThread* processThread = [[NSThread alloc] initWithTarget:self selector:@selector(process) object:nil];
-        [processThread setThreadPriority:0];
-        [processThread start];
-        [processThread release];
     }
     return self;
+}
+
+-(void)startProcessing{
+    // TODO Check what do tryLock exactly
+    if (![threadLock tryLock]){
+        return;
+    }
+    [threadLock unlock];
+    NSThread* processThread = [[NSThread alloc] initWithTarget:self selector:@selector(process) object:nil];
+    [processThread setThreadPriority:0];
+    [processThread start];
+    [processThread release];
 }
 
 -(void)dealloc{
@@ -43,9 +51,16 @@
 -(void)process{
     [threadLock lock];
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-    CTCoreAccount *account = [[CTCoreAccount alloc] init];
-    [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
-
+    CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
+    @try {
+        [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
+    }
+    @catch (NSException *exception) {
+        [threadLock unlock];
+        [self.delegate onError:[exception description]];
+        [pool release];
+        return;
+    }
     // Create dest folders
     BOOL goodExists = false;
     BOOL badExists = false;
@@ -58,30 +73,53 @@
         }
     }
     CTCoreFolder* good = [[CTCoreFolder alloc] initWithPath:@"good" inAccount:account];
-    if (!goodExists){
-        [good create];
-    }
     CTCoreFolder* bad = [[CTCoreFolder alloc] initWithPath:@"bad" inAccount:account];
-    if (!badExists){
-        [bad create];
+    @try {
+        if (!badExists){
+            [bad create];
+        }
+        if (!goodExists){
+            [good create];
+        }
+    }
+    @catch (NSException *exception) {
+        [threadLock unlock];
+        [self.delegate onError:[exception description]];
+        [pool release];
+    }
+    @finally {
+        [good release];
+        [bad release];
     }
     
     // Loop on unread messages
     CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];    
-    for (CTCoreMessage*  message in (NSSet*)[inbox messageObjectsFromIndex:1 toIndex:0]){
+    NSSet* messages = nil;
+    
+    @try {
+        messages = [inbox messageObjectsFromIndex:1 toIndex:0];
+    }
+    @catch (NSException *exception) {
+        [threadLock unlock];
+        [self.delegate onError:[exception description]];
+        [pool release];
+    }
+
+    for (CTCoreMessage*  message in messages){
         if (message.isUnread){
-            [wordsToSort addObject:message.sender.email];
-            if ([wordsToSort count]==1){
+            NSLog(@"%@",[message.subject componentsSeparatedByString:@" "]);
+            [wordsToSort addObjectsFromArray:[message.subject componentsSeparatedByString:@" "]];
+            if ([wordsToSort count]>1){
                 [self.delegate nextWordReady];
             }
         }
         if (shouldEnd){
             [threadLock unlock];
+            [pool release];
             return;
         }
 
     }
-    [account release];
     [threadLock unlock];
     [pool release];
 }

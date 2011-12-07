@@ -42,7 +42,7 @@
     }else{
         firstView = [[LoginController alloc] init];
     }
-    
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
 	[window addSubview: navigationController.view];
 	[window makeKeyAndVisible];

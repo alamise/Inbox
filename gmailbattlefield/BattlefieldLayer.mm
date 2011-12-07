@@ -16,6 +16,7 @@
 enum {
 	tagBadZone = 1,
 	tagGoodZone = 2,
+    tagLoadingLabel = 3,
 };
 
 @interface BattlefieldLayer() 
@@ -60,7 +61,23 @@ enum {
 	return self;
 }
 
--(void)showLoadingView{
+-(void)setLoadingViewVisible:(BOOL)visibility{
+    isLoadingViewVisible = visibility;
+    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagLoadingLabel];
+    if (!loadingLabel && visibility){
+        loadingLabel = [[CCLabelTTF alloc] initWithString:@"Loading" fontName:@"Marker Felt" fontSize:28];
+        loadingLabel.tag = tagLoadingLabel;
+        [self addChild:loadingLabel z:1];
+    }
+    if (visibility){
+        CGSize windowSize = [CCDirector sharedDirector].winSize;    
+        loadingLabel.position=CGPointMake(windowSize.width/2, windowSize.height-loadingLabel.boundingBox.size.height/2-5);
+        loadingLabel.visible=true;
+    }else{
+        if (loadingLabel){
+            loadingLabel.visible=false;
+        }
+    }
 }
 
 -(void)showDoneView{
@@ -242,6 +259,10 @@ enum {
     [self setGround];
     [self setBadZone];
     [self setGoodZone];
+    if (isLoadingViewVisible){
+        [self  setLoadingViewVisible:true];
+    }
+
 }
 
 -(void)willRotate{
@@ -251,6 +272,11 @@ enum {
     
     sprite = (CCSprite*)[self getChildByTag:tagGoodZone];
     if (sprite) sprite.visible=false;
+    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagLoadingLabel];
+    if (loadingLabel){
+        loadingLabel.visible = false;
+    }
+    
 }
 
 -(void)didRotate{
@@ -269,6 +295,9 @@ enum {
     [self setGround];
     [self setBadZone];
     [self setGoodZone];
+    if (isLoadingViewVisible){
+        [self  setLoadingViewVisible:true];
+    }
 }
 
 -(void) tick: (ccTime) dt{

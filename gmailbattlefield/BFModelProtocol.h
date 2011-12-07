@@ -9,4 +9,5 @@
 
 @protocol BFModelProtocol <NSObject>
     - (void)nextWordReady;
+    -(void)onError:(NSString*)errorMessage;
 @end
