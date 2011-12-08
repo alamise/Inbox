@@ -11,9 +11,9 @@
 #import "CTCoreFolder.h"
 #import "CTCoreMessage.h"
 #import "CTCoreAddress.h"
-
+#import "AppDelegate.h"
 @implementation BattlefieldModel
-@synthesize delegate;
+@synthesize delegate, fetchedResultsController, managedObjectContext;
 
 -(id)initWithEmail:(NSString*)em password:(NSString*)pwd{
     self = [self init];
@@ -23,6 +23,7 @@
         shouldEnd = false;
         wordsToSort = [[NSMutableArray alloc] init];
         threadLock = [[NSLock alloc] init];
+        self.managedObjectContext = [(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext];
     }
     return self;
 }
@@ -37,6 +38,7 @@
     [processThread setThreadPriority:0];
     [processThread start];
     [processThread release];
+
 }
 
 -(void)dealloc{

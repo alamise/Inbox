@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "CTCoreAccount.h"
 #import "BFModelProtocol.h"
 @interface BattlefieldModel : NSObject{
@@ -16,7 +17,13 @@
     NSMutableArray* wordsToSort;
     NSMutableDictionary* sortedWords;
     id<BFModelProtocol> delegate;
+    
+    NSFetchedResultsController *fetchedResultsController;
+    NSManagedObjectContext *managedObjectContext;
 }
+
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @property(nonatomic,retain) id<BFModelProtocol> delegate;
 -(id)initWithEmail:(NSString*)email password:(NSString*)password;

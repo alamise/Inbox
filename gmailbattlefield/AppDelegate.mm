@@ -17,7 +17,7 @@
 #import "LoginController.h"
 #import "TutorialController.h"
 @implementation AppDelegate
-@synthesize window,navigationController;
+@synthesize window,navigationController,managedObjectContext,managedObjectModel;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
@@ -85,10 +85,61 @@
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
+
+#pragma mark - CoreData
+
+- (NSManagedObjectContext *) managedObjectContext {
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
+    }
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator: coordinator];
+    }
+    
+    return managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (managedObjectModel != nil) {
+        return managedObjectModel;
+    }
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
+    
+    return managedObjectModel;
+}
+
+- (NSString *)databasePath {
+    NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    return [path stringByAppendingPathComponent: @"coredata.sqlite"];
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (persistentStoreCoordinator != nil) {
+        return persistentStoreCoordinator;
+    }
+    NSURL *storeUrl = [NSURL fileURLWithPath: [self databasePath]];
+    NSError *error = nil;
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                  initWithManagedObjectModel:[self managedObjectModel]];
+    if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                 configuration:nil URL:storeUrl options:nil error:&error]) {
+        /*Error for store creation should be handled in here*/
+    }
+    
+    return persistentStoreCoordinator;
+}
+
+
 - (void)dealloc {
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];
+    [managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
+
 	[super dealloc];
 }
 

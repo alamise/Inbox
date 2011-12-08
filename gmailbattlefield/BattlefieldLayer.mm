@@ -17,6 +17,7 @@ enum {
 	tagBadZone = 1,
 	tagGoodZone = 2,
     tagLoadingLabel = 3,
+    tagWordPreloadedImage = 4
 };
 
 @interface BattlefieldLayer() 
@@ -57,6 +58,10 @@ enum {
         [self setGround];
         [self setGoodZone];
         [self setBadZone];
+        // If the image is not 
+        WordNode* sprite = [[WordNode alloc] initWithWord:@"loadind"];
+        sprite.visible = false;
+        [self addChild:sprite z:0 tag:tagWordPreloadedImage];
 	}
 	return self;
 }
@@ -235,7 +240,7 @@ enum {
     if (sprite){
         sprite.visible = true;        
     }else{
-        sprite = [CCSprite spriteWithFile:@"round.png"];    
+        sprite = [CCSprite spriteWithFile:@"badZone.png"];    
         [self addChild:sprite z:0 tag:tagBadZone];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;
@@ -247,7 +252,7 @@ enum {
     if (sprite){
         sprite.visible=true;        
     }else{
-        sprite = [CCSprite spriteWithFile:@"round.png"];    
+        sprite = [CCSprite spriteWithFile:@"goodZone.png"];    
         [self addChild:sprite z:0 tag:tagGoodZone];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;    
