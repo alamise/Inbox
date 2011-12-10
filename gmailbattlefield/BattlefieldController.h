@@ -11,7 +11,7 @@
 #import "BFDelegateProtocol.h"
 #import "BattlefieldModel.h"
 @class  MBProgressHUD;
-@interface BattlefieldController : UIViewController<BFDelegateProtocol,BFModelProtocol> {
+@interface BattlefieldController : UIViewController<BFDelegateProtocol, BFModelProtocol> {
     BattlefieldModel* model;
     BattlefieldLayer* layer;
     BOOL isLoading;

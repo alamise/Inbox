@@ -126,6 +126,7 @@ enum {
                 if (b->GetUserData() == draggedNode) {
                     b->SetLinearVelocity(b2Vec2(0,0));
                     b->SetAngularVelocity(0);
+                    b->SetTransform(b->GetPosition(), 0);
                     b->SetAwake(true);
                     break;
                 }	
@@ -182,7 +183,7 @@ enum {
     
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
 		if (b->GetUserData() == self.draggedNode) {
-            b->SetTransform(b2Vec2((newLocation.x-oldLocation.x)/PTM_RATIO, (newLocation.y-oldLocation.y)/PTM_RATIO), b->GetAngle());
+            b->SetLinearVelocity(b2Vec2(oldLocation.x-newLocation.x, oldLocation.y-newLocation.y));
             b->SetAwake(true);
 		}	
 	}
