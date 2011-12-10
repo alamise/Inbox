@@ -9,6 +9,7 @@
 #import "GameConfig.h"
 #import "AppDelegate.h"
 #import "BattlefieldLayer.h"
+#import "MBProgressHUD.h"
 @implementation BattlefieldController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -42,10 +43,10 @@
             isLoading = false;
             [layer putWord:nextWord];
             [nextWord release];
-            [layer setLoadingViewVisible:false];
+            [loadingHud hide:true];
         }else{
             isLoading = true;
-            [layer setLoadingViewVisible:true];
+            [loadingHud show:true];
         }
     }
 }
@@ -77,16 +78,6 @@
 }
 
 #pragma mark - view lifecycle
-
-- (void)loadView {
-    glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, 100, 100) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
-    [self setView:glView];
-    layer = [[BattlefieldLayer node] retain];
-    layer.delegate = self;
-    
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     CCDirector *director = [CCDirector sharedDirector];
@@ -121,6 +112,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden=FALSE;
+
+    glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
+    [self.view addSubview:glView];
+    [self setView:glView];
+    layer = [[BattlefieldLayer node] retain];
+    layer.delegate = self;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    loadingHud = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
+    loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
+    loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
+    [self.view addSubview:loadingHud];
 }
 
 - (void)viewDidUnload {
@@ -128,6 +130,7 @@
     [layer release];
     [glView removeFromSuperview];
     [glView release];
+    [loadingHud release];
 }
 
 - (void)didReceiveMemoryWarning {

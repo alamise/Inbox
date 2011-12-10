@@ -58,19 +58,15 @@ enum {
         [self setGround];
         [self setGoodZone];
         [self setBadZone];
-        // If the image is not 
-        WordNode* sprite = [[WordNode alloc] initWithWord:@"loadind"];
-        sprite.visible = false;
-        [self addChild:sprite z:0 tag:tagWordPreloadedImage];
 	}
 	return self;
 }
 
 -(void)setLoadingViewVisible:(BOOL)visibility{
-    isLoadingViewVisible = visibility;
     CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagLoadingLabel];
     if (!loadingLabel && visibility){
-        loadingLabel = [[CCLabelTTF alloc] initWithString:@"Loading" fontName:@"Marker Felt" fontSize:28];
+        loadingLabel = [[CCLabelTTF alloc] initWithString:@"Loading" fontName:@"Arial" fontSize:28];
+        loadingLabel.color=ccc3(0, 0, 0);
         loadingLabel.tag = tagLoadingLabel;
         [self addChild:loadingLabel z:1];
     }
@@ -92,7 +88,6 @@ enum {
     WordNode* node = [[WordNode alloc] initWithWord:word];
     [self addChild:node z:1];
     
-    
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
@@ -112,6 +107,7 @@ enum {
 	body->CreateFixture(&fixtureDef);
     
     [draggableNodes addObject:node];
+
     [node release];
 }
 
@@ -180,13 +176,24 @@ enum {
         return;
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
-    CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
+    CGPoint oldLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]];
+    
+    
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
+		if (b->GetUserData() == self.draggedNode) {
+            b->SetTransform(b2Vec2((newLocation.x-oldLocation.x)/PTM_RATIO, (newLocation.y-oldLocation.y)/PTM_RATIO), b->GetAngle());
+            b->SetAwake(true);
+		}	
+	}
+
+    
     BOOL sorted = false;
-    if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, location)){
+    if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, newLocation)){
         sorted = true;
         [self.delegate sortedWord:self.draggedNode.word isGood:YES];
         [self removeChildAndBody:self.draggedNode];
-    }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, location)){
+    }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, newLocation)){
         sorted = false;
         [self.delegate sortedWord:self.draggedNode.word isGood:NO];
         [self removeChildAndBody:self.draggedNode];
@@ -259,15 +266,10 @@ enum {
     sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
 }
 
-
 -(void)didAppear{
     [self setGround];
     [self setBadZone];
     [self setGoodZone];
-    if (isLoadingViewVisible){
-        [self  setLoadingViewVisible:true];
-    }
-
 }
 
 -(void)willRotate{
@@ -300,9 +302,6 @@ enum {
     [self setGround];
     [self setBadZone];
     [self setGoodZone];
-    if (isLoadingViewVisible){
-        [self  setLoadingViewVisible:true];
-    }
 }
 
 -(void) tick: (ccTime) dt{

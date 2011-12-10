@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F4093094149172510094C3F5 /* goodZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4093093149172510094C3F5 /* goodZone.png */; };
 		F4093096149172830094C3F5 /* badZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4093095149172830094C3F5 /* badZone.png */; };
+		F4128BFD1493DB84005A8718 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F4128BD31493DB84005A8718 /* MBProgressHUD.m */; };
 		F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */; };
 		F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */; };
 		F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4B5148BAE16009F3185 /* TutorialController.m */; };
@@ -214,6 +215,8 @@
 /* Begin PBXFileReference section */
 		F4093093149172510094C3F5 /* goodZone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goodZone.png; path = Resources/goodZone.png; sourceTree = "<group>"; };
 		F4093095149172830094C3F5 /* badZone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = badZone.png; path = Resources/badZone.png; sourceTree = "<group>"; };
+		F4128BD21493DB84005A8718 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		F4128BD31493DB84005A8718 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFModelProtocol.h; path = gmailbattlefield/BFModelProtocol.h; sourceTree = "<group>"; };
 		F44DC4AE148BADCA009F3185 /* SortedEmailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedEmailsController.h; sourceTree = "<group>"; };
 		F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedEmailsController.m; sourceTree = "<group>"; };
@@ -577,6 +580,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4128B951493DB83005A8718 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F4128BD21493DB84005A8718 /* MBProgressHUD.h */,
+				F4128BD31493DB84005A8718 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		F44DC4AD148BAD0F009F3185 /* sortedEmails */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,7 +658,6 @@
 		F4FB8467146D2FEE00B08513 = {
 			isa = PBXGroup;
 			children = (
-				F482021C14917FC800C0576C /* CoreData.framework */,
 				F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */,
 				F4FB8486146D2FEE00B08513 /* gmailbattlefield */,
 				F4FB8475146D2FEE00B08513 /* Frameworks */,
@@ -665,6 +676,7 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F482021C14917FC800C0576C /* CoreData.framework */,
 				F48202161491779B00C0576C /* libsasl2.a */,
 				F44F061E1478FAD9008DE7CF /* libcrypto.a */,
 				F44F061F1478FAD9008DE7CF /* libssl.a */,
@@ -684,6 +696,7 @@
 		F4FB8486146D2FEE00B08513 /* gmailbattlefield */ = {
 			isa = PBXGroup;
 			children = (
+				F4128B951493DB83005A8718 /* MBProgressHUD */,
 				F44DC4B3148BADEF009F3185 /* tutorial */,
 				F44DC4AD148BAD0F009F3185 /* sortedEmails */,
 				F48920A714828EA300150122 /* login */,
@@ -1411,6 +1424,7 @@
 				F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */,
 				F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */,
 				F4820220149181AB00C0576C /* coreDataSchema.xcdatamodeld in Sources */,
+				F4128BFD1493DB84005A8718 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

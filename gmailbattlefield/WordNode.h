@@ -11,6 +11,7 @@
 @interface WordNode : CCNode{
     NSString* word;
     CCLabelTTF *label;
+    BOOL drawMe;
 }
 @property(nonatomic,retain) NSString* word;
 - (id)initWithWord:(NSString*)word;

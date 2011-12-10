@@ -17,17 +17,14 @@
     NSMutableArray *draggableNodes;
     WordNode *draggedNode;
     id<BFDelegateProtocol> delegate;
-    BOOL isLoadingViewVisible;
 }
 @property(nonatomic,retain) id<BFDelegateProtocol> delegate;
 
--(void)setLoadingViewVisible:(BOOL)visibility;
 -(void)showDoneView;
 -(void) putWord:(NSString*)word;
 
 -(void)didRotate;
 -(void)willRotate;
--(void)willAppear;
 -(void)didAppear;
 
 @end
