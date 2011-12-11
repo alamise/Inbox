@@ -4,16 +4,16 @@
 //
 //  Created by Simon Watiau on 11/30/11.
 //
-
-#import "WordNode.h"
+#import "EmailNode.h"
+#import "EmailModel.h"
 #import "cocos2d.h"
-@implementation WordNode
-@synthesize word;
+@implementation EmailNode
+@synthesize emailModel;
 
-- (id)initWithWord:(NSString*)w{
+- (id)initWithEmailModel:(EmailModel*)model{
     self = [super init];
     if (self) {
-        word = [w retain];
+        emailModel = [model retain];
         drawMe = true;
     }
     return self;    
@@ -26,7 +26,7 @@
         NSLog(@"draw");
         CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
         sprite.position=CGPointMake(50,50);
-        label = [[CCLabelTTF labelWithString:word fontName:@"Arial" fontSize:24] retain];
+        label = [[CCLabelTTF labelWithString:emailModel.senderName fontName:@"Arial" fontSize:24] retain];
         label.color=ccc3(0, 1, 0);
         label.position=CGPointMake(50, 50);
         [self addChild:sprite];
@@ -36,20 +36,20 @@
     }
 }
 
--(void)setWord:(NSString *)w{
-    if (word){
-        [word release];
+-(void)setEmailModel:(EmailModel *)model{
+    if (emailModel){
+        [emailModel release];
     }
-    if (w){
-        word = [w retain];
-        [label setString:word];
+    if (model){
+        emailModel = [model retain];
+        [label setString:emailModel.senderName];
     }else{
-        word=nil;
+        emailModel=nil;
     }
     
 }
 -(void)dealloc{
-    self.word=nil;
+    self.emailModel=nil;
     [label release];
     [super dealloc];
 }

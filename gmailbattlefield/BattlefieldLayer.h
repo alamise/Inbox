@@ -8,20 +8,20 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GLES-Render.h"
-
 #import "BFDelegateProtocol.h"
-@class WordNode;
+@class EmailNode;
+@class EmailModel;
 @interface BattlefieldLayer : CCLayer{
 	b2World* world;
 	GLESDebugDraw *m_debugDraw;
     NSMutableArray *draggableNodes;
-    WordNode *draggedNode;
+    EmailNode *draggedNode;
     id<BFDelegateProtocol> delegate;
 }
 @property(nonatomic,retain) id<BFDelegateProtocol> delegate;
 
 -(void)showDoneView;
--(void) putWord:(NSString*)word;
+-(void) putEmail:(EmailModel*)model;
 
 -(void)didRotate;
 -(void)willRotate;

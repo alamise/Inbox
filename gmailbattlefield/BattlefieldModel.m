@@ -12,16 +12,17 @@
 #import "CTCoreMessage.h"
 #import "CTCoreAddress.h"
 #import "AppDelegate.h"
+#import "EmailModel.h"
 @implementation BattlefieldModel
 @synthesize delegate, fetchedResultsController, managedObjectContext;
 
--(id)initWithEmail:(NSString*)em password:(NSString*)pwd{
+-(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
     if (self) {
         email = [em retain];
         password = [pwd retain];
         shouldEnd = false;
-        wordsToSort = [[NSMutableArray alloc] init];
+        emailsToBeSorted = [[NSMutableArray alloc] init];
         threadLock = [[NSLock alloc] init];
         self.managedObjectContext = [(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext];
     }
@@ -46,7 +47,7 @@
     [password release];
     [self end];
     [threadLock release];
-    [wordsToSort release];
+    [emailsToBeSorted release];
     [super dealloc];
 }
 
@@ -100,6 +101,7 @@
     
     @try {
         messages = [inbox messageObjectsFromIndex:1 toIndex:0];
+
     }
     @catch (NSException *exception) {
         [threadLock unlock];
@@ -109,10 +111,15 @@
 
     for (CTCoreMessage*  message in messages){
         if (message.isUnread){
-            NSLog(@"%@",[message.subject componentsSeparatedByString:@" "]);
-            [wordsToSort addObjectsFromArray:[message.subject componentsSeparatedByString:@" "]];
-            if ([wordsToSort count]>1){
-                [self.delegate nextWordReady];
+            EmailModel* emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
+            emailModel.senderName = message.sender.name;
+            emailModel.senderEmail = message.sender.email;
+            emailModel.sentDate =  message.sentDateGMT;
+            emailModel.uid = message.uid;
+            emailModel.summary =@"summary";
+            [emailsToBeSorted addObject:emailModel];
+            if ([emailsToBeSorted count]>1){
+                [self.delegate nextEmailReady];
             }
         }
         if (shouldEnd){
@@ -126,10 +133,10 @@
     [pool release];
 }
 
--(NSString*)getNextWord{
-    if ([wordsToSort count]!=0){
-        NSString* next = [[wordsToSort objectAtIndex:0] retain];
-        [wordsToSort removeObjectAtIndex:0];
+-(EmailModel*)getNextEmail{
+    if ([emailsToBeSorted count]!=0){
+        EmailModel* next = [[emailsToBeSorted objectAtIndex:0] retain];
+        [emailsToBeSorted removeObjectAtIndex:0];
         return [next autorelease];
     }else{
         return nil;
@@ -141,7 +148,7 @@
     [threadLock lock];
 }
 
--(void)sortedWord:(NSString*)word isGood:(BOOL)isGood{
+-(void)sortedEmail:(EmailModel*)model isGood:(BOOL)isGood{
 
 }
 

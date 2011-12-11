@@ -9,7 +9,7 @@
 #import "GPLoadingBar.h"
 #import "CTCoreAccount.h"
 #import "CCNode.h"
-#import "WordNode.h"
+#import "EmailNode.h"
 #import "BFDelegateProtocol.h"
 #define PTM_RATIO 32
 
@@ -27,7 +27,7 @@ enum {
     -(void) sortingDone;
     -(void) displayLoading;
     -(void) wakeup;
-@property(nonatomic,retain) WordNode* draggedNode;
+@property(nonatomic,retain) EmailNode* draggedNode;
 @end
 
 @implementation BattlefieldLayer
@@ -84,8 +84,8 @@ enum {
 -(void)showDoneView{
 }
 
--(void) putWord:(NSString*)word{
-    WordNode* node = [[WordNode alloc] initWithWord:word];
+-(void) putEmail:(EmailModel*)model{
+    EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
     [self addChild:node z:1];
     
 	b2BodyDef bodyDef;
@@ -118,7 +118,7 @@ enum {
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
     
-    for (WordNode* node in draggableNodes){        
+    for (EmailNode* node in draggableNodes){        
         CGRect rect = node.boundingBox;
         if (CGRectContainsPoint(rect, location)) {            
             self.draggedNode = node;
@@ -192,11 +192,11 @@ enum {
     BOOL sorted = false;
     if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, newLocation)){
         sorted = true;
-        [self.delegate sortedWord:self.draggedNode.word isGood:YES];
+        [self.delegate sortedEmail:self.draggedNode.emailModel isGood:YES];
         [self removeChildAndBody:self.draggedNode];
     }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, newLocation)){
         sorted = false;
-        [self.delegate sortedWord:self.draggedNode.word isGood:NO];
+        [self.delegate sortedEmail:self.draggedNode.emailModel isGood:NO];
         [self removeChildAndBody:self.draggedNode];
     }else{
     }
@@ -288,7 +288,7 @@ enum {
 }
 
 -(void)didRotate{
-    for (WordNode* node in draggableNodes){        
+    for (EmailNode* node in draggableNodes){        
         CGRect rect = node.boundingBox;
         CGSize windowSize = [CCDirector sharedDirector].winSize;
         if (!CGRectContainsRect(CGRectMake(0, 0, windowSize.width, windowSize.height),rect)){

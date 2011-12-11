@@ -16,7 +16,8 @@
 		F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B6148BAE16009F3185 /* TutorialView.xib */; };
 		F44DC4BC148BB2E0009F3185 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B9148BB2E0009F3185 /* Login.xib */; };
 		F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4BB148BB2E0009F3185 /* LoginController.mm */; };
-		F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EEEFE14859FC900CE9D9F /* WordNode.m */; };
+		F44EEEFF14859FC900CE9D9F /* EmailNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EEEFE14859FC900CE9D9F /* EmailNode.m */; };
+		F44EFECA14950CBF00FDE520 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EFEC914950CBF00FDE520 /* EmailModel.m */; };
 		F44F06201478FADA008DE7CF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061E1478FAD9008DE7CF /* libcrypto.a */; };
 		F44F06211478FADA008DE7CF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F061F1478FAD9008DE7CF /* libssl.a */; };
 		F44F06271478FBBC008DE7CF /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06101478F1CB008DE7CF /* libmailcore.a */; };
@@ -228,8 +229,10 @@
 		F44DC4BA148BB2E0009F3185 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F44DC4BB148BB2E0009F3185 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
 		F44EEEFC14859D6C00CE9D9F /* BFDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDelegateProtocol.h; sourceTree = "<group>"; };
-		F44EEEFD14859FC900CE9D9F /* WordNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordNode.h; sourceTree = "<group>"; };
-		F44EEEFE14859FC900CE9D9F /* WordNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordNode.m; sourceTree = "<group>"; };
+		F44EEEFD14859FC900CE9D9F /* EmailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailNode.h; sourceTree = "<group>"; };
+		F44EEEFE14859FC900CE9D9F /* EmailNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailNode.m; sourceTree = "<group>"; };
+		F44EFEC814950CBF00FDE520 /* EmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailModel.h; path = gmailbattlefield/EmailModel.h; sourceTree = "<group>"; };
+		F44EFEC914950CBF00FDE520 /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailModel.m; path = gmailbattlefield/EmailModel.m; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F44F061E1478FAD9008DE7CF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator/libcrypto.a"; sourceTree = "<group>"; };
 		F44F061F1478FAD9008DE7CF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator/libssl.a"; sourceTree = "<group>"; };
@@ -628,8 +631,8 @@
 				F4FB8666146D412400B08513 /* BattlefieldLayer.h */,
 				F4FB8667146D412400B08513 /* BattlefieldLayer.mm */,
 				F44EEEFC14859D6C00CE9D9F /* BFDelegateProtocol.h */,
-				F44EEEFD14859FC900CE9D9F /* WordNode.h */,
-				F44EEEFE14859FC900CE9D9F /* WordNode.m */,
+				F44EEEFD14859FC900CE9D9F /* EmailNode.h */,
+				F44EEEFE14859FC900CE9D9F /* EmailNode.m */,
 			);
 			name = battlefield;
 			sourceTree = "<group>";
@@ -650,6 +653,8 @@
 				F4CDC4EF146FC13B003C2D4D /* BattlefieldModel.h */,
 				F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */,
 				F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */,
+				F44EFEC814950CBF00FDE520 /* EmailModel.h */,
+				F44EFEC914950CBF00FDE520 /* EmailModel.m */,
 			);
 			name = model;
 			path = ..;
@@ -1419,12 +1424,13 @@
 				F4FB8668146D412400B08513 /* BattlefieldLayer.mm in Sources */,
 				F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */,
 				F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */,
-				F44EEEFF14859FC900CE9D9F /* WordNode.m in Sources */,
+				F44EEEFF14859FC900CE9D9F /* EmailNode.m in Sources */,
 				F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */,
 				F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */,
 				F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */,
 				F4820220149181AB00C0576C /* coreDataSchema.xcdatamodeld in Sources */,
 				F4128BFD1493DB84005A8718 /* MBProgressHUD.m in Sources */,
+				F44EFECA14950CBF00FDE520 /* EmailModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1498,6 +1504,7 @@
 					"\"$(SRCROOT)/MailCore/Source\"/**",
 					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/Debug/include\"/**",
 					"\"$(SRCROOT)/MailCore/libetpan/build-mac/include\"/**",
+					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Debug/include\"",
 				);
 				INFOPLIST_FILE = gmailbattlefield/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -1508,6 +1515,7 @@
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
+					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Debug/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";

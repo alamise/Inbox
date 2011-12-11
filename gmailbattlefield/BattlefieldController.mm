@@ -16,7 +16,7 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        model = [[BattlefieldModel alloc] initWithEmail:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
+        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
         model.delegate = self;
         [model startProcessing];
         [plistDic release];
@@ -37,12 +37,12 @@
     if ([model isDone]){
         [layer showDoneView];
     }else{
-        NSString* nextWord = [model getNextWord];
-        if (nextWord){
-            [nextWord retain];
+        EmailModel* nextEmail = [model getNextEmail];
+        if (nextEmail){
+            [nextEmail retain];
             isLoading = false;
-            [layer putWord:nextWord];
-            [nextWord release];
+            [layer putEmail:nextEmail];
+            [nextEmail release];
             [loadingHud hide:true];
         }else{
             isLoading = true;
@@ -51,14 +51,14 @@
     }
 }
 
-- (void)nextWordReady{
+- (void)nextEmailReady{
     if (isLoading){
         [self loop];
     }
 }
 
--(void)sortedWord:(NSString*)word isGood:(BOOL)isGood{
-    [model sortedWord:word isGood:isGood];
+-(void)sortedEmail:(EmailModel*)m isGood:(BOOL)isGood{
+    [model sortedEmail:m isGood:isGood];
     [self loop];
 }
 
