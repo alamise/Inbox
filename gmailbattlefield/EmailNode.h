@@ -10,7 +10,8 @@
 @class CCLabelTTF;
 @interface EmailNode : CCNode{
     EmailModel* emailModel;
-    CCLabelTTF *label;
+    CCLabelTTF *title;
+    CCLabelTTF *content;
     BOOL drawMe;
 }
 @property(nonatomic,retain) EmailModel* emailModel;

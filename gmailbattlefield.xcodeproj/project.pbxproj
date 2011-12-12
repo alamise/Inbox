@@ -10,6 +10,8 @@
 		F4093094149172510094C3F5 /* goodZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4093093149172510094C3F5 /* goodZone.png */; };
 		F4093096149172830094C3F5 /* badZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4093095149172830094C3F5 /* badZone.png */; };
 		F4128BFD1493DB84005A8718 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F4128BD31493DB84005A8718 /* MBProgressHUD.m */; };
+		F42C68C61496AEA1002F5BE5 /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = F42C68C51496AEA1002F5BE5 /* round.png */; };
+		F42C68C81496B497002F5BE5 /* emailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F42C68C71496B497002F5BE5 /* emailBackground.png */; };
 		F44DC4B1148BADCA009F3185 /* SortedEmailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */; };
 		F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B0148BADCA009F3185 /* SortedEmailsView.xib */; };
 		F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4B5148BAE16009F3185 /* TutorialController.m */; };
@@ -25,7 +27,6 @@
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F4820220149181AB00C0576C /* coreDataSchema.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F482021E149181AB00C0576C /* coreDataSchema.xcdatamodeld */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
-		F4CDC13F146EEAFA003C2D4D /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC13E146EEAFA003C2D4D /* round.png */; };
 		F4CDC142146EF41D003C2D4D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CDC141146EF41D003C2D4D /* background.png */; };
 		F4CDC145146EF5DE003C2D4D /* GPLoadingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC144146EF5DE003C2D4D /* GPLoadingBar.m */; };
 		F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */; };
@@ -218,6 +219,8 @@
 		F4093095149172830094C3F5 /* badZone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = badZone.png; path = Resources/badZone.png; sourceTree = "<group>"; };
 		F4128BD21493DB84005A8718 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F4128BD31493DB84005A8718 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F42C68C51496AEA1002F5BE5 /* round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = round.png; path = Resources/round.png; sourceTree = "<group>"; };
+		F42C68C71496B497002F5BE5 /* emailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emailBackground.png; path = Resources/emailBackground.png; sourceTree = "<group>"; };
 		F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFModelProtocol.h; path = gmailbattlefield/BFModelProtocol.h; sourceTree = "<group>"; };
 		F44DC4AE148BADCA009F3185 /* SortedEmailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedEmailsController.h; sourceTree = "<group>"; };
 		F44DC4AF148BADCA009F3185 /* SortedEmailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedEmailsController.m; sourceTree = "<group>"; };
@@ -240,7 +243,6 @@
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F482021F149181AB00C0576C /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		F4CDC13E146EEAFA003C2D4D /* round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round.png; sourceTree = "<group>"; };
 		F4CDC141146EF41D003C2D4D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		F4CDC143146EF5DE003C2D4D /* GPLoadingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLoadingBar.h; sourceTree = "<group>"; };
 		F4CDC144146EF5DE003C2D4D /* GPLoadingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPLoadingBar.m; sourceTree = "<group>"; };
@@ -707,7 +709,6 @@
 				F48920A714828EA300150122 /* login */,
 				F48920A614828E2300150122 /* battlefield */,
 				F4CDC141146EF41D003C2D4D /* background.png */,
-				F4CDC13E146EEAFA003C2D4D /* round.png */,
 				F4FB864B146D2FF200B08513 /* AppDelegate.h */,
 				F4FB864C146D2FF200B08513 /* AppDelegate.mm */,
 				F4FB8657146D2FF200B08513 /* GameConfig.h */,
@@ -722,6 +723,8 @@
 		F4FB8487146D2FEE00B08513 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F42C68C51496AEA1002F5BE5 /* round.png */,
+				F42C68C71496B497002F5BE5 /* emailBackground.png */,
 				F4093095149172830094C3F5 /* badZone.png */,
 				F4093093149172510094C3F5 /* goodZone.png */,
 				F4FB8488146D2FEE00B08513 /* Default.png */,
@@ -1271,13 +1274,14 @@
 				F4FB8495146D2FEE00B08513 /* Icon.png in Resources */,
 				F4FB8497146D2FEE00B08513 /* Icon@2x.png in Resources */,
 				F4FB849A146D2FEE00B08513 /* iTunesArtwork in Resources */,
-				F4CDC13F146EEAFA003C2D4D /* round.png in Resources */,
 				F4CDC142146EF41D003C2D4D /* background.png in Resources */,
 				F44DC4B2148BADCA009F3185 /* SortedEmailsView.xib in Resources */,
 				F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */,
 				F44DC4BC148BB2E0009F3185 /* Login.xib in Resources */,
 				F4093094149172510094C3F5 /* goodZone.png in Resources */,
 				F4093096149172830094C3F5 /* badZone.png in Resources */,
+				F42C68C61496AEA1002F5BE5 /* round.png in Resources */,
+				F42C68C81496B497002F5BE5 /* emailBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,6 +54,25 @@
 -(void)process{
     [threadLock lock];
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    
+    
+    /* offline test : */
+    for (int i=0;i<10;i++){
+        EmailModel* emailModel = [[EmailModel alloc] init];
+        emailModel.senderName = @"plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop ";
+        emailModel.senderEmail = @"sadsd";
+        emailModel.sentDate =  [NSDate date];
+        emailModel.uid = @"uid";
+        emailModel.summary =@"summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary ";
+        [emailsToBeSorted addObject:emailModel];
+        [self.delegate nextEmailReady];
+    }
+    
+    [threadLock unlock];
+    [pool release];
+    return;
+
+    
     CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
     @try {
         [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];

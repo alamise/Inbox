@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class EmailModel;
 @protocol BFDelegateProtocol <NSObject>
-    -(void)sortedWord:(NSString*)word isGood:(BOOL)isGood;
+    -(void)sortedEmail:(EmailModel*)word isGood:(BOOL)isGood;
 @end

@@ -24,14 +24,23 @@
     if (drawMe){
         drawMe = false;
         NSLog(@"draw");
-        CCSprite* sprite = [CCSprite spriteWithFile:@"round.png"];
-        sprite.position=CGPointMake(50,50);
-        label = [[CCLabelTTF labelWithString:emailModel.senderName fontName:@"Arial" fontSize:24] retain];
-        label.color=ccc3(0, 1, 0);
-        label.position=CGPointMake(50, 50);
+        CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
+        sprite.position=CGPointMake(100,55);
         [self addChild:sprite];
-        [self addChild:label];
-        [self setContentSize:CGSizeMake(100, 100)];
+        
+
+        title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(170, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeClip fontName:@"Arial" fontSize:15] retain];
+        title.color=ccc3(150, 150, 150);
+        title.position=CGPointMake(100, 88);
+        [self addChild:title];
+        
+        content = [[CCLabelTTF labelWithString:emailModel.summary dimensions:CGSizeMake(170, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeClip fontName:@"Arial" fontSize:13] retain];
+
+        content.color=ccc3(0, 1, 0);
+        content.position=CGPointMake(100, 48);
+        
+        [self addChild:content];
+        [self setContentSize:CGSizeMake(200, 110)];
         [self setAnchorPoint:CGPointMake(0.5, 0.5)];
     }
 }
@@ -42,7 +51,7 @@
     }
     if (model){
         emailModel = [model retain];
-        [label setString:emailModel.senderName];
+        [title setString:emailModel.senderName];
     }else{
         emailModel=nil;
     }
@@ -50,7 +59,8 @@
 }
 -(void)dealloc{
     self.emailModel=nil;
-    [label release];
+    [title release];
+    [content release];
     [super dealloc];
 }
 

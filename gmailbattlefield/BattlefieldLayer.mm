@@ -87,7 +87,6 @@ enum {
 -(void) putEmail:(EmailModel*)model{
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
     [self addChild:node z:1];
-    
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
@@ -96,11 +95,11 @@ enum {
     bodyDef.linearDamping=1;
 	b2Body *body = world->CreateBody(&bodyDef);
 
-	b2CircleShape dynamicBox;
-    dynamicBox.m_radius=1.5;
+	b2PolygonShape* dynamicBox = new b2PolygonShape();
+    dynamicBox->SetAsBox(95/(float)PTM_RATIO,48/(float)PTM_RATIO);
     
 	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
+	fixtureDef.shape = dynamicBox;	
 	fixtureDef.density = 0.3f;
 	fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 1;
@@ -210,7 +209,7 @@ enum {
 	glDisable(GL_TEXTURE_2D);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	world->DrawDebugData();
+	//world->DrawDebugData();
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
