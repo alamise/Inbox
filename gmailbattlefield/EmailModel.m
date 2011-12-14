@@ -8,7 +8,7 @@
 #import "EmailModel.h"
 
 @implementation EmailModel
-@synthesize senderEmail, senderName, summary,sentDate, uid;
+@synthesize senderEmail, senderName, summary,sentDate, uid, sortedTo;
 
 - (id)init{
     self = [super init];

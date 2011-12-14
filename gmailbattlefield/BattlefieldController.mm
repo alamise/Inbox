@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "BattlefieldLayer.h"
 #import "MBProgressHUD.h"
+#import "EmailController.h"
 @implementation BattlefieldController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -18,7 +19,6 @@
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
         model.delegate = self;
-        [model startProcessing];
         [plistDic release];
 	}
 	return self;
@@ -33,35 +33,28 @@
     [super dealloc];
 }
 
--(void)loop{
-    if ([model isDone]){
-        [layer showDoneView];
+- (void)emailsReady{
+    [loadingHud hide:true];
+    [layer putEmail:[model getNextEmail]];
+}
+
+-(void)email:(EmailModel*)m sortedTo:(folderType)folder{
+    [model email:m sortedTo:folder];
+    if ([model pendingEmails]==0){
+        // TODO done
     }else{
-        EmailModel* nextEmail = [model getNextEmail];
-        if (nextEmail){
-            [nextEmail retain];
-            isLoading = false;
-            [layer putEmail:nextEmail];
-            [nextEmail release];
-            [loadingHud hide:true];
-        }else{
-            isLoading = true;
-            [loadingHud show:true];
-        }
+        [layer putEmail:[model getNextEmail]];
     }
 }
 
-- (void)nextEmailReady{
-    if (isLoading){
-        [self loop];
-    }
-}
+-(void)emailTouched:(EmailModel*)email{
+    EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
+    UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
+    navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+    navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:navCtr animated:YES];
 
--(void)sortedEmail:(EmailModel*)m isGood:(BOOL)isGood{
-    [model sortedEmail:m isGood:isGood];
-    [self loop];
 }
-
 
 #pragma mark - rotation
 
@@ -99,7 +92,6 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self loop];
     [layer didAppear];
 }
 
@@ -123,6 +115,7 @@
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
+    [model startProcessing];
 }
 
 - (void)viewDidUnload {

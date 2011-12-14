@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#define IS_IPAD true
 @class BattlefieldViewController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {

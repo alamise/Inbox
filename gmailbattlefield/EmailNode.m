@@ -8,7 +8,7 @@
 #import "EmailModel.h"
 #import "cocos2d.h"
 @implementation EmailNode
-@synthesize emailModel;
+@synthesize emailModel,didMoved;
 
 - (id)initWithEmailModel:(EmailModel*)model{
     self = [super init];
@@ -23,7 +23,6 @@
     [super draw];
     if (drawMe){
         drawMe = false;
-        NSLog(@"draw");
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
         sprite.position=CGPointMake(100,55);
         [self addChild:sprite];

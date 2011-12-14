@@ -13,6 +13,14 @@
 #import "CTCoreAddress.h"
 #import "AppDelegate.h"
 #import "EmailModel.h"
+
+@interface BattlefieldModel() {
+    
+}
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@end
+
 @implementation BattlefieldModel
 @synthesize delegate, fetchedResultsController, managedObjectContext;
 
@@ -29,19 +37,6 @@
     return self;
 }
 
--(void)startProcessing{
-    // TODO Check what do tryLock exactly
-    if (![threadLock tryLock]){
-        return;
-    }
-    [threadLock unlock];
-    NSThread* processThread = [[NSThread alloc] initWithTarget:self selector:@selector(process) object:nil];
-    [processThread setThreadPriority:0];
-    [processThread start];
-    [processThread release];
-
-}
-
 -(void)dealloc{
     [email release];
     [password release];
@@ -51,12 +46,22 @@
     [super dealloc];
 }
 
+-(void)startProcessing{
+    if (![threadLock tryLock]){
+        return;
+    }
+    [threadLock unlock];
+    NSThread* processThread = [[NSThread alloc] initWithTarget:self selector:@selector(process) object:nil];
+    [processThread setThreadPriority:0];
+    [processThread start];
+    [processThread release];
+}
+
 -(void)process{
     [threadLock lock];
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
-    
-    /* offline test : */
+    /* offline tests : */
     for (int i=0;i<10;i++){
         EmailModel* emailModel = [[EmailModel alloc] init];
         emailModel.senderName = @"plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop ";
@@ -65,13 +70,13 @@
         emailModel.uid = @"uid";
         emailModel.summary =@"summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary ";
         [emailsToBeSorted addObject:emailModel];
-        [self.delegate nextEmailReady];
     }
     
+    [self.delegate emailsReady];    
     [threadLock unlock];
     [pool release];
     return;
-
+    /* offline tests */
     
     CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
     @try {
@@ -84,6 +89,7 @@
         return;
     }
     // Create dest folders
+    /*
     BOOL goodExists = false;
     BOOL badExists = false;
     for (NSString* folder in (NSSet*)[account allFolders]){
@@ -113,6 +119,7 @@
         [good release];
         [bad release];
     }
+    */
     
     // Loop on unread messages
     CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];    
@@ -120,7 +127,6 @@
     
     @try {
         messages = [inbox messageObjectsFromIndex:1 toIndex:0];
-
     }
     @catch (NSException *exception) {
         [threadLock unlock];
@@ -137,17 +143,14 @@
             emailModel.uid = message.uid;
             emailModel.summary =@"summary";
             [emailsToBeSorted addObject:emailModel];
-            if ([emailsToBeSorted count]>1){
-                [self.delegate nextEmailReady];
-            }
         }
         if (shouldEnd){
             [threadLock unlock];
             [pool release];
             return;
         }
-
     }
+    [self.delegate emailsReady];
     [threadLock unlock];
     [pool release];
 }
@@ -167,12 +170,12 @@
     [threadLock lock];
 }
 
--(void)sortedEmail:(EmailModel*)model isGood:(BOOL)isGood{
-
+-(void)email:(EmailModel*)model sortedTo:(folderType)folder{
+    model.sortedTo = folder;
 }
 
--(BOOL)isDone{
-    return false;
+-(int)pendingEmails{
+    return [emailsToBeSorted count];
 }
 
 

@@ -6,7 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BattlefieldModel.h"
 @class EmailModel;
 @protocol BFDelegateProtocol <NSObject>
-    -(void)sortedEmail:(EmailModel*)word isGood:(BOOL)isGood;
+    -(void)email:(EmailModel*)email sortedTo:(folderType)folder;
+    -(void)emailTouched:(EmailModel*)email;
 @end

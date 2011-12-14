@@ -10,6 +10,11 @@
 #import "CTCoreAccount.h"
 #import "BFModelProtocol.h"
 @class EmailModel;
+typedef enum {
+    goodMetaFolder,
+    badMetaFolder
+} folderType;
+
 @interface BattlefieldModel : NSObject{
     NSString *email;
     NSString *password;
@@ -23,17 +28,15 @@
     NSManagedObjectContext *managedObjectContext;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @property(nonatomic,retain) id<BFModelProtocol> delegate;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
-// Return the next word to sort or nil if there is no more word
+-(void)startProcessing;
 -(EmailModel*)getNextEmail;
-// To call when a word is sorted
--(void)sortedEmail:(EmailModel*)model isGood:(BOOL)isGood;
--(BOOL)isDone;
+-(void)email:(EmailModel*)model sortedTo:(folderType)folder;
+-(int)pendingEmails;
+
 // Wait for the processing thread to finish and return
 -(void)end;
--(void)startProcessing;
+
 @end

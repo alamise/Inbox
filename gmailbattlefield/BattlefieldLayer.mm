@@ -11,6 +11,7 @@
 #import "CCNode.h"
 #import "EmailNode.h"
 #import "BFDelegateProtocol.h"
+#import "BattlefieldModel.h"
 #define PTM_RATIO 32
 
 enum {
@@ -106,9 +107,9 @@ enum {
 	body->CreateFixture(&fixtureDef);
     
     [draggableNodes addObject:node];
-
     [node release];
 }
+
 
 #pragma mark - drag & drop
 
@@ -121,6 +122,7 @@ enum {
         CGRect rect = node.boundingBox;
         if (CGRectContainsPoint(rect, location)) {            
             self.draggedNode = node;
+            self.draggedNode.didMoved=false;
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
                 if (b->GetUserData() == draggedNode) {
                     b->SetLinearVelocity(b2Vec2(0,0));
@@ -138,7 +140,7 @@ enum {
     if (!self.draggedNode){
         return;
     }
-    
+    self.draggedNode.didMoved=true;
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     CGPoint oldTouchLocation = [touch previousLocationInView:touch.view];
@@ -175,6 +177,10 @@ enum {
     if (self.draggedNode==nil){
         return;
     }
+    if(!self.draggedNode.didMoved){
+        [self.delegate emailTouched:self.draggedNode.emailModel];
+        return;
+    }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint oldLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
     CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]];
@@ -188,14 +194,11 @@ enum {
 	}
 
     
-    BOOL sorted = false;
     if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, newLocation)){
-        sorted = true;
-        [self.delegate sortedEmail:self.draggedNode.emailModel isGood:YES];
+        [self.delegate email:self.draggedNode.emailModel sortedTo:goodMetaFolder];
         [self removeChildAndBody:self.draggedNode];
     }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, newLocation)){
-        sorted = false;
-        [self.delegate sortedEmail:self.draggedNode.emailModel isGood:NO];
+        [self.delegate email:self.draggedNode.emailModel sortedTo:badMetaFolder];
         [self removeChildAndBody:self.draggedNode];
     }else{
     }

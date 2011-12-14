@@ -8,6 +8,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol BFModelProtocol <NSObject>
-    - (void)nextEmailReady;
+    - (void)emailsReady;
     -(void)onError:(NSString*)errorMessage;
 @end

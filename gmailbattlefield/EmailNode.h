@@ -13,7 +13,10 @@
     CCLabelTTF *title;
     CCLabelTTF *content;
     BOOL drawMe;
+    BOOL didMoved;
 }
 @property(nonatomic,retain) EmailModel* emailModel;
+@property(nonatomic,assign) BOOL didMoved;
 - (id)initWithEmailModel:(EmailModel*)model;
+
 @end
