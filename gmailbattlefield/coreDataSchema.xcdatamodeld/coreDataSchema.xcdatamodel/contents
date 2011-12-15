@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Email" representedClassName="EmailModel"/>
+    <entity name="Email" representedClassName="EmailModel">
+        <attribute name="body" optional="YES" attributeType="String"/>
+        <attribute name="senderEmail" optional="YES" attributeType="String"/>
+        <attribute name="senderName" optional="YES" attributeType="String"/>
+        <attribute name="sentDate" optional="YES" attributeType="Date"/>
+        <attribute name="sortedTo" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="uid" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="Email" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Email" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

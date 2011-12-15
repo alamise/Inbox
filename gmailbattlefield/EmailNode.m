@@ -26,7 +26,6 @@
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
         sprite.position=CGPointMake(100,55);
         [self addChild:sprite];
-        
 
         title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(170, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeClip fontName:@"Arial" fontSize:15] retain];
         title.color=ccc3(150, 150, 150);

@@ -14,9 +14,7 @@
 #import "AppDelegate.h"
 #import "EmailModel.h"
 
-@interface BattlefieldModel() {
-    
-}
+@interface BattlefieldModel()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @end
@@ -63,16 +61,29 @@
     
     /* offline tests : */
     for (int i=0;i<10;i++){
-        EmailModel* emailModel = [[EmailModel alloc] init];
+        EmailModel* emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
         emailModel.senderName = @"plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop ";
         emailModel.senderEmail = @"sadsd";
         emailModel.sentDate =  [NSDate date];
         emailModel.uid = @"uid";
         emailModel.summary =@"summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary ";
         [emailsToBeSorted addObject:emailModel];
-    }
-    
+
+    }    
     [self.delegate emailsReady];    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Email" inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    NSError *error = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array == nil){
+        NSLog(@"%@",[error description]);
+    }else{
+        for (EmailModel* model in array){
+            NSLog(@"=%@",model.senderName);
+        }
+    }
     [threadLock unlock];
     [pool release];
     return;
@@ -168,6 +179,7 @@
 -(void)end{
     shouldEnd = true;
     [threadLock lock];
+    [managedObjectContext save:nil];
 }
 
 -(void)email:(EmailModel*)model sortedTo:(folderType)folder{

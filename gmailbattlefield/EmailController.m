@@ -10,8 +10,8 @@
 @implementation EmailController
 
 -(id)initWithEmailModel:(EmailModel*)model{
-    if (self = [super init]){
-    
+    if (self = [super initWithNibName:@"EmailView" bundle:nil]){
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
     }
     return self;
 }
@@ -27,8 +27,12 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void)close{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return YES;
+    return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft)||(interfaceOrientation==UIInterfaceOrientationLandscapeRight));
 }
 
 @end

@@ -11,7 +11,7 @@
 @interface EmailModel : NSManagedObject{
     NSString* senderEmail;
     NSString* senderName;
-    NSString* summary;
+    NSString* body;
     NSDate* sentDate; /* GMT time */
     NSString* uid;
     folderType sortedTo;
