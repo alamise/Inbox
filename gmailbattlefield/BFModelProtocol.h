@@ -9,5 +9,6 @@
 
 @protocol BFModelProtocol <NSObject>
     - (void)emailsReady;
-    -(void)onError:(NSString*)errorMessage;
+    - (void)onError:(NSString*)errorMessage;
+    
 @end

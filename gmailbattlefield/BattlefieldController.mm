@@ -33,18 +33,23 @@
     [super dealloc];
 }
 
-- (void)emailsReady{
-    [loadingHud hide:true];
-    [layer putEmail:[model getNextEmail]];
-}
-
--(void)email:(EmailModel*)m sortedTo:(folderType)folder{
-    [model email:m sortedTo:folder];
+-(void)nextStep{
     if ([model pendingEmails]==0){
-        // TODO done
+        // show done view
     }else{
         [layer putEmail:[model getNextEmail]];
     }
+}
+
+- (void)emailsReady{
+    [loadingHud hide:true];
+    [self nextStep];
+}
+
+
+-(void)email:(EmailModel*)m sortedTo:(folderType)folder{
+    [model email:m sortedTo:folder];
+    [self nextStep];
 }
 
 -(void)emailTouched:(EmailModel*)email{
@@ -95,15 +100,15 @@
     [layer didAppear];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
 	CCDirector *director = [CCDirector sharedDirector];
+    [director stopAnimation];
     [director popScene];
     [model end];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden=FALSE;
 
     glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
     [self.view addSubview:glView];
@@ -129,8 +134,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-
 
 @end
 

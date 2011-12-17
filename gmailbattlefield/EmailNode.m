@@ -8,13 +8,16 @@
 #import "EmailModel.h"
 #import "cocos2d.h"
 @implementation EmailNode
-@synthesize emailModel,didMoved;
+@synthesize emailModel,didMoved,isAppearing,isDisappearing;
 
 - (id)initWithEmailModel:(EmailModel*)model{
     self = [super init];
     if (self) {
         emailModel = [model retain];
         drawMe = true;
+        isAppearing = true;
+        isDisappearing = false;
+        self.scale=0;
     }
     return self;    
 }
@@ -53,8 +56,38 @@
     }else{
         emailModel=nil;
     }
-    
 }
+
+-(void)hideAndRemove{
+    self.isAppearing = false;
+    self.isDisappearing = true;
+}
+
+-(void)setNextStep{
+    if (isAppearing){
+        if (self.scale>=1){
+            isAppearing=false;
+        }else{
+            self.scale+=0.08;
+        }
+        
+    }else if (isDisappearing){
+        if (self.scale>0){
+            self.scale-=0.08;
+        }
+    }
+    self.scale=self.scale<0?0:self.scale;
+    self.scale=self.scale>1?1:self.scale;
+}
+
+-(BOOL)shouldBeRemoved{
+    if (isDisappearing && self.scale==0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 -(void)dealloc{
     self.emailModel=nil;
     [title release];

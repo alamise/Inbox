@@ -12,10 +12,11 @@
 #import "EmailNode.h"
 #import "BFDelegateProtocol.h"
 #import "BattlefieldModel.h"
+#import "VisualEffectProtocol.h"
 #define PTM_RATIO 32
 
 enum {
-	tagBadZone = 1,
+	tagArchiveZone = 1,
 	tagGoodZone = 2,
     tagLoadingLabel = 3,
     tagWordPreloadedImage = 4
@@ -24,7 +25,7 @@ enum {
 @interface BattlefieldLayer() 
     -(void) setGround;
     -(void) setGoodZone;
-    -(void) setBadZone;
+    -(void) setArchiveZone;
     -(void) sortingDone;
     -(void) displayLoading;
     -(void) wakeup;
@@ -58,7 +59,7 @@ enum {
 		[self schedule: @selector(tick:)];
         [self setGround];
         [self setGoodZone];
-        [self setBadZone];
+        [self setArchiveZone];
 	}
 	return self;
 }
@@ -82,18 +83,16 @@ enum {
     }
 }
 
--(void)showDoneView{
-}
-
 -(void) putEmail:(EmailModel*)model{
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
+    node.scale=0;
     [self addChild:node z:1];
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
 	bodyDef.userData = node;
     bodyDef.linearVelocity=b2Vec2(30,30);
-    bodyDef.linearDamping=1;
+    bodyDef.linearDamping=7;
 	b2Body *body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape* dynamicBox = new b2PolygonShape();
@@ -101,14 +100,15 @@ enum {
     
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = dynamicBox;	
-	fixtureDef.density = 0.3f;
-	fixtureDef.friction = 0.3f;
+	fixtureDef.density = 5.f;
+	fixtureDef.friction = 5.f;
     fixtureDef.restitution = 1;
 	body->CreateFixture(&fixtureDef);
     
     [draggableNodes addObject:node];
     [node release];
 }
+
 
 
 #pragma mark - drag & drop
@@ -183,7 +183,8 @@ enum {
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint oldLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
-    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]];
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]]
+    ;
     
     
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
@@ -196,10 +197,10 @@ enum {
     
     if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, newLocation)){
         [self.delegate email:self.draggedNode.emailModel sortedTo:goodMetaFolder];
-        [self removeChildAndBody:self.draggedNode];
-    }else if (CGRectContainsPoint([self getChildByTag:tagBadZone].boundingBox, newLocation)){
+        [self.draggedNode hideAndRemove];
+    }else if (CGRectContainsPoint([self getChildByTag:tagArchiveZone].boundingBox, newLocation)){
         [self.delegate email:self.draggedNode.emailModel sortedTo:badMetaFolder];
-        [self removeChildAndBody:self.draggedNode];
+        [self.draggedNode hideAndRemove];
     }else{
     }
 }
@@ -245,16 +246,17 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
 }
 
--(void)setBadZone{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagBadZone];
+-(void)setArchiveZone{
+    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagArchiveZone];
     if (sprite){
         sprite.visible = true;        
     }else{
-        sprite = [CCSprite spriteWithFile:@"badZone.png"];    
-        [self addChild:sprite z:0 tag:tagBadZone];
+        sprite = [CCSprite spriteWithFile:@"archiveZone.png"];    
+        [self addChild:sprite z:0 tag:tagArchiveZone];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;
-    sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
+    sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
+    
 }
 
 -(void)setGoodZone{
@@ -266,18 +268,18 @@ enum {
         [self addChild:sprite z:0 tag:tagGoodZone];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;    
-    sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
+    sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
 }
 
 -(void)didAppear{
     [self setGround];
-    [self setBadZone];
+    [self setArchiveZone];
     [self setGoodZone];
 }
 
 -(void)willRotate{
     CCSprite* sprite = nil;
-    sprite = (CCSprite*)[self getChildByTag:tagBadZone];
+    sprite = (CCSprite*)[self getChildByTag:tagArchiveZone];
     if (sprite) sprite.visible=false;
     
     sprite = (CCSprite*)[self getChildByTag:tagGoodZone];
@@ -315,7 +317,15 @@ enum {
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
 		if (b->GetUserData() != NULL) {
 			CCSprite *myActor = (CCSprite*)b->GetUserData();
-			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+            // TODO How can I hceck if a class implement a protocol
+            if ([myActor respondsToSelector:@selector(isAppearing)]){
+                id<VisualEffectProtocol> node = (id<VisualEffectProtocol>) myActor;
+                [node setNextStep];
+                if ([node shouldBeRemoved]){
+                    [self removeChildAndBody:myActor];
+                }
+            }
+    myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 		}
 	}

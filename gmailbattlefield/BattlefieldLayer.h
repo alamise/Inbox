@@ -20,7 +20,6 @@
 }
 @property(nonatomic,retain) id<BFDelegateProtocol> delegate;
 
--(void)showDoneView;
 -(void) putEmail:(EmailModel*)model;
 
 -(void)didRotate;
