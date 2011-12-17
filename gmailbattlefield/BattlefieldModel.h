@@ -11,8 +11,8 @@
 #import "BFModelProtocol.h"
 @class EmailModel;
 typedef enum {
-    goodMetaFolder,
-    badMetaFolder
+    folderArchive,
+    folderInbox
 } folderType;
 
 @interface BattlefieldModel : NSObject{

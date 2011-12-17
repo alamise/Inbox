@@ -286,17 +286,80 @@
        y1="844.34558"
        x2="675"
        y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3068"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,104.47252,254.47218)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3071"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,27.786289,431.74684)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3916"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,27.786289,431.74684)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3919"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,25.794434,481.59198)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
+    <filter
+       inkscape:collect="always"
+       id="filter3942">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.0723869"
+         id="feGaussianBlur3944" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3950"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,25.794434,481.59198)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
   </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0040916"
-     inkscape:cx="175.79794"
-     inkscape:cy="192.03163"
+     inkscape:cx="370.38895"
+     inkscape:cy="293.34053"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -304,7 +367,7 @@
      inkscape:window-height="771"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true" />
   <metadata
@@ -315,7 +378,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -324,77 +387,95 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-348.36218)">
-    <path
-       style="opacity:0.14224135;fill:none;stroke:#000000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:30, 10;stroke-dashoffset:0;marker-start:url(#Arrow2Sstart);marker-end:url(#Arrow2Send)"
-       d="m 395,699.36218 232,0"
-       id="path6209"
-       inkscape:connector-curvature="0" />
-    <rect
-       style="fill:#357bd6;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect2985"
-       width="216.96046"
-       height="704"
-       x="807.03955"
-       y="348.36218" />
-    <text
-       xml:space="preserve"
-       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Tamil Sangam MN;-inkscape-font-specification:Tamil Sangam MN Bold"
-       x="469.91296"
-       y="-878.51196"
-       id="text2987"
-       sodipodi:linespacing="125%"
-       transform="matrix(0,1,-1,0,0,0)"><tspan
-         sodipodi:role="line"
-         id="tspan2989"
+    <g
+       id="g3062"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/archiveZone.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="348.36218"
+         x="807.03955"
+         height="704"
+         width="216.96046"
+         id="rect2985"
+         style="fill:#357bd6;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <text
+         transform="matrix(0,1,-1,0,0,0)"
+         sodipodi:linespacing="125%"
+         id="text2987"
+         y="-878.51196"
          x="469.91296"
-         y="-878.51196">Archive</tspan></text>
-    <rect
-       style="fill:url(#linearGradient2999);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect2991"
-       width="25.455845"
-       height="704"
-       x="807.03955"
-       y="348.36218" />
-    <rect
-       y="348.36218"
-       x="0"
-       height="704"
-       width="216.96046"
-       id="rect3012"
-       style="fill:#edac00;fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <path
-       style="fill:none;stroke:#a07500;stroke-width:4.36039304999999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.72078592999999991, 4.36039299000000025;stroke-dashoffset:0"
-       d="m 214.78027,348.85784 0,703.00576"
-       id="path3016"
-       inkscape:connector-curvature="0" />
-    <text
-       transform="matrix(0,-1,1,0,0,0)"
-       sodipodi:linespacing="125%"
-       id="text3786"
-       y="157.80023"
-       x="-867.31781"
-       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Tamil Sangam MN;-inkscape-font-specification:Tamil Sangam MN Bold"
-       xml:space="preserve"><tspan
-         y="157.80023"
+         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Tamil Sangam MN;-inkscape-font-specification:Tamil Sangam MN Bold"
+         xml:space="preserve"><tspan
+           y="-878.51196"
+           x="469.91296"
+           id="tspan2989"
+           sodipodi:role="line">Archive</tspan></text>
+      <rect
+         y="348.36218"
+         x="807.03955"
+         height="704"
+         width="25.455845"
+         id="rect2991"
+         style="fill:url(#linearGradient2999);fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    </g>
+    <g
+       id="g3047"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/inboxZone.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:#edac00;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect3012"
+         width="216.96046"
+         height="704"
+         x="0"
+         y="348.36218" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3016"
+         d="m 214.78027,350.5268 0,699.6604"
+         style="fill:none;stroke:#a07500;stroke-width:4.35000277;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.70000569, 4.35000288;stroke-dashoffset:0" />
+      <text
+         xml:space="preserve"
+         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Tamil Sangam MN;-inkscape-font-specification:Tamil Sangam MN Bold"
          x="-867.31781"
-         id="tspan3788"
-         sodipodi:role="line">inbox</tspan></text>
-    <path
-       sodipodi:type="arc"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="path6193"
-       sodipodi:cx="479.4184"
-       sodipodi:cy="491.86795"
-       sodipodi:rx="77.781746"
-       sodipodi:ry="77.781746"
-       d="m 557.20014,491.86795 c 0,42.95767 -34.82407,77.78175 -77.78174,77.78175 -42.95768,0 -77.78175,-34.82408 -77.78175,-77.78175 0,-42.95767 34.82407,-77.78175 77.78175,-77.78175 42.95767,0 77.78174,34.82408 77.78174,77.78175 z"
-       transform="matrix(0.5,0,0,0.5,272.01428,454.28902)" />
-    <path
-       style="fill:none;stroke:#a07500;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 4;stroke-dashoffset:0;marker-end:url(#DotL)"
-       d="m 219.2031,128.41508 292.74221,0 0,223.44574"
-       id="path5413"
-       inkscape:connector-curvature="0"
-       transform="translate(0,348.36218)" />
+         y="157.80023"
+         id="text3786"
+         sodipodi:linespacing="125%"
+         transform="matrix(0,-1,1,0,0,0)"><tspan
+           sodipodi:role="line"
+           id="tspan3788"
+           x="-867.31781"
+           y="157.80023">inbox</tspan></text>
+    </g>
+    <g
+       id="g3053"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/pipe.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6209"
+         d="m 395,699.36218 232,0"
+         style="opacity:0.14224135;fill:none;stroke:#000000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:30, 10;stroke-dashoffset:0;marker-start:url(#Arrow2Sstart);marker-end:url(#Arrow2Send)" />
+      <path
+         transform="matrix(0.5,0,0,0.5,272.01428,454.28902)"
+         d="m 557.20014,491.86795 c 0,42.95767 -34.82407,77.78175 -77.78174,77.78175 -42.95768,0 -77.78175,-34.82408 -77.78175,-77.78175 0,-42.95767 34.82407,-77.78175 77.78175,-77.78175 42.95767,0 77.78174,34.82408 77.78174,77.78175 z"
+         sodipodi:ry="77.781746"
+         sodipodi:rx="77.781746"
+         sodipodi:cy="491.86795"
+         sodipodi:cx="479.4184"
+         id="path6193"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="translate(0,348.36218)"
+         inkscape:connector-curvature="0"
+         id="path5413"
+         d="m 219.2031,128.41508 292.74221,0 0,223.44574"
+         style="fill:none;stroke:#a07500;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 4;stroke-dashoffset:0;marker-end:url(#DotL)" />
+    </g>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
@@ -405,20 +486,32 @@
        transform="translate(0,348.36218)"><tspan
          sodipodi:role="line"
          id="tspan7167" /></text>
-    <rect
-       y="845.36218"
-       x="359"
-       height="138"
-       width="244"
-       id="rect7111"
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;filter:url(#filter7123)"
-       transform="matrix(0.83351672,0,0,0.83608996,148.32324,183.57224)" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3050);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect7071"
-       width="196.2467"
-       height="110.99199"
-       x="451.12143"
-       y="892.56525" />
+    <g
+       id="g3946"
+       transform="translate(0.99592507,-245.99349)"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5.7908864;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3942)"
+         id="rect3922"
+         width="196.2467"
+         height="110.99199"
+         x="372.44336"
+         y="1119.6852"
+         inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+         y="1119.6852"
+         x="372.44336"
+         height="110.99199"
+         width="196.2467"
+         id="rect7071"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3950);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
   </g>
 </svg>

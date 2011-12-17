@@ -16,20 +16,18 @@
 #define PTM_RATIO 32
 
 enum {
-	tagArchiveZone = 1,
-	tagGoodZone = 2,
-    tagLoadingLabel = 3,
-    tagWordPreloadedImage = 4
+	tagArchiveSprite = 1,
+	tagInboxSprite = 2,
+    tagPipeSprite = 3,
 };
 
 @interface BattlefieldLayer() 
-    -(void) setGround;
-    -(void) setGoodZone;
-    -(void) setArchiveZone;
-    -(void) sortingDone;
-    -(void) displayLoading;
-    -(void) wakeup;
 @property(nonatomic,retain) EmailNode* draggedNode;
+    -(void) putGround;
+    -(void) putArchiveZone;
+    -(void) putInboxZone;
+    -(void) putPipeSprite;
+    -(void) setOrUpdateScene;
 @end
 
 @implementation BattlefieldLayer
@@ -57,30 +55,8 @@ enum {
 		
 		draggableNodes = [[NSMutableArray alloc] init];
 		[self schedule: @selector(tick:)];
-        [self setGround];
-        [self setGoodZone];
-        [self setArchiveZone];
 	}
 	return self;
-}
-
--(void)setLoadingViewVisible:(BOOL)visibility{
-    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagLoadingLabel];
-    if (!loadingLabel && visibility){
-        loadingLabel = [[CCLabelTTF alloc] initWithString:@"Loading" fontName:@"Arial" fontSize:28];
-        loadingLabel.color=ccc3(0, 0, 0);
-        loadingLabel.tag = tagLoadingLabel;
-        [self addChild:loadingLabel z:1];
-    }
-    if (visibility){
-        CGSize windowSize = [CCDirector sharedDirector].winSize;    
-        loadingLabel.position=CGPointMake(windowSize.width/2, windowSize.height-loadingLabel.boundingBox.size.height/2-5);
-        loadingLabel.visible=true;
-    }else{
-        if (loadingLabel){
-            loadingLabel.visible=false;
-        }
-    }
 }
 
 -(void) putEmail:(EmailModel*)model{
@@ -91,8 +67,8 @@ enum {
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
 	bodyDef.userData = node;
-    bodyDef.linearVelocity=b2Vec2(30,30);
-    bodyDef.linearDamping=7;
+    bodyDef.linearVelocity=b2Vec2(0,-2);
+    bodyDef.linearDamping=3;
 	b2Body *body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape* dynamicBox = new b2PolygonShape();
@@ -195,11 +171,11 @@ enum {
 	}
 
     
-    if (CGRectContainsPoint([self getChildByTag:tagGoodZone].boundingBox, newLocation)){
-        [self.delegate email:self.draggedNode.emailModel sortedTo:goodMetaFolder];
+    if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
+        [self.delegate email:self.draggedNode.emailModel sortedTo:folderArchive];
         [self.draggedNode hideAndRemove];
-    }else if (CGRectContainsPoint([self getChildByTag:tagArchiveZone].boundingBox, newLocation)){
-        [self.delegate email:self.draggedNode.emailModel sortedTo:badMetaFolder];
+    }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
+        [self.delegate email:self.draggedNode.emailModel sortedTo:folderInbox];
         [self.draggedNode hideAndRemove];
     }else{
     }
@@ -219,7 +195,14 @@ enum {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
--(void)setGround{
+-(void)setOrUpdateScene{
+    [self putGround];
+    [self putArchiveZone];
+    [self putInboxZone];
+    [self putPipeSprite];
+}
+
+-(void)putGround{
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
 		if (b->GetUserData() == nil) {
@@ -246,45 +229,57 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
 }
 
--(void)setArchiveZone{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagArchiveZone];
+-(void)putArchiveZone{
+    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
     if (sprite){
         sprite.visible = true;        
     }else{
         sprite = [CCSprite spriteWithFile:@"archiveZone.png"];    
-        [self addChild:sprite z:0 tag:tagArchiveZone];
+        [self addChild:sprite z:0 tag:tagArchiveSprite];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
-    
 }
 
--(void)setGoodZone{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagGoodZone];
+-(void)putPipeSprite{
+    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagPipeSprite];
+    if (sprite){
+        sprite.visible = true;        
+    }else{
+        sprite = [CCSprite spriteWithFile:@"pipe.png"];    
+        [self addChild:sprite z:0 tag:tagPipeSprite];
+    }
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    sprite.anchorPoint=CGPointMake(0, 0);
+    sprite.position=CGPointMake(217, windowSize.height/2-40);
+    
+
+}
+
+-(void)putInboxZone{
+    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];
     if (sprite){
         sprite.visible=true;        
     }else{
-        sprite = [CCSprite spriteWithFile:@"goodZone.png"];    
-        [self addChild:sprite z:0 tag:tagGoodZone];
+        sprite = [CCSprite spriteWithFile:@"inboxZone.png"];    
+        [self addChild:sprite z:0 tag:tagInboxSprite];
     }
     CGSize windowSize = [CCDirector sharedDirector].winSize;    
     sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
 }
 
 -(void)didAppear{
-    [self setGround];
-    [self setArchiveZone];
-    [self setGoodZone];
+    [self setOrUpdateScene];
 }
 
 -(void)willRotate{
     CCSprite* sprite = nil;
-    sprite = (CCSprite*)[self getChildByTag:tagArchiveZone];
+    sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
     if (sprite) sprite.visible=false;
     
-    sprite = (CCSprite*)[self getChildByTag:tagGoodZone];
+    sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
     if (sprite) sprite.visible=false;
-    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagLoadingLabel];
+    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagArchiveSprite];
     if (loadingLabel){
         loadingLabel.visible = false;
     }
@@ -304,9 +299,7 @@ enum {
             }
         }
     }
-    [self setGround];
-    [self setBadZone];
-    [self setGoodZone];
+    [self setOrUpdateScene];
 }
 
 -(void) tick: (ccTime) dt{
@@ -325,7 +318,7 @@ enum {
                     [self removeChildAndBody:myActor];
                 }
             }
-    myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+            myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 		}
 	}
