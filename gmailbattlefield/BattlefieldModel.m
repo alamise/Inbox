@@ -129,6 +129,9 @@
         emailModel.senderName = from.name;
         emailModel.senderEmail = from.email;
         emailModel.subject=message.subject;
+        emailModel.sentDate = message.sentDateGMT;
+        emailModel.uid = message.uid;
+        folderType sortedTo;
         [emailsToBeSorted addObject:emailModel];
         
         if (shouldEnd){

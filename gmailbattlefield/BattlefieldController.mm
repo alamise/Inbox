@@ -53,11 +53,28 @@
 }
 
 -(void)emailTouched:(EmailModel*)email{
-    EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
-    UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
-    navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
-    navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
-    [self presentModalViewController:navCtr animated:YES];
+    if (!email.htmlBody){
+        [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:email animated:YES];    
+    }else{
+        EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
+        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
+        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+        navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:navCtr animated:YES];
+    }
+    
+}
+
+-(void)fetchEmailBody:(EmailModel*)email{
+    if ([model fetchEmailBody:email]){
+        EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
+        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
+        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+        navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+        [self performSelectorOnMainThread:@selector(presentModalViewController:animated:) withObject:navCtr waitUntilDone:YES];
+    }else{
+//
+    }
 
 }
 

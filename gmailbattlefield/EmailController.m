@@ -12,19 +12,29 @@
 -(id)initWithEmailModel:(EmailModel*)model{
     if (self = [super initWithNibName:@"EmailView" bundle:nil]){
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
+    
+        emailModel = [model retain];
     }
     return self;
+}
+-(void)dealloc{
+    [webView release];
+    [emailModel release];
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    NSLog(@"%@",emailModel.htmlBody);
+    [webView loadHTMLString:emailModel.htmlBody baseURL:nil];
 }
 
 - (void)viewDidUnload{
     [super viewDidUnload];
-    // e.g. self.myOutlet = nil;
+    [webView release];
+    webView = nil;
 }
 
 -(void)close{
