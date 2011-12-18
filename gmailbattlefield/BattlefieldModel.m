@@ -59,13 +59,14 @@
     NSManagedObjectContext *managedObjectContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];
     
     /* offline tests : */
+    /*
     for (int i=0;i<10;i++){
         EmailModel* emailModel = [[EmailModel alloc] init];
         emailModel.senderName = @"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         emailModel.senderEmail = @"sadsd";
         emailModel.sentDate =  [NSDate date];
         emailModel.uid = @"uid";
-        emailModel.summary =@"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+        emailModel.object =@"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         [emailsToBeSorted addObject:emailModel];
 
     }    
@@ -73,7 +74,7 @@
     [threadLock unlock];
     [pool release];
     return;
-    
+    */
     CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
     @try {
         [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
@@ -115,12 +116,19 @@
         }else{
             emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
         }
-        [request release];
-        NSSet* from = message.from;
-        [message description];
-        NSLog(@"%@",[message.sender description]);
+        NSEnumerator* enumerator = [message.from objectEnumerator];
+        CTCoreAddress* from;
+        // The "sender" field is not valid (the name is wrong sometimes)
+        if ([message.from count]>0){
+            from = [enumerator nextObject];
+        }else{
+            from = message.sender;
+        }
         
-        emailModel.summary =@"summary";
+        [request release];
+        emailModel.senderName = from.name;
+        emailModel.senderEmail = from.email;
+        emailModel.subject=message.subject;
         [emailsToBeSorted addObject:emailModel];
         
         if (shouldEnd){

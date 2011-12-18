@@ -11,7 +11,7 @@
 @interface EmailModel : NSManagedObject{
     NSString* senderEmail;
     NSString* senderName;
-    NSString* body;
+    NSString* subject;
     NSDate* sentDate; /* GMT time */
     NSString* uid;
     NSString* htmlBody;
@@ -20,6 +20,7 @@
 }
 @property(nonatomic,retain) NSString* senderEmail;
 @property(nonatomic,retain) NSString* senderName;
+@property(nonatomic,retain) NSString* subject;
 @property(nonatomic,retain) NSString* summary;
 @property(nonatomic,retain) NSDate* sentDate;
 @property(nonatomic,retain) NSString* uid;

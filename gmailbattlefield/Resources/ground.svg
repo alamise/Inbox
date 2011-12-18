@@ -234,14 +234,6 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-20.930799,45.364131)"
        spreadMethod="reflect" />
-    <filter
-       inkscape:collect="always"
-       id="filter7123">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="2.865"
-         id="feGaussianBlur7125" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient7091"
@@ -349,6 +341,25 @@
        y1="844.34558"
        x2="675"
        y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient3105"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,-328.81414,577.97076)"
+       spreadMethod="reflect"
+       x1="559.79327"
+       y1="813.70007"
+       x2="571.12067"
+       y2="825.02747" />
+    <filter
+       inkscape:collect="always"
+       id="filter3938">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1"
+         id="feGaussianBlur3940" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -357,9 +368,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0040916"
-     inkscape:cx="370.38895"
-     inkscape:cy="293.34053"
+     inkscape:zoom="3.0348682"
+     inkscape:cx="118.3661"
+     inkscape:cy="-181.34018"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -378,7 +389,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -387,6 +398,17 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-348.36218)">
+    <rect
+       ry="18.172028"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5.7908864;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3938)"
+       id="rect3108"
+       width="100"
+       height="100"
+       x="86.252151"
+       y="1200.6162"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <g
        id="g3062"
        inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/archiveZone.png"
@@ -513,5 +535,26 @@
          id="rect7071"
          style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3950);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none" />
     </g>
+    <rect
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5.7908864;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3942)"
+       id="rect3080"
+       width="196.2467"
+       height="110.99199"
+       x="390.37"
+       y="1109.726"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+       y="1201.2753"
+       x="86.14463"
+       height="100"
+       width="100"
+       id="rect3082"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3105);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none"
+       ry="9.9344072" />
   </g>
 </svg>

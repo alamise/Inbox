@@ -50,20 +50,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "gmailbattlefield/BattlefieldModel.m"
-         timestampString = "345915521.894026"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
-         landmarkName = "-getNextEmail"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "gmailbattlefield/BattlefieldLayer.mm"
          timestampString = "345835532.261135"
          startingColumnNumber = "9223372036854775807"
@@ -71,20 +57,6 @@
          startingLineNumber = "145"
          endingLineNumber = "145"
          landmarkName = "-ccTouchesMoved:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "gmailbattlefield/BattlefieldModel.m"
-         timestampString = "345916065.590255"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
-         landmarkName = "-process"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

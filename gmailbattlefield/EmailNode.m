@@ -30,12 +30,14 @@
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
         sprite.position=CGPointMake(105,67);
         [self addChild:sprite];
+        NSString* headline;
+        
         title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
         title.color=ccc3(150, 150, 150);
         title.position=CGPointMake(105, 105);
         [self addChild:title];
         
-        content = [[CCLabelTTF labelWithString:emailModel.summary dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
+        content = [[CCLabelTTF labelWithString:emailModel.subject dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
 
         content.color=ccc3(0, 1, 0);
         content.position=CGPointMake(105, 56);
