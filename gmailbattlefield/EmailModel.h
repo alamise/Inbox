@@ -14,6 +14,7 @@
     NSString* body;
     NSDate* sentDate; /* GMT time */
     NSString* uid;
+    NSString* htmlBody;
     folderType sortedTo;
     
 }
@@ -22,7 +23,10 @@
 @property(nonatomic,retain) NSString* summary;
 @property(nonatomic,retain) NSDate* sentDate;
 @property(nonatomic,retain) NSString* uid;
+@property(nonatomic,retain) NSString* htmlBody;
 @property(nonatomic,assign) folderType sortedTo;
 
 +(NSString*)entityName;
+
+
 @end

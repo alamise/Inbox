@@ -26,22 +26,22 @@
     [super draw];
     if (drawMe){
         drawMe = false;
+        // 217x135
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
-        sprite.position=CGPointMake(100,55);
+        sprite.position=CGPointMake(105,67);
         [self addChild:sprite];
-
-        title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(170, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeClip fontName:@"Arial" fontSize:15] retain];
+        title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
         title.color=ccc3(150, 150, 150);
-        title.position=CGPointMake(100, 88);
+        title.position=CGPointMake(105, 105);
         [self addChild:title];
         
-        content = [[CCLabelTTF labelWithString:emailModel.summary dimensions:CGSizeMake(170, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeClip fontName:@"Arial" fontSize:13] retain];
+        content = [[CCLabelTTF labelWithString:emailModel.summary dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
 
         content.color=ccc3(0, 1, 0);
-        content.position=CGPointMake(100, 48);
+        content.position=CGPointMake(105, 56);
         
         [self addChild:content];
-        [self setContentSize:CGSizeMake(200, 110)];
+        [self setContentSize:CGSizeMake(217, 135)];
         [self setAnchorPoint:CGPointMake(0.5, 0.5)];
     }
 }

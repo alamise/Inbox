@@ -13,7 +13,9 @@
 #import "BFDelegateProtocol.h"
 #import "BattlefieldModel.h"
 #import "VisualEffectProtocol.h"
+
 #define PTM_RATIO 32
+#define TOUCHES_DELAY 0.1
 
 enum {
 	tagArchiveSprite = 1,
@@ -33,12 +35,7 @@ enum {
 @implementation BattlefieldLayer
 @synthesize delegate, draggedNode;
 
-+(CCScene *) scene{
-	CCScene *scene = [CCScene node];
-	BattlefieldLayer *layer = [BattlefieldLayer node];
-	[scene addChild: layer];
-	return scene;
-}
+
 
 -(id) init{
 	if( (self=[super init])) {
@@ -48,7 +45,7 @@ enum {
 		world->SetContinuousPhysics(true);
 		m_debugDraw = new GLESDebugDraw(PTM_RATIO);
 		world->SetDebugDraw(m_debugDraw);
-		
+        lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;
 		m_debugDraw->SetFlags(flags);		
@@ -57,6 +54,15 @@ enum {
 		[self schedule: @selector(tick:)];
 	}
 	return self;
+}
+
+- (void) dealloc{
+	delete world;
+	world = NULL;	
+	delete m_debugDraw;
+    [draggableNodes release];
+    self.draggedNode = nil;
+	[super dealloc];
 }
 
 -(void) putEmail:(EmailModel*)model{
@@ -125,7 +131,7 @@ enum {
     
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);    
     CGPoint newPos = ccpAdd(self.draggedNode.position, translation);
-    self.draggedNode.position = touchLocation;
+    self.draggedNode.position = newPos;
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     CGRect bounding = CGRectMake(0, 0, windowSize.width, windowSize.height);
     if (!CGRectContainsPoint(bounding, newPos)) return;
@@ -135,18 +141,11 @@ enum {
             b->SetAwake(true);
 		}	
 	}
-}
 
--(void)removeChildAndBody:(CCNode*)node{
-
-    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
-        if (b->GetUserData()==node){
-            world->DestroyBody(b);
-            break;
-        }
+    if (lastTouchTime+TOUCHES_DELAY<[NSDate timeIntervalSinceReferenceDate]){
+        lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
+        lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
     }
-    [self removeChild:node cleanup:YES];
-    [draggableNodes removeObject:node];
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -158,18 +157,8 @@ enum {
         return;
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
-    CGPoint oldLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
-    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]]
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]]
     ;
-    
-    
-    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
-		if (b->GetUserData() == self.draggedNode) {
-            b->SetLinearVelocity(b2Vec2(oldLocation.x-newLocation.x, oldLocation.y-newLocation.y));
-            b->SetAwake(true);
-		}	
-	}
-
     
     if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [self.delegate email:self.draggedNode.emailModel sortedTo:folderArchive];
@@ -178,6 +167,16 @@ enum {
         [self.delegate email:self.draggedNode.emailModel sortedTo:folderInbox];
         [self.draggedNode hideAndRemove];
     }else{
+        // No effect if the mail is dropped in a zone.
+        if (lastTouchTime<[NSDate timeIntervalSinceReferenceDate]+TOUCHES_DELAY){
+            for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
+                if (b->GetUserData() == self.draggedNode) {
+                    CGPoint point = ccpSub(newLocation,lastTouchPosition);
+                    b->SetLinearVelocity(b2Vec2(point.x, point.y));
+                    b->SetAwake(true);
+                }	        
+            }
+        }
     }
 }
 
@@ -193,6 +192,18 @@ enum {
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+}
+
+-(void)removeChildAndBody:(CCNode*)node{
+    
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+        if (b->GetUserData()==node){
+            world->DestroyBody(b);
+            break;
+        }
+    }
+    [self removeChild:node cleanup:YES];
+    [draggableNodes removeObject:node];
 }
 
 -(void)setOrUpdateScene{
@@ -252,8 +263,6 @@ enum {
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     sprite.anchorPoint=CGPointMake(0, 0);
     sprite.position=CGPointMake(217, windowSize.height/2-40);
-    
-
 }
 
 -(void)putInboxZone{
@@ -283,7 +292,6 @@ enum {
     if (loadingLabel){
         loadingLabel.visible = false;
     }
-    
 }
 
 -(void)didRotate{
@@ -324,18 +332,4 @@ enum {
 	}
 }
 
--(void)sortingDone{
-
-}
-
-#pragma mark - life cycle
-
-- (void) dealloc{
-	delete world;
-	world = NULL;	
-	delete m_debugDraw;
-    [draggableNodes release];
-    self.draggedNode = nil;
-	[super dealloc];
-}
 @end

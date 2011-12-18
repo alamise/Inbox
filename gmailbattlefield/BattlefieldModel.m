@@ -15,12 +15,11 @@
 #import "EmailModel.h"
 
 @interface BattlefieldModel()
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
 
 @implementation BattlefieldModel
-@synthesize delegate, fetchedResultsController, managedObjectContext;
+@synthesize delegate;
 
 -(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
@@ -30,7 +29,6 @@
         shouldEnd = false;
         emailsToBeSorted = [[NSMutableArray alloc] init];
         threadLock = [[NSLock alloc] init];
-        self.managedObjectContext = [(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext];
     }
     return self;
 }
@@ -58,15 +56,16 @@
 -(void)process{
     [threadLock lock];
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    NSManagedObjectContext *managedObjectContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];
     
     /* offline tests : */
     for (int i=0;i<10;i++){
         EmailModel* emailModel = [[EmailModel alloc] init];
-        emailModel.senderName = @"plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop ";
+        emailModel.senderName = @"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         emailModel.senderEmail = @"sadsd";
         emailModel.sentDate =  [NSDate date];
         emailModel.uid = @"uid";
-        emailModel.summary =@"summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary summary ";
+        emailModel.summary =@"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         [emailsToBeSorted addObject:emailModel];
 
     }    
@@ -74,7 +73,6 @@
     [threadLock unlock];
     [pool release];
     return;
-    /* offline tests */
     
     CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
     @try {
@@ -86,40 +84,8 @@
         [pool release];
         return;
     }
-    // Create dest folders
-    /*
-    BOOL goodExists = false;
-    BOOL badExists = false;
-    for (NSString* folder in (NSSet*)[account allFolders]){
-        if ([folder isEqualToString:@"good"]){
-            goodExists=true;
-        }
-        if ([folder isEqualToString:@"bad"]){
-            badExists=true;
-        }
-    }
-    CTCoreFolder* good = [[CTCoreFolder alloc] initWithPath:@"good" inAccount:account];
-    CTCoreFolder* bad = [[CTCoreFolder alloc] initWithPath:@"bad" inAccount:account];
-    @try {
-        if (!badExists){
-            [bad create];
-        }
-        if (!goodExists){
-            [good create];
-        }
-    }
-    @catch (NSException *exception) {
-        [threadLock unlock];
-        [self.delegate onError:[exception description]];
-        [pool release];
-    }
-    @finally {
-        [good release];
-        [bad release];
-    }
-    */
     
-    // Loop on unread messages
+    // Loop on messages from the inbox
     CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];    
     NSSet* messages = nil;
     
@@ -133,15 +99,30 @@
     }
 
     for (CTCoreMessage*  message in messages){
-        if (message.isUnread){
-            EmailModel* emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
-            emailModel.senderName = message.sender.name;
-            emailModel.senderEmail = message.sender.email;
-            emailModel.sentDate =  message.sentDateGMT;
-            emailModel.uid = message.uid;
-            emailModel.summary =@"summary";
-            [emailsToBeSorted addObject:emailModel];
+        EmailModel* emailModel=nil;
+        
+        /* Create or get the email model */
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
+        request.entity = entity;
+        request.propertiesToFetch = [NSArray arrayWithObject:[[entity propertiesByName] objectForKey:@"uid"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid like %@", message.uid];          
+        [request setPredicate:predicate];
+        NSError* fetchError = nil;
+        NSArray* objects = [managedObjectContext executeFetchRequest:request error:&fetchError];
+        if (fetchError==nil && [objects count]>0){
+            emailModel = [objects objectAtIndex:0];
+        }else{
+            emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
         }
+        [request release];
+        NSSet* from = message.from;
+        [message description];
+        NSLog(@"%@",[message.sender description]);
+        
+        emailModel.summary =@"summary";
+        [emailsToBeSorted addObject:emailModel];
+        
         if (shouldEnd){
             [threadLock unlock];
             [pool release];
@@ -150,6 +131,7 @@
     }
     [self.delegate emailsReady];
     [threadLock unlock];
+    [managedObjectContext release];
     [pool release];
 }
 
@@ -161,6 +143,23 @@
     }else{
         return nil;
     }
+}
+
+-(BOOL)fetchEmailBody:(EmailModel*)model{
+    CTCoreAccount *account = [[CTCoreAccount alloc] init];
+    @try {
+        [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
+    }
+    @catch (NSException *exception) {
+        return false;
+    }
+    CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];
+    
+    CTCoreMessage* message = [inbox messageWithUID:model.uid];
+    [message fetchBody];
+    model.htmlBody = [message htmlBody];
+    [account release];
+    return true;
 }
 
 -(void)end{

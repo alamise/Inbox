@@ -24,8 +24,6 @@ typedef enum {
     NSMutableDictionary* sortedEmails;
     id<BFModelProtocol> delegate;
     
-    NSFetchedResultsController *fetchedResultsController;
-    NSManagedObjectContext *managedObjectContext;
 }
 
 
@@ -35,7 +33,7 @@ typedef enum {
 -(EmailModel*)getNextEmail;
 -(void)email:(EmailModel*)model sortedTo:(folderType)folder;
 -(int)pendingEmails;
-
+-(BOOL)fetchEmailBody:(EmailModel*)model;
 // Wait for the processing thread to finish and return
 -(void)end;
 

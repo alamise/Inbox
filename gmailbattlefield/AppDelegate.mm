@@ -16,6 +16,16 @@
 #import "BattlefieldModel.h"
 #import "LoginController.h"
 #import "TutorialController.h"
+
+
+@interface AppDelegate()
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) UINavigationController* navigationController;
+@end
+
 @implementation AppDelegate
 @synthesize window,navigationController,managedObjectContext,managedObjectModel;
 
@@ -88,17 +98,22 @@
 
 #pragma mark - CoreData
 
-- (NSManagedObjectContext *) managedObjectContext {
-    if (managedObjectContext != nil) {
+-(NSManagedObjectContext*)getManagedObjectContext:(BOOL)reuse{
+    if (managedObjectContext != nil && reuse) {
         return managedObjectContext;
     }
+    NSManagedObjectContext* context;
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [managedObjectContext setPersistentStoreCoordinator: coordinator];
+        context = [[NSManagedObjectContext alloc] init];
+        [context setPersistentStoreCoordinator: coordinator];
     }
     
-    return managedObjectContext;
+    if (!managedObjectContext){
+        managedObjectContext = [context retain];
+        return managedObjectContext;
+    }
+    return [context autorelease];
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
