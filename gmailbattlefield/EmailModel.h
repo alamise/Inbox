@@ -15,7 +15,8 @@
     NSDate* sentDate; /* GMT time */
     NSString* uid;
     NSString* htmlBody;
-    folderType sortedTo;
+    NSString* path; /* path from the server*/ 
+    NSString* newPath; /* next path of the email, will be update during the next round*/
     
 }
 @property(nonatomic,retain) NSString* senderEmail;
@@ -25,8 +26,8 @@
 @property(nonatomic,retain) NSDate* sentDate;
 @property(nonatomic,retain) NSString* uid;
 @property(nonatomic,retain) NSString* htmlBody;
-@property(nonatomic,assign) folderType sortedTo;
-
+@property(nonatomic,retain) NSString* path;
+@property(nonatomic,retain) NSString* newPath;
 +(NSString*)entityName;
 
 

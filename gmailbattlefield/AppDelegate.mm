@@ -50,7 +50,7 @@
         [infos writeToFile:[self getPlistPath] atomically:YES];
         firstView = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
     }else{
-        firstView = [[LoginController alloc] init];
+        firstView = [[LoginController alloc] initWithNibName:@"loginView" bundle:nil];
     }
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];

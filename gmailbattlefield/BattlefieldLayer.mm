@@ -6,7 +6,6 @@
 //
 
 #import "BattlefieldLayer.h"
-#import "GPLoadingBar.h"
 #import "CTCoreAccount.h"
 #import "CCNode.h"
 #import "EmailNode.h"
@@ -43,8 +42,8 @@ enum {
 		self.isAccelerometerEnabled = NO;
 		world = new b2World(b2Vec2(0,0), true);
 		world->SetContinuousPhysics(true);
-		m_debugDraw = new GLESDebugDraw(PTM_RATIO);
-		world->SetDebugDraw(m_debugDraw);
+		//m_debugDraw = new GLESDebugDraw(PTM_RATIO);
+		//world->SetDebugDraw(m_debugDraw);
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;

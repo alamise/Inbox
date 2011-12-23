@@ -23,17 +23,20 @@ typedef enum {
     NSMutableArray* emailsToBeSorted;
     NSMutableDictionary* sortedEmails;
     id<BFModelProtocol> delegate;
-    
+    CTCoreAccount *account;
+    NSManagedObjectContext *managedObjectContext;
+
 }
 
 
 @property(nonatomic,retain) id<BFModelProtocol> delegate;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
--(void)startProcessing;
+-(BOOL)syncEmails;
 -(EmailModel*)getNextEmail;
 -(void)email:(EmailModel*)model sortedTo:(folderType)folder;
 -(int)pendingEmails;
 -(BOOL)fetchEmailBody:(EmailModel*)model;
+-(BOOL)connect;
 // Wait for the processing thread to finish and return
 -(void)end;
 

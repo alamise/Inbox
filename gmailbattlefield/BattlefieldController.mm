@@ -99,7 +99,7 @@
     CCScene *scene = [CCScene node];
     [scene addChild:layer];
     [director setOpenGLView:glView];
-    glClearColor(0.93, 0.93, 0.93, 1);
+    glClearColor(1, 1, 1, 1);
     if (director.runningScene){
         [director replaceScene:scene];
     }else{

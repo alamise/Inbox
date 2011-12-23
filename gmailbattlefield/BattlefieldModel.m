@@ -13,13 +13,16 @@
 #import "CTCoreAddress.h"
 #import "AppDelegate.h"
 #import "EmailModel.h"
-
+#import "MailCoreTypes.h"
 @interface BattlefieldModel()
-
+    @property(nonatomic,retain) CTCoreAccount* account;
+    @property(nonatomic,retain) NSManagedObjectContext *managedObjectContext;
+    -(BOOL)saveContext:(NSManagedObjectContext*)context;
+    -(EmailModel*)processMessage:(CTCoreMessage*)message reuseFetchRequest:(NSFetchRequest*)request;
 @end
 
 @implementation BattlefieldModel
-@synthesize delegate;
+@synthesize delegate, account, managedObjectContext;
 
 -(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
@@ -29,11 +32,13 @@
         shouldEnd = false;
         emailsToBeSorted = [[NSMutableArray alloc] init];
         threadLock = [[NSLock alloc] init];
+        self.managedObjectContext = [(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false];
     }
     return self;
 }
 
 -(void)dealloc{
+    self.managedObjectContext = nil;
     [email release];
     [password release];
     [self end];
@@ -42,21 +47,79 @@
     [super dealloc];
 }
 
--(void)startProcessing{
-    if (![threadLock tryLock]){
-        return;
+-(BOOL)connect{
+    self.account = [[[CTCoreAccount alloc] init] autorelease];
+    @try {
+        [self.account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
     }
-    [threadLock unlock];
-    NSThread* processThread = [[NSThread alloc] initWithTarget:self selector:@selector(process) object:nil];
-    [processThread setThreadPriority:0];
-    [processThread start];
-    [processThread release];
+    @catch (NSException *exception) {
+        return false;
+    }
+    return true;
+}
+
+-(BOOL)isConnected{
+    if (self.account && self.account.isConnected){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+-(BOOL)syncEmails{
+    if (![self isConnected]){
+        return false;
+    }
+
+    // GET NEW EMAILS
+    CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];    
+    NSSet* messages = nil;
+    
+    @try {
+        messages = [inbox messageObjectsFromIndex:1 toIndex:0];
+    }
+    @catch (NSException *exception) {
+        return false;
+    }
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.managedObjectContext];
+    request.entity = entity;    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [sortDescriptor release];
+    
+    for (CTCoreMessage*  message in messages){
+        [self processMessage:message reuseFetchRequest:request];
+    }
+
+    if (![self saveContext:self.managedObjectContext]){
+        return false;
+    }
+    
+    
+    // UPDATE 
+    request.sortDescriptors=nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"newPath = nil"];
+    [request setPredicate:predicate];
+    NSError* fetchError = nil;
+    NSArray* objects = [managedObjectContext executeFetchRequest:request error:&fetchError];
+    if (fetchError!=nil){
+        return false;
+    }
+    
+    for (EmailModel* model in objects){
+    
+    
+    }
+    
+    [request release];
 }
 
 -(void)process{
     [threadLock lock];
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-    NSManagedObjectContext *managedObjectContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];
+    NSManagedObjectContext *localContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];
     
     /* offline tests : */
     /*
@@ -75,82 +138,69 @@
     [pool release];
     return;
     */
-    CTCoreAccount *account = [[[CTCoreAccount alloc] init] autorelease];
-    @try {
-        [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
-    }
-    @catch (NSException *exception) {
-        [threadLock unlock];
-        [self.delegate onError:[exception description]];
-        [pool release];
-        return;
-    }
     
-    // Loop on messages from the inbox
-    CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];    
-    NSSet* messages = nil;
     
-    @try {
-        messages = [inbox messageObjectsFromIndex:1 toIndex:0];
-    }
-    @catch (NSException *exception) {
-        [threadLock unlock];
-        [self.delegate onError:[exception description]];
-        [pool release];
-    }
 
-    for (CTCoreMessage*  message in messages){
-        EmailModel* emailModel=nil;
-        
-        /* Create or get the email model */
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
-        request.entity = entity;
-        request.propertiesToFetch = [NSArray arrayWithObject:[[entity propertiesByName] objectForKey:@"uid"]];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid like %@", message.uid];          
-        [request setPredicate:predicate];
-        NSError* fetchError = nil;
-        NSArray* objects = [managedObjectContext executeFetchRequest:request error:&fetchError];
-        if (fetchError==nil && [objects count]>0){
-            emailModel = [objects objectAtIndex:0];
-        }else{
-            emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
-        }
-        NSEnumerator* enumerator = [message.from objectEnumerator];
-        CTCoreAddress* from;
-        // The "sender" field is not valid (the name is wrong sometimes)
-        if ([message.from count]>0){
-            from = [enumerator nextObject];
-        }else{
-            from = message.sender;
-        }
-        
-        [request release];
-        emailModel.senderName = from.name;
-        emailModel.senderEmail = from.email;
-        emailModel.subject=message.subject;
-        emailModel.sentDate = message.sentDateGMT;
-        emailModel.uid = message.uid;
-        folderType sortedTo;
-        [emailsToBeSorted addObject:emailModel];
-        
-        if (shouldEnd){
-            [threadLock unlock];
-            [pool release];
-            return;
-        }
-    }
-    [self.delegate emailsReady];
-    [threadLock unlock];
+    // Loop on messages from the inbox
+        [threadLock unlock];
     [managedObjectContext release];
     [pool release];
 }
 
+-(EmailModel*)processMessage:(CTCoreMessage*)message reuseFetchRequest:(NSFetchRequest*)request reuseContext:(NSManagedObjectContext*)context{
+    EmailModel* emailModel=nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid like %@", message.uid];
+    [request setPredicate:predicate];
+    NSError* fetchError = nil;
+    NSArray* objects = [managedObjectContext executeFetchRequest:request error:&fetchError];
+    if (fetchError==nil && [objects count]>0){
+        emailModel = [objects objectAtIndex:0];
+    }else{
+        emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
+    }
+    NSEnumerator* enumerator = [message.from objectEnumerator];
+    CTCoreAddress* from;
+    
+    // The "sender" field is not valid
+    if ([message.from count]>0){
+        from = [enumerator nextObject];
+    }else{
+        from = message.sender;
+    }
+    
+    emailModel.senderName = from.name;
+    emailModel.senderEmail = from.email;
+    emailModel.subject=message.subject;
+    emailModel.sentDate = message.sentDateGMT;
+    emailModel.uid = message.uid;
+    return emailModel;
+}
+
+-(BOOL)saveContext:(NSManagedObjectContext*)context{
+    NSError* error = nil;
+    [context save:&error];
+    if (error){
+        [self.delegate onError:[error localizedDescription]];
+        return false;
+    }else{
+        return true;
+    }
+}
+
 -(EmailModel*)getNextEmail{
-    if ([emailsToBeSorted count]!=0){
-        EmailModel* next = [[emailsToBeSorted objectAtIndex:0] retain];
-        [emailsToBeSorted removeObjectAtIndex:0];
-        return [next autorelease];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.managedObjectContext];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path like %@", @"INBOX"];          
+    [request setPredicate:predicate];
+    
+
+    [request setFetchLimit:1];
+    NSError* fetchError = nil;
+    NSArray* objects = [managedObjectContext executeFetchRequest:request error:&fetchError];
+    if (fetchError==nil && [objects count]>0){
+        return [objects objectAtIndex:0];
     }else{
         return nil;
     }
@@ -164,6 +214,8 @@
     @catch (NSException *exception) {
         return false;
     }
+    
+
     CTCoreFolder *inbox = [account folderWithPath:@"INBOX"];
     
     CTCoreMessage* message = [inbox messageWithUID:model.uid];
@@ -179,7 +231,12 @@
 }
 
 -(void)email:(EmailModel*)model sortedTo:(folderType)folder{
-    model.sortedTo = folder;
+    CTCoreFolder* archiveFolder = [self.account folderWithPath:@"[Gmail]/All Mail"];
+    CTCoreFolder* inboxFolder = [self.account folderWithPath:@"INBOX"];
+    CTCoreMessage* message = [inboxFolder messageWithUID:model.uid];
+    [archiveFolder copyMessage:@"[Gmail]/All Mail" forMessage:message];
+    [inboxFolder setFlags:CTFlagDeleted forMessage:message];
+
 }
 
 -(int)pendingEmails{
