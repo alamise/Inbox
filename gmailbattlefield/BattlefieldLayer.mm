@@ -12,7 +12,7 @@
 #import "BFDelegateProtocol.h"
 #import "BattlefieldModel.h"
 #import "VisualEffectProtocol.h"
-
+#import "GLES-Render.h"
 #define PTM_RATIO 32
 #define TOUCHES_DELAY 0.1
 
@@ -20,6 +20,7 @@ enum {
 	tagArchiveSprite = 1,
 	tagInboxSprite = 2,
     tagPipeSprite = 3,
+    tagBackgroundSprite = 4
 };
 
 @interface BattlefieldLayer() 
@@ -32,18 +33,19 @@ enum {
 @end
 
 @implementation BattlefieldLayer
-@synthesize delegate, draggedNode;
+@synthesize draggedNode;
 
 
 
--(id) init{
+-(id) initWithDelegate:(id<BFDelegateProtocol>)d{
 	if( (self=[super init])) {
+        delegate = [d retain];
         self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
 		world = new b2World(b2Vec2(0,0), true);
 		world->SetContinuousPhysics(true);
-		//m_debugDraw = new GLESDebugDraw(PTM_RATIO);
-		//world->SetDebugDraw(m_debugDraw);
+		m_debugDraw = new GLESDebugDraw(PTM_RATIO);
+		world->SetDebugDraw(m_debugDraw);
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;
@@ -61,6 +63,7 @@ enum {
 	delete m_debugDraw;
     [draggableNodes release];
     self.draggedNode = nil;
+    [delegate release];
 	[super dealloc];
 }
 
@@ -152,7 +155,7 @@ enum {
         return;
     }
     if(!self.draggedNode.didMoved){
-        [self.delegate emailTouched:self.draggedNode.emailModel];
+        [delegate emailTouched:self.draggedNode.emailModel];
         return;
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
@@ -160,10 +163,10 @@ enum {
     ;
     
     if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
-        [self.delegate email:self.draggedNode.emailModel sortedTo:folderArchive];
+        [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
         [self.draggedNode hideAndRemove];
     }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
-        [self.delegate email:self.draggedNode.emailModel sortedTo:folderInbox];
+        [delegate move:self.draggedNode.emailModel to:@"INBOX"];
         [self.draggedNode hideAndRemove];
     }else{
         // No effect if the mail is dropped in a zone.
@@ -237,6 +240,16 @@ enum {
     // right
     groundBox.SetAsEdge(b2Vec2(windowSize.width/PTM_RATIO,windowSize.height/PTM_RATIO), b2Vec2(windowSize.width/PTM_RATIO,0));
     groundBody->CreateFixture(&groundBox,0);
+    
+    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagBackgroundSprite];
+    if (sprite){
+        sprite.visible = true;        
+    }else{
+        sprite = [CCSprite spriteWithFile:@"woodBackground.jpg"];    
+        [self addChild:sprite z:0 tag:tagBackgroundSprite];
+    }
+    sprite.anchorPoint=CGPointMake(0, 0);
+    sprite.position=CGPointMake(0,0);    
 }
 
 -(void)putArchiveZone{

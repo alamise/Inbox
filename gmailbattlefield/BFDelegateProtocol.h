@@ -9,6 +9,6 @@
 #import "BattlefieldModel.h"
 @class EmailModel;
 @protocol BFDelegateProtocol <NSObject>
-    -(void)email:(EmailModel*)email sortedTo:(folderType)folder;
+    -(void)move:(EmailModel*)email to:(NSString*)folder;
     -(void)emailTouched:(EmailModel*)email;
 @end

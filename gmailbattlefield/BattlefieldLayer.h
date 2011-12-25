@@ -21,7 +21,7 @@
     CGPoint lastTouchPosition;
     NSTimeInterval lastTouchTime;
 }
-@property(nonatomic,retain) id<BFDelegateProtocol> delegate;
+-(id) initWithDelegate:(id<BFDelegateProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
 
 -(void)didRotate;

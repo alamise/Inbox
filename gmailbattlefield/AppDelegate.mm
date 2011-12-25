@@ -22,7 +22,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, retain) UIWindow *window;
+
 @property (nonatomic, retain) UINavigationController* navigationController;
 @end
 
@@ -43,14 +43,14 @@
     UIViewController* firstView = nil;
     NSDictionary* infos = [NSMutableDictionary dictionaryWithContentsOfFile:[self getPlistPath]];
     
-    firstView = [[LoginController alloc] init];
+    firstView = nil;
     
     if (!infos){
         infos = [[NSMutableDictionary alloc] init];
         [infos writeToFile:[self getPlistPath] atomically:YES];
         firstView = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
     }else{
-        firstView = [[LoginController alloc] initWithNibName:@"loginView" bundle:nil];
+        firstView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
     }
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
@@ -59,7 +59,7 @@
 }
 
 -(NSString*)getPlistPath{
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [documentsDirectory stringByAppendingPathComponent:@"infos.plist"];
 }
 
@@ -113,14 +113,26 @@
         managedObjectContext = [context retain];
         return managedObjectContext;
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mergeChangesWithMainContext:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:context];
+    
+
     return [context autorelease];
+}
+
+- (void)mergeChangesWithMainContext:(NSNotification *)notification{
+    NSManagedObjectContext *mainContext = [self getManagedObjectContext:YES];
+    [mainContext mergeChangesFromContextDidSaveNotification:notification];  
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
     if (managedObjectModel != nil) {
         return managedObjectModel;
     }
-    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coreDataSchema" withExtension:@"momd"];
+    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     
     return managedObjectModel;
 }

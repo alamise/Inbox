@@ -8,14 +8,15 @@
 #import "EmailModel.h"
 
 @implementation EmailModel
-@synthesize senderEmail, senderName, summary,sentDate, uid, htmlBody, subject, path;
+@dynamic uid;
+@dynamic subject;
+@dynamic sentDate;
+@dynamic senderName;
+@dynamic senderEmail;
+@dynamic path;
+@dynamic newPath;
+@dynamic htmlBody;
 
-- (id)init{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
 
 +(NSString*)entityName{
     return @"Email";

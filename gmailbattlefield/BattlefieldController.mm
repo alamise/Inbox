@@ -17,15 +17,13 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
-        model.delegate = self;
+        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
         [plistDic release];
 	}
 	return self;
 }
 
 - (void)dealloc {
-    [model end];
     [model release];
     [layer release];
     [glView removeFromSuperview];
@@ -34,21 +32,22 @@
 }
 
 -(void)nextStep{
-    if ([model pendingEmails]==0){
+    if ([model emailsCountInFolder:@"INBOX"]==0){
         // show done view
     }else{
-        [layer putEmail:[model getNextEmail]];
+        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
     }
 }
 
-- (void)emailsReady{
+-(void)syncDone{
     [loadingHud hide:true];
     [self nextStep];
 }
 
 
--(void)email:(EmailModel*)m sortedTo:(folderType)folder{
-    [model email:m sortedTo:folder];
+
+-(void)move:(EmailModel*)m to:(NSString*)folder{
+    [model move:m to:folder];
     [self nextStep];
 }
 
@@ -95,6 +94,7 @@
 #pragma mark - view lifecycle
 
 -(void)viewWillAppear:(BOOL)animated{
+
     CCDirector *director = [CCDirector sharedDirector];
     CCScene *scene = [CCScene node];
     [scene addChild:layer];
@@ -121,24 +121,21 @@
 	CCDirector *director = [CCDirector sharedDirector];
     [director stopAnimation];
     [director popScene];
-    [model end];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
     [self.view addSubview:glView];
     [self setView:glView];
-    layer = [[BattlefieldLayer node] retain];
-    layer.delegate = self;
+    layer = [[[BattlefieldLayer alloc] initWithDelegate:self] retain];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     loadingHud = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
-    [loadingHud show:NO];
-    [model startProcessing];
+    [loadingHud show:YES];
+    [model sync];
 }
 
 - (void)viewDidUnload {

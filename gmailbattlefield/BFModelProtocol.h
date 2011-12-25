@@ -8,7 +8,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol BFModelProtocol <NSObject>
-    - (void)emailsReady;
+
+    - (void)syncDone;
+
     - (void)onError:(NSString*)errorMessage;
-    
+
 @end

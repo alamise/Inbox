@@ -19,6 +19,7 @@
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
+@property (nonatomic, retain,readwrite) UIWindow *window;
 -(NSString*)getPlistPath;
 
 -(NSManagedObjectContext*)getManagedObjectContext:(BOOL)reuse;

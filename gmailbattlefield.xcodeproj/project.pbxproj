@@ -146,6 +146,8 @@
 		F42982C314A29BFE00240E08 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F429823B14A29BFE00240E08 /* CJSONScanner.m */; };
 		F42982C414A29BFE00240E08 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F429823D14A29BFE00240E08 /* CJSONSerializer.m */; };
 		F42C68C81496B497002F5BE5 /* emailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F42C68C71496B497002F5BE5 /* emailBackground.png */; };
+		F449FCAB14A5F4F000D30C0A /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = F449FCAA14A5F4F000D30C0A /* GLES-Render.mm */; };
+		F449FD0414A7298500D30C0A /* woodBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F449FD0314A7298500D30C0A /* woodBackground.jpg */; };
 		F44DC4B7148BAE16009F3185 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4B5148BAE16009F3185 /* TutorialController.m */; };
 		F44DC4B8148BAE16009F3185 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F44DC4B6148BAE16009F3185 /* TutorialView.xib */; };
 		F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4BB148BB2E0009F3185 /* LoginController.mm */; };
@@ -493,6 +495,9 @@
 		F429823D14A29BFE00240E08 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
 		F429823E14A29BFE00240E08 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		F42C68C71496B497002F5BE5 /* emailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emailBackground.png; path = Resources/emailBackground.png; sourceTree = "<group>"; };
+		F449FCA914A5F4F000D30C0A /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
+		F449FCAA14A5F4F000D30C0A /* GLES-Render.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
+		F449FD0314A7298500D30C0A /* woodBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woodBackground.jpg; sourceTree = "<group>"; };
 		F44DC4AC148B8B20009F3185 /* BFModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFModelProtocol.h; path = gmailbattlefield/BFModelProtocol.h; sourceTree = "<group>"; };
 		F44DC4B4148BAE16009F3185 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
 		F44DC4B5148BAE16009F3185 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
@@ -609,6 +614,8 @@
 				F429822D14A29BFE00240E08 /* LICENSE_FontLabel.txt */,
 				F429822E14A29BFE00240E08 /* LICENSE_TouchJSON.txt */,
 				F429822F14A29BFE00240E08 /* TouchJSON */,
+				F449FCA914A5F4F000D30C0A /* GLES-Render.h */,
+				F449FCAA14A5F4F000D30C0A /* GLES-Render.mm */,
 			);
 			name = cocos2d;
 			path = gmailbattlefield/cocos2d;
@@ -1048,7 +1055,6 @@
 		F48920A614828E2300150122 /* battlefield */ = {
 			isa = PBXGroup;
 			children = (
-				F48920B01482913B00150122 /* model */,
 				F4FB864E146D2FF200B08513 /* BattlefieldController.h */,
 				F4FB864F146D2FF200B08513 /* BattlefieldController.mm */,
 				F4FB8666146D412400B08513 /* BattlefieldLayer.h */,
@@ -1082,13 +1088,6 @@
 			);
 			name = model;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		F4DBB24C149C08E900F35817 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		F4FB8467146D2FEE00B08513 = {
@@ -1134,7 +1133,7 @@
 		F4FB8486146D2FEE00B08513 /* gmailbattlefield */ = {
 			isa = PBXGroup;
 			children = (
-				F4DBB24C149C08E900F35817 /* New Group */,
+				F48920B01482913B00150122 /* model */,
 				F40F677114994413002388C4 /* email */,
 				F4128B951493DB83005A8718 /* MBProgressHUD */,
 				F44DC4B3148BADEF009F3185 /* tutorial */,
@@ -1152,6 +1151,7 @@
 		F4FB8487146D2FEE00B08513 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F449FD0314A7298500D30C0A /* woodBackground.jpg */,
 				F479DE51149FDFC8000C3244 /* loginBackground.png */,
 				F4BEEDF8149C1B6900D8DEF3 /* archiveZone.png */,
 				F42C68C71496B497002F5BE5 /* emailBackground.png */,
@@ -1271,6 +1271,7 @@
 				F42982BC14A29BFE00240E08 /* LICENSE_CocosDenshion.txt in Resources */,
 				F42982BD14A29BFE00240E08 /* LICENSE_FontLabel.txt in Resources */,
 				F42982BE14A29BFE00240E08 /* LICENSE_TouchJSON.txt in Resources */,
+				F449FD0414A7298500D30C0A /* woodBackground.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1422,6 +1423,7 @@
 				F42982C214A29BFE00240E08 /* CJSONDeserializer.m in Sources */,
 				F42982C314A29BFE00240E08 /* CJSONScanner.m in Sources */,
 				F42982C414A29BFE00240E08 /* CJSONSerializer.m in Sources */,
+				F449FCAB14A5F4F000D30C0A /* GLES-Render.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1513,6 +1515,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/cocos2d/**";
 				WRAPPER_EXTENSION = app;
@@ -1552,6 +1555,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/cocos2d/**";
 				VALIDATE_PRODUCT = YES;

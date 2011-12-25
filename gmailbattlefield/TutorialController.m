@@ -40,7 +40,7 @@
 }
 
 -(void)goToNextStep{
-    LoginController* loginView = [[LoginController alloc] init];
+    LoginController* loginView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
     [self.navigationController pushViewController:loginView animated:YES];
     [loginView release];
 }
