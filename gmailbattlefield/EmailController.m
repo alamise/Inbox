@@ -8,7 +8,6 @@
 #import "EmailController.h"
 
 @implementation EmailController
-
 -(id)initWithEmailModel:(EmailModel*)model{
     if (self = [super initWithNibName:@"EmailView" bundle:nil]){
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];

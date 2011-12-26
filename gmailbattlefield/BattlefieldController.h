@@ -18,4 +18,5 @@
     EAGLView* glView;
     MBProgressHUD* loadingHud;
 }
+-(void)reload;
 @end

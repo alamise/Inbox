@@ -13,8 +13,12 @@
 #import "EmailController.h"
 #import "TutorialController.h"
 #import "ErrorController.h"
-@implementation BattlefieldController
 
+@interface BattlefieldController ()
+@property(nonatomic,retain)BattlefieldModel* model;
+@end
+@implementation BattlefieldController
+@synthesize model;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 	}
@@ -22,7 +26,7 @@
 }
 
 - (void)dealloc {
-    [model release];
+    self.model = nil;
     [layer release];
     [glView removeFromSuperview];
     [glView release];
@@ -93,9 +97,10 @@
 
 
 -(void)onError:(NSString*)errorMessage{
-    UIViewController* viewController = [[ErrorController alloc] init];
-    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
-    [viewController release];
+    ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
+    errorController.field = self;
+    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
+    [errorController release];
     navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
     [self presentModalViewController:navigationController animated:YES];
 }
@@ -123,7 +128,7 @@
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
-        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
+        self.model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
         [model sync];        
     }else{
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
@@ -138,6 +143,16 @@
 	CCDirector *director = [CCDirector sharedDirector];
     [director popScene];
     [director pause];
+}
+
+-(void)reload{
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+
+    self.model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
+    [model performSelectorOnMainThread:@selector(sync) withObject:nil waitUntilDone:YES];        
+    [plistDic release];
+
 }
 
 - (void)viewDidLoad {

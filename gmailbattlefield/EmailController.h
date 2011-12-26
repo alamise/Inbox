@@ -7,10 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "EmailModel.h"
+
 @interface EmailController : UIViewController{
     EmailModel* emailModel;
     IBOutlet UIWebView* webView;
-}
 
+}
 -(id)initWithEmailModel:(EmailModel*)model;
 @end
