@@ -10,7 +10,6 @@
 		F40F677714994488002388C4 /* EmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40F677514994488002388C4 /* EmailController.m */; };
 		F40F677814994488002388C4 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40F677614994488002388C4 /* EmailView.xib */; };
 		F4128BFD1493DB84005A8718 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F4128BD31493DB84005A8718 /* MBProgressHUD.m */; };
-		F4267E8F14A8FC1B00AEB7CC /* iconIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4267E8E14A8FC1B00AEB7CC /* iconIpad.png */; };
 		F429823F14A29BFE00240E08 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F429811814A29BFE00240E08 /* b2BroadPhase.cpp */; };
 		F429824014A29BFE00240E08 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F429811A14A29BFE00240E08 /* b2CollideCircle.cpp */; };
 		F429824114A29BFE00240E08 /* b2CollidePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F429811B14A29BFE00240E08 /* b2CollidePolygon.cpp */; };
@@ -153,6 +152,8 @@
 		F44DC4BD148BB2E0009F3185 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44DC4BB148BB2E0009F3185 /* LoginController.mm */; };
 		F44EEEFF14859FC900CE9D9F /* EmailNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EEEFE14859FC900CE9D9F /* EmailNode.m */; };
 		F44EFECA14950CBF00FDE520 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F44EFEC914950CBF00FDE520 /* EmailModel.m */; };
+		F46A2A0714A90A19001C0117 /* iconIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46A2A0614A90A19001C0117 /* iconIpad.png */; };
+		F46A2A0914A90D15001C0117 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46A2A0814A90D15001C0117 /* Default-Landscape~ipad.png */; };
 		F479DE50149FDC92000C3244 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F479DE4F149FDC92000C3244 /* LoginView.xib */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F4820220149181AB00C0576C /* coreDataSchema.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F482021E149181AB00C0576C /* coreDataSchema.xcdatamodeld */; };
@@ -210,7 +211,6 @@
 		F40F677614994488002388C4 /* EmailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailView.xib; sourceTree = "<group>"; };
 		F4128BD21493DB84005A8718 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F4128BD31493DB84005A8718 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		F4267E8E14A8FC1B00AEB7CC /* iconIpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconIpad.png; path = ../iconIpad.png; sourceTree = "<group>"; };
 		F429811614A29BFE00240E08 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		F429811814A29BFE00240E08 /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
 		F429811914A29BFE00240E08 /* b2BroadPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2BroadPhase.h; sourceTree = "<group>"; };
@@ -507,6 +507,8 @@
 		F44EFEC814950CBF00FDE520 /* EmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailModel.h; path = gmailbattlefield/EmailModel.h; sourceTree = "<group>"; };
 		F44EFEC914950CBF00FDE520 /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailModel.m; path = gmailbattlefield/EmailModel.m; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
+		F46A2A0614A90A19001C0117 /* iconIpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconIpad.png; path = Resources/iconIpad.png; sourceTree = "<group>"; };
+		F46A2A0814A90D15001C0117 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "Resources/Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		F479DE4F149FDC92000C3244 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F482021F149181AB00C0576C /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
@@ -1162,7 +1164,8 @@
 		F4FB8487146D2FEE00B08513 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F4267E8E14A8FC1B00AEB7CC /* iconIpad.png */,
+				F46A2A0814A90D15001C0117 /* Default-Landscape~ipad.png */,
+				F46A2A0614A90A19001C0117 /* iconIpad.png */,
 				F49A766D14A8A7E400C8E133 /* buttonImage.png */,
 				F449FD0314A7298500D30C0A /* woodBackground.jpg */,
 				F4BEEDF8149C1B6900D8DEF3 /* archiveZone.png */,
@@ -1269,7 +1272,8 @@
 				F449FD0414A7298500D30C0A /* woodBackground.jpg in Resources */,
 				F49A766314A88D6F00C8E133 /* ErrorView.xib in Resources */,
 				F49A766E14A8A7E400C8E133 /* buttonImage.png in Resources */,
-				F4267E8F14A8FC1B00AEB7CC /* iconIpad.png in Resources */,
+				F46A2A0714A90A19001C0117 /* iconIpad.png in Resources */,
+				F46A2A0914A90D15001C0117 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,8 +1472,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1480,8 +1484,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
+				PROVISIONING_PROFILE = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
