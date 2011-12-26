@@ -9,6 +9,7 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "BFDelegateProtocol.h"
+#define NO_INTERNET_MESSAGE no connection
 @class EmailNode;
 @class EmailModel;
 
@@ -26,7 +27,7 @@
 
 -(void)didRotate;
 -(void)willRotate;
--(void)didAppear;
+-(void)willAppear;
 
 @end
 

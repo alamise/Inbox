@@ -52,6 +52,7 @@
     }else{
         firstView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
     }
+    firstView = [[BattlefieldController alloc] init];
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
 	[window addSubview: navigationController.view];

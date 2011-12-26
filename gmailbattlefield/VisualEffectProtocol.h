@@ -11,6 +11,8 @@
 @protocol VisualEffectProtocol <NSObject>
     // Set the next step in the animation
     -(void)setNextStep;
+    // Should the body be removed right now
+    -(BOOL)shouldDisableCollisions;
     // Should the object be removed
     -(BOOL)shouldBeRemoved;
 @end

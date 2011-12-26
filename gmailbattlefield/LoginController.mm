@@ -61,8 +61,7 @@
     [plistDic setValue:passwordField.text forKey:@"password"];
     [plistDic writeToFile:plistPath atomically:YES];
     [plistDic release];
-    BattlefieldController* battlefield = [[BattlefieldController alloc] init];
-    [self.navigationController pushViewController:battlefield animated:YES];
-    [battlefield release];
+
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

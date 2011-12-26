@@ -30,8 +30,6 @@
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
         sprite.position=CGPointMake(105,67);
         [self addChild:sprite];
-        NSString* headline;
-        
         title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
         title.color=ccc3(150, 150, 150);
         title.position=CGPointMake(105, 105);
@@ -87,6 +85,13 @@
         return true;
     }else{
         return false;
+    }
+}
+-(BOOL)shouldDisableCollisions{
+    if (isDisappearing){
+        return YES;
+    }else{
+        return NO;
     }
 }
 

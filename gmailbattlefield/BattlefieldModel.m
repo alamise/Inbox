@@ -16,7 +16,8 @@
 #import "MailCoreTypes.h"
 @interface BattlefieldModel()
     -(BOOL)saveContext:(NSManagedObjectContext*)context;
-    -(EmailModel*)processMessage:(CTCoreMessage*)message reuseFetchRequest:(NSFetchRequest*)request reuseContext:(NSManagedObjectContext*)context path:(NSString*)path;
+    -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
+    -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 @end
 
 @implementation BattlefieldModel
@@ -27,17 +28,14 @@
         delegate = [d retain];
         email = [em retain];
         password = [pwd retain];
-        managedObjectContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:true] retain];
     }
     return self;
 }
 
 -(void)dealloc{
-    [managedObjectContext release];
     [email release];
     [password release];
     [delegate release];
-    
     [super dealloc];
 }
 
@@ -93,8 +91,8 @@
             model.newPath=nil;
         }
     }
-
-    return [self saveContext:context];
+    
+    return [context save:nil];
 }
 
 -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
@@ -141,7 +139,7 @@
         emailModel.uid = message.uid;
         emailModel.path = inbox.path;
     }
-    return [self saveContext:context];
+    return [context save:nil];
 }
 
 -(void)sync{
@@ -249,21 +247,22 @@
 }
 
 -(int)emailsCountInFolder:(NSString*)folder{
-
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path like %@ OR newPath like %@", folder,folder];          
     [request setPredicate:predicate];
     
     NSError* fetchError = nil;
-    int count = [managedObjectContext countForFetchRequest:request error:&fetchError];
+    int count = [context countForFetchRequest:request error:&fetchError];
     if (fetchError==nil){
         return count;
     }else{
         [delegate onError:@"Cant count emails"];
         return 0;
     }
+    [context release];
 }
 
 

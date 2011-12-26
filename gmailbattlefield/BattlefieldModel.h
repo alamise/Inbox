@@ -15,7 +15,6 @@
     NSString *email;
     NSString *password;
     id<BFModelProtocol> delegate;
-    NSManagedObjectContext *managedObjectContext;
 }
 -(id)initWithAccount:(NSString*)email password:(NSString*)password delegate:(id<BFModelProtocol>) model;
 -(void)sync;

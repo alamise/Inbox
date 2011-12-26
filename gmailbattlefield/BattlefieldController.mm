@@ -11,14 +11,12 @@
 #import "BattlefieldLayer.h"
 #import "MBProgressHUD.h"
 #import "EmailController.h"
+#import "TutorialController.h"
+#import "ErrorController.h"
 @implementation BattlefieldController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
-        NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
-        [plistDic release];
 	}
 	return self;
 }
@@ -93,8 +91,19 @@
 
 #pragma mark - view lifecycle
 
--(void)viewWillAppear:(BOOL)animated{
 
+-(void)onError:(NSString*)errorMessage{
+    UIViewController* viewController = [[ErrorController alloc] init];
+    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
+    [viewController release];
+    navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark - view's lifecyle
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden=YES;
     CCDirector *director = [CCDirector sharedDirector];
     CCScene *scene = [CCScene node];
     [scene addChild:layer];
@@ -105,41 +114,51 @@
     }else{
         [director runWithScene:scene];
     }
+    [director resume];
+    [layer willAppear];
 }
-
--(void)onError:(NSString*)errorMessage{
-}
-
-#pragma mark - view's lifecyle
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [layer didAppear];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
+        model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
+        [model sync];        
+    }else{
+        TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
+        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginCtr];
+        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+        [self presentModalViewController:navCtr animated:YES];
+    }
+    [plistDic release];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
 	CCDirector *director = [CCDirector sharedDirector];
-    [director stopAnimation];
     [director popScene];
+    [director pause];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
+    glView.autoresizingMask=UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:glView];
     [self setView:glView];
     layer = [[[BattlefieldLayer alloc] initWithDelegate:self] retain];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     loadingHud = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
     [loadingHud show:YES];
-    [model sync];
+
 }
 
 - (void)viewDidUnload {
+
     [super viewDidUnload];
+
     [layer release];
     [glView removeFromSuperview];
     [glView release];

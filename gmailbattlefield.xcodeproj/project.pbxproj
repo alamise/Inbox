@@ -158,6 +158,9 @@
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F4820220149181AB00C0576C /* coreDataSchema.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F482021E149181AB00C0576C /* coreDataSchema.xcdatamodeld */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
+		F49A765D14A88B9E00C8E133 /* NoConnectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A765B14A88B9E00C8E133 /* NoConnectionView.xib */; };
+		F49A766214A88D6F00C8E133 /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A766014A88D6F00C8E133 /* ErrorController.m */; };
+		F49A766314A88D6F00C8E133 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A766114A88D6F00C8E133 /* ErrorView.xib */; };
 		F4BEEDF9149C1B6900D8DEF3 /* archiveZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4BEEDF8149C1B6900D8DEF3 /* archiveZone.png */; };
 		F4CDC4F1146FC13B003C2D4D /* BattlefieldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */; };
 		F4D900A7149CB1E700A0DCCC /* inboxZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D900A6149CB1E700A0DCCC /* inboxZone.png */; };
@@ -515,6 +518,10 @@
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F482021F149181AB00C0576C /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		F49A765B14A88B9E00C8E133 /* NoConnectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoConnectionView.xib; sourceTree = "<group>"; };
+		F49A765F14A88D6F00C8E133 /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
+		F49A766014A88D6F00C8E133 /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
+		F49A766114A88D6F00C8E133 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		F4BEEDF8149C1B6900D8DEF3 /* archiveZone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = archiveZone.png; path = Resources/archiveZone.png; sourceTree = "<group>"; };
 		F4CDC4EF146FC13B003C2D4D /* BattlefieldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BattlefieldModel.h; path = gmailbattlefield/BattlefieldModel.h; sourceTree = "<group>"; };
 		F4CDC4F0146FC13B003C2D4D /* BattlefieldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BattlefieldModel.m; path = gmailbattlefield/BattlefieldModel.m; sourceTree = "<group>"; };
@@ -1090,6 +1097,17 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		F49A765E14A88D5800C8E133 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				F49A765F14A88D6F00C8E133 /* ErrorController.h */,
+				F49A766014A88D6F00C8E133 /* ErrorController.m */,
+				F49A766114A88D6F00C8E133 /* ErrorView.xib */,
+				F49A765B14A88B9E00C8E133 /* NoConnectionView.xib */,
+			);
+			name = error;
+			sourceTree = "<group>";
+		};
 		F4FB8467146D2FEE00B08513 = {
 			isa = PBXGroup;
 			children = (
@@ -1133,6 +1151,7 @@
 		F4FB8486146D2FEE00B08513 /* gmailbattlefield */ = {
 			isa = PBXGroup;
 			children = (
+				F49A765E14A88D5800C8E133 /* error */,
 				F48920B01482913B00150122 /* model */,
 				F40F677114994413002388C4 /* email */,
 				F4128B951493DB83005A8718 /* MBProgressHUD */,
@@ -1272,6 +1291,8 @@
 				F42982BD14A29BFE00240E08 /* LICENSE_FontLabel.txt in Resources */,
 				F42982BE14A29BFE00240E08 /* LICENSE_TouchJSON.txt in Resources */,
 				F449FD0414A7298500D30C0A /* woodBackground.jpg in Resources */,
+				F49A765D14A88B9E00C8E133 /* NoConnectionView.xib in Resources */,
+				F49A766314A88D6F00C8E133 /* ErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1424,6 +1445,7 @@
 				F42982C314A29BFE00240E08 /* CJSONScanner.m in Sources */,
 				F42982C414A29BFE00240E08 /* CJSONSerializer.m in Sources */,
 				F449FCAB14A5F4F000D30C0A /* GLES-Render.mm in Sources */,
+				F49A766214A88D6F00C8E133 /* ErrorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

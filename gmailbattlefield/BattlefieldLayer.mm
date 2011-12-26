@@ -19,8 +19,7 @@
 enum {
 	tagArchiveSprite = 1,
 	tagInboxSprite = 2,
-    tagPipeSprite = 3,
-    tagBackgroundSprite = 4
+    tagBackgroundSprite = 3
 };
 
 @interface BattlefieldLayer() 
@@ -28,7 +27,6 @@ enum {
     -(void) putGround;
     -(void) putArchiveZone;
     -(void) putInboxZone;
-    -(void) putPipeSprite;
     -(void) setOrUpdateScene;
 @end
 
@@ -73,10 +71,10 @@ enum {
     [self addChild:node z:1];
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set([CCDirector sharedDirector].winSize.width/2/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
+	bodyDef.position.Set(100/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
 	bodyDef.userData = node;
-    bodyDef.linearVelocity=b2Vec2(0,-2);
-    bodyDef.linearDamping=3;
+    bodyDef.linearVelocity=b2Vec2(20,0);
+    bodyDef.linearDamping=1.4;
 	b2Body *body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape* dynamicBox = new b2PolygonShape();
@@ -212,7 +210,6 @@ enum {
     [self putGround];
     [self putArchiveZone];
     [self putInboxZone];
-    [self putPipeSprite];
 }
 
 -(void)putGround{
@@ -264,18 +261,6 @@ enum {
     sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
 }
 
--(void)putPipeSprite{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagPipeSprite];
-    if (sprite){
-        sprite.visible = true;        
-    }else{
-        sprite = [CCSprite spriteWithFile:@"pipe.png"];    
-        [self addChild:sprite z:0 tag:tagPipeSprite];
-    }
-    CGSize windowSize = [CCDirector sharedDirector].winSize;
-    sprite.anchorPoint=CGPointMake(0, 0);
-    sprite.position=CGPointMake(217, windowSize.height/2-40);
-}
 
 -(void)putInboxZone{
     CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];
@@ -289,7 +274,7 @@ enum {
     sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
 }
 
--(void)didAppear{
+-(void)willAppear{
     [self setOrUpdateScene];
 }
 
@@ -333,6 +318,11 @@ enum {
             // TODO How can I hceck if a class implement a protocol
             if ([myActor respondsToSelector:@selector(isAppearing)]){
                 id<VisualEffectProtocol> node = (id<VisualEffectProtocol>) myActor;
+                if ([node shouldDisableCollisions]){
+                    for (b2Fixture* f = b->GetFixtureList();f; f = f->GetNext()){
+                        b->DestroyFixture(f);
+                    }
+                }
                 [node setNextStep];
                 if ([node shouldBeRemoved]){
                     [self removeChildAndBody:myActor];

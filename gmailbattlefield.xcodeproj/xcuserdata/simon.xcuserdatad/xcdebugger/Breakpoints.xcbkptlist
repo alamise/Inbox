@@ -37,27 +37,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "gmailbattlefield/VisualEffectProtocol.h"
-         timestampString = "345772504.403972"
+         timestampString = "346587310.84403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "13"
          endingLineNumber = "13"
          landmarkName = "@protocol VisualEffectProtocol"
          landmarkType = "2">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "gmailbattlefield/BattlefieldModel.m"
-         timestampString = "346437407.785509"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
-         landmarkName = "-dealloc"
-         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -78,20 +64,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "gmailbattlefield/AppDelegate.mm"
-         timestampString = "346495222.686464"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
-         landmarkName = "-mergeChangesWithMainContext:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "gmailbattlefield/BattlefieldModel.m"
          timestampString = "346499637.604991"
          startingColumnNumber = "9223372036854775807"
@@ -99,20 +71,6 @@
          startingLineNumber = "88"
          endingLineNumber = "88"
          landmarkName = "-updateRemoteMessages:context:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "gmailbattlefield/BattlefieldModel.m"
-         timestampString = "346499637.604991"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "232"
-         endingLineNumber = "232"
-         landmarkName = "-move:to:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

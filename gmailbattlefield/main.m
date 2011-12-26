@@ -3,7 +3,6 @@
 //  gmailbattlefield
 //
 //  Created by Simon Watiau on 11/11/11.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
