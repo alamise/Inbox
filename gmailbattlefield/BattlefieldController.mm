@@ -132,6 +132,7 @@
         [model sync];        
     }else{
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
+        loginCtr.field=self;
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginCtr];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         [self presentModalViewController:navCtr animated:YES];
@@ -150,7 +151,8 @@
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
 
     self.model = [[BattlefieldModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
-    [model performSelectorOnMainThread:@selector(sync) withObject:nil waitUntilDone:YES];        
+    
+    [model performSelector:@selector(sync) withObject:nil afterDelay:1];
     [plistDic release];
 
 }

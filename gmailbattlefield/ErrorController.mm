@@ -25,6 +25,14 @@
     return self;
 }
 
+-(void)dealloc{
+    self.field = nil;
+    [connectionIsBackView release];
+    [noConnectionView release];
+    [errorView release];
+    [loadingView release];
+    [super dealloc];
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     switch ([internetReachable currentReachabilityStatus]) {
@@ -48,15 +56,6 @@
     [self updateView];
 }
 
--(void)dealloc{
-    self.field = nil;
-    [connectionIsBackView release];
-    [noConnectionView release];
-    [errorView release];
-    [loadingView release];
-    [super dealloc];
-}
-
 -(void)updateView{
     if (!isInternetReachable){
         self.view = noConnectionView;
@@ -69,7 +68,6 @@
     [self.field reload];
     [self dismissModalViewControllerAnimated:YES];
 }
-
 
 -(IBAction)editAccount{
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   

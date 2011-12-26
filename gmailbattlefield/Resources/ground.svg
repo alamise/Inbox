@@ -483,6 +483,100 @@
        y1="376.51157"
        x2="209.05537"
        y2="404.19421" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4144"
+       id="linearGradient4190"
+       gradientUnits="userSpaceOnUse"
+       x1="161.10765"
+       y1="376.51157"
+       x2="209.05537"
+       y2="404.19421" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4144"
+       id="linearGradient4192"
+       gradientUnits="userSpaceOnUse"
+       x1="161.10765"
+       y1="376.51157"
+       x2="209.05537"
+       y2="404.19421" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient4220"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,25.794434,481.59198)"
+       spreadMethod="reflect"
+       x1="656.9834"
+       y1="844.34558"
+       x2="675"
+       y2="862.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient4228"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,52.197777,457.29167)"
+       spreadMethod="reflect"
+       x1="559.79327"
+       y1="813.70007"
+       x2="571.12067"
+       y2="825.02747" />
+    <filter
+       inkscape:collect="always"
+       id="filter4262">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.66067844"
+         id="feGaussianBlur4264" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient4299"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,1.2343993,450.0153)"
+       spreadMethod="reflect"
+       x1="559.79327"
+       y1="813.70007"
+       x2="571.12067"
+       y2="825.02747" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7091"
+       id="linearGradient4320"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80428979,0,0,0.80428979,-24.989163,606.42596)"
+       spreadMethod="reflect"
+       x1="559.79327"
+       y1="813.70007"
+       x2="571.12067"
+       y2="825.02747" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4330">
+      <rect
+         mask="none"
+         ry="0"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect4332"
+         width="197.99989"
+         height="19.499172"
+         x="521.49524"
+         y="1318.1674"
+         inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </clipPath>
+    <filter
+       inkscape:collect="always"
+       id="filter4338">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.2012335"
+         id="feGaussianBlur4340" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -491,9 +585,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.65760931"
-     inkscape:cx="451.27296"
-     inkscape:cy="217.86955"
+     inkscape:zoom="0.20240301"
+     inkscape:cx="5362.3142"
+     inkscape:cy="-35225.515"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -512,7 +606,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -521,6 +615,17 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-304.36218)">
+    <rect
+       ry="9.7073097"
+       style="fill:#000000;fill-opacity:0.57079649;fill-rule:evenodd;stroke:none;filter:url(#filter4338)"
+       id="rect4266"
+       width="196.2467"
+       height="44"
+       x="528.22491"
+       y="1139.8738"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/buttonImage.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <image
        y="303.2648"
        x="0"
@@ -2045,13 +2150,6 @@ n+430FSE/J+lRzH5GpgiE/xL7f0pF/vewox95vb+hpFHyfl/KkMiI+eP8SfrUoP+f8/Wo2Pzr+NS
        height="749.09735"
        width="1024" />
     <rect
-       y="304.36218"
-       x="0"
-       height="748"
-       width="216.96001"
-       id="rect4082"
-       style="fill:url(#linearGradient4084);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <rect
        ry="18.172028"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5.7908864;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3938)"
        id="rect3108"
@@ -2062,20 +2160,6 @@ n+430FSE/J+lRzH5GpgiE/xL7f0pF/vewox95vb+hpFHyfl/KkMiI+eP8SfrUoP+f8/Wo2Pzr+NS
        inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/emailBackground.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <rect
-       style="fill:url(#linearGradient3080);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect2985"
-       width="216.96001"
-       height="748"
-       x="807.03955"
-       y="304.36218" />
-    <rect
-       style="fill:url(#linearGradient3069);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect2991"
-       width="25.455999"
-       height="748"
-       x="807.03955"
-       y="304.36218" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
@@ -2126,70 +2210,136 @@ n+430FSE/J+lRzH5GpgiE/xL7f0pF/vewox95vb+hpFHyfl/KkMiI+eP8SfrUoP+f8/Wo2Pzr+NS
        id="rect3082"
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3105);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none"
        ry="9.9344072" />
+    <g
+       id="g4194"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/inboxZone.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:url(#linearGradient4084);fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect4082"
+         width="216.96001"
+         height="748"
+         x="0"
+         y="304.36218" />
+      <rect
+         transform="scale(-1,1)"
+         style="fill:url(#linearGradient3935);fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect3933"
+         width="25.455999"
+         height="748"
+         x="-216.96001"
+         y="304.36218" />
+      <g
+         transform="translate(-2.8835728,-0.400318)"
+         id="g4183">
+        <g
+           id="g4154">
+          <path
+             transform="matrix(0.5285912,0,0,0.3741881,-387.4313,-111.78903)"
+             sodipodi:nodetypes="ccccc"
+             inkscape:connector-curvature="0"
+             id="path4118"
+             d="m 758.63557,1396.6603 c 65.07392,-11.4578 229.02272,-23.5665 369.99023,-0.7357 l -3.1091,-239.4055 -366.88113,-1.5546 z"
+             style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4132)" />
+          <rect
+             y="318.6813"
+             x="11.545455"
+             height="89.582687"
+             width="195.69656"
+             id="rect4110"
+             style="fill:url(#linearGradient4192);fill-opacity:1;fill-rule:evenodd;stroke:none" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+           x="47.711231"
+           y="378.84698"
+           id="text4166"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4168"
+             x="47.711231"
+             y="378.84698">INBOX</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g4204"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/archiveZone.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="304.36218"
+         x="807.03955"
+         height="748"
+         width="216.96001"
+         id="rect2985"
+         style="fill:url(#linearGradient3080);fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <rect
+         y="304.36218"
+         x="807.03955"
+         height="748"
+         width="25.455999"
+         id="rect2991"
+         style="fill:url(#linearGradient3069);fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <g
+         transform="translate(3.129478,7.3400603)"
+         id="g4176">
+        <g
+           id="g4158"
+           transform="translate(803.0265,-7.7403775)">
+          <path
+             style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4132)"
+             d="m 758.63557,1396.6603 c 65.07392,-11.4578 229.02272,-23.5665 369.99023,-0.7357 l -3.1091,-239.4055 -366.88113,-1.5546 z"
+             id="path4160"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="ccccc"
+             transform="matrix(0.5285912,0,0,0.3741881,-387.4313,-111.78903)" />
+          <rect
+             style="fill:url(#linearGradient4190);fill-opacity:1;fill-rule:evenodd;stroke:none"
+             id="rect4162"
+             width="195.69656"
+             height="89.582687"
+             x="11.545455"
+             y="318.6813" />
+        </g>
+        <text
+           sodipodi:linespacing="125%"
+           id="text4170"
+           y="371.1066"
+           x="825.7182"
+           style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+           xml:space="preserve"><tspan
+             y="371.1066"
+             x="825.7182"
+             id="tspan4172"
+             sodipodi:role="line">ARCHIVE</tspan></text>
+      </g>
+    </g>
     <rect
-       y="304.36218"
-       x="-216.96001"
-       height="748"
-       width="25.455999"
-       id="rect3933"
-       style="fill:url(#linearGradient3935);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       transform="scale(-1,1)" />
-    <g
-       id="g4154">
-      <path
-         transform="matrix(0.5285912,0,0,0.3741881,-387.4313,-111.78903)"
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
-         id="path4118"
-         d="m 758.63557,1396.6603 c 65.07392,-11.4578 229.02272,-23.5665 369.99023,-0.7357 l -3.1091,-239.4055 -366.88113,-1.5546 z"
-         style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4132)" />
-      <rect
-         y="318.6813"
-         x="11.545455"
-         height="89.582687"
-         width="195.69656"
-         id="rect4110"
-         style="fill:url(#linearGradient4150);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    </g>
-    <g
-       id="g4158"
-       transform="translate(805.94966,-3.0413195)">
-      <path
-         style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4132)"
-         d="m 758.63557,1396.6603 c 65.07392,-11.4578 229.02272,-23.5665 369.99023,-0.7357 l -3.1091,-239.4055 -366.88113,-1.5546 z"
-         id="path4160"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="ccccc"
-         transform="matrix(0.5285912,0,0,0.3741881,-387.4313,-111.78903)" />
-      <rect
-         style="fill:url(#linearGradient4164);fill-opacity:1;fill-rule:evenodd;stroke:none"
-         id="rect4162"
-         width="195.69656"
-         height="89.582687"
-         x="11.545455"
-         y="318.6813" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
-       x="47.140453"
-       y="374.14792"
-       id="text4166"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4168"
-         x="47.140453"
-         y="374.14792">INBOX</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text4170"
-       y="371.1066"
-       x="825.7182"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
-       xml:space="preserve"><tspan
-         y="371.1066"
-         x="825.7182"
-         id="tspan4172"
-         sodipodi:role="line">ARCHIVE</tspan></text>
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/buttonImage.png"
+       y="1137.8271"
+       x="528.22491"
+       height="44"
+       width="196.2467"
+       id="rect4218"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       ry="9.7073097"
+       mask="none" />
+    <rect
+       ry="6.47154"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4320);stroke-width:5.7908864;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4226"
+       width="190.60843"
+       height="20"
+       x="525.06305"
+       y="1300.9171"
+       inkscape:export-filename="/Users/simon/Documents/projects/gmailbattlefield/gmailbattlefield/Resources/buttonImage.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       clip-path="url(#clipPath4330)"
+       transform="translate(6.0573939,-141.98538)" />
   </g>
 </svg>

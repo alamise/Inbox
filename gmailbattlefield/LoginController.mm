@@ -80,6 +80,7 @@
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
         [plistDic release];
+        [self.field reload];
         [self dismissModalViewControllerAnimated:YES];
     }
 }
