@@ -537,6 +537,12 @@
 	// DON'T draw your stuff outside this method
 }
 
+-(void) beforeDraw{
+}
+
+-(void) afterDraw{
+}
+
 -(void) visit
 {
 	// quick return if not visible
@@ -551,7 +557,7 @@
 	}
 
 	[self transform];
-	
+	[self beforeDraw]; // Added for the CCScrollView, see http://bit.ly/u6zkNC
 	if(children_) {
 		ccArray *arrayData = children_->data;
 		NSUInteger i = 0;
@@ -564,7 +570,6 @@
 			else
 				break;
 		}
-		
 		// self draw
 		[self draw];
 		
@@ -577,8 +582,10 @@
 	} else
 		[self draw];
 	
-	if ( grid_ && grid_.active)
+	if ( grid_ && grid_.active){
+        [self afterDraw];
 		[grid_ afterDraw:self];
+    }
 	
 	glPopMatrix();
 }
