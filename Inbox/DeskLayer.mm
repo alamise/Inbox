@@ -13,19 +13,22 @@
 #import "GmailModel.h"
 #import "VisualEffectProtocol.h"
 #import "GLES-Render.h"
+#import "SWTableView.h"
+#import "SWScrollView.h"
 #define PTM_RATIO 32
 #define TOUCHES_DELAY 0.1
 
 enum {
 	tagArchiveSprite = 1,
 	tagInboxSprite = 2,
-    tagBackgroundSprite = 3
+    tagBackgroundSprite = 3,
+    tagScrollZone = 4
 };
 
 @interface DeskLayer() 
 @property(nonatomic,retain) EmailNode* draggedNode;
     -(void) putGround;
-    -(void) putArchiveZone;
+    -(void)putFoldersZones;
     -(void) putInboxZone;
     -(void) setOrUpdateScene;
 @end
@@ -206,7 +209,7 @@ enum {
 
 -(void)setOrUpdateScene{
     [self putGround];
-    [self putArchiveZone];
+    [self putFoldersZones];
     [self putInboxZone];
 }
 
@@ -245,6 +248,29 @@ enum {
     }
     sprite.anchorPoint=CGPointMake(0, 0);
     sprite.position=CGPointMake(0,0);    
+}
+
+
+-(void)putFoldersZones{
+    SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
+    if (!table){
+        table = [SWTableView viewWithDataSource:self size:CGSizeMake(400, 400) container:nil];
+        [self addChild:table];
+    }
+    
+    table.position=CGPointMake(0,0);
+    
+    [table reloadData];
+    
+}
+-(CGSize)cellSizeForTable:(SWTableView *)table{
+    return CGSizeMake(200, 200);
+}
+-(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
+    return [[[DropZoneNode alloc] init] autorelease];
+}
+-(NSUInteger)numberOfCellsInTableView:(SWTableView *)table{
+    return 10;
 }
 
 -(void)putArchiveZone{

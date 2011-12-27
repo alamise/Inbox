@@ -6,14 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class BattlefieldController;
+@class DeskController;
 @interface LoginController : UIViewController {
     IBOutlet UITextField *emailField;
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *submitButton;
-    BattlefieldController* field;
+    DeskController* field;
 }
-@property(nonatomic,retain) BattlefieldController* field;
+@property(nonatomic,retain) DeskController* field;
 - (IBAction)onLogin:(id)sender;
 
 @end

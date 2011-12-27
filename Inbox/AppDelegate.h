@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #define IS_IPAD true
-@class BattlefieldViewController;
+@class DesckController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow *window;

@@ -173,13 +173,14 @@
 		F41E665B14A9CFB800BA4712 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65A914A9CFB700BA4712 /* Icon@2x.png */; };
 		F41E665C14A9CFB800BA4712 /* iconIpad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AA14A9CFB700BA4712 /* iconIpad.png */; };
 		F41E665D14A9CFB800BA4712 /* inboxZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AB14A9CFB700BA4712 /* inboxZone.png */; };
-		F41E665E14A9CFB800BA4712 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AC14A9CFB700BA4712 /* Info.plist */; };
 		F41E665F14A9CFB800BA4712 /* login.svg in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AD14A9CFB700BA4712 /* login.svg */; };
 		F41E666014A9CFB800BA4712 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E65AF14A9CFB700BA4712 /* TutorialController.m */; };
 		F41E666114A9CFB800BA4712 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E65B014A9CFB700BA4712 /* TutorialView.xib */; };
 		F41E666B14A9D0E500BA4712 /* woodBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F41E666A14A9D0E500BA4712 /* woodBackground.jpg */; };
 		F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */; };
 		F41E667214A9D2B200BA4712 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E667114A9D2B200BA4712 /* MBProgressHUD.m */; };
+		F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E667814A9E1F800BA4712 /* DropZoneNode.m */; };
+		F41E669114A9E2D400BA4712 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E669014A9E2D400BA4712 /* circle.png */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -560,6 +561,9 @@
 		F41E666E14A9D13100BA4712 /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
 		F41E667014A9D2B200BA4712 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Inbox/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		F41E667114A9D2B200BA4712 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Inbox/MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		F41E667714A9E1F800BA4712 /* DropZoneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropZoneNode.h; sourceTree = "<group>"; };
+		F41E667814A9E1F800BA4712 /* DropZoneNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropZoneNode.m; sourceTree = "<group>"; };
+		F41E669014A9E2D400BA4712 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1092,6 +1096,7 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F41E669014A9E2D400BA4712 /* circle.png */,
 				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
 				F41E666A14A9D0E500BA4712 /* woodBackground.jpg */,
 				F41E65A214A9CFB700BA4712 /* archiveZone.png */,
@@ -1183,6 +1188,8 @@
 				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
 				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
 				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
+				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
+				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 			);
 			name = Desk;
 			sourceTree = "<group>";
@@ -1264,7 +1271,7 @@
 				F4DBB21E149BF8EB00F35817 /* PBXTargetDependency */,
 			);
 			name = Inbox;
-			productName = gmailbattlefield;
+			productName = Inbox;
 			productReference = F4FB8472146D2FEE00B08513 /* Inbox.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1331,10 +1338,10 @@
 				F41E665B14A9CFB800BA4712 /* Icon@2x.png in Resources */,
 				F41E665C14A9CFB800BA4712 /* iconIpad.png in Resources */,
 				F41E665D14A9CFB800BA4712 /* inboxZone.png in Resources */,
-				F41E665E14A9CFB800BA4712 /* Info.plist in Resources */,
 				F41E665F14A9CFB800BA4712 /* login.svg in Resources */,
 				F41E666114A9CFB800BA4712 /* TutorialView.xib in Resources */,
 				F41E666B14A9D0E500BA4712 /* woodBackground.jpg in Resources */,
+				F41E669114A9E2D400BA4712 /* circle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1503,7 @@
 				F41E666014A9CFB800BA4712 /* TutorialController.m in Sources */,
 				F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */,
 				F41E667214A9D2B200BA4712 /* MBProgressHUD.m in Sources */,
+				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1523,13 +1531,14 @@
 					"COCOS2D_DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
+				PRODUCT_NAME = Inbox;
 				PROVISIONING_PROFILE = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
 				SDKROOT = iphoneos;
@@ -1544,7 +1553,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
@@ -1552,6 +1561,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = Inbox;
 				PROVISIONING_PROFILE = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
 				SDKROOT = iphoneos;
@@ -1591,7 +1601,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
 				WRAPPER_EXTENSION = app;
@@ -1631,7 +1641,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
 				VALIDATE_PRODUCT = YES;
