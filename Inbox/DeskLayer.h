@@ -23,6 +23,7 @@
     id<DeskProtocol> delegate;
     CGPoint lastTouchPosition;
     NSTimeInterval lastTouchTime;
+    SWTableView* foldersTable;
 }
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;

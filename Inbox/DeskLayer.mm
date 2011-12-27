@@ -158,9 +158,16 @@ enum {
         return;
     }
     UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
-    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]]
-    ;
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
     
+    SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
+    CGRect bounds = CGRectMake(table.boundingBox.origin.x,table.boundingBox.origin.y, table.viewSize.width, table.viewSize.height) ;
+    CGPoint converted = [table convertToNodeSpace:newLocation];
+    if (CGRectContainsPoint(bounds, newLocation)){
+
+        NSLog(@"AU DESSUS DU SCROLLLL");
+    }
+
     if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
         [self.draggedNode hideAndRemove];
@@ -252,15 +259,16 @@ enum {
 
 
 -(void)putFoldersZones{
-    SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
-    if (!table){
-        table = [SWTableView viewWithDataSource:self size:CGSizeMake(400, 400) container:nil];
-        [self addChild:table];
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    foldersTable = (SWTableView*)[self getChildByTag:tagScrollZone];
+    if (!foldersTable){
+        foldersTable = [[SWTableView viewWithDataSource:self size:CGSizeMake(200, 748) container:nil] retain];
+        [self addChild:foldersTable z:0 tag:tagScrollZone];
     }
     
-    table.position=CGPointMake(0,0);
+    foldersTable.position=CGPointMake(windowSize.width-200,0);
     
-    [table reloadData];
+    [foldersTable reloadData];
     
 }
 -(CGSize)cellSizeForTable:(SWTableView *)table{
