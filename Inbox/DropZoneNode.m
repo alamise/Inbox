@@ -24,8 +24,16 @@
         sprite.anchorPoint = CGPointMake(0, 0);
         sprite.position=CGPointMake(0,0);
         [self addChild:sprite];
-        [self setContentSize:CGSizeMake(200, 200)];
+
+
+        sprite = [CCSprite spriteWithFile:@"sticker.png"];
+        sprite.anchorPoint = CGPointMake(0, 0);
+        sprite.position=CGPointMake(0,150);
+        [self addChild:sprite];
+
         [self setAnchorPoint:CGPointMake(0, 0)];
+
+        [self setContentSize:CGSizeMake(200, 250)];
     }
 }
 

@@ -6,9 +6,8 @@
 //
 
 #import "CCNode.h"
-#import "EmailModel.h"
 #import "VisualEffectProtocol.h"
-@class CCLabelTTF;
+@class CCLabelTTF,EmailModel;
 @interface EmailNode : CCNode<VisualEffectProtocol>{
     EmailModel* emailModel;
     CCLabelTTF *title;

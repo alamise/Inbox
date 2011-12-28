@@ -13,8 +13,7 @@
 #import "GmailModel.h"
 #import "VisualEffectProtocol.h"
 #import "GLES-Render.h"
-#import "SWTableView.h"
-#import "SWScrollView.h"
+
 #define PTM_RATIO 32
 #define TOUCHES_DELAY 0.1
 
@@ -66,6 +65,10 @@ enum {
 	[super dealloc];
 }
 
+-(void)registerWithTouchDispatcher {
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:1 swallowsTouches:NO];
+}
+
 -(void) putEmail:(EmailModel*)model{
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
     node.scale=0;
@@ -96,9 +99,8 @@ enum {
 
 #pragma mark - drag & drop
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     self.draggedNode = nil;
-    UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
     
     for (EmailNode* node in draggableNodes){        
@@ -117,14 +119,17 @@ enum {
             }
         }
     }
+    if (self.draggedNode){
+        foldersTable.isTouchEnabled=FALSE;
+    }
+    return YES;
 }
 
--(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
     if (!self.draggedNode){
         return;
     }
     self.draggedNode.didMoved=true;
-    UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     CGPoint oldTouchLocation = [touch previousLocationInView:touch.view];
     oldTouchLocation = [[CCDirector sharedDirector] convertToGL:oldTouchLocation];
@@ -147,9 +152,10 @@ enum {
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
         lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
     }
+    return;
 }
 
--(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     if (self.draggedNode==nil){
         return;
     }
@@ -157,14 +163,12 @@ enum {
         [delegate emailTouched:self.draggedNode.emailModel];
         return;
     }
-    UITouch* touch = [[touches allObjects] objectAtIndex:0]; 
     CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
     
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
     CGRect bounds = CGRectMake(table.boundingBox.origin.x,table.boundingBox.origin.y, table.viewSize.width, table.viewSize.height) ;
-    CGPoint converted = [table convertToNodeSpace:newLocation];
+    int converted = [table cellIndexForTouch:touch];
     if (CGRectContainsPoint(bounds, newLocation)){
-
         NSLog(@"AU DESSUS DU SCROLLLL");
     }
 
@@ -186,6 +190,8 @@ enum {
             }
         }
     }
+    foldersTable.isTouchEnabled=TRUE;
+    return;
 }
 
 
@@ -266,13 +272,13 @@ enum {
         [self addChild:foldersTable z:0 tag:tagScrollZone];
     }
     
-    foldersTable.position=CGPointMake(windowSize.width-200,0);
+    foldersTable.position=CGPointMake(windowSize.width-230,0);
     
     [foldersTable reloadData];
     
 }
 -(CGSize)cellSizeForTable:(SWTableView *)table{
-    return CGSizeMake(200, 200);
+    return CGSizeMake(200, 280);
 }
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
     return [[[DropZoneNode alloc] init] autorelease];

@@ -5,6 +5,7 @@
 //  Created by Simon Watiau on 11/11/11.
 //
 
+
 #import "DeskController.h"
 #import "GameConfig.h"
 #import "AppDelegate.h"
@@ -13,7 +14,8 @@
 #import "EmailController.h"
 #import "TutorialController.h"
 #import "ErrorController.h"
-
+#import "GmailModel.h"
+#import "cocos2d.h"
 @interface DeskController ()
 @property(nonatomic,retain)GmailModel* model;
 @end

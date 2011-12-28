@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "SWTableViewCell.h"
 @interface DropZoneNode : SWTableViewCell{
     BOOL drawMe;
