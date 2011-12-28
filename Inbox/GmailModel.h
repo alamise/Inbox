@@ -23,4 +23,5 @@
 -(void)move:(EmailModel*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;
 -(BOOL)fetchEmailBody:(EmailModel*)model;
+-(NSArray*)folders;
 @end

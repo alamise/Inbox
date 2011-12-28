@@ -15,6 +15,7 @@
     BOOL isLoading;
     EAGLView* glView;
     MBProgressHUD* loadingHud;
+    NSArray* folders;
 }
 -(void)reload;
 @end

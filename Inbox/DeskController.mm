@@ -17,10 +17,12 @@
 #import "GmailModel.h"
 #import "cocos2d.h"
 @interface DeskController ()
-@property(nonatomic,retain)GmailModel* model;
+@property(nonatomic,retain) GmailModel* model;
+@property(nonatomic,retain) NSArray* folders;
 @end
+
 @implementation DeskController
-@synthesize model;
+@synthesize model,folders;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 	}
@@ -45,6 +47,8 @@
 
 -(void)syncDone{
     [loadingHud hide:true];
+    self.folders = [model folders];
+    [layer setFolders:self.folders];
     [self nextStep];
 }
 

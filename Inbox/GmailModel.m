@@ -14,10 +14,12 @@
 #import "AppDelegate.h"
 #import "EmailModel.h"
 #import "MailCoreTypes.h"
+#import "FolderModel.h"
 @interface GmailModel()
     -(BOOL)saveContext:(NSManagedObjectContext*)context;
     -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
     -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
+-(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 @end
 
 @implementation GmailModel
@@ -37,6 +39,32 @@
     [password release];
     [delegate release];
     [super dealloc];
+}
+
+
+-(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+    
+    for (NSString* path in [account allFolders]){
+    
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
+        [request setPredicate:predicate];
+    
+        NSError* fetchError = nil;
+        int folders = [context countForFetchRequest:request error:&fetchError];
+        if (fetchError==nil){
+            if (folders==0){
+                FolderModel* folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
+                folderModel.path = path;
+            }
+        }else{
+            return false;
+        }
+    }
+    [request release];
+    return [context save:nil];
 }
 
 /*
@@ -160,7 +188,7 @@
             NSLog(@"%@",forl);
         }
         
-        if (![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
+        if (![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]|| ![self updateLocalFolders:account context:context]){
             [account release];
             [delegate onError:@""];
             return;
@@ -246,6 +274,22 @@
     [self saveContext:context];
 }
 
+-(NSArray*)folders{
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+    
+    NSError* fetchError = nil;
+    NSArray* folders = [context executeFetchRequest:request error:&fetchError];
+    if (fetchError==nil){
+        return folders;
+    }else{
+        return nil;
+    }
+    [context release];
+    [request release];
+}
 -(int)emailsCountInFolder:(NSString*)folder{
     NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

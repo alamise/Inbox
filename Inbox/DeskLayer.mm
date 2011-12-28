@@ -33,7 +33,7 @@ enum {
 @end
 
 @implementation DeskLayer
-@synthesize draggedNode;
+@synthesize draggedNode,folders;
 
 -(id) initWithDelegate:(id<DeskProtocol>)d{
 	if( (self=[super init])) {
@@ -69,6 +69,15 @@ enum {
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:1 swallowsTouches:NO];
 }
 
+-(void)setFolders:(NSArray *)f{
+    if (folders){
+        [folders release];
+        folders = nil;
+    }
+    folders = [f retain];
+    [foldersTable reloadData];
+    [foldersTable setContentOffset:foldersTable.contentOffset];
+}
 -(void) putEmail:(EmailModel*)model{
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
     node.scale=0;
@@ -280,11 +289,19 @@ enum {
 -(CGSize)cellSizeForTable:(SWTableView *)table{
     return CGSizeMake(200, 280);
 }
+
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
-    return [[[DropZoneNode alloc] init] autorelease];
+    DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
+    return node;
 }
+
 -(NSUInteger)numberOfCellsInTableView:(SWTableView *)table{
-    return 10;
+    if (self.folders){
+        int count = [self.folders count];
+        return count;
+    }else{
+        return 3;
+    }
 }
 
 -(void)putArchiveZone{

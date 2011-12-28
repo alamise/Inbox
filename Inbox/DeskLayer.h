@@ -22,7 +22,9 @@
     CGPoint lastTouchPosition;
     NSTimeInterval lastTouchTime;
     SWTableView* foldersTable;
+    NSArray* folders;
 }
+@property(nonatomic,retain) NSArray* folders;
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
 

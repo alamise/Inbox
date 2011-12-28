@@ -10,7 +10,11 @@
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Folder" representedClassName="FolderModel" syncable="YES">
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Email" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Folder" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>
