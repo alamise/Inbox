@@ -21,7 +21,8 @@ enum {
 	tagArchiveSprite = 1,
 	tagInboxSprite = 2,
     tagBackgroundSprite = 3,
-    tagScrollZone = 4
+    tagScrollZone = 4,
+    tagSettingsSprite = 5
 };
 
 @interface DeskLayer() 
@@ -29,6 +30,7 @@ enum {
     -(void) putGround;
     -(void)putFoldersZones;
     -(void) putInboxZone;
+    -(void)putSettings;
     -(void) setOrUpdateScene;
 @end
 
@@ -175,7 +177,6 @@ enum {
     CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
     
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
-    CGRect bounds = CGRectMake(table.boundingBox.origin.x,table.boundingBox.origin.y, table.viewSize.width, table.viewSize.height) ;
     int cellIndex = [table cellIndexForTouch:touch];
     if (cellIndex!=-1){
         FolderModel* folder = [self.folders objectAtIndex:cellIndex];
@@ -231,8 +232,24 @@ enum {
 
 -(void)setOrUpdateScene{
     [self putGround];
+    [self putSettings];
     [self putFoldersZones];
     [self putInboxZone];
+}
+
+-(void)putSettings{
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    CCMenu *starMenu = (CCMenu*)[self getChildByTag:tagSettingsSprite];
+    if (!starMenu){
+        CCMenuItem *starMenuItem = [CCMenuItemImage itemFromNormalImage:@"settingsUp.png" selectedImage:@"settingsDown.png" target:self selector:@selector(openSettings:)];
+        starMenu = [CCMenu menuWithItems:starMenuItem, nil];
+        [self addChild:starMenu z:0 tag:tagSettingsSprite];        
+    }
+    starMenu.position = CGPointMake(280,windowSize.height-60);
+}
+
+
+- (void)openSettings:(id)sender {
 }
 
 -(void)putGround{

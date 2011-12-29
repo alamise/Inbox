@@ -185,6 +185,8 @@
 		F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43819F014AB90CA0017C9BC /* FolderModel.m */; };
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
+		F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4381A0F14AC909D0017C9BC /* SettingsController.m */; };
+		F4381A1214AC909D0017C9BC /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4381A1014AC909D0017C9BC /* SettingsController.xib */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -573,6 +575,9 @@
 		F43819F014AB90CA0017C9BC /* FolderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderModel.m; sourceTree = "<group>"; };
 		F43819F214AC79530017C9BC /* settingsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsDown.png; sourceTree = "<group>"; };
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
+		F4381A0E14AC909D0017C9BC /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		F4381A0F14AC909D0017C9BC /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		F4381A1014AC909D0017C9BC /* SettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1130,6 +1135,7 @@
 		F41E666314A9CFE300BA4712 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				F4381A0C14AC90620017C9BC /* settings */,
 				F41E666714A9D00500BA4712 /* tutorial */,
 				F41E666614A9CFFE00BA4712 /* error */,
 				F41E666514A9CFF700BA4712 /* login */,
@@ -1214,6 +1220,16 @@
 				F41E65B114A9CFB700BA4712 /* VisualEffectProtocol.h */,
 			);
 			name = app;
+			sourceTree = "<group>";
+		};
+		F4381A0C14AC90620017C9BC /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				F4381A0E14AC909D0017C9BC /* SettingsController.h */,
+				F4381A0F14AC909D0017C9BC /* SettingsController.m */,
+				F4381A1014AC909D0017C9BC /* SettingsController.xib */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 		F44F05F71478F1C9008DE7CF /* Products */ = {
@@ -1362,6 +1378,7 @@
 				F426414014AB718500040EC9 /* sticker.png in Resources */,
 				F43819F414AC79530017C9BC /* settingsDown.png in Resources */,
 				F43819F514AC79530017C9BC /* settingsUp.png in Resources */,
+				F4381A1214AC909D0017C9BC /* SettingsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1525,6 +1542,7 @@
 				F41E667214A9D2B200BA4712 /* MBProgressHUD.m in Sources */,
 				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
 				F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */,
+				F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
