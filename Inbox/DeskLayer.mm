@@ -13,7 +13,7 @@
 #import "GmailModel.h"
 #import "VisualEffectProtocol.h"
 #import "GLES-Render.h"
-
+#import "FolderModel.h"
 #define PTM_RATIO 32
 #define TOUCHES_DELAY 0.1
 
@@ -48,7 +48,7 @@ enum {
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;
 		m_debugDraw->SetFlags(flags);		
-		
+		folders = [[NSArray alloc] init];
 		draggableNodes = [[NSMutableArray alloc] init];
 		[self schedule: @selector(tick:)];
 	}
@@ -176,12 +176,12 @@ enum {
     
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
     CGRect bounds = CGRectMake(table.boundingBox.origin.x,table.boundingBox.origin.y, table.viewSize.width, table.viewSize.height) ;
-    int converted = [table cellIndexForTouch:touch];
-    if (CGRectContainsPoint(bounds, newLocation)){
-        NSLog(@"AU DESSUS DU SCROLLLL");
-    }
-
-    if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
+    int cellIndex = [table cellIndexForTouch:touch];
+    if (cellIndex!=-1){
+        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
+        [delegate move:self.draggedNode.emailModel to:folder.path];
+        [self.draggedNode hideAndRemove];
+    }else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
         [self.draggedNode hideAndRemove];
     }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
@@ -278,6 +278,7 @@ enum {
     foldersTable = (SWTableView*)[self getChildByTag:tagScrollZone];
     if (!foldersTable){
         foldersTable = [[SWTableView viewWithDataSource:self size:CGSizeMake(200, 748) container:nil] retain];
+        [foldersTable setVerticalFillOrder:SWTableViewFillTopDown];
         [self addChild:foldersTable z:0 tag:tagScrollZone];
     }
     
@@ -292,6 +293,10 @@ enum {
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
+    FolderModel* folder = [self.folders objectAtIndex:idx];
+    if (folder){
+        node.folderPath=folder.path;
+    }
     return node;
 }
 

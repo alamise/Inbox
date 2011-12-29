@@ -48,19 +48,20 @@
     request.entity = entity;
     
     for (NSString* path in [account allFolders]){
-    
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
-        [request setPredicate:predicate];
-    
-        NSError* fetchError = nil;
-        int folders = [context countForFetchRequest:request error:&fetchError];
-        if (fetchError==nil){
-            if (folders==0){
-                FolderModel* folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
-                folderModel.path = path;
+        if (![path isEqualToString:@"INBOX"] && ![path isEqualToString:@"[Gmail]"] &&![path isEqualToString:@"[Gmail]/Drafts"] && ![path isEqualToString:@"[Gmail]"] && ![path isEqualToString:@"[Gmail]/Sent Mail"] && ![path isEqualToString:@"Notes"]){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
+            [request setPredicate:predicate];
+        
+            NSError* fetchError = nil;
+            int folders = [context countForFetchRequest:request error:&fetchError];
+            if (fetchError==nil){
+                if (folders==0){
+                    FolderModel* folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
+                    folderModel.path = path;
+                }
+            }else{
+                return false;
             }
-        }else{
-            return false;
         }
     }
     [request release];
@@ -283,10 +284,12 @@
     NSError* fetchError = nil;
     NSArray* folders = [context executeFetchRequest:request error:&fetchError];
     if (fetchError==nil){
+        folders = [folders sortedArrayUsingSelector:@selector(compare:)];
         return folders;
     }else{
         return nil;
     }
+    
     [context release];
     [request release];
 }
