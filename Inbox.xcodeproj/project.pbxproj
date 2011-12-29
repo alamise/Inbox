@@ -186,7 +186,7 @@
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
 		F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4381A0F14AC909D0017C9BC /* SettingsController.m */; };
-		F4381A1214AC909D0017C9BC /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4381A1014AC909D0017C9BC /* SettingsController.xib */; };
+		F4381A1214AC909D0017C9BC /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4381A1014AC909D0017C9BC /* SettingsView.xib */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -577,7 +577,7 @@
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
 		F4381A0E14AC909D0017C9BC /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		F4381A0F14AC909D0017C9BC /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
-		F4381A1014AC909D0017C9BC /* SettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
+		F4381A1014AC909D0017C9BC /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -638,7 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				F41E666C14A9D0F000BA4712 /* app */,
-				F41E666914A9D0B500BA4712 /* Desk */,
+				F41E666914A9D0B500BA4712 /* desk */,
 				F41E666814A9D09900BA4712 /* models */,
 				F41E666314A9CFE300BA4712 /* views */,
 				F41E65A114A9CFB700BA4712 /* Resources */,
@@ -1198,7 +1198,7 @@
 			name = models;
 			sourceTree = "<group>";
 		};
-		F41E666914A9D0B500BA4712 /* Desk */ = {
+		F41E666914A9D0B500BA4712 /* desk */ = {
 			isa = PBXGroup;
 			children = (
 				F41E658914A9CFB700BA4712 /* EmailNode.h */,
@@ -1211,7 +1211,7 @@
 				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
 				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 			);
-			name = Desk;
+			name = desk;
 			sourceTree = "<group>";
 		};
 		F41E666C14A9D0F000BA4712 /* app */ = {
@@ -1227,7 +1227,7 @@
 			children = (
 				F4381A0E14AC909D0017C9BC /* SettingsController.h */,
 				F4381A0F14AC909D0017C9BC /* SettingsController.m */,
-				F4381A1014AC909D0017C9BC /* SettingsController.xib */,
+				F4381A1014AC909D0017C9BC /* SettingsView.xib */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -1378,7 +1378,7 @@
 				F426414014AB718500040EC9 /* sticker.png in Resources */,
 				F43819F414AC79530017C9BC /* settingsDown.png in Resources */,
 				F43819F514AC79530017C9BC /* settingsUp.png in Resources */,
-				F4381A1214AC909D0017C9BC /* SettingsController.xib in Resources */,
+				F4381A1214AC909D0017C9BC /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

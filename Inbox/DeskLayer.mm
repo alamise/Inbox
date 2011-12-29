@@ -250,6 +250,7 @@ enum {
 
 
 - (void)openSettings:(id)sender {
+    [delegate openSettings];
 }
 
 -(void)putGround{

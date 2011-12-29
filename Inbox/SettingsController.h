@@ -7,10 +7,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface SettingsController : UIViewController{
     
     IBOutlet UILabel *inboxCountLabel;
-    IBOutlet UITableView *optionsTable;
+    IBOutlet UILabel *inboxCountValue;
+
+    IBOutlet UILabel *lastSyncValue;
+    IBOutlet UILabel *lastSyncLabel;
+    IBOutlet UILabel *accountValue;
+    IBOutlet UILabel *accountLabel;
 }
+- (IBAction)sync:(id)sender;
+- (IBAction)editAccount:(id)sender;
 
 @end

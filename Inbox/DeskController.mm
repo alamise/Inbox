@@ -16,6 +16,7 @@
 #import "ErrorController.h"
 #import "GmailModel.h"
 #import "cocos2d.h"
+#import "SettingsController.h"
 @interface DeskController ()
 @property(nonatomic,retain) GmailModel* model;
 @property(nonatomic,retain) NSArray* folders;
@@ -52,6 +53,13 @@
     [self nextStep];
 }
 
+-(void)openSettings{
+    SettingsController* settingsController = [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
+    UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:settingsController];
+    navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+    navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:navCtr animated:YES];
+}
 
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{

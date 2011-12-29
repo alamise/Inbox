@@ -12,47 +12,25 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
+
     }
     return self;
 }
 
 - (void)dealloc {
+    [inboxCountValue release];
     [inboxCountLabel release];
-    [optionsTable release];
+    [accountLabel release];
+    [accountValue release];
+    [lastSyncLabel release];
+    [lastSyncValue release];
     [super dealloc];
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-
+-(void)close{
+    [self dismissModalViewControllerAnimated:YES];
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString* identifier = @"ident";
-    UITableViewCell* cell  = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-    }
-    
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text=@"copy";
-            cell.detailTextLabel.text=@"send or get emails";
-            break;
-        case 1:
-            cell.textLabel.text=@"Account";
-            cell.detailTextLabel.text=@"Change your Gmail account";
-            break;
-        case 2:
-            
-            break;
-        default:
-            break;
-    }
-    return cell;
-}
-
-
 
 #pragma mark - View lifecycle
 
@@ -61,10 +39,18 @@
 }
 
 - (void)viewDidUnload{
+    [inboxCountValue release];
+    inboxCountValue = nil;
     [inboxCountLabel release];
     inboxCountLabel = nil;
-    [optionsTable release];
-    optionsTable = nil;
+    [accountLabel release];
+    accountLabel = nil;
+    [accountValue release];
+    accountValue = nil;
+    [lastSyncLabel release];
+    lastSyncLabel = nil;
+    [lastSyncValue release];
+    lastSyncValue = nil;
     [super viewDidUnload];
 }
 
@@ -72,4 +58,9 @@
 	return YES;
 }
 
+- (IBAction)sync:(id)sender {
+}
+
+- (IBAction)editAccount:(id)sender {
+}
 @end
