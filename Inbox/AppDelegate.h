@@ -20,7 +20,8 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
 @property (nonatomic, retain,readwrite) UIWindow *window;
--(NSString*)getPlistPath;
+-(NSString*)plistPath;
 
--(NSManagedObjectContext*)getManagedObjectContext:(BOOL)reuse;
+-(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse;
+-(void)resetDatabase;
 @end

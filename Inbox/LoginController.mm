@@ -30,7 +30,7 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad{
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if (plistPath){
         emailField.text = [plistDic valueForKey:@"email"];
@@ -74,7 +74,7 @@
         [alert show];
         [alert release];
     }else{
-        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         [plistDic setValue:emailField.text forKey:@"email"];
         [plistDic setValue:passwordField.text forKey:@"password"];

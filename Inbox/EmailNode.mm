@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         world = w;
-        emailModel = [model retain];
+        self.emailModel = model;
         drawMe = true;
 
         // Body
@@ -47,12 +47,12 @@
         CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
         sprite.position=CGPointMake(105,67);
         [self addChild:sprite];
-        title = [[CCLabelTTF labelWithString:emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
+        title = [[CCLabelTTF labelWithString:self.emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
         title.color=ccc3(150, 150, 150);
         title.position=CGPointMake(105, 105);
         [self addChild:title];
         
-        content = [[CCLabelTTF labelWithString:emailModel.subject dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
+        content = [[CCLabelTTF labelWithString:self.emailModel.subject dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
 
         content.color=ccc3(0, 1, 0);
         content.position=CGPointMake(105, 56);
@@ -74,18 +74,13 @@
     [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 
--(void)fadeAndHide{
-    world->DestroyBody(body);
-    [self runAction:[CCFadeTo actionWithDuration:ANIMATION_DELAY opacity:0]];
-    [CCCallFunc actionWithTarget:self selector:@selector(remove)];
-}
 
 -(void)remove{
     [self removeFromParentAndCleanup:YES];    
 }
 
 -(void)dealloc{
-    self.emailModel=nil;
+    self.emailModel = nil;
     [title release];
     [content release];
     [super dealloc];

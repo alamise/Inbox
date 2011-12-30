@@ -65,7 +65,7 @@
 
 - (IBAction)sync:(id)sender {
     [hud show:YES];
-    [desk.model sync:self];
+    [desk.model sync];
 }
 
 - (void)onError:(NSString*)errorMessage{

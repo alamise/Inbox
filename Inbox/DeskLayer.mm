@@ -12,6 +12,7 @@
 #import "DeskProtocol.h"
 #import "GmailModel.h"
 #import "GLES-Render.h"
+#import "EmailModel.h"
 #import "FolderModel.h"
 #import "GameConfig.h"
 #define TOUCHES_DELAY 0.1
@@ -49,7 +50,7 @@ enum {
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;
 		m_debugDraw->SetFlags(flags);		
-		folders = [[NSArray alloc] init];
+		folders = nil;
 		draggableNodes = [[NSMutableArray alloc] init];
 		[self schedule: @selector(tick:)];
 	}
@@ -80,7 +81,6 @@ enum {
     [foldersTable setContentOffset:foldersTable.contentOffset];
 }
 -(void) putEmail:(EmailModel*)model{
-    
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(100/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
     bodyDef.linearVelocity=b2Vec2(20,0);
@@ -298,9 +298,12 @@ enum {
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
-    FolderModel* folder = [self.folders objectAtIndex:idx];
-    if (folder){
+    
+    if (folders){
+        FolderModel* folder = [self.folders objectAtIndex:idx];
         node.folderPath=folder.path;
+    }else{
+        node.folderPath=@"Archive";
     }
     return node;
 }
@@ -310,7 +313,7 @@ enum {
         int count = [self.folders count];
         return count;
     }else{
-        return 3;
+        return 1;
     }
 }
 
@@ -358,7 +361,7 @@ enum {
 
 -(void)cleanDesk{
    for (EmailNode* node in draggableNodes){
-       [node fadeAndHide];
+       [node scaleAndHide];
    }
 }
 

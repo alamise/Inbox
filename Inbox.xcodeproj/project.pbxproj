@@ -539,7 +539,6 @@
 		F41E658F14A9CFB700BA4712 /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		F41E659214A9CFB700BA4712 /* GmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailModel.h; sourceTree = "<group>"; };
 		F41E659314A9CFB700BA4712 /* GmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailModel.m; sourceTree = "<group>"; };
-		F41E659414A9CFB700BA4712 /* GmailModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailModelProtocol.h; sourceTree = "<group>"; };
 		F41E659514A9CFB700BA4712 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F41E659614A9CFB700BA4712 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
 		F41E659714A9CFB700BA4712 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -1189,7 +1188,6 @@
 				F41E658814A9CFB700BA4712 /* EmailModel.m */,
 				F41E659214A9CFB700BA4712 /* GmailModel.h */,
 				F41E659314A9CFB700BA4712 /* GmailModel.m */,
-				F41E659414A9CFB700BA4712 /* GmailModelProtocol.h */,
 				F43819EF14AB90CA0017C9BC /* FolderModel.h */,
 				F43819F014AB90CA0017C9BC /* FolderModel.m */,
 			);

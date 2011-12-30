@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "CTCoreAccount.h"
-#import "GmailModelProtocol.h"
+
 #define SYNC_DONE @"sync done"
 #define ERROR @"error"
 

@@ -18,16 +18,17 @@
 #import "cocos2d.h"
 #import "SettingsController.h"
 @interface DeskController ()
-@property(nonatomic,retain) GmailModel* model;
+@property(nonatomic,retain,readwrite) GmailModel* model;
 @property(nonatomic,retain) NSArray* folders;
 @end
 
 @implementation DeskController
 @synthesize model,folders;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        isReloading = FALSE;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
 	}
 	return self;
 }
@@ -48,21 +49,15 @@
     }
 }
 
+-(void)onError{
+    NSLog(@"merde");
+}
+
 -(void)syncDone{
-    if (isReloading){
-        isReloading = NO;
-        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
-        NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
-        [model performSelector:@selector(sync) withObject:nil afterDelay:1];
-        [plistDic release];
-    }else{
-        [loadingHud hide:true];
-        self.folders = [model folders];
-        [layer setFolders:self.folders];
-        [self nextStep];
-    }
-    
+    [loadingHud hide:true];
+    self.folders = [model folders];
+    [layer setFolders:self.folders];
+    [self nextStep];
 }
 
 -(void)openSettings{
@@ -152,7 +147,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
         self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
@@ -174,10 +169,27 @@
 }
 
 -(void)reload{
-    [layer cleanDesk];
     [loadingHud show:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateModel) name:SYNC_DONE object:nil];
+    [layer cleanDesk];
+    self.folders = nil;
+    [layer setFolders:self.folders];
     [self.model sync];
 }
+
+-(void)updateModel{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
+
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
+    [plistDic release];
+    
+    [model sync];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -22,6 +22,5 @@
 @property(nonatomic,assign) BOOL isAppearing;
 @property(nonatomic,assign) BOOL isDisappearing;
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)world;
--(void)fadeAndHide;
 -(void)scaleAndHide;
 @end

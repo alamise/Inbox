@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GmailModelProtocol.h"
+
 @class DeskController;
 @class MBProgressHUD;
 
-@interface SettingsController : UIViewController<GmailModelProtocol>{
+@interface SettingsController : UIViewController{
     
     IBOutlet UILabel *inboxCountLabel;
     IBOutlet UILabel *inboxCountValue;

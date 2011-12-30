@@ -41,13 +41,14 @@
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     UIViewController* firstView = nil;
-    NSDictionary* infos = [NSMutableDictionary dictionaryWithContentsOfFile:[self getPlistPath]];
+    NSDictionary* infos = [NSMutableDictionary dictionaryWithContentsOfFile:[self plistPath]];
     
     firstView = nil;
     
     if (!infos){
         infos = [[NSMutableDictionary alloc] init];
-        [infos writeToFile:[self getPlistPath] atomically:YES];
+        [infos writeToFile:[self plistPath] atomically:YES];
+        [infos release];
         firstView = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
     }else{
         firstView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
@@ -59,7 +60,7 @@
 	[window makeKeyAndVisible];
 }
 
--(NSString*)getPlistPath{
+-(NSString*)plistPath{
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [documentsDirectory stringByAppendingPathComponent:@"infos.plist"];
 }
@@ -99,7 +100,7 @@
 
 #pragma mark - CoreData
 
--(NSManagedObjectContext*)getManagedObjectContext:(BOOL)reuse{
+-(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse{
     if (managedObjectContext != nil && reuse) {
         return managedObjectContext;
     }
@@ -124,7 +125,7 @@
 }
 
 - (void)mergeChangesWithMainContext:(NSNotification *)notification{
-    NSManagedObjectContext *mainContext = [self getManagedObjectContext:YES];
+    NSManagedObjectContext *mainContext = [self managedObjectContext:YES];
     [mainContext mergeChangesFromContextDidSaveNotification:notification];  
 }
 
@@ -141,6 +142,22 @@
 - (NSString *)databasePath {
     NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [path stringByAppendingPathComponent: @"coredata.sqlite"];
+}
+
+-(void)resetDatabase{
+    if (!persistentStoreCoordinator){
+        return;
+    }
+    [managedObjectContext release];
+    managedObjectContext = nil;
+    
+    NSArray *stores = [persistentStoreCoordinator persistentStores];
+    for(NSPersistentStore *store in stores) {
+        [persistentStoreCoordinator removePersistentStore:store error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+    }
+    [persistentStoreCoordinator release];
+    persistentStoreCoordinator = nil;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {

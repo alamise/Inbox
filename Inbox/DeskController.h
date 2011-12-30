@@ -6,17 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GmailModelProtocol.h"
 #import "DeskProtocol.h"
 @class  MBProgressHUD,GmailModel,DeskLayer,EAGLView;
-@interface DeskController : UIViewController<DeskProtocol, GmailModelProtocol> {
+@interface DeskController : UIViewController<DeskProtocol> {
     GmailModel* model;
     DeskLayer* layer;
     BOOL isLoading;
     EAGLView* glView;
     MBProgressHUD* loadingHud;
     NSArray* folders;
-    BOOL isReloading;
 }
 @property(readonly) GmailModel* model;
 -(void)reload;
