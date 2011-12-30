@@ -14,8 +14,6 @@
     CCLabelTTF *content;
     BOOL drawMe;
     BOOL didMoved;
-    BOOL isAppearing;
-    BOOL isDisappearing;
     b2Body* body;
     b2World* world;
 }

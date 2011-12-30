@@ -88,6 +88,7 @@ enum {
 
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:model bodyDef:bodyDef world:world];
     [self addChild:node z:1];
+
     [draggableNodes addObject:node];
     [node release];
 }
@@ -353,6 +354,12 @@ enum {
     if (loadingLabel){
         loadingLabel.visible = false;
     }
+}
+
+-(void)cleanDesk{
+   for (EmailNode* node in draggableNodes){
+       [node fadeAndHide];
+   }
 }
 
 -(void)didRotate{

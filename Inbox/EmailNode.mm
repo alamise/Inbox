@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GameConfig.h"
+#define ANIMATION_DELAY 0.3
 @implementation EmailNode
 @synthesize emailModel,didMoved,isAppearing,isDisappearing;
 
@@ -62,32 +63,20 @@
     }
 }
 
--(void)setEmailModel:(EmailModel *)model{
-    if (emailModel){
-        [emailModel release];
-    }
-    if (model){
-        emailModel = [model retain];
-        [title setString:emailModel.senderName];
-    }else{
-        emailModel=nil;
-    }
-}
-
 -(void)onEnter{
     [super onEnter];
-    [self runAction:[CCScaleTo actionWithDuration:0.5 scale:1]];
+    [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
 }
 
 -(void)scaleAndHide{
     world->DestroyBody(body);
-    [self runAction:[CCScaleTo actionWithDuration:0.5 scale:0]];
+    [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0]];
     [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 
 -(void)fadeAndHide{
     world->DestroyBody(body);
-    [self runAction:[CCFadeTo actionWithDuration:0.5 opacity:0]];
+    [self runAction:[CCFadeTo actionWithDuration:ANIMATION_DELAY opacity:0]];
     [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 

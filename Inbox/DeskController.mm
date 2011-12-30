@@ -27,6 +27,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         isReloading = FALSE;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
 	}
 	return self;
 }
@@ -40,10 +41,10 @@
 }
 
 -(void)nextStep{
-    if ([model emailsCountInFolder:@"INBOX" delegate:self]==0){
+    if ([model emailsCountInFolder:@"INBOX"]==0){
         // show done view
     }else{
-        [layer putEmail:[model getLastEmailFrom:@"INBOX" delegate:self]];
+        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
     }
 }
 
@@ -57,7 +58,7 @@
         [plistDic release];
     }else{
         [loadingHud hide:true];
-        self.folders = [model folders:self];
+        self.folders = [model folders];
         [layer setFolders:self.folders];
         [self nextStep];
     }
@@ -75,7 +76,7 @@
 
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
-    [model move:m to:folder delegate:self];
+    [model move:m to:folder];
     [self nextStep];
 }
 
@@ -93,7 +94,7 @@
 }
 
 -(void)fetchEmailBody:(EmailModel*)email{
-    if ([model fetchEmailBody:email delegate:self]){
+    if ([model fetchEmailBody:email]){
         EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
@@ -155,7 +156,7 @@
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
         self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
-        [model sync:self];        
+        [model sync];        
     }else{
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
         loginCtr.field=self;
@@ -173,8 +174,9 @@
 }
 
 -(void)reload{
+    [layer cleanDesk];
     [loadingHud show:YES];
-    [self.model sync:self];
+    [self.model sync];
 }
 
 - (void)viewDidLoad {

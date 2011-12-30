@@ -31,6 +31,6 @@
 -(void)didRotate;
 -(void)willRotate;
 -(void)willAppear;
-
+-(void)cleanDesk;
 @end
 
