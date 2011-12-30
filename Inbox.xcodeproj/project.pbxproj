@@ -154,7 +154,7 @@
 		F41E664414A9CFB800BA4712 /* DeskLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658314A9CFB700BA4712 /* DeskLayer.mm */; };
 		F41E664514A9CFB800BA4712 /* EmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658614A9CFB700BA4712 /* EmailController.m */; };
 		F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658814A9CFB700BA4712 /* EmailModel.m */; };
-		F41E664714A9CFB800BA4712 /* EmailNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.m */; };
+		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
 		F41E664814A9CFB800BA4712 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658B14A9CFB700BA4712 /* EmailView.xib */; };
 		F41E664914A9CFB800BA4712 /* ErrorController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.mm */; };
 		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
@@ -531,7 +531,7 @@
 		F41E658714A9CFB700BA4712 /* EmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailModel.h; sourceTree = "<group>"; };
 		F41E658814A9CFB700BA4712 /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailModel.m; sourceTree = "<group>"; };
 		F41E658914A9CFB700BA4712 /* EmailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailNode.h; sourceTree = "<group>"; };
-		F41E658A14A9CFB700BA4712 /* EmailNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailNode.m; sourceTree = "<group>"; };
+		F41E658A14A9CFB700BA4712 /* EmailNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailNode.mm; sourceTree = "<group>"; };
 		F41E658B14A9CFB700BA4712 /* EmailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailView.xib; sourceTree = "<group>"; };
 		F41E658C14A9CFB700BA4712 /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
 		F41E658D14A9CFB700BA4712 /* ErrorController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorController.mm; sourceTree = "<group>"; };
@@ -562,7 +562,6 @@
 		F41E65AE14A9CFB700BA4712 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
 		F41E65AF14A9CFB700BA4712 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
 		F41E65B014A9CFB700BA4712 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
-		F41E65B114A9CFB700BA4712 /* VisualEffectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualEffectProtocol.h; sourceTree = "<group>"; };
 		F41E666A14A9D0E500BA4712 /* woodBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woodBackground.jpg; sourceTree = "<group>"; };
 		F41E666E14A9D13100BA4712 /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
 		F41E667014A9D2B200BA4712 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Inbox/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
@@ -637,7 +636,6 @@
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
-				F41E666C14A9D0F000BA4712 /* app */,
 				F41E666914A9D0B500BA4712 /* desk */,
 				F41E666814A9D09900BA4712 /* models */,
 				F41E666314A9CFE300BA4712 /* views */,
@@ -1202,7 +1200,7 @@
 			isa = PBXGroup;
 			children = (
 				F41E658914A9CFB700BA4712 /* EmailNode.h */,
-				F41E658A14A9CFB700BA4712 /* EmailNode.m */,
+				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
 				F41E658014A9CFB700BA4712 /* DeskController.h */,
 				F41E658114A9CFB700BA4712 /* DeskController.mm */,
 				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
@@ -1212,14 +1210,6 @@
 				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 			);
 			name = desk;
-			sourceTree = "<group>";
-		};
-		F41E666C14A9D0F000BA4712 /* app */ = {
-			isa = PBXGroup;
-			children = (
-				F41E65B114A9CFB700BA4712 /* VisualEffectProtocol.h */,
-			);
-			name = app;
 			sourceTree = "<group>";
 		};
 		F4381A0C14AC90620017C9BC /* settings */ = {
@@ -1531,7 +1521,7 @@
 				F41E664414A9CFB800BA4712 /* DeskLayer.mm in Sources */,
 				F41E664514A9CFB800BA4712 /* EmailController.m in Sources */,
 				F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */,
-				F41E664714A9CFB800BA4712 /* EmailNode.m in Sources */,
+				F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */,
 				F41E664914A9CFB800BA4712 /* ErrorController.mm in Sources */,
 				F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */,
 				F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */,

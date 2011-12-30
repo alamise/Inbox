@@ -16,6 +16,8 @@
     EAGLView* glView;
     MBProgressHUD* loadingHud;
     NSArray* folders;
+    BOOL isReloading;
 }
+@property(readonly) GmailModel* model;
 -(void)reload;
 @end

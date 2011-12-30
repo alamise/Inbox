@@ -15,19 +15,22 @@
 #import "EmailModel.h"
 #import "MailCoreTypes.h"
 #import "FolderModel.h"
+
+#define SYNC_DONE @"sync done"
+#define ERROR @"error"
+
+
 @interface GmailModel()
-    -(BOOL)saveContext:(NSManagedObjectContext*)context;
-    -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
-    -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
+-(BOOL)saveContext:(NSManagedObjectContext*)context;
+-(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
+-(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 -(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 @end
 
 @implementation GmailModel
-
--(id)initWithAccount:(NSString*)em password:(NSString*)pwd delegate:(id<GmailModelProtocol>)d{
+-(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
     if (self) {
-        delegate = [d retain];
         email = [em retain];
         password = [pwd retain];
     }
@@ -37,12 +40,11 @@
 -(void)dealloc{
     [email release];
     [password release];
-    [delegate release];
     [super dealloc];
 }
 
 
--(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
+-(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -54,18 +56,19 @@
         
             NSError* fetchError = nil;
             int folders = [context countForFetchRequest:request error:&fetchError];
-            if (fetchError==nil){
+            if (fetchError){
+                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+                return false;
+            }else{
                 if (folders==0){
                     FolderModel* folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
                     folderModel.path = path;
                 }
-            }else{
-                return false;
             }
         }
     }
     [request release];
-    return [context save:nil];
+    return true;
 }
 
 /*
@@ -114,6 +117,7 @@
                 [folder setFlags:CTFlagDeleted forMessage:message];
             }
             @catch (NSException* exception) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 return false;
             }
             model.path = model.newPath;
@@ -170,9 +174,7 @@
     }
     return [context save:nil];
 }
-
--(void)sync{
-    dispatch_queue_t currentQueue =  dispatch_get_current_queue();
+-(void)sync {
     dispatch_async( dispatch_get_global_queue(0, 0), ^{
         NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];
         CTCoreAccount* account = [[CTCoreAccount alloc] init];
@@ -181,38 +183,30 @@
         }
         @catch (NSException *exception) {
             [account release];
-            [delegate onError:@""];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             return;
         }
-        
-        for (NSString* forl in [account allFolders]){
-            NSLog(@"%@",forl);
-        }
-        
+            
         if (![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]|| ![self updateLocalFolders:account context:context]){
             [account release];
-            [delegate onError:@""];
             return;
         }
-    
-        dispatch_async(currentQueue, ^{
-            [delegate syncDone];
-        });
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
     });
 }
 
--(BOOL)saveContext:(NSManagedObjectContext*)context{
+-(BOOL)saveContext:(NSManagedObjectContext*)context delegate:(id<GmailModelProtocol>) delegate{
     NSError* error = nil;
     [context save:&error];
     if (error){
-        [delegate onError:[error localizedDescription]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:error];
         return false;
     }else{
         return true;
     }
 }
 
--(EmailModel*)getLastEmailFrom:(NSString*)folder{
+-(EmailModel*)getLastEmailFrom:(NSString*)folder delegate:(id<GmailModelProtocol>)delegate{
     NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
@@ -226,13 +220,19 @@
 
     NSError* fetchError = nil;
     NSArray* objects = [context executeFetchRequest:request error:&fetchError];
-    if (fetchError==nil && [objects count]>0){
-        EmailModel* model = [objects objectAtIndex:0];
-        return model;
-    }else{
-        return nil;
-    }
     [context release];
+    
+    if (fetchError){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        return nil;
+    }else{
+        if ([objects count]>0){
+            EmailModel* model = [objects objectAtIndex:0];
+            return model;
+        }else{
+            return nil;
+        }
+    }
 }
 
 -(BOOL)fetchEmailBody:(EmailModel*)model{
@@ -256,7 +256,7 @@
      */
 }
 
--(void)move:(EmailModel*)model to:(NSString*)folder{
+-(BOOL)move:(EmailModel*)model to:(NSString*)folder delegate:(id<GmailModelProtocol>) delegate{
     NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
@@ -267,15 +267,19 @@
     [request setFetchLimit:1];
     NSError* fetchError = nil;
     NSArray* objects = [context executeFetchRequest:request error:&fetchError];
-
-    if (fetchError==nil && [objects count]>0){
-        EmailModel* linkedModel = [objects lastObject];
-        linkedModel.newPath = folder;
+    if (fetchError){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        return false;
+    }else{
+        if ([objects count]>0){
+            EmailModel* linkedModel = [objects lastObject];
+            linkedModel.newPath = folder;
+        }
+        return [self saveContext:context delegate:delegate];
     }
-    [self saveContext:context];
 }
 
--(NSArray*)folders{
+-(NSArray*)folders:(id<GmailModelProtocol>) delegate{
     NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
@@ -283,17 +287,19 @@
     
     NSError* fetchError = nil;
     NSArray* folders = [context executeFetchRequest:request error:&fetchError];
-    if (fetchError==nil){
-        folders = [folders sortedArrayUsingSelector:@selector(compare:)];
-        return folders;
-    }else{
-        return nil;
-    }
-    
     [context release];
     [request release];
+    if (fetchError){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        return nil;
+    }else{
+        folders = [folders sortedArrayUsingSelector:@selector(compare:)];
+        return folders;
+    }
+
 }
--(int)emailsCountInFolder:(NSString*)folder{
+
+-(int)emailsCountInFolder:(NSString*)folder delegate:(id<GmailModelProtocol>) delegate{
     NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate getManagedObjectContext:false] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
@@ -303,13 +309,13 @@
     
     NSError* fetchError = nil;
     int count = [context countForFetchRequest:request error:&fetchError];
-    if (fetchError==nil){
-        return count;
-    }else{
-        [delegate onError:@"Cant count emails"];
-        return 0;
-    }
     [context release];
+    if (fetchError){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        return -1;
+    }else{
+        return count;
+    }
 }
 
 

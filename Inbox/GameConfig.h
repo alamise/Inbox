@@ -19,6 +19,7 @@
 #define kGameAutorotationCCDirector 1
 #define kGameAutorotationUIViewController 2
 
+#define PTM_RATIO 32
 //
 // Define here the type of autorotation that you want for your game
 //

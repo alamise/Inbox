@@ -15,12 +15,11 @@
 @interface GmailModel : NSObject{
     NSString *email;
     NSString *password;
-    id<GmailModelProtocol> delegate;
 }
--(id)initWithAccount:(NSString*)email password:(NSString*)password delegate:(id<DeskProtocol>) model;
+-(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
 -(EmailModel*)getLastEmailFrom:(NSString*)folder;
--(void)move:(EmailModel*)model to:(NSString*)folder;
+-(BOOL)move:(EmailModel*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;
 -(BOOL)fetchEmailBody:(EmailModel*)model;
 -(NSArray*)folders;

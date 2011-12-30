@@ -7,16 +7,32 @@
 #import "EmailNode.h"
 #import "EmailModel.h"
 #import "cocos2d.h"
+#import "Box2D.h"
+#import "GameConfig.h"
 @implementation EmailNode
 @synthesize emailModel,didMoved,isAppearing,isDisappearing;
 
-- (id)initWithEmailModel:(EmailModel*)model{
+- (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
     self = [super init];
     if (self) {
+        world = w;
         emailModel = [model retain];
         drawMe = true;
-        isAppearing = true;
-        isDisappearing = false;
+
+        // Body
+        bodyDef.type = b2_dynamicBody;
+        bodyDef.userData = self;
+        body = world->CreateBody(&bodyDef);
+        
+        // Fixture
+        b2PolygonShape* dynamicBox = new b2PolygonShape();
+        dynamicBox->SetAsBox(95/(float)PTM_RATIO,48/(float)PTM_RATIO);
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = dynamicBox;	
+        fixtureDef.density = 5.f;
+        fixtureDef.friction = 5.f;
+        fixtureDef.restitution = 1;
+        body->CreateFixture(&fixtureDef);
         self.scale=0;
     }
     return self;    
@@ -58,41 +74,25 @@
     }
 }
 
--(void)hideAndRemove{
-    self.isAppearing = false;
-    self.isDisappearing = true;
+-(void)onEnter{
+    [super onEnter];
+    [self runAction:[CCScaleTo actionWithDuration:0.5 scale:1]];
 }
 
--(void)setNextStep{
-    if (isAppearing){
-        if (self.scale>=1){
-            isAppearing=false;
-        }else{
-            self.scale+=0.08;
-        }
-        
-    }else if (isDisappearing){
-        if (self.scale>0){
-            self.scale-=0.08;
-        }
-    }
-    self.scale=self.scale<0?0:self.scale;
-    self.scale=self.scale>1?1:self.scale;
+-(void)scaleAndHide{
+    world->DestroyBody(body);
+    [self runAction:[CCScaleTo actionWithDuration:0.5 scale:0]];
+    [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 
--(BOOL)shouldBeRemoved{
-    if (isDisappearing && self.scale==0){
-        return true;
-    }else{
-        return false;
-    }
+-(void)fadeAndHide{
+    world->DestroyBody(body);
+    [self runAction:[CCFadeTo actionWithDuration:0.5 opacity:0]];
+    [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
--(BOOL)shouldDisableCollisions{
-    if (isDisappearing){
-        return YES;
-    }else{
-        return NO;
-    }
+
+-(void)remove{
+    [self removeFromParentAndCleanup:YES];    
 }
 
 -(void)dealloc{

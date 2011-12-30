@@ -8,9 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol GmailModelProtocol <NSObject>
-
-    - (void)syncDone;
-
+@required
     - (void)onError:(NSString*)errorMessage;
-
+    -(void)syncDone;
 @end

@@ -6,9 +6,9 @@
 //
 
 #import "CCNode.h"
-#import "VisualEffectProtocol.h"
+#import "Box2D.h"
 @class CCLabelTTF,EmailModel;
-@interface EmailNode : CCNode<VisualEffectProtocol>{
+@interface EmailNode : CCNode{
     EmailModel* emailModel;
     CCLabelTTF *title;
     CCLabelTTF *content;
@@ -16,11 +16,14 @@
     BOOL didMoved;
     BOOL isAppearing;
     BOOL isDisappearing;
+    b2Body* body;
+    b2World* world;
 }
 @property(nonatomic,retain) EmailModel* emailModel;
 @property(nonatomic,assign) BOOL didMoved;
 @property(nonatomic,assign) BOOL isAppearing;
 @property(nonatomic,assign) BOOL isDisappearing;
-- (id)initWithEmailModel:(EmailModel*)model;
--(void)hideAndRemove;
+- (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)world;
+-(void)fadeAndHide;
+-(void)scaleAndHide;
 @end

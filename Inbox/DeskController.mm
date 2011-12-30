@@ -26,6 +26,7 @@
 @synthesize model,folders;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        isReloading = FALSE;
 	}
 	return self;
 }
@@ -39,22 +40,33 @@
 }
 
 -(void)nextStep{
-    if ([model emailsCountInFolder:@"INBOX"]==0){
+    if ([model emailsCountInFolder:@"INBOX" delegate:self]==0){
         // show done view
     }else{
-        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
+        [layer putEmail:[model getLastEmailFrom:@"INBOX" delegate:self]];
     }
 }
 
 -(void)syncDone{
-    [loadingHud hide:true];
-    self.folders = [model folders];
-    [layer setFolders:self.folders];
-    [self nextStep];
+    if (isReloading){
+        isReloading = NO;
+        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
+        NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+        self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
+        [model performSelector:@selector(sync) withObject:nil afterDelay:1];
+        [plistDic release];
+    }else{
+        [loadingHud hide:true];
+        self.folders = [model folders:self];
+        [layer setFolders:self.folders];
+        [self nextStep];
+    }
+    
 }
 
 -(void)openSettings{
     SettingsController* settingsController = [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
+    settingsController.desk = self;
     UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:settingsController];
     navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
     navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
@@ -63,7 +75,7 @@
 
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
-    [model move:m to:folder];
+    [model move:m to:folder delegate:self];
     [self nextStep];
 }
 
@@ -81,7 +93,7 @@
 }
 
 -(void)fetchEmailBody:(EmailModel*)email{
-    if ([model fetchEmailBody:email]){
+    if ([model fetchEmailBody:email delegate:self]){
         EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
@@ -142,8 +154,8 @@
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
-        self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
-        [model sync];        
+        self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
+        [model sync:self];        
     }else{
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
         loginCtr.field=self;
@@ -161,14 +173,8 @@
 }
 
 -(void)reload{
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate getPlistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-
-    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"] delegate:self];
-    
-    [model performSelector:@selector(sync) withObject:nil afterDelay:1];
-    [plistDic release];
-
+    [loadingHud show:YES];
+    [self.model sync:self];
 }
 
 - (void)viewDidLoad {

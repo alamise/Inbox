@@ -11,10 +11,9 @@
 #import "EmailNode.h"
 #import "DeskProtocol.h"
 #import "GmailModel.h"
-#import "VisualEffectProtocol.h"
 #import "GLES-Render.h"
 #import "FolderModel.h"
-#define PTM_RATIO 32
+#import "GameConfig.h"
 #define TOUCHES_DELAY 0.1
 
 enum {
@@ -81,27 +80,14 @@ enum {
     [foldersTable setContentOffset:foldersTable.contentOffset];
 }
 -(void) putEmail:(EmailModel*)model{
-    EmailNode* node = [[EmailNode alloc] initWithEmailModel:model];
-    node.scale=0;
-    [self addChild:node z:1];
+    
 	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(100/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
-	bodyDef.userData = node;
     bodyDef.linearVelocity=b2Vec2(20,0);
     bodyDef.linearDamping=1.4;
-	b2Body *body = world->CreateBody(&bodyDef);
 
-	b2PolygonShape* dynamicBox = new b2PolygonShape();
-    dynamicBox->SetAsBox(95/(float)PTM_RATIO,48/(float)PTM_RATIO);
-    
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = dynamicBox;	
-	fixtureDef.density = 5.f;
-	fixtureDef.friction = 5.f;
-    fixtureDef.restitution = 1;
-	body->CreateFixture(&fixtureDef);
-    
+    EmailNode* node = [[EmailNode alloc] initWithEmailModel:model bodyDef:bodyDef world:world];
+    [self addChild:node z:1];
     [draggableNodes addObject:node];
     [node release];
 }
@@ -181,13 +167,13 @@ enum {
     if (cellIndex!=-1){
         FolderModel* folder = [self.folders objectAtIndex:cellIndex];
         [delegate move:self.draggedNode.emailModel to:folder.path];
-        [self.draggedNode hideAndRemove];
+        [self.draggedNode scaleAndHide];
     }else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
-        [self.draggedNode hideAndRemove];
+        [self.draggedNode scaleAndHide];
     }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"INBOX"];
-        [self.draggedNode hideAndRemove];
+        [self.draggedNode scaleAndHide];
     }else{
         // No effect if the mail is dropped in a zone.
         if (lastTouchTime<[NSDate timeIntervalSinceReferenceDate]+TOUCHES_DELAY){
@@ -393,19 +379,6 @@ enum {
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
 		if (b->GetUserData() != NULL) {
 			CCSprite *myActor = (CCSprite*)b->GetUserData();
-            // TODO How can I hceck if a class implement a protocol
-            if ([myActor respondsToSelector:@selector(isAppearing)]){
-                id<VisualEffectProtocol> node = (id<VisualEffectProtocol>) myActor;
-                if ([node shouldDisableCollisions]){
-                    for (b2Fixture* f = b->GetFixtureList();f; f = f->GetNext()){
-                        b->DestroyFixture(f);
-                    }
-                }
-                [node setNextStep];
-                if ([node shouldBeRemoved]){
-                    [self removeChildAndBody:myActor];
-                }
-            }
             myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 		}
