@@ -14,7 +14,8 @@
     BOOL isLoading;
     EAGLView* glView;
     MBProgressHUD* loadingHud;
-    NSArray* folders;
+    BOOL isWaiting;
+    BOOL isSyncing;
 }
 @property(readonly) GmailModel* model;
 -(void)resetModel;

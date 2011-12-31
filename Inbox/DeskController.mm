@@ -19,11 +19,10 @@
 #import "SettingsController.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
-@property(nonatomic,retain) NSArray* folders;
 @end
 
 @implementation DeskController
-@synthesize model,folders;
+@synthesize model;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
@@ -43,23 +42,22 @@
 
 -(void)nextStep{
     if ([model emailsCountInFolder:@"INBOX"]==0){
-        // show done view
+        if (isSyncing){
+            isWaiting = TRUE;
+            [loadingHud show:YES];
+        }else{
+            isWaiting = FALSE;
+            // show done view;
+        }
     }else{
+        [loadingHud hide:YES];
         [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
     }
 }
 
--(void)onError{
-    NSLog(@"merde");
-}
 
--(void)syncDone{
-    [layer cleanDesk];
-    [loadingHud hide:true];
-    self.folders = [model folders];
-    [layer setFolders:self.folders];
-    [self nextStep];
-}
+
+
 
 -(void)openSettings{
     [self unlinkToModel];
@@ -71,19 +69,10 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
--(void)linkToModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
-}
-
--(void)unlinkToModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
-}
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
     [model move:m to:folder];
-    [self nextStep];
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 -(void)emailTouched:(EmailModel*)email{
@@ -112,6 +101,54 @@
 
 }
 
+#pragma mark model handlers
+
+-(void)unlinkToModel{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:INBOX_STATE_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_STARTED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FOLDERS_READY object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
+}
+
+-(void)linkToModel{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newEmails) name:INBOX_STATE_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncStarted) name:SYNC_STARTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foldersReady) name:FOLDERS_READY object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
+}
+
+-(void)syncStarted{
+    isSyncing = YES;
+}
+
+-(void)newEmails{
+    if (isWaiting){
+        isWaiting = NO;
+        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+    }
+}
+
+-(void)foldersReady{
+    [layer setFolders:[model folders]];
+}
+
+-(void)syncDone{
+    isSyncing = NO;
+    [loadingHud hide:true];
+}
+
+
+-(void)onError{
+    ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
+    errorController.desk = self;
+    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
+    [errorController release];
+    navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 #pragma mark - rotation
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -127,16 +164,6 @@
 }
 
 #pragma mark - view lifecycle
-
-
--(void)onError:(NSString*)errorMessage{
-    ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-    errorController.desk = self;
-    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
-    [errorController release];
-    navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
-    [self presentModalViewController:navigationController animated:YES];
-}
 
 #pragma mark - view's lifecyle
 
@@ -160,9 +187,9 @@
     [super viewDidAppear:animated];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    [self linkToModel];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
-        self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
-        [model sync];        
+        [self resetModel];
     }else{
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
         loginCtr.field=self;
@@ -181,26 +208,38 @@
 
 -(void)resetModel{
     [loadingHud show:YES];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateModel) name:SYNC_DONE object:nil];
+
     [layer cleanDesk];
-    self.folders = nil;
-    [layer setFolders:self.folders];
-    [self.model sync];
+
+    [layer setFolders:nil];
+    
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+
+    if (self.model && [self.model.email isEqualToString:[plistDic valueForKey:@"email"]]){
+        
+        [self.model sync];
+        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+    }else {
+        [self unlinkToModel];
+        if (self.model){
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
+            [self.model sync];
+        }else{
+            [self setNewModel];
+        }
+    }
 }
 
--(void)updateModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
-
+-(void)setNewModel{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [self linkToModel];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
-    [plistDic release];
-    
-    [model sync];
+    [self.model sync];
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -213,7 +252,6 @@
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
-    [loadingHud show:YES];
 
 }
 

@@ -24,7 +24,7 @@
 @end
 
 @implementation GmailModel
-
+@synthesize email,password;
 -(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
     if (self) {
@@ -110,7 +110,13 @@
     }
     [disabledFolders release];
     [request release];
-    return true;
+    
+    if ([self saveContext:context]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:FOLDERS_READY object:nil];
+        return true;
+    }else{
+        return false;
+    }
 }
 
 /*
@@ -185,15 +191,9 @@
 -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
     CTCoreFolder *inbox = nil;    
     NSSet* messages = nil;
-    @try {
-        inbox = [account folderWithPath:@"INBOX"]; 
-        messages = [inbox messageObjectsFromIndex:1 toIndex:20];
-    }
-    @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
-        return false;
-    }
-    
+    BOOL messagesAvailable=true;
+    int page = 0;
+    int pageSize = 5;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;    
@@ -201,50 +201,70 @@
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [sortDescriptor release];
     
-    for (CTCoreMessage* message in messages){
-        EmailModel* emailModel=nil;
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@", message.uid];
-        [request setPredicate:predicate];
-        NSError* fetchError = nil;
-        NSArray* objects = [context executeFetchRequest:request error:&fetchError];
-        if (fetchError){
-            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
-            [request release];
-            return false;   
+    while (messagesAvailable){
+        @try {
+            inbox = [account folderWithPath:@"INBOX"]; 
+            messages = [inbox messageObjectsFromIndex:page*pageSize+1 toIndex:page*pageSize];
         }
-        if ([objects count]>0){
-            emailModel = [objects objectAtIndex:0];
-        }else{
-            @try {
-                emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
-            }
-            @catch (NSException *exception) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        @catch (NSException *exception) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            return false;
+        }
+        
+        for (CTCoreMessage* message in messages){
+            EmailModel* emailModel=nil;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@", message.uid];
+            [request setPredicate:predicate];
+            NSError* fetchError = nil;
+            NSArray* objects = [context executeFetchRequest:request error:&fetchError];
+            if (fetchError){
+                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
                 [request release];
                 return false;   
             }
+            if ([objects count]>0){
+                emailModel = [objects objectAtIndex:0];
+            }else{
+                @try {
+                    emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
+                }
+                @catch (NSException *exception) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                    [request release];
+                    return false;   
+                }
+            }
+            NSEnumerator* enumerator = [message.from objectEnumerator];
+            CTCoreAddress* from;
+            
+            // The "sender" field is not valid
+            if ([message.from count]>0){
+                from = [enumerator nextObject];
+            }else{
+                from = message.sender;
+            }
+            
+            emailModel.senderName = from.name;
+            emailModel.senderEmail = from.email;
+            emailModel.subject=message.subject;
+            emailModel.sentDate = message.sentDateGMT;
+            emailModel.uid = message.uid;
+            emailModel.path = inbox.path;
         }
-        NSEnumerator* enumerator = [message.from objectEnumerator];
-        CTCoreAddress* from;
-        
-        // The "sender" field is not valid
-        if ([message.from count]>0){
-            from = [enumerator nextObject];
+        if ([messages count]==0){
+            messagesAvailable = FALSE;
         }else{
-            from = message.sender;
+            if (![self saveContext:context]){
+                return false;
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:INBOX_STATE_CHANGED object:nil];
         }
-        
-        emailModel.senderName = from.name;
-        emailModel.senderEmail = from.email;
-        emailModel.subject=message.subject;
-        emailModel.sentDate = message.sentDateGMT;
-        emailModel.uid = message.uid;
-        emailModel.path = inbox.path;
     }
     [request release];
     return true;
 }
 -(void)sync {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STARTED object:nil];
     dispatch_async( dispatch_get_global_queue(0, 0), ^{
         NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:false] retain];
         CTCoreAccount* account = [[CTCoreAccount alloc] init];
@@ -258,7 +278,7 @@
             return;
         }
             
-        if (![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]|| ![self updateLocalFolders:account context:context]){
+        if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
             [account release];
             [context release];
             return;
@@ -346,13 +366,10 @@
 }
 
 -(BOOL)move:(EmailModel*)model to:(NSString*)folder{
-    if (model.isFault){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:@"model is fault" code:0 userInfo:nil]];
-        return false;
-    }else{
+    [model awakeFromFetch];
+   
         model.newPath = folder;        
         return true;
-    }
 }
 
 -(NSArray*)folders{

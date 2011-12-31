@@ -168,12 +168,16 @@ enum {
     if (cellIndex!=-1){
         FolderModel* folder = [self.folders objectAtIndex:cellIndex];
         [delegate move:self.draggedNode.emailModel to:folder.path];
+        [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
     }else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
+        [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
+        
     }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailModel to:@"INBOX"];
+        [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
     }else{
         // No effect if the mail is dropped in a zone.

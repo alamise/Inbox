@@ -8,10 +8,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "CTCoreAccount.h"
-
+#define SYNC_STARTED @"sync started"
 #define SYNC_DONE @"sync done"
 #define ERROR @"error"
-
+#define INBOX_STATE_CHANGED @"new messages"
+#define FOLDERS_READY @"folders ready"
 @protocol DeskProtocol;
 @class EmailModel;
 
@@ -19,6 +20,8 @@
     NSString *email;
     NSString *password;
 }
+@property(readonly) NSString *email;
+@property(readonly) NSString *password;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
 -(EmailModel*)getLastEmailFrom:(NSString*)folder;

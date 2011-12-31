@@ -97,20 +97,13 @@
     }else{
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        BOOL reset = false;
-        if (![[plistDic valueForKey:@"email"] isEqualToString:emailField.text]){
-            reset = true;
-        }
+
         [plistDic setValue:emailField.text forKey:@"email"];
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
         [self unlinkToModel];
         [self.desk linkToModel];
-        if (reset){
-            [self.desk resetModel];
-        }else{
-            [self.desk.model sync];
-        }
+        [self.desk resetModel];
         [plistDic release];
         [self dismissModalViewControllerAnimated:YES];
     }
