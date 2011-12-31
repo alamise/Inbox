@@ -24,5 +24,6 @@
 @property(nonatomic,retain) DeskController* desk;
 - (IBAction)sync:(id)sender;
 - (IBAction)editAccount:(id)sender;
-
+-(void)linkToModel;
+-(void)unlinkToModel;
 @end

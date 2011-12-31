@@ -73,7 +73,7 @@
 
 -(IBAction)goToNextStep{
     LoginController* loginView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
-    loginView.field=self.field;
+    loginView.desk=self.field;
     [self.navigationController pushViewController:loginView animated:YES];
     [loginView release];
 }

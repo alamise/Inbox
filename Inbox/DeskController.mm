@@ -54,6 +54,7 @@
 }
 
 -(void)syncDone{
+    [layer cleanDesk];
     [loadingHud hide:true];
     self.folders = [model folders];
     [layer setFolders:self.folders];
@@ -61,6 +62,7 @@
 }
 
 -(void)openSettings{
+    [self unlinkToModel];
     SettingsController* settingsController = [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
     settingsController.desk = self;
     UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:settingsController];
@@ -69,6 +71,15 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
+-(void)linkToModel{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
+}
+
+-(void)unlinkToModel{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
+}
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
     [model move:m to:folder];
@@ -120,7 +131,7 @@
 
 -(void)onError:(NSString*)errorMessage{
     ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-    errorController.field = self;
+    errorController.desk = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
     [errorController release];
     navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
@@ -168,7 +179,7 @@
     [director pause];
 }
 
--(void)reload{
+-(void)resetModel{
     [loadingHud show:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateModel) name:SYNC_DONE object:nil];

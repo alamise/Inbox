@@ -17,11 +17,13 @@
     IBOutlet UIView *noConnectionView;
     IBOutlet UIView *errorView;
     IBOutlet UIView *loadingView;
-    DeskController* field;
+    DeskController* desk;
+    NSError* error;
 }
-@property(nonatomic,retain) DeskController* field;
-
+@property(nonatomic,retain) DeskController* desk;
+@property(nonatomic,retain) NSError* error;
     - (void) checkNetworkStatus:(NSNotification *)notice;
     -(IBAction)dismiss;
     -(IBAction)editAccount;
+    
 @end

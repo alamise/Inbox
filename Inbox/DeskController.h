@@ -17,5 +17,7 @@
     NSArray* folders;
 }
 @property(readonly) GmailModel* model;
--(void)reload;
+-(void)resetModel;
+-(void)linkToModel;
+-(void)unlinkToModel;
 @end

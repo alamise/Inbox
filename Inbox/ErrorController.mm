@@ -9,13 +9,14 @@
 #import "Reachability.h"
 #import "LoginController.h"
 #import "DeskController.h"
+#import "GmailModel.h"
 @interface ErrorController()
 -(void)updateView;
 
 @end
 
 @implementation ErrorController
-@synthesize field;
+@synthesize desk,error;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -26,7 +27,7 @@
 }
 
 -(void)dealloc{
-    self.field = nil;
+    self.desk = nil;
     [connectionIsBackView release];
     [noConnectionView release];
     [errorView release];
@@ -65,13 +66,14 @@
 }
 
 -(IBAction)dismiss{
-    [self.field reload];
+    [self.desk linkToModel];
+    [self.desk.model sync];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)editAccount{
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
-    loginController.field=self.field;
+    loginController.desk=self.desk;
     [self.navigationController pushViewController:loginController animated:YES];
     [loginController release];
 }

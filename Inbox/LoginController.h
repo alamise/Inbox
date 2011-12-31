@@ -11,9 +11,10 @@
     IBOutlet UITextField *emailField;
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *submitButton;
-    DeskController* field;
+    DeskController* desk;
 }
-@property(nonatomic,retain) DeskController* field;
+@property(nonatomic,retain) DeskController* desk;
 - (IBAction)onLogin:(id)sender;
-
+-(void)linkToModel;
+-(void)unlinkToModel;
 @end

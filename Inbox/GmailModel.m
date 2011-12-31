@@ -187,7 +187,7 @@
     NSSet* messages = nil;
     @try {
         inbox = [account folderWithPath:@"INBOX"]; 
-        messages = [inbox messageObjectsFromIndex:1 toIndex:0];
+        messages = [inbox messageObjectsFromIndex:1 toIndex:20];
     }
     @catch (NSException *exception) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];

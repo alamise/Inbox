@@ -78,7 +78,7 @@ enum {
     }
     folders = [f retain];
     [foldersTable reloadData];
-    [foldersTable setContentOffset:foldersTable.contentOffset];
+    [foldersTable scrollToTop];
 }
 -(void) putEmail:(EmailModel*)model{
 	b2BodyDef bodyDef;
@@ -290,6 +290,7 @@ enum {
     foldersTable.position=CGPointMake(windowSize.width-230,0);
     
     [foldersTable reloadData];
+    [foldersTable scrollToTop];
     
 }
 -(CGSize)cellSizeForTable:(SWTableView *)table{
@@ -303,7 +304,20 @@ enum {
         FolderModel* folder = [self.folders objectAtIndex:idx];
         node.folderPath=folder.path;
     }else{
-        node.folderPath=@"Archive";
+        switch (idx) {
+            case 0:
+                node.folderPath=@"Archive";
+                break;
+            case 1:
+                node.folderPath=@"Starred";
+                break;
+            case 2:
+                node.folderPath=@"Important";
+                break;
+            default:
+                break;
+        }
+
     }
     return node;
 }
@@ -313,7 +327,7 @@ enum {
         int count = [self.folders count];
         return count;
     }else{
-        return 1;
+        return 3;
     }
 }
 
@@ -360,9 +374,10 @@ enum {
 }
 
 -(void)cleanDesk{
-   for (EmailNode* node in draggableNodes){
-       [node scaleAndHide];
-   }
+    for (EmailNode* node in draggableNodes){
+        [node scaleAndHide];
+    }
+    [draggableNodes removeAllObjects];
 }
 
 -(void)didRotate{

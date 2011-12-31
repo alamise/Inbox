@@ -16,6 +16,7 @@
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
     self = [super init];
     if (self) {
+        [self retain];
         world = w;
         self.emailModel = model;
         drawMe = true;
@@ -76,10 +77,13 @@
 
 
 -(void)remove{
+    [self release];
     [self removeFromParentAndCleanup:YES];    
 }
 
 -(void)dealloc{
+    body = nil;
+    world = nil;
     self.emailModel = nil;
     [title release];
     [content release];
