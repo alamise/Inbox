@@ -1,11 +1,26 @@
-//
-//  RootViewController.m
-//  gmailbattlefield
-//
-//  Created by Simon Watiau on 11/11/11.
-//
-
-
+/*
+ *
+ * Copyright (c) 2012 Simon Watiau.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ */
 #import "DeskController.h"
 #import "GameConfig.h"
 #import "AppDelegate.h"
@@ -26,8 +41,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
 	}
 	return self;
 }
@@ -47,16 +60,15 @@
             [loadingHud show:YES];
         }else{
             isWaiting = FALSE;
+            [loadingHud show:NO];
             // show done view;
         }
     }else{
+        isWaiting = NO;
         [loadingHud hide:YES];
         [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
     }
 }
-
-
-
 
 
 -(void)openSettings{
@@ -68,7 +80,6 @@
     navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:navCtr animated:YES];
 }
-
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
     [model move:m to:folder];
@@ -85,7 +96,6 @@
         navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:navCtr animated:YES];
     }
-    
 }
 
 -(void)fetchEmailBody:(EmailModel*)email{
@@ -125,7 +135,6 @@
 
 -(void)newEmails{
     if (isWaiting){
-        isWaiting = NO;
         [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
     }
 }
@@ -139,8 +148,41 @@
     [loadingHud hide:true];
 }
 
+-(void)setNewModel{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [self linkToModel];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
+    [self.model sync];
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+}
+
+-(void)resetModel{
+    [loadingHud show:YES];
+    [layer cleanDesk];
+    [layer setFolders:nil];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    if (self.model && [self.model.email isEqualToString:[plistDic valueForKey:@"email"]]){
+        
+        [self.model sync];
+        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+    }else {
+        [self unlinkToModel];
+        if (self.model){
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
+            [self.model sync];
+        }else{
+            [self setNewModel];
+        }
+    }
+}
 
 -(void)onError{
+    isSyncing = false;
+    isWaiting = false;
     ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
     errorController.desk = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
@@ -162,8 +204,6 @@
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     //[layer willRotate];
 }
-
-#pragma mark - view lifecycle
 
 #pragma mark - view's lifecyle
 
@@ -204,41 +244,6 @@
 	CCDirector *director = [CCDirector sharedDirector];
     [director popScene];
     [director pause];
-}
-
--(void)resetModel{
-    [loadingHud show:YES];
-
-    [layer cleanDesk];
-
-    [layer setFolders:nil];
-    
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-
-    if (self.model && [self.model.email isEqualToString:[plistDic valueForKey:@"email"]]){
-        
-        [self.model sync];
-        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
-    }else {
-        [self unlinkToModel];
-        if (self.model){
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
-            [self.model sync];
-        }else{
-            [self setNewModel];
-        }
-    }
-}
-
--(void)setNewModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [self linkToModel];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
-    [self.model sync];
-    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 - (void)viewDidLoad {
