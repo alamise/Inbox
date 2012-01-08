@@ -69,9 +69,6 @@
     [super viewDidLoad];
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
-    inboxCountLabel.text = NSLocalizedString(@"settings.inboxcountlabel",@"");
-    accountLabel.text = NSLocalizedString(@"settings.accountLabel",@"");
-    lastSyncLabel.text = NSLocalizedString(@"settings.lastsynclabel", @"");
     [self reloadFromModel];
 }
 

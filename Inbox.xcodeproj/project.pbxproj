@@ -160,12 +160,10 @@
 		F41E664514A9CFB800BA4712 /* EmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658614A9CFB700BA4712 /* EmailController.m */; };
 		F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658814A9CFB700BA4712 /* EmailModel.m */; };
 		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
-		F41E664814A9CFB800BA4712 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658B14A9CFB700BA4712 /* EmailView.xib */; };
 		F41E664914A9CFB800BA4712 /* ErrorController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.mm */; };
 		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
 		F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659314A9CFB700BA4712 /* GmailModel.m */; };
 		F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E659614A9CFB700BA4712 /* LoginController.mm */; };
-		F41E664E14A9CFB800BA4712 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E659714A9CFB700BA4712 /* LoginView.xib */; };
 		F41E664F14A9CFB800BA4712 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659814A9CFB700BA4712 /* main.m */; };
 		F41E665314A9CFB800BA4712 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E65A014A9CFB700BA4712 /* Reachability.m */; };
 		F41E665414A9CFB800BA4712 /* archiveZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65A214A9CFB700BA4712 /* archiveZone.png */; };
@@ -180,7 +178,6 @@
 		F41E665D14A9CFB800BA4712 /* inboxZone.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AB14A9CFB700BA4712 /* inboxZone.png */; };
 		F41E665F14A9CFB800BA4712 /* login.svg in Resources */ = {isa = PBXBuildFile; fileRef = F41E65AD14A9CFB700BA4712 /* login.svg */; };
 		F41E666014A9CFB800BA4712 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E65AF14A9CFB700BA4712 /* TutorialController.m */; };
-		F41E666114A9CFB800BA4712 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E65B014A9CFB700BA4712 /* TutorialView.xib */; };
 		F41E666B14A9D0E500BA4712 /* woodBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F41E666A14A9D0E500BA4712 /* woodBackground.jpg */; };
 		F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */; };
 		F41E667214A9D2B200BA4712 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E667114A9D2B200BA4712 /* MBProgressHUD.m */; };
@@ -191,8 +188,11 @@
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
 		F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4381A0F14AC909D0017C9BC /* SettingsController.m */; };
-		F4381A1214AC909D0017C9BC /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4381A1014AC909D0017C9BC /* SettingsView.xib */; };
 		F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */; };
+		F444C0E514BA01F400D08560 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E714BA01F400D08560 /* TutorialView.xib */; };
+		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
+		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
+		F444C0F114BA026600D08560 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F314BA026600D08560 /* SettingsView.xib */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -545,7 +545,6 @@
 		F41E658814A9CFB700BA4712 /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailModel.m; sourceTree = "<group>"; };
 		F41E658914A9CFB700BA4712 /* EmailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailNode.h; sourceTree = "<group>"; };
 		F41E658A14A9CFB700BA4712 /* EmailNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailNode.mm; sourceTree = "<group>"; };
-		F41E658B14A9CFB700BA4712 /* EmailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailView.xib; sourceTree = "<group>"; };
 		F41E658C14A9CFB700BA4712 /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
 		F41E658D14A9CFB700BA4712 /* ErrorController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorController.mm; sourceTree = "<group>"; };
 		F41E658E14A9CFB700BA4712 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
@@ -554,7 +553,6 @@
 		F41E659314A9CFB700BA4712 /* GmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailModel.m; sourceTree = "<group>"; };
 		F41E659514A9CFB700BA4712 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F41E659614A9CFB700BA4712 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
-		F41E659714A9CFB700BA4712 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		F41E659814A9CFB700BA4712 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F41E659E14A9CFB700BA4712 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		F41E659F14A9CFB700BA4712 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Inbox/Reachability.h; sourceTree = "<group>"; };
@@ -573,7 +571,6 @@
 		F41E65AD14A9CFB700BA4712 /* login.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = login.svg; sourceTree = "<group>"; };
 		F41E65AE14A9CFB700BA4712 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
 		F41E65AF14A9CFB700BA4712 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
-		F41E65B014A9CFB700BA4712 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
 		F41E666A14A9D0E500BA4712 /* woodBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woodBackground.jpg; sourceTree = "<group>"; };
 		F41E666E14A9D13100BA4712 /* coreDataSchema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreDataSchema.xcdatamodel; sourceTree = "<group>"; };
 		F41E667014A9D2B200BA4712 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Inbox/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
@@ -588,8 +585,15 @@
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
 		F4381A0E14AC909D0017C9BC /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		F4381A0F14AC909D0017C9BC /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
-		F4381A1014AC909D0017C9BC /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formSheetWoodBackground.png; sourceTree = "<group>"; };
+		F444C0E614BA01F400D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TutorialView.xib; sourceTree = "<group>"; };
+		F444C0E814BA020B00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/TutorialView.xib; sourceTree = "<group>"; };
+		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
+		F444C0EC14BA025400D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoginView.xib; sourceTree = "<group>"; };
+		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
+		F444C0F014BA026000D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/EmailView.xib; sourceTree = "<group>"; };
+		F444C0F214BA026600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView.xib; sourceTree = "<group>"; };
+		F444C0F414BA026D00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SettingsView.xib; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1175,7 +1179,7 @@
 			children = (
 				F41E658514A9CFB700BA4712 /* EmailController.h */,
 				F41E658614A9CFB700BA4712 /* EmailController.m */,
-				F41E658B14A9CFB700BA4712 /* EmailView.xib */,
+				F444C0EF14BA025A00D08560 /* EmailView.xib */,
 			);
 			name = email;
 			sourceTree = "<group>";
@@ -1185,7 +1189,7 @@
 			children = (
 				F41E659514A9CFB700BA4712 /* LoginController.h */,
 				F41E659614A9CFB700BA4712 /* LoginController.mm */,
-				F41E659714A9CFB700BA4712 /* LoginView.xib */,
+				F444C0EB14BA024600D08560 /* LoginView.xib */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -1205,7 +1209,7 @@
 			children = (
 				F41E65AE14A9CFB700BA4712 /* TutorialController.h */,
 				F41E65AF14A9CFB700BA4712 /* TutorialController.m */,
-				F41E65B014A9CFB700BA4712 /* TutorialView.xib */,
+				F444C0E714BA01F400D08560 /* TutorialView.xib */,
 			);
 			name = tutorial;
 			sourceTree = "<group>";
@@ -1244,7 +1248,7 @@
 			children = (
 				F4381A0E14AC909D0017C9BC /* SettingsController.h */,
 				F4381A0F14AC909D0017C9BC /* SettingsController.m */,
-				F4381A1014AC909D0017C9BC /* SettingsView.xib */,
+				F444C0F314BA026600D08560 /* SettingsView.xib */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -1340,6 +1344,7 @@
 				en,
 				English,
 				_english,
+				fr,
 			);
 			mainGroup = F4FB8467146D2FEE00B08513;
 			productRefGroup = F4FB8473146D2FEE00B08513 /* Products */;
@@ -1377,9 +1382,9 @@
 				F41E663214A9CFB800BA4712 /* LICENSE_CocosDenshion.txt in Resources */,
 				F41E663314A9CFB800BA4712 /* LICENSE_FontLabel.txt in Resources */,
 				F41E663414A9CFB800BA4712 /* LICENSE_TouchJSON.txt in Resources */,
-				F41E664814A9CFB800BA4712 /* EmailView.xib in Resources */,
+				F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */,
 				F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */,
-				F41E664E14A9CFB800BA4712 /* LoginView.xib in Resources */,
+				F444C0E914BA024600D08560 /* LoginView.xib in Resources */,
 				F41E665414A9CFB800BA4712 /* archiveZone.png in Resources */,
 				F41E665514A9CFB800BA4712 /* buttonImage.png in Resources */,
 				F41E665614A9CFB800BA4712 /* Default-Landscape~ipad.png in Resources */,
@@ -1391,13 +1396,13 @@
 				F41E665C14A9CFB800BA4712 /* iconIpad.png in Resources */,
 				F41E665D14A9CFB800BA4712 /* inboxZone.png in Resources */,
 				F41E665F14A9CFB800BA4712 /* login.svg in Resources */,
-				F41E666114A9CFB800BA4712 /* TutorialView.xib in Resources */,
+				F444C0E514BA01F400D08560 /* TutorialView.xib in Resources */,
 				F41E666B14A9D0E500BA4712 /* woodBackground.jpg in Resources */,
 				F41E669114A9E2D400BA4712 /* circle.png in Resources */,
 				F426414014AB718500040EC9 /* sticker.png in Resources */,
 				F43819F414AC79530017C9BC /* settingsDown.png in Resources */,
 				F43819F514AC79530017C9BC /* settingsUp.png in Resources */,
-				F4381A1214AC909D0017C9BC /* SettingsView.xib in Resources */,
+				F444C0F114BA026600D08560 /* SettingsView.xib in Resources */,
 				F40BDEA714B9F04F00F2DC5F /* tutorialElements.png in Resources */,
 				F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */,
 				F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */,
@@ -1579,6 +1584,45 @@
 			targetProxy = F4DBB21D149BF8EB00F35817 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F444C0E714BA01F400D08560 /* TutorialView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F444C0E614BA01F400D08560 /* en */,
+				F444C0E814BA020B00D08560 /* fr */,
+			);
+			name = TutorialView.xib;
+			sourceTree = "<group>";
+		};
+		F444C0EB14BA024600D08560 /* LoginView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F444C0EA14BA024600D08560 /* en */,
+				F444C0EC14BA025400D08560 /* fr */,
+			);
+			name = LoginView.xib;
+			sourceTree = "<group>";
+		};
+		F444C0EF14BA025A00D08560 /* EmailView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F444C0EE14BA025A00D08560 /* en */,
+				F444C0F014BA026000D08560 /* fr */,
+			);
+			name = EmailView.xib;
+			sourceTree = "<group>";
+		};
+		F444C0F314BA026600D08560 /* SettingsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F444C0F214BA026600D08560 /* en */,
+				F444C0F414BA026D00D08560 /* fr */,
+			);
+			name = SettingsView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F4FB865A146D2FF200B08513 /* Debug */ = {
