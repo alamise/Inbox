@@ -28,6 +28,13 @@
 #import "MBProgressHUD.h"
 #import "GmailModel.h"
 #import "ErrorController.h"
+#import "AppDelegate.h"
+
+@interface SettingsController()
+-(NSString*)lastSyncValue:(NSDate*)date;
+-(void)reloadFromModel;
+@end
+
 @implementation SettingsController
 @synthesize desk;
 
@@ -62,7 +69,12 @@
     [super viewDidLoad];
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
+    inboxCountLabel.text = NSLocalizedString(@"settings.inboxcountlabel",@"");
+    accountLabel.text = NSLocalizedString(@"settings.accountLabel",@"");
+    lastSyncLabel.text = NSLocalizedString(@"settings.lastsynclabel", @"");
+    [self reloadFromModel];
 }
+
 
 - (void)viewDidUnload{
     [inboxCountValue release];
@@ -120,9 +132,33 @@
         resync = false;
         [self.desk.model sync];
     }else{
-        [hud hide:YES];        
+        [hud hide:YES];
+        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+        NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+        [plistDic setValue:[NSDate date] forKey:@"lastsync"];
+        [plistDic writeToFile:plistPath atomically:YES];
+        [self reloadFromModel];
     }
 }
+
+-(NSString*)lastSyncValue:(NSDate*)date{
+    if (date==nil){
+        return NSLocalizedString(@"settings.nolastsync", @"");
+    }
+    return [NSDateFormatter localizedStringFromDate: date dateStyle: NSDateFormatterShortStyle timeStyle: NSDateFormatterShortStyle];
+}
+
+-(void)reloadFromModel{
+    inboxCountValue.text = [NSString stringWithFormat:@"%d",[self.desk.model emailsCountInFolder:@"INBOX"]];
+    accountValue.text = self.desk.model.email;
+    
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSDictionary* dic = [NSDictionary dictionaryWithContentsOfFile:[delegate plistPath]];
+    NSDate* syncDate = [dic objectForKey:@"syncDate"];
+    
+    lastSyncValue.text = [self lastSyncValue:syncDate];
+}
+
 
 - (void)onError:(NSError*)error{
     [hud hide:YES];

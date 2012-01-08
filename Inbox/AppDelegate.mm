@@ -32,7 +32,7 @@
 #import "GmailModel.h"
 #import "LoginController.h"
 #import "TutorialController.h"
-
+#import "CrashController.h"
 
 @interface AppDelegate()
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
@@ -73,7 +73,22 @@
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
 	[window addSubview: navigationController.view];
+    
+    crashController = [[CrashController sharedInstance] retain];
+    crashController.delegate = self;
+    
+    [crashController sendCrashReportsToEmail:@"sim.w80+inbox@gmail.com" withViewController:navigationController];
 	[window makeKeyAndVisible];
+}
+
+- (void)onCrash{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Crash"
+                                                    message:@"The App has crashed and will attempt to send a crash report"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 -(NSString*)plistPath{
@@ -200,7 +215,7 @@
     [managedObjectContext release];
     [managedObjectModel release];
     [persistentStoreCoordinator release];
-
+    [crashController release];
 	[super dealloc];
 }
 

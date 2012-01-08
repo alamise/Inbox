@@ -210,7 +210,7 @@
     NSSet* messages = nil;
     BOOL messagesAvailable=true;
     int page = 0;
-    int pageSize = 5;
+    int pageSize = 20;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;    
@@ -221,7 +221,8 @@
     while (messagesAvailable){
         @try {
             inbox = [account folderWithPath:@"INBOX"]; 
-            messages = [inbox messageObjectsFromIndex:page*pageSize+1 toIndex:page*pageSize];
+            messages = [inbox messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
+            page++;
         }
         @catch (NSException *exception) {
             [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
@@ -291,11 +292,11 @@
 }
 
 -(void)sync {
-    if(![syncLock tryLock]){
-        return;
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STARTED object:nil];
     dispatch_async( dispatch_get_global_queue(0, 0), ^{
+        if(![syncLock tryLock]){
+            return;
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STARTED object:nil];
         NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:false] retain];
         CTCoreAccount* account = [[CTCoreAccount alloc] init];
         @try {
@@ -305,12 +306,14 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             [account release];
             [context release];
+            [syncLock unlock];
             return;
         }
             
         if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
             [account release];
             [context release];
+            [syncLock unlock];
             return;
         }
         if ([self saveContext:context]){
@@ -396,9 +399,10 @@
 }
 
 -(BOOL)move:(EmailModel*)model to:(NSString*)folder{
-    [model awakeFromFetch];
    
-        model.newPath = folder;        
+    model.newPath = folder;        
+    NSError* error;
+    //[[model managedObjectContext] save:&error];
         return true;
 }
 
@@ -426,7 +430,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path like %@ OR newPath like %@", folder,folder];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path = %@ AND newPath = nil) OR (newPath = %@)", folder,folder];          
     [request setPredicate:predicate];
     
     NSError* fetchError = nil;

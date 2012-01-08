@@ -146,6 +146,10 @@
 -(void)syncDone{
     isSyncing = NO;
     [loadingHud hide:true];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    [plistDic setValue:[NSDate date] forKey:@"lastsync"];
+    [plistDic writeToFile:plistPath atomically:YES];
 }
 
 -(void)setNewModel{
@@ -173,6 +177,7 @@
         [self unlinkToModel];
         if (self.model){
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:ERROR object:nil];
             [self.model sync];
         }else{
             [self setNewModel];

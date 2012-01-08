@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDE9E14B9D19800F2DC5F /* CrashController.m */; };
+		F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDEA014B9D19800F2DC5F /* CrashLogger.m */; };
+		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F41E65B314A9CFB800BA4712 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E644114A9CFB700BA4712 /* AppDelegate.mm */; };
 		F41E65B414A9CFB800BA4712 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F41E644614A9CFB700BA4712 /* b2BroadPhase.cpp */; };
 		F41E65B514A9CFB800BA4712 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F41E644814A9CFB700BA4712 /* b2CollideCircle.cpp */; };
@@ -223,6 +226,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F40BDE9D14B9D19800F2DC5F /* CrashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashController.h; path = CrashKit/Classes/CrashController.h; sourceTree = "<group>"; };
+		F40BDE9E14B9D19800F2DC5F /* CrashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashController.m; path = CrashKit/Classes/CrashController.m; sourceTree = "<group>"; };
+		F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLogger.h; path = CrashKit/Classes/CrashLogger.h; sourceTree = "<group>"; };
+		F40BDEA014B9D19800F2DC5F /* CrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashLogger.m; path = CrashKit/Classes/CrashLogger.m; sourceTree = "<group>"; };
+		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F41E644014A9CFB700BA4712 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F41E644114A9CFB700BA4712 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		F41E644414A9CFB700BA4712 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
@@ -600,6 +608,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */,
 				F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */,
 				F4D900D3149CD99B00A0DCCC /* libcrypto.a in Frameworks */,
 				F4D900D4149CD99B00A0DCCC /* libetpan_ios.a in Frameworks */,
@@ -622,6 +631,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40BDEA314B9D19D00F2DC5F /* crashKit */ = {
+			isa = PBXGroup;
+			children = (
+				F40BDE9D14B9D19800F2DC5F /* CrashController.h */,
+				F40BDE9E14B9D19800F2DC5F /* CrashController.m */,
+				F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */,
+				F40BDEA014B9D19800F2DC5F /* CrashLogger.m */,
+			);
+			name = crashKit;
+			sourceTree = "<group>";
+		};
 		F4128B951493DB83005A8718 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1249,6 +1269,7 @@
 			isa = PBXGroup;
 			children = (
 				F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */,
+				F40BDEA314B9D19D00F2DC5F /* crashKit */,
 				F41E659F14A9CFB700BA4712 /* Reachability.h */,
 				F41E65A014A9CFB700BA4712 /* Reachability.m */,
 				F41E644214A9CFB700BA4712 /* cocos2d */,
@@ -1257,9 +1278,10 @@
 				F4D900D0149CD99B00A0DCCC /* libetpan_ios.a */,
 				F4D900D1149CD99B00A0DCCC /* libsasl2.a */,
 				F4D900D2149CD99B00A0DCCC /* libssl.a */,
-				F482021C14917FC800C0576C /* CoreData.framework */,
 				F484D0D81470156700F7CA1A /* libiconv.dylib */,
 				F49A766414A89AB400C8E133 /* SystemConfiguration.framework */,
+				F482021C14917FC800C0576C /* CoreData.framework */,
+				F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */,
 				F4FB8476146D2FEE00B08513 /* QuartzCore.framework */,
 				F4FB8478146D2FEE00B08513 /* OpenGLES.framework */,
 				F4FB847A146D2FEE00B08513 /* OpenAL.framework */,
@@ -1531,6 +1553,8 @@
 				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
 				F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */,
 				F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */,
+				F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */,
+				F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1611,6 +1635,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/MailCore/Source\"",
 					"\"$(SRCROOT)/MailCore/libetpan/build-mac\"/**",
+					"\"$(SRCROOT)/CrashKit/Classes\"/**",
 				);
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -1630,7 +1655,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/CrashKit/Classes\" /Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1648,6 +1673,7 @@
 				GCC_PREFIX_HEADER = Inbox/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = YES;
 				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/CrashKit/Classes\"",
 					"\"$(SRCROOT)/MailCore/libetpan/build-mac/include\"/**",
 					"\"$(SRCROOT)/MailCore/binaries/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Debug/include\"/**",
 					"\"$(SRCROOT)/MailCore/Source\"/**",
@@ -1670,7 +1696,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/CrashKit/Classes\" /Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

@@ -24,16 +24,17 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "CrashController.h"
 #define IS_IPAD true
 @class DesckController;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate,CrashSaveDelegate> {
 	UIWindow *window;
     UINavigationController* navigationController;
-
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    CrashController* crashController;
 }
 @property (nonatomic, retain,readwrite) UIWindow *window;
 -(NSString*)plistPath;
