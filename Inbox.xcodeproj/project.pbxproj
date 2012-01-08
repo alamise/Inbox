@@ -193,6 +193,8 @@
 		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
 		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
 		F444C0F114BA026600D08560 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F314BA026600D08560 /* SettingsView.xib */; };
+		F444C0F714BA052200D08560 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F514BA052200D08560 /* Localizable.strings */; };
+		F444C0F914BA052A00D08560 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -594,6 +596,8 @@
 		F444C0F014BA026000D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/EmailView.xib; sourceTree = "<group>"; };
 		F444C0F214BA026600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView.xib; sourceTree = "<group>"; };
 		F444C0F414BA026D00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SettingsView.xib; sourceTree = "<group>"; };
+		F444C0F614BA052200D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Inbox/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		F444C0F814BA052A00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Inbox/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1137,6 +1141,7 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F444C0F514BA052200D08560 /* Localizable.strings */,
 				F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */,
 				F40BDEA614B9F04F00F2DC5F /* tutorialElements.png */,
 				F43819F214AC79530017C9BC /* settingsDown.png */,
@@ -1406,6 +1411,8 @@
 				F40BDEA714B9F04F00F2DC5F /* tutorialElements.png in Resources */,
 				F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */,
 				F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */,
+				F444C0F714BA052200D08560 /* Localizable.strings in Resources */,
+				F444C0F914BA052A00D08560 /* tutorialSettingsButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,6 +1627,15 @@
 				F444C0F414BA026D00D08560 /* fr */,
 			);
 			name = SettingsView.xib;
+			sourceTree = "<group>";
+		};
+		F444C0F514BA052200D08560 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F444C0F614BA052200D08560 /* en */,
+				F444C0F814BA052A00D08560 /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
