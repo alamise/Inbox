@@ -161,13 +161,15 @@
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
-    if (managedObjectModel != nil) {
+    @synchronized(managedObjectContext) {
+        if (managedObjectModel != nil) {
+            return managedObjectModel;
+        }
+        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coreDataSchema" withExtension:@"momd"];
+        managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+        
         return managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coreDataSchema" withExtension:@"momd"];
-    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    
-    return managedObjectModel;
 }
 
 - (NSString *)databasePath {
@@ -176,19 +178,21 @@
 }
 
 -(void)resetDatabase{
-    if (!persistentStoreCoordinator){
-        return;
+    @synchronized(managedObjectContext) {
+        if (!persistentStoreCoordinator){
+            return;
+        }
+        [managedObjectContext release];
+        managedObjectContext = nil;
+        
+        NSArray *stores = [persistentStoreCoordinator persistentStores];
+        for(NSPersistentStore *store in stores) {
+            [persistentStoreCoordinator removePersistentStore:store error:nil];
+            [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+        }
+        [persistentStoreCoordinator release];
+        persistentStoreCoordinator = nil;
     }
-    [managedObjectContext release];
-    managedObjectContext = nil;
-    
-    NSArray *stores = [persistentStoreCoordinator persistentStores];
-    for(NSPersistentStore *store in stores) {
-        [persistentStoreCoordinator removePersistentStore:store error:nil];
-        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
-    }
-    [persistentStoreCoordinator release];
-    persistentStoreCoordinator = nil;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
@@ -201,10 +205,10 @@
                                   initWithManagedObjectModel:[self managedObjectModel]];
     if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil URL:storeUrl options:nil error:&error]) {
-        /*Error for store creation should be handled in here*/
+        NSLog(@"pers %@",[error localizedDescription]);
     }
-    
     return persistentStoreCoordinator;
+
 }
 
 

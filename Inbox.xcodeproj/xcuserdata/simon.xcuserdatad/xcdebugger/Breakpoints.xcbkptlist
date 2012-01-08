@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/AppDelegate.mm"
-         timestampString = "347653651.351307"
+         timestampString = "347725694.047751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "163"
-         endingLineNumber = "163"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
          landmarkName = "-resetDatabase"
          landmarkType = "5">
       </FileBreakpoint>
@@ -211,6 +211,20 @@
          startingLineNumber = "84"
          endingLineNumber = "84"
          landmarkName = "-move:to:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Inbox/AppDelegate.mm"
+         timestampString = "347725694.047751"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
+         landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
