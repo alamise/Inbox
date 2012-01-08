@@ -134,6 +134,8 @@
 -(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse{
     if (managedObjectContext != nil && reuse) {
         return managedObjectContext;
+    }else if (managedObjectContext){
+        [managedObjectContext save:nil];
     }
     NSManagedObjectContext* context;
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
