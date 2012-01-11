@@ -29,12 +29,9 @@
 
 @interface SettingsController : UIViewController{
     
-    IBOutlet UILabel *inboxCountLabel;
     IBOutlet UILabel *inboxCountValue;
     IBOutlet UILabel *lastSyncValue;
-    IBOutlet UILabel *lastSyncLabel;
     IBOutlet UILabel *accountValue;
-    IBOutlet UILabel *accountLabel;
     DeskController* desk;
     MBProgressHUD* hud;
     BOOL resync;

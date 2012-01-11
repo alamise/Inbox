@@ -169,7 +169,6 @@
 						<string key="NSFrame">{{348, 293}, {165, 47}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -306,35 +305,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">inboxCountLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="808667941"/>
-					</object>
-					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">accountLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="306179838"/>
-					</object>
-					<int key="connectionID">27</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">accountValue</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="316849265"/>
 					</object>
 					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lastSyncLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="976855980"/>
-					</object>
-					<int key="connectionID">29</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -494,32 +469,17 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="accountLabel">UILabel</string>
 						<string key="accountValue">UILabel</string>
-						<string key="inboxCountLabel">UILabel</string>
 						<string key="inboxCountValue">UILabel</string>
-						<string key="lastSyncLabel">UILabel</string>
 						<string key="lastSyncValue">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="accountLabel">
-							<string key="name">accountLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="accountValue">
 							<string key="name">accountValue</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="inboxCountLabel">
-							<string key="name">inboxCountLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="inboxCountValue">
 							<string key="name">inboxCountValue</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lastSyncLabel">
-							<string key="name">lastSyncLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lastSyncValue">

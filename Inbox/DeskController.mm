@@ -157,7 +157,8 @@
     [self linkToModel];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];        
+    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
+    [plistDic release];
     [self.model sync];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
@@ -188,6 +189,7 @@
 -(void)onError{
     isSyncing = false;
     isWaiting = false;
+    [loadingHud hide:YES];
     ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
     errorController.desk = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];

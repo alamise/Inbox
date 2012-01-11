@@ -35,15 +35,11 @@
 #import "CrashController.h"
 
 @interface AppDelegate()
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
 @property (nonatomic, retain) UINavigationController* navigationController;
 @end
 
 @implementation AppDelegate
-@synthesize window,navigationController,managedObjectContext,managedObjectModel;
+@synthesize window,navigationController;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
@@ -56,29 +52,26 @@
     [director setDeviceOrientation:kCCDeviceOrientationPortrait];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    UIViewController* firstView = nil;
-    NSDictionary* infos = [NSMutableDictionary dictionaryWithContentsOfFile:[self plistPath]];
-    
-    firstView = nil;
-    
-    if (!infos){
-        infos = [[NSMutableDictionary alloc] init];
-        [infos writeToFile:[self plistPath] atomically:YES];
-        [infos release];
-        firstView = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
-    }else{
-        firstView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
-    }
-    firstView = [[DeskController alloc] init];
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-	navigationController = [[UINavigationController alloc] initWithRootViewController:firstView];
+	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    crashController = [[CrashController sharedInstance] retain];
-    crashController.delegate = self;
+    //crashController = [[CrashController sharedInstance] retain];
+    //crashController.delegate = self;
     
     [crashController sendCrashReportsToEmail:@"sim.w80+inbox@gmail.com" withViewController:navigationController];
 	[window makeKeyAndVisible];
+}
+
+- (void)dealloc {
+	[[CCDirector sharedDirector] end];
+	[window release];
+    [navigationController release];
+    [managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
+    [crashController release];
+	[super dealloc];
 }
 
 - (void)onCrash{
@@ -132,29 +125,36 @@
 #pragma mark - CoreData
 
 -(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse{
-    if (managedObjectContext != nil && reuse) {
-        return managedObjectContext;
-    }else if (managedObjectContext){
-        [managedObjectContext save:nil];
-    }
-    NSManagedObjectContext* context;
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        context = [[NSManagedObjectContext alloc] init];
-        [context setPersistentStoreCoordinator: coordinator];
-    }
-    
-    if (!managedObjectContext){
-        managedObjectContext = [context retain];
-        return managedObjectContext;
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mergeChangesWithMainContext:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:context];
-    
+    @synchronized(self){
+        if (managedObjectContext != nil && reuse) {
+            return managedObjectContext;
+        }else if (managedObjectContext){
+            [managedObjectContext save:nil];
+        }
+        NSManagedObjectContext* context;
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        if (coordinator != nil) {
+            context = [[NSManagedObjectContext alloc] init];
+            [context setPersistentStoreCoordinator: coordinator];
+        }else{
+            NSLog(@"BOUM");
+        }
 
-    return [context autorelease];
+
+        if (managedObjectContext){
+            /*
+             If the managedObjectContext exists here, that means we won't reuse it.
+             */
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(mergeChangesWithMainContext:)
+                                                         name:NSManagedObjectContextDidSaveNotification
+                                                       object:context];
+            return [context autorelease];
+        }else{
+            managedObjectContext = context;
+            return managedObjectContext;
+        }
+    }
 }
 
 - (void)mergeChangesWithMainContext:(NSNotification *)notification{
@@ -163,15 +163,13 @@
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
-    @synchronized(managedObjectContext) {
-        if (managedObjectModel != nil) {
-            return managedObjectModel;
-        }
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coreDataSchema" withExtension:@"momd"];
-        managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-        
+    if (managedObjectModel != nil) {
         return managedObjectModel;
     }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coreDataSchema" withExtension:@"momd"];
+    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    return managedObjectModel;
 }
 
 - (NSString *)databasePath {
@@ -180,14 +178,13 @@
 }
 
 -(void)resetDatabase{
-    @synchronized(managedObjectContext) {
-        if (!persistentStoreCoordinator){
-            return;
-        }
-        [managedObjectContext release];
-        managedObjectContext = nil;
-        
-        NSArray *stores = [persistentStoreCoordinator persistentStores];
+    if (!persistentStoreCoordinator){
+        return;
+    }
+    [managedObjectContext release];
+    managedObjectContext = nil;
+    if (persistentStoreCoordinator){
+    NSArray *stores = [persistentStoreCoordinator persistentStores];
         for(NSPersistentStore *store in stores) {
             [persistentStoreCoordinator removePersistentStore:store error:nil];
             [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
@@ -195,6 +192,9 @@
         [persistentStoreCoordinator release];
         persistentStoreCoordinator = nil;
     }
+    
+    [managedObjectModel release];
+    managedObjectModel = nil;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
@@ -203,26 +203,17 @@
     }
     NSURL *storeUrl = [NSURL fileURLWithPath: [self databasePath]];
     NSError *error = nil;
+
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
                                   initWithManagedObjectModel:[self managedObjectModel]];
     if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil URL:storeUrl options:nil error:&error]) {
         NSLog(@"pers %@",[error localizedDescription]);
     }
+
     return persistentStoreCoordinator;
-
 }
 
 
-- (void)dealloc {
-	[[CCDirector sharedDirector] end];
-	[window release];
-    [navigationController release];
-    [managedObjectContext release];
-    [managedObjectModel release];
-    [persistentStoreCoordinator release];
-    [crashController release];
-	[super dealloc];
-}
 
 @end

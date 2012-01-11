@@ -49,10 +49,7 @@
 
 - (void)dealloc {
     [inboxCountValue release];
-    [inboxCountLabel release];
-    [accountLabel release];
     [accountValue release];
-    [lastSyncLabel release];
     [lastSyncValue release];
     [super dealloc];
 }
@@ -76,14 +73,8 @@
 - (void)viewDidUnload{
     [inboxCountValue release];
     inboxCountValue = nil;
-    [inboxCountLabel release];
-    inboxCountLabel = nil;
-    [accountLabel release];
-    accountLabel = nil;
     [accountValue release];
     accountValue = nil;
-    [lastSyncLabel release];
-    lastSyncLabel = nil;
     [lastSyncValue release];
     lastSyncValue = nil;
     [super viewDidUnload];

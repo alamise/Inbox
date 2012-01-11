@@ -10,7 +10,6 @@
 		F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDE9E14B9D19800F2DC5F /* CrashController.m */; };
 		F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDEA014B9D19800F2DC5F /* CrashLogger.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
-		F40BDEA714B9F04F00F2DC5F /* tutorialElements.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA614B9F04F00F2DC5F /* tutorialElements.png */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F41E65B314A9CFB800BA4712 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E644114A9CFB700BA4712 /* AppDelegate.mm */; };
 		F41E65B414A9CFB800BA4712 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F41E644614A9CFB700BA4712 /* b2BroadPhase.cpp */; };
@@ -188,13 +187,13 @@
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
 		F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4381A0F14AC909D0017C9BC /* SettingsController.m */; };
+		F444A26314BE37BF00F1E316 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F444A26214BE37BF00F1E316 /* tutorialSettingsButton.png */; };
 		F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */; };
 		F444C0E514BA01F400D08560 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E714BA01F400D08560 /* TutorialView.xib */; };
 		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
 		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
 		F444C0F114BA026600D08560 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F314BA026600D08560 /* SettingsView.xib */; };
 		F444C0F714BA052200D08560 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F514BA052200D08560 /* Localizable.strings */; };
-		F444C0F914BA052A00D08560 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -236,8 +235,7 @@
 		F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLogger.h; path = CrashKit/Classes/CrashLogger.h; sourceTree = "<group>"; };
 		F40BDEA014B9D19800F2DC5F /* CrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashLogger.m; path = CrashKit/Classes/CrashLogger.m; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		F40BDEA614B9F04F00F2DC5F /* tutorialElements.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialElements.png; sourceTree = "<group>"; };
-		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialSettingsButton.png; sourceTree = "<group>"; };
+		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
 		F41E644014A9CFB700BA4712 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F41E644114A9CFB700BA4712 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		F41E644414A9CFB700BA4712 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
@@ -587,9 +585,9 @@
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
 		F4381A0E14AC909D0017C9BC /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		F4381A0F14AC909D0017C9BC /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		F444A26214BE37BF00F1E316 /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialSettingsButton.png; sourceTree = "<group>"; };
 		F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formSheetWoodBackground.png; sourceTree = "<group>"; };
 		F444C0E614BA01F400D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TutorialView.xib; sourceTree = "<group>"; };
-		F444C0E814BA020B00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/TutorialView.xib; sourceTree = "<group>"; };
 		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EC14BA025400D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
@@ -1141,9 +1139,8 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F444A26214BE37BF00F1E316 /* tutorialSettingsButton.png */,
 				F444C0F514BA052200D08560 /* Localizable.strings */,
-				F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */,
-				F40BDEA614B9F04F00F2DC5F /* tutorialElements.png */,
 				F43819F214AC79530017C9BC /* settingsDown.png */,
 				F43819F314AC79530017C9BC /* settingsUp.png */,
 				F426413F14AB718500040EC9 /* sticker.png */,
@@ -1408,11 +1405,10 @@
 				F43819F414AC79530017C9BC /* settingsDown.png in Resources */,
 				F43819F514AC79530017C9BC /* settingsUp.png in Resources */,
 				F444C0F114BA026600D08560 /* SettingsView.xib in Resources */,
-				F40BDEA714B9F04F00F2DC5F /* tutorialElements.png in Resources */,
 				F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */,
 				F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */,
 				F444C0F714BA052200D08560 /* Localizable.strings in Resources */,
-				F444C0F914BA052A00D08560 /* tutorialSettingsButton.png in Resources */,
+				F444A26314BE37BF00F1E316 /* tutorialSettingsButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1597,7 +1593,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				F444C0E614BA01F400D08560 /* en */,
-				F444C0E814BA020B00D08560 /* fr */,
 			);
 			name = TutorialView.xib;
 			sourceTree = "<group>";
