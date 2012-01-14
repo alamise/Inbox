@@ -73,13 +73,15 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    [self linkToModel];
+    //[self linkToModel];
 }
 
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self unlinkToModel];
+    //[self unlinkToModel];
+    [self.desk linkToModel];
+    [self.desk resetModel];
 }
 
 - (void)viewDidUnload{
@@ -118,15 +120,15 @@
     }else{
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-
+        if (!plistDic){
+            plistDic = [[NSMutableDictionary alloc] initWithCapacity:2];
+        }
         [plistDic setValue:emailField.text forKey:@"email"];
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
-        [self unlinkToModel];
-        [self.desk linkToModel];
-        [self.desk resetModel];
         [plistDic release];
         [self dismissModalViewControllerAnimated:YES];
     }
 }
+
 @end

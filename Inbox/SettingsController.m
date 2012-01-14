@@ -143,7 +143,6 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSDictionary* dic = [NSDictionary dictionaryWithContentsOfFile:[delegate plistPath]];
     NSDate* syncDate = [dic objectForKey:@"lastsync"];
-    
     lastSyncValue.text = [self lastSyncValue:syncDate];
 }
 

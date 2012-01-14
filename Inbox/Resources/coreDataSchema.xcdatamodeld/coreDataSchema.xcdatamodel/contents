@@ -7,6 +7,7 @@
         <attribute name="senderEmail" optional="YES" attributeType="String"/>
         <attribute name="senderName" optional="YES" attributeType="String"/>
         <attribute name="sentDate" optional="YES" attributeType="Date"/>
+        <attribute name="skippedIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
     </entity>
@@ -14,7 +15,7 @@
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Email" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Email" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Folder" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

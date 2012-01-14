@@ -341,9 +341,11 @@
     request.entity = entity;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path = %@ AND newPath = nil) OR (newPath = %@)", folder, folder];          
     [request setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    [sortDescriptor release];
+    NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:YES];
+    NSSortDescriptor *sortBySkippedIndex = [[NSSortDescriptor alloc] initWithKey:@"skippedIndex" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortBySkippedIndex, sortBySentDate, nil]];
+    [sortBySentDate release];
+    [sortBySkippedIndex release];
     [request setPropertiesToFetch:[entity properties]];
 
     NSError* fetchError = nil;
@@ -399,8 +401,12 @@
 }
 
 -(BOOL)move:(EmailModel*)model to:(NSString*)folder{
-   
-    model.newPath = folder;        
+    if ([folder isEqualToString:@"INBOX"]){
+        model.skippedIndex=[NSNumber numberWithInt:[model.skippedIndex intValue]+1];
+    }else{
+        model.newPath = folder;
+    }
+    
     NSError* error;
     //[[model managedObjectContext] save:&error];
         return true;

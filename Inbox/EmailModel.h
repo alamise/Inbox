@@ -28,6 +28,7 @@
     NSString* uid;
     NSString* subject;
     NSDate* sentDate; /* GMT time */
+    NSNumber* skippedIndex;
     NSString* senderName;
     NSString* senderEmail;
     NSString* path; /* path from the server*/ 
@@ -37,6 +38,7 @@
 @property(nonatomic,retain) NSString* uid;
 @property(nonatomic,retain) NSString* subject;
 @property(nonatomic,retain) NSDate* sentDate;
+@property(nonatomic,retain) NSNumber* skippedIndex;
 @property(nonatomic,retain) NSString* senderName;
 @property(nonatomic,retain) NSString* senderEmail;
 @property(nonatomic,retain) NSString* path;

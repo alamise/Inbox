@@ -28,12 +28,12 @@
 @dynamic uid;
 @dynamic subject;
 @dynamic sentDate;
+@dynamic skippedIndex;
 @dynamic senderName;
 @dynamic senderEmail;
 @dynamic path;
 @dynamic newPath;
 @dynamic htmlBody;
-
 
 +(NSString*)entityName{
     return @"Email";

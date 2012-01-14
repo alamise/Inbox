@@ -92,6 +92,7 @@
     }else{
         EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
+        [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:navCtr animated:YES];
@@ -280,6 +281,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 @end
 
