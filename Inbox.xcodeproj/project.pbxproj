@@ -62,15 +62,15 @@
 		F44CB83214C196E000EB24E8 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB82914C196E000EB24E8 /* SWTableView.m */; };
 		F44CB83314C196E000EB24E8 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB82B14C196E000EB24E8 /* SWTableViewCell.m */; };
 		F44CB83414C196E000EB24E8 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB82D14C196E000EB24E8 /* SWTableViewSpriteCell.m */; };
-		F44CB84914C197EF00EB24E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79C14C194F300EB24E8 /* libcocos2d.a */; };
-		F44CB84A14C1981400EB24E8 /* libbox2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79814C194F300EB24E8 /* libbox2d.a */; };
+		F44CB84F14C199CB00EB24E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79C14C194F300EB24E8 /* libcocos2d.a */; };
+		F44CB85014C199D300EB24E8 /* libbox2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79814C194F300EB24E8 /* libbox2d.a */; };
+		F44CB85214C19A0500EB24E8 /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB85114C19A0500EB24E8 /* libsasl2.a */; };
+		F44CB85414C19A1200EB24E8 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB85314C19A1200EB24E8 /* libcrypto.a */; };
+		F44CB85614C19A2000EB24E8 /* libetpan_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB85514C19A2000EB24E8 /* libetpan_ios.a */; };
+		F44CB85814C19A3600EB24E8 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB85714C19A3600EB24E8 /* libssl.a */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
-		F4D900D3149CD99B00A0DCCC /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D900CF149CD99B00A0DCCC /* libcrypto.a */; };
-		F4D900D4149CD99B00A0DCCC /* libetpan_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D900D0149CD99B00A0DCCC /* libetpan_ios.a */; };
-		F4D900D5149CD99B00A0DCCC /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D900D1149CD99B00A0DCCC /* libsasl2.a */; };
-		F4D900D6149CD99B00A0DCCC /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D900D2149CD99B00A0DCCC /* libssl.a */; };
 		F4DBB24A149BFE8600F35817 /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44F06101478F1CB008DE7CF /* libmailcore.a */; };
 		F4FB8477146D2FEE00B08513 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8476146D2FEE00B08513 /* QuartzCore.framework */; };
 		F4FB8479146D2FEE00B08513 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8478146D2FEE00B08513 /* OpenGLES.framework */; };
@@ -559,6 +559,20 @@
 			remoteGlobalIDString = A031C5B7139543A70072E9F9;
 			remoteInfo = Bug1174;
 		};
+		F44CB84B14C199B600EB24E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5042256F0FC0B39C00B992F7;
+			remoteInfo = box2d;
+		};
+		F44CB84D14C199BA00EB24E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
+			remoteInfo = cocos2d;
+		};
 		F44F060F1478F1CB008DE7CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */;
@@ -665,14 +679,14 @@
 		F44CB82B14C196E000EB24E8 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = Inbox/SWTableViewCell.m; sourceTree = "<group>"; };
 		F44CB82C14C196E000EB24E8 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = Inbox/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		F44CB82D14C196E000EB24E8 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = Inbox/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
+		F44CB85114C19A0500EB24E8 /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libsasl2.a; path = "MailCore/iOSPorts/ports/security/cyrus-sasl/build/Release-iphoneos/libsasl2.a"; sourceTree = "<group>"; };
+		F44CB85314C19A1200EB24E8 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libcrypto.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Release-iphoneos/libcrypto.a"; sourceTree = "<group>"; };
+		F44CB85514C19A2000EB24E8 /* libetpan_ios.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libetpan_ios.a; path = "MailCore/libetpan/build-mac/build/Release-iphoneos/libetpan_ios.a"; sourceTree = "<group>"; };
+		F44CB85714C19A3600EB24E8 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Release-iphoneos/libssl.a"; sourceTree = "<group>"; };
 		F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		F4D900CF149CD99B00A0DCCC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos/libcrypto.a"; sourceTree = "<group>"; };
-		F4D900D0149CD99B00A0DCCC /* libetpan_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libetpan_ios.a; path = "MailCore/libetpan/build-mac/build/Debug-iphoneos/libetpan_ios.a"; sourceTree = "<group>"; };
-		F4D900D1149CD99B00A0DCCC /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsasl2.a; path = "MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos/libsasl2.a"; sourceTree = "<group>"; };
-		F4D900D2149CD99B00A0DCCC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos/libssl.a"; sourceTree = "<group>"; };
 		F4FB8472146D2FEE00B08513 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FB8476146D2FEE00B08513 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F4FB8478146D2FEE00B08513 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -689,14 +703,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F44CB84A14C1981400EB24E8 /* libbox2d.a in Frameworks */,
-				F44CB84914C197EF00EB24E8 /* libcocos2d.a in Frameworks */,
+				F44CB85814C19A3600EB24E8 /* libssl.a in Frameworks */,
+				F44CB85614C19A2000EB24E8 /* libetpan_ios.a in Frameworks */,
+				F44CB85414C19A1200EB24E8 /* libcrypto.a in Frameworks */,
+				F44CB85214C19A0500EB24E8 /* libsasl2.a in Frameworks */,
+				F44CB85014C199D300EB24E8 /* libbox2d.a in Frameworks */,
+				F44CB84F14C199CB00EB24E8 /* libcocos2d.a in Frameworks */,
 				F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */,
 				F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */,
-				F4D900D3149CD99B00A0DCCC /* libcrypto.a in Frameworks */,
-				F4D900D4149CD99B00A0DCCC /* libetpan_ios.a in Frameworks */,
-				F4D900D5149CD99B00A0DCCC /* libsasl2.a in Frameworks */,
-				F4D900D6149CD99B00A0DCCC /* libssl.a in Frameworks */,
 				F4DBB24A149BFE8600F35817 /* libmailcore.a in Frameworks */,
 				F482021D14917FC800C0576C /* CoreData.framework in Frameworks */,
 				F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */,
@@ -995,20 +1009,20 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */,
 				F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */,
 				F44CB70A14C1946B00EB24E8 /* MBProgressHUD */,
-				F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */,
 				F44CB83514C196E900EB24E8 /* cocos2d-table */,
 				F40BDEA314B9D19D00F2DC5F /* crashKit */,
 				F41E659F14A9CFB700BA4712 /* Reachability.h */,
 				F41E65A014A9CFB700BA4712 /* Reachability.m */,
 				F44CB81D14C1964700EB24E8 /* GLES-Render.h */,
 				F44CB81E14C1964700EB24E8 /* GLES-Render.mm */,
-				F4D900CF149CD99B00A0DCCC /* libcrypto.a */,
-				F4D900D0149CD99B00A0DCCC /* libetpan_ios.a */,
-				F4D900D1149CD99B00A0DCCC /* libsasl2.a */,
-				F4D900D2149CD99B00A0DCCC /* libssl.a */,
 				F484D0D81470156700F7CA1A /* libiconv.dylib */,
+				F44CB85714C19A3600EB24E8 /* libssl.a */,
+				F44CB85514C19A2000EB24E8 /* libetpan_ios.a */,
+				F44CB85314C19A1200EB24E8 /* libcrypto.a */,
+				F44CB85114C19A0500EB24E8 /* libsasl2.a */,
 				F49A766414A89AB400C8E133 /* SystemConfiguration.framework */,
 				F482021C14917FC800C0576C /* CoreData.framework */,
 				F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */,
@@ -1038,6 +1052,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				F44CB84E14C199BA00EB24E8 /* PBXTargetDependency */,
+				F44CB84C14C199B600EB24E8 /* PBXTargetDependency */,
 				F4DBB21E149BF8EB00F35817 /* PBXTargetDependency */,
 			);
 			name = Inbox;
@@ -1644,6 +1660,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F44CB84C14C199B600EB24E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = box2d;
+			targetProxy = F44CB84B14C199B600EB24E8 /* PBXContainerItemProxy */;
+		};
+		F44CB84E14C199BA00EB24E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = cocos2d;
+			targetProxy = F44CB84D14C199BA00EB24E8 /* PBXContainerItemProxy */;
+		};
 		F4DBB21E149BF8EB00F35817 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MailCore iOS";
@@ -1772,6 +1798,7 @@
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/cocos2d-iphone/build\"",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphonesimulator\"",
@@ -1787,7 +1814,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/cocos2d-iphone\"/** \"$(SRCROOT)/MBProgressHUD\" \"$(SRCROOT)/CrashKit/Classes\" /Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1815,6 +1842,7 @@
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/cocos2d-iphone/build\"",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/cyrus-sasl/build/Debug-iphoneos\"",
 					"\"$(SRCROOT)/MailCore/iOSPorts/ports/security/openssl/build/Debug-iphoneos\"",
@@ -1830,7 +1858,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/cocos2d-iphone\"/** \"$(SRCROOT)/MBProgressHUD\" \"$(SRCROOT)/CrashKit/Classes\" /Users/simon/Documents/projects/Inbox/Inbox/cocos2d/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
