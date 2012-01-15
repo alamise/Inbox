@@ -86,26 +86,27 @@
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
--(void)emailTouched:(EmailModel*)email{
+-(void)showEmail:(EmailModel*)email{
     if (!email.htmlBody){
         [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:email animated:YES];    
     }else{
         EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
         [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
-        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
+        navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
         navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:navCtr animated:YES];
     }
 }
 
+
+-(void)emailTouched:(EmailModel*)email{
+    [self showEmail:email]; 
+}
+
 -(void)fetchEmailBody:(EmailModel*)email{
     if ([model fetchEmailBody:email]){
-        EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
-        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
-        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
-        navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
-        [self performSelectorOnMainThread:@selector(presentModalViewController:animated:) withObject:navCtr waitUntilDone:YES];
+        [self showEmail:email];  
     }else{
 //
     }

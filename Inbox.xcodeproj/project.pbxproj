@@ -651,7 +651,6 @@
 		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EC14BA025400D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
-		F444C0F014BA026000D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/EmailView.xib; sourceTree = "<group>"; };
 		F444C0F214BA026600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView.xib; sourceTree = "<group>"; };
 		F444C0F614BA052200D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Inbox/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		F444C0F814BA052A00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Inbox/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
@@ -1690,7 +1689,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				F444C0EE14BA025A00D08560 /* en */,
-				F444C0F014BA026000D08560 /* fr */,
 			);
 			name = EmailView.xib;
 			sourceTree = "<group>";
