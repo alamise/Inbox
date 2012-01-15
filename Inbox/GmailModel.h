@@ -27,7 +27,7 @@
 #import "CTCoreAccount.h"
 #define SYNC_STARTED @"sync started"
 #define SYNC_DONE @"sync done"
-#define ERROR @"error"
+#define SYNC_ABORTED @"sync aborted"
 #define INBOX_STATE_CHANGED @"new messages"
 #define FOLDERS_READY @"folders ready"
 @protocol DeskProtocol;
@@ -37,12 +37,14 @@
     NSString *email;
     NSString *password;
     NSLock *syncLock;
+    BOOL shouldStopSync;
 }
 @property(readonly) NSString *email;
 @property(readonly) NSString *password;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
 -(BOOL)isSyncing;
+-(void)stopSync;
 -(EmailModel*)getLastEmailFrom:(NSString*)folder;
 -(BOOL)move:(EmailModel*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;

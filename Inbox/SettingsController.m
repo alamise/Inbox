@@ -55,7 +55,6 @@
 }
 
 -(void)close{
-    [self unlinkToModel];
     [self.desk linkToModel];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -67,6 +66,7 @@
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
     [self reloadFromModel];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
 
@@ -92,17 +92,6 @@
     [super viewDidDisappear:animated];
     [self unlinkToModel];
 }
-
--(void)linkToModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
-}
-
--(void)unlinkToModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
-}
-
 
 - (IBAction)sync:(id)sender {
     [hud show:YES];

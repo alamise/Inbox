@@ -76,6 +76,7 @@
         currentX+=view.frame.size.width;
     }
     pageControl.numberOfPages=[tutorialViews count];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
 - (void)viewDidUnload{

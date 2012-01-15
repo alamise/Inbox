@@ -64,10 +64,16 @@
         folders = [account allFolders];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         return false;
     }
-    NSArray* disabledFolders = [[NSArray alloc] initWithObjects:@"INBOX",@"[Gmail]",@"[Gmail]/Drafts",@"[Gmail]/Sent Mail",@"Notes", nil];
+    NSArray* disabledFolders = [[NSArray alloc] initWithObjects:
+                                @"INBOX",
+                                @"[Gmail]",
+                                @"[Gmail]/Drafts",
+                                @"[Gmail]/Sent Mail",
+                                @"Notes",
+                                nil];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
@@ -79,7 +85,7 @@
     NSError* fetchError = nil;
     NSArray* foldersToDelete = [context executeFetchRequest:request error:&fetchError];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         [disabledFolders release];
         [request release];
         return false;
@@ -89,13 +95,12 @@
             [context deleteObject:folder];
         }
         @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             [disabledFolders release];
             [request release];
             return false;
         }
     }
-    
     for (NSString* path in folders){
         if (![disabledFolders containsObject:path]){
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
@@ -104,7 +109,7 @@
             NSError* fetchError = nil;
             int folders = [context countForFetchRequest:request error:&fetchError];
             if (fetchError){
-                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
                 [disabledFolders release];
                 [request release];
                 return false;
@@ -115,7 +120,7 @@
                         folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
                     }
                     @catch (NSException *exception) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                         [disabledFolders release];
                         [request release];
                         return false;
@@ -150,7 +155,7 @@
     NSArray* models = [context executeFetchRequest:request error:&fetchError];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         [request release];
         return false;
     }
@@ -183,7 +188,7 @@
                 [context deleteObject:model];
             }
             @catch (NSException *exception) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
                 return false; 
             }
@@ -193,7 +198,7 @@
                 [folder setFlags:CTFlagDeleted forMessage:message];
             }
             @catch (NSException* exception) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
                 return false;
             }
@@ -225,7 +230,7 @@
             page++;
         }
         @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             return false;
         }
         
@@ -236,7 +241,7 @@
             NSError* fetchError = nil;
             NSArray* objects = [context executeFetchRequest:request error:&fetchError];
             if (fetchError){
-                [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
                 [request release];
                 return false;   
             }
@@ -247,7 +252,7 @@
                     emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
                 }
                 @catch (NSException *exception) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                     [request release];
                     return false;   
                 }
@@ -303,22 +308,24 @@
             [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
         }
         @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             [account release];
             [context release];
             [syncLock unlock];
             return;
         }
-            
-        if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
-            [account release];
-            [context release];
-            [syncLock unlock];
-            return;
+        while (!shouldStopSync){           
+            if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
+                [account release];
+                [context release];
+                [syncLock unlock];
+                return;
+            }
+
         }
         if ([self saveContext:context]){
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
-        }
+        }        
         [syncLock unlock];
     });
 }
@@ -327,7 +334,7 @@
     NSError* error = nil;
     [context save:&error];
     if (error){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:error];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:error];
         return false;
     }else{
         return true;
@@ -341,7 +348,7 @@
     request.entity = entity;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path = %@ AND newPath = nil) OR (newPath = %@)", folder, folder];          
     [request setPredicate:predicate];
-    NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:YES];
+    NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     NSSortDescriptor *sortBySkippedIndex = [[NSSortDescriptor alloc] initWithKey:@"skippedIndex" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySkippedIndex, sortBySentDate, nil]];
     [sortBySentDate release];
@@ -353,7 +360,7 @@
     [context release];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         return nil;
     }else{
         if ([objects count]>0){
@@ -365,13 +372,18 @@
     }
 }
 
+
+-(void)stopSync{
+    shouldStopSync = YES;
+}
+
 -(BOOL)fetchEmailBody:(EmailModel*)model{
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {
         [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
@@ -380,7 +392,7 @@
         inbox = [account folderWithPath:model.path];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
@@ -391,7 +403,7 @@
         [message fetchBody];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
@@ -423,7 +435,7 @@
     [context release];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         return nil;
     }else{
         folders = [folders sortedArrayUsingSelector:@selector(compare:)];
@@ -443,7 +455,7 @@
     int count = [context countForFetchRequest:request error:&fetchError];
     [context release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ERROR object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         [request release];
         [context release];
         return -1;

@@ -55,21 +55,13 @@
         passwordField.text = [plistDic valueForKey:@"password"];
     }
     [super viewDidLoad];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
 
 - (void)onError{
 }
 
--(void)linkToModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
-}
-
--(void)unlinkToModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
-}
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
@@ -80,7 +72,6 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     //[self unlinkToModel];
-    [self.desk linkToModel];
     [self.desk resetModel];
 }
 

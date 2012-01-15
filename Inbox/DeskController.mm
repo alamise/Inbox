@@ -46,6 +46,7 @@
 }
 
 - (void)dealloc {
+    [self.model stopSync];
     self.model = nil;
     [layer release];
     [glView removeFromSuperview];
@@ -57,15 +58,15 @@
     if ([model emailsCountInFolder:@"INBOX"]==0){
         if (isSyncing){
             isWaiting = TRUE;
-            [loadingHud show:YES];
+            [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
         }else{
             isWaiting = FALSE;
-            [loadingHud show:NO];
+        [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
             // show done view;
         }
     }else{
         isWaiting = NO;
-        [loadingHud hide:YES];
+        [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
         [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
     }
 }
@@ -101,12 +102,12 @@
 
 
 -(void)emailTouched:(EmailModel*)email{
-    [self showEmail:email]; 
+    [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES]; 
 }
 
 -(void)fetchEmailBody:(EmailModel*)email{
     if ([model fetchEmailBody:email]){
-        [self showEmail:email];  
+        [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES];
     }else{
 //
     }
@@ -120,7 +121,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FOLDERS_READY object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ERROR object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
 }
 
 -(void)linkToModel{
@@ -128,70 +129,63 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncStarted) name:SYNC_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foldersReady) name:FOLDERS_READY object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:ERROR object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
 }
 
 -(void)syncStarted{
-    isSyncing = YES;
+    [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
 }
 
+-(void)showLoadingHud{
+    [loadingHud show:YES];
+}
+
+-(void)hideLoadingHud{
+    [loadingHud hide:YES];
+}
 -(void)newEmails{
+    [loadingHud hide:YES];
     if (isWaiting){
         [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
     }
 }
 
 -(void)foldersReady{
+    [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
     [layer setFolders:[model folders]];
 }
 
 -(void)syncDone{
-    isSyncing = NO;
-    [loadingHud hide:true];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    [plistDic setValue:[NSDate date] forKey:@"lastsync"];
-    [plistDic writeToFile:plistPath atomically:YES];
 }
 
 -(void)setNewModel{
+    isWaiting = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
     [self linkToModel];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
     [plistDic release];
     [self.model sync];
-    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 -(void)resetModel{
-    [loadingHud show:YES];
     [layer cleanDesk];
-    [layer setFolders:nil];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    
-    if (self.model && [self.model.email isEqualToString:[plistDic valueForKey:@"email"]]){
-        
-        [self.model sync];
-        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
-    }else {
-        [self unlinkToModel];
-        if (self.model){
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:ERROR object:nil];
-            [self.model sync];
-        }else{
-            [self setNewModel];
-        }
+    if (self.model && [self.model isSyncing]){
+        [loadingHud show:YES];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
+        [self.model stopSync];
+    }else{
+        [self setNewModel];
     }
 }
 
 -(void)onError{
     isSyncing = false;
     isWaiting = false;
-    [loadingHud hide:YES];
+    [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
     ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
     errorController.desk = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
@@ -236,7 +230,6 @@
     [super viewDidAppear:animated];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    [self linkToModel];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
         [self resetModel];
     }else{

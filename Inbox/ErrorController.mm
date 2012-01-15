@@ -44,6 +44,8 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+
     self.desk = nil;
     [connectionIsBackView release];
     [noConnectionView release];
@@ -122,6 +124,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
 - (void)viewDidUnload{

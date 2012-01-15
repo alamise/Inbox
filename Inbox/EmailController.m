@@ -45,6 +45,7 @@
     [super viewDidLoad];
     NSLog(@"%@",emailModel.htmlBody);
     [webView loadHTMLString:emailModel.htmlBody baseURL:nil];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
 - (void)viewDidUnload{
