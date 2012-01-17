@@ -115,12 +115,12 @@ enum {
 #pragma mark - drag & drop
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    self.draggedNode = nil;
-    CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];		
     
+    self.draggedNode = nil;
+    CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     for (EmailNode* node in draggableNodes){        
         CGRect rect = node.boundingBox;
-        if (CGRectContainsPoint(rect, location)) {            
+        if (CGRectContainsPoint(rect, location)) {
             self.draggedNode = node;
             self.draggedNode.didMoved=false;
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
