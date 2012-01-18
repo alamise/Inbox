@@ -81,6 +81,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F40C71D914C62C0200F15B48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = MailCore;
+		};
+		F40C71DB14C62C0200F15B48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F44F05F61478F1C9008DE7CF /* MailCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82D7C810F48AC8500ADA65C;
+			remoteInfo = Tests;
+		};
 		F44CB79514C194F300EB24E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */;
@@ -976,6 +990,8 @@
 		F44F05F71478F1C9008DE7CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				F40C71DA14C62C0200F15B48 /* MailCore.framework */,
+				F40C71DC14C62C0200F15B48 /* Tests.octest */,
 				F44F06101478F1CB008DE7CF /* libmailcore.a */,
 			);
 			name = Products;
@@ -1092,6 +1108,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F40C71DA14C62C0200F15B48 /* MailCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MailCore.framework;
+			remoteRef = F40C71D914C62C0200F15B48 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F40C71DC14C62C0200F15B48 /* Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.octest;
+			remoteRef = F40C71DB14C62C0200F15B48 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F44CB79614C194F300EB24E8 /* libbuild all tests.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1721,10 +1751,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					DEBUG,
-					"COCOS2D_DEBUG=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOS2D_DEBUG=0";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

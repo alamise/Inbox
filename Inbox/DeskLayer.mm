@@ -134,16 +134,15 @@ enum {
             }
         }
     }
-    if (self.draggedNode){
-        foldersTable.isTouchEnabled=FALSE;
-    }
     return YES;
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
     if (!self.draggedNode){
         return;
-    }
+    }else{
+        foldersTable.isTouchEnabled=FALSE;
+    }    
     self.draggedNode.didMoved=true;
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     CGPoint oldTouchLocation = [touch previousLocationInView:touch.view];
@@ -165,7 +164,7 @@ enum {
 
     if (lastTouchTime+TOUCHES_DELAY<[NSDate timeIntervalSinceReferenceDate]){
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
-        lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
+        lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     }
     return;
 }
@@ -178,10 +177,9 @@ enum {
         [delegate emailTouched:self.draggedNode.emailModel];
         return;
     }
-    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]];
-    
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
-    int cellIndex = [table cellIndexForTouch:touch];
+    int cellIndex = [table cellIndexAt:newLocation] ;
     if (cellIndex!=-1){
         FolderModel* folder = [self.folders objectAtIndex:cellIndex];
         [delegate move:self.draggedNode.emailModel to:folder.path];
