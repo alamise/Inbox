@@ -89,13 +89,17 @@ enum {
 }
 
 -(void)setFolders:(NSArray *)f{
+    BOOL shouldScrollToTop = true;
     if (folders){
+        shouldScrollToTop=false;
         [folders release];
         folders = nil;
     }
     folders = [f retain];
     [foldersTable reloadData];
-    [foldersTable scrollToTop];
+    if (shouldScrollToTop){
+        [foldersTable scrollToTop];
+    }    
 }
 -(void) putEmail:(EmailModel*)model{
 	b2BodyDef bodyDef;
