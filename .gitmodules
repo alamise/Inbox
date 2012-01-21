@@ -4,3 +4,6 @@
 [submodule "MBProgressHUD"]
 	path = MBProgressHUD
 	url = git://github.com/jdg/MBProgressHUD.git
+[submodule "cocos2d-iphone"]
+	path = cocos2d-iphone
+	url = git://github.com/cocos2d/cocos2d-iphone.git
