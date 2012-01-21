@@ -31,6 +31,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        shouldResetModelOnDisappear = NO;
     }
     return self;
 }
@@ -44,57 +45,11 @@
     [super dealloc];
 }
 
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad{
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    if (plistPath){
-        emailField.text = [plistDic valueForKey:@"email"];
-        passwordField.text = [plistDic valueForKey:@"password"];
-    }
-    [super viewDidLoad];
-    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
-}
-
-
-- (void)onError{
-}
-
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:YES];
-    //[self linkToModel];
-}
-
-
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    //[self unlinkToModel];
-    [self.desk resetModel];
-}
-
-- (void)viewDidUnload{
-    [passwordField release];
-    passwordField = nil;
-    [submitButton release];
-    submitButton = nil;
-    [emailField release];
-    emailField = nil;
-    [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft)||(interfaceOrientation==UIInterfaceOrientationLandscapeRight));
-}
-
 - (BOOL) validateEmail: (NSString *) candidate {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@gmail\\.com";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
     return [emailTest evaluateWithObject:candidate];
 }
-
 
 #pragma mark - IBActions
 
@@ -118,8 +73,50 @@
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
         [plistDic release];
+        shouldResetModelOnDisappear = YES;
         [self dismissModalViewControllerAnimated:YES];
     }
 }
+
+#pragma mark - View's lifecycle
+
+- (void)viewDidLoad{
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if (plistPath){
+        emailField.text = [plistDic valueForKey:@"email"];
+        passwordField.text = [plistDic valueForKey:@"password"];
+    }
+    [super viewDidLoad];
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (shouldResetModelOnDisappear){
+        [self.desk resetModel];
+    }
+}
+
+- (void)viewDidUnload{
+    [passwordField release];
+    passwordField = nil;
+    [submitButton release];
+    submitButton = nil;
+    [emailField release];
+    emailField = nil;
+    [super viewDidUnload];
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft)||(interfaceOrientation==UIInterfaceOrientationLandscapeRight));
+}
+
 
 @end

@@ -30,6 +30,7 @@
 #define SYNC_ABORTED @"sync aborted"
 #define INBOX_STATE_CHANGED @"new messages"
 #define FOLDERS_READY @"folders ready"
+
 @protocol DeskProtocol;
 @class EmailModel;
 
@@ -41,6 +42,7 @@
 }
 @property(readonly) NSString *email;
 @property(readonly) NSString *password;
+@property(readonly) BOOL isLooping;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
 -(BOOL)isSyncing;

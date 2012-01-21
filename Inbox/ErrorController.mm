@@ -37,6 +37,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        shouldSyncOnDisappear = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
         internetReachable = [[Reachability reachabilityForInternetConnection] retain];
     }
@@ -45,35 +46,12 @@
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-
     self.desk = nil;
     [connectionIsBackView release];
     [noConnectionView release];
     [errorView release];
     [loadingView release];
     [super dealloc];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    switch ([internetReachable currentReachabilityStatus]) {
-        case NotReachable:
-            isInternetReachable = NO;
-            isWifi = NO;
-            break;
-        case ReachableViaWiFi:
-            isInternetReachable = YES;
-            isWifi = YES;
-            break;
-        case ReachableViaWWAN:
-            isInternetReachable = YES;
-            isWifi = NO;
-            break;
-    }
-    if (!isInternetReachable){
-        internetReachable = [[Reachability reachabilityForInternetConnection] retain];
-        [internetReachable performSelector:@selector(startNotifier) withObject:nil afterDelay:1.5];
-    }
-    [self updateView];
 }
 
 -(void)updateView{
@@ -84,9 +62,10 @@
     }
 }
 
+
+
 -(IBAction)dismiss{
-    [self.desk linkToModel];
-    [self.desk.model sync];
+    shouldSyncOnDisappear = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -121,6 +100,35 @@
 
 
 #pragma mark - View lifecycle
+
+-(void)viewDidDisappear:(BOOL)animated{
+    if (shouldSyncOnDisappear){
+        [self.desk linkToModel];
+        [self.desk.model sync];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    switch ([internetReachable currentReachabilityStatus]) {
+        case NotReachable:
+            isInternetReachable = NO;
+            isWifi = NO;
+            break;
+        case ReachableViaWiFi:
+            isInternetReachable = YES;
+            isWifi = YES;
+            break;
+        case ReachableViaWWAN:
+            isInternetReachable = YES;
+            isWifi = NO;
+            break;
+    }
+    if (!isInternetReachable){
+        internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+        [internetReachable performSelector:@selector(startNotifier) withObject:nil afterDelay:1.5];
+    }
+    [self updateView];
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];

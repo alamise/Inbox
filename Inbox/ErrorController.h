@@ -36,6 +36,7 @@
     IBOutlet UIView *loadingView;
     DeskController* desk;
     NSError* error;
+    BOOL shouldSyncOnDisappear;
 }
 @property(nonatomic,retain) DeskController* desk;
 @property(nonatomic,retain) NSError* error;

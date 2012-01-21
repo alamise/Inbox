@@ -29,6 +29,7 @@
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *submitButton;
     DeskController* desk;
+    BOOL shouldResetModelOnDisappear;
 }
 @property(nonatomic,retain) DeskController* desk;
 - (IBAction)onLogin:(id)sender;

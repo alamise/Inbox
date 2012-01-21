@@ -40,7 +40,7 @@
 @end
 
 @implementation GmailModel
-@synthesize email,password;
+@synthesize email,password,isLooping;
 -(id)initWithAccount:(NSString*)em password:(NSString*)pwd{
     self = [self init];
     if (self) {
@@ -314,14 +314,11 @@
             [syncLock unlock];
             return;
         }
-        while (!shouldStopSync){           
-            if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
-                [account release];
-                [context release];
-                [syncLock unlock];
-                return;
-            }
-
+        if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
+            [account release];
+            [context release];
+            [syncLock unlock];
+            return;
         }
         if ([self saveContext:context]){
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];

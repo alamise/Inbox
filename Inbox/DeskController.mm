@@ -32,6 +32,8 @@
 #import "GmailModel.h"
 #import "cocos2d.h"
 #import "SettingsController.h"
+#import "LoginController.h"
+
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
 @end
@@ -54,29 +56,11 @@
     [super dealloc];
 }
 
--(void)nextStep{
-    if ([model emailsCountInFolder:@"INBOX"]==0){
-        if (isSyncing){
-            isWaiting = TRUE;
-            [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
-        }else{
-            isWaiting = FALSE;
-        [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-            // show done view;
-        }
-    }else{
-        isWaiting = NO;
-        [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
-    }
-}
-
-
 -(void)openSettings{
     [self unlinkToModel];
-    SettingsController* settingsController = [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
-    settingsController.desk = self;
-    UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:settingsController];
+    LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
+    loginController.desk = self;
+    UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginController];
     navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
     navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:navCtr animated:YES];
@@ -111,8 +95,17 @@
     }else{
 //
     }
-
 }
+
+
+-(void)showLoadingHud{
+    [loadingHud show:YES];
+}
+
+-(void)hideLoadingHud{
+    [loadingHud hide:YES];
+}
+
 
 #pragma mark model handlers
 
@@ -125,7 +118,7 @@
 }
 
 -(void)linkToModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newEmails) name:INBOX_STATE_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inboxChanged) name:INBOX_STATE_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncStarted) name:SYNC_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foldersReady) name:FOLDERS_READY object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
@@ -133,33 +126,42 @@
 }
 
 -(void)syncStarted{
-    [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
+    isWaiting = TRUE;
+    [self performSelectorOnMainThread:@selector(showLoadingHub) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:YES];
 }
 
--(void)showLoadingHud{
-    [loadingHud show:YES];
-}
-
--(void)hideLoadingHud{
-    [loadingHud hide:YES];
-}
--(void)newEmails{
-    [loadingHud hide:YES];
-    if (isWaiting){
-        [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
-    }
-}
-
--(void)foldersReady{
-    [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-    [layer setFolders:[model folders]];
+-(void)inboxChanged{
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 -(void)syncDone{
+    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+}
+
+-(void)foldersReady{
+    [layer setFolders:[model folders]];
+}
+
+-(void)nextStep{
+    if (!isWaiting) return;
+    if ([model emailsCountInFolder:@"INBOX"]==0){
+        if ([model isSyncing]){
+            isWaiting = YES;
+            [self performSelectorOnMainThread:@selector(showLoadingHub) withObject:nil waitUntilDone:YES];    
+        }else{
+            isWaiting = NO;
+            [self performSelectorOnMainThread:@selector(hideLoadingHub) withObject:nil waitUntilDone:YES];
+            // show done view;
+        }
+    }else{
+        isWaiting = NO;
+        [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
+        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
+    }
 }
 
 -(void)setNewModel{
-    isWaiting = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
     [self linkToModel];
@@ -171,11 +173,12 @@
 }
 
 -(void)resetModel{
+    [self unlinkToModel];
     [layer cleanDesk];
     if (self.model && [self.model isSyncing]){
         [loadingHud show:YES];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
         [self.model stopSync];
     }else{
         [self setNewModel];
@@ -183,6 +186,7 @@
 }
 
 -(void)onError{
+    [self unlinkToModel];
     isSyncing = false;
     isWaiting = false;
     [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
@@ -194,21 +198,11 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
-#pragma mark - rotation
+#pragma mark - view's lifecyle
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft)||(interfaceOrientation==UIInterfaceOrientationLandscapeRight));
 }
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-    [layer didRotate];
-}
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    //[layer willRotate];
-}
-
-#pragma mark - view's lifecyle
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden=YES;
@@ -233,6 +227,7 @@
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
         [self resetModel];
     }else{
+        [self unlinkToModel];
         TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
         loginCtr.field=self;
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginCtr];
@@ -262,9 +257,7 @@
 }
 
 - (void)viewDidUnload {
-
     [super viewDidUnload];
-
     [layer release];
     [glView removeFromSuperview];
     [glView release];
