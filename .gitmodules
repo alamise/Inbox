@@ -7,3 +7,9 @@
 [submodule "cocos2d-iphone"]
 	path = cocos2d-iphone
 	url = git://github.com/cocos2d/cocos2d-iphone.git
+[submodule "CrashKit"]
+	path = CrashKit
+	url = git://github.com/kaler/CrashKit.git
+[submodule "iRate"]
+	path = iRate
+	url = git://github.com/nicklockwood/iRate.git
