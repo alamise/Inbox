@@ -1,3 +1,6 @@
 [submodule "MailCore"]
 	path = MailCore
 	url = git://github.com/mronge/MailCore.git
+[submodule "MBProgressHUD"]
+	path = MBProgressHUD
+	url = git://github.com/jdg/MBProgressHUD.git
