@@ -53,7 +53,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityStarted) name:MODEL_ACTIVE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityEnded) name:MODEL_UNACTIVE object:nil];
@@ -69,8 +69,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    //crashController = [[CrashController sharedInstance] retain];
-    //crashController.delegate = self;
+    crashController = [[CrashController sharedInstance] retain];
+    crashController.delegate = self;
     
     [crashController sendCrashReportsToEmail:@"sim.w80+inbox@gmail.com" withViewController:navigationController];
 	[window makeKeyAndVisible];
