@@ -24,8 +24,10 @@
 
 #import "DropZoneNode.h"
 #import "cocos2d.h"
+
 @interface DropZoneNode()
 @property(nonatomic,retain) CCLabelTTF* label;
+-(NSString*)readableLabelForPath:(NSString*)path;
 @end
 
 @implementation DropZoneNode

@@ -33,6 +33,4 @@
 }
 @property(nonatomic,retain) DeskController* desk;
 - (IBAction)onLogin:(id)sender;
--(void)linkToModel;
--(void)unlinkToModel;
 @end
