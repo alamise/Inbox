@@ -167,6 +167,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
     [self linkToModel];
+    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
@@ -257,7 +258,7 @@
     glView.autoresizingMask=UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:glView];
     [self setView:glView];
-    layer = [[[DeskLayer alloc] initWithDelegate:self] retain];
+    layer = [[DeskLayer alloc] initWithDelegate:self];
     loadingHud = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");

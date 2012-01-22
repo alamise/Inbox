@@ -455,6 +455,7 @@
         model.skippedIndex=[NSNumber numberWithInt:[model.skippedIndex intValue]+1];
     }else{
         model.newPath = folder;
+        [self performSelectorInBackground:@selector(updateRemoteMessagesAsync) withObject:nil];
     }
     return;
 }

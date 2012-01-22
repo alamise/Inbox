@@ -16,3 +16,6 @@
 [submodule "RegexKitLite"]
 	path = RegexKitLite
 	url = git://github.com/wezm/RegexKitLite.git
+[submodule "GoogleAnalytics-SDK-iOS"]
+	path = GoogleAnalytics-SDK-iOS
+	url = git://github.com/danielctull/GoogleAnalytics-SDK-iOS.git
