@@ -35,15 +35,25 @@
 #import "CrashController.h"
 
 @interface AppDelegate()
+-(void)resetDatabase;
+- (NSString *)databasePath;
+- (NSManagedObjectModel *)managedObjectModel;
 @property (nonatomic, retain) UINavigationController* navigationController;
 @end
 
 @implementation AppDelegate
 @synthesize window,navigationController;
 
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+}
+
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
     CCDirector *director = [CCDirector sharedDirector];
     [director setAnimationInterval:1.0/60];
@@ -124,6 +134,25 @@
 
 #pragma mark - CoreData
 
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (persistentStoreCoordinator != nil) {
+        return persistentStoreCoordinator;
+    }
+    NSURL *storeUrl = [NSURL fileURLWithPath: [self databasePath]];
+    NSError *error = nil;
+    
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                  initWithManagedObjectModel:[self managedObjectModel]];
+    if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                 configuration:nil URL:storeUrl options:nil error:&error]) {
+        NSLog(@"pers %@",[error localizedDescription]);
+    }
+    
+    return persistentStoreCoordinator;
+}
+
+
 -(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse{
     @synchronized(self){
         if (managedObjectContext != nil && reuse) {
@@ -195,23 +224,6 @@
     
     [managedObjectModel release];
     managedObjectModel = nil;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (persistentStoreCoordinator != nil) {
-        return persistentStoreCoordinator;
-    }
-    NSURL *storeUrl = [NSURL fileURLWithPath: [self databasePath]];
-    NSError *error = nil;
-
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
-                                  initWithManagedObjectModel:[self managedObjectModel]];
-    if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                 configuration:nil URL:storeUrl options:nil error:&error]) {
-        NSLog(@"pers %@",[error localizedDescription]);
-    }
-
-    return persistentStoreCoordinator;
 }
 
 

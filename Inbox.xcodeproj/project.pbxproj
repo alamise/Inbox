@@ -17,7 +17,7 @@
 		F41E664514A9CFB800BA4712 /* EmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658614A9CFB700BA4712 /* EmailController.m */; };
 		F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658814A9CFB700BA4712 /* EmailModel.m */; };
 		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
-		F41E664914A9CFB800BA4712 /* ErrorController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.mm */; };
+		F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.m */; };
 		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
 		F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659314A9CFB700BA4712 /* GmailModel.m */; };
 		F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E659614A9CFB700BA4712 /* LoginController.mm */; };
@@ -62,6 +62,7 @@
 		F44CB83414C196E000EB24E8 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB82D14C196E000EB24E8 /* SWTableViewSpriteCell.m */; };
 		F44CB84F14C199CB00EB24E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79C14C194F300EB24E8 /* libcocos2d.a */; };
 		F44CB85014C199D300EB24E8 /* libbox2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79814C194F300EB24E8 /* libbox2d.a */; };
+		F46F717614CC573300C81028 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = F46F716A14CC573300C81028 /* RegexKitLite.m */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -622,7 +623,7 @@
 		F41E658914A9CFB700BA4712 /* EmailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailNode.h; sourceTree = "<group>"; };
 		F41E658A14A9CFB700BA4712 /* EmailNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailNode.mm; sourceTree = "<group>"; };
 		F41E658C14A9CFB700BA4712 /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
-		F41E658D14A9CFB700BA4712 /* ErrorController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorController.mm; sourceTree = "<group>"; };
+		F41E658D14A9CFB700BA4712 /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
 		F41E658E14A9CFB700BA4712 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		F41E658F14A9CFB700BA4712 /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		F41E659214A9CFB700BA4712 /* GmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailModel.h; sourceTree = "<group>"; };
@@ -688,6 +689,8 @@
 		F44CB82C14C196E000EB24E8 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = Inbox/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		F44CB82D14C196E000EB24E8 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = Inbox/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = ../MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
+		F46F716814CC573300C81028 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		F46F716A14CC573300C81028 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -827,7 +830,7 @@
 			isa = PBXGroup;
 			children = (
 				F41E658C14A9CFB700BA4712 /* ErrorController.h */,
-				F41E658D14A9CFB700BA4712 /* ErrorController.mm */,
+				F41E658D14A9CFB700BA4712 /* ErrorController.m */,
 				F41E658E14A9CFB700BA4712 /* ErrorView.xib */,
 			);
 			name = error;
@@ -997,6 +1000,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F46F715914CC573300C81028 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				F46F716814CC573300C81028 /* RegexKitLite.h */,
+				F46F716A14CC573300C81028 /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
 		F4FB8467146D2FEE00B08513 = {
 			isa = PBXGroup;
 			children = (
@@ -1017,6 +1029,7 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F46F715914CC573300C81028 /* RegexKitLite */,
 				F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */,
 				F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */,
 				F44CB70A14C1946B00EB24E8 /* MBProgressHUD */,
@@ -1653,7 +1666,7 @@
 				F41E664514A9CFB800BA4712 /* EmailController.m in Sources */,
 				F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */,
 				F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */,
-				F41E664914A9CFB800BA4712 /* ErrorController.mm in Sources */,
+				F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */,
 				F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */,
 				F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */,
 				F41E664F14A9CFB800BA4712 /* main.m in Sources */,
@@ -1674,6 +1687,7 @@
 				F44CB83214C196E000EB24E8 /* SWTableView.m in Sources */,
 				F44CB83314C196E000EB24E8 /* SWTableViewCell.m in Sources */,
 				F44CB83414C196E000EB24E8 /* SWTableViewSpriteCell.m in Sources */,
+				F46F717614CC573300C81028 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,14 +1769,14 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
+				PROVISIONING_PROFILE = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1777,15 +1791,15 @@
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34401BB4-15E3-4320-B8EC-DCF4D816C42A";
+				PROVISIONING_PROFILE = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1817,7 +1831,10 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-lz";
+				OTHER_LDFLAGS = (
+					"-licucore",
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1852,7 +1869,10 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-lz";
+				OTHER_LDFLAGS = (
+					"-licucore",
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

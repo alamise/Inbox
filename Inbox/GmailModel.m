@@ -31,12 +31,14 @@
 #import "EmailModel.h"
 #import "MailCoreTypes.h"
 #import "FolderModel.h"
+#import "RegexKitLite.h"
 
 @interface GmailModel()
 -(BOOL)saveContext:(NSManagedObjectContext*)context;
 -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 -(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
 -(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
+-(NSString*)decodeImapString:(NSString*)input;
 @end
 
 @implementation GmailModel
@@ -47,6 +49,7 @@
         email = [em retain];
         password = [pwd retain];
         syncLock = [[NSLock alloc] init];
+        writeChangesLock = [[NSLock alloc] init];
     }
     return self;
 }
@@ -66,13 +69,19 @@
     @catch (NSException *exception) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         return false;
+    }    
+    NSMutableSet* decodedFolders = [NSMutableSet setWithCapacity:[folders count]];
+    for (NSString* folderName in folders){
+        [decodedFolders addObject:[self decodeImapString:folderName]];
     }
+    folders = decodedFolders;
+    
     NSArray* disabledFolders = [[NSArray alloc] initWithObjects:
-                                @"INBOX",
+                                NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\""),
                                 @"[Gmail]",
-                                @"[Gmail]/Drafts",
-                                @"[Gmail]/Sent Mail",
-                                @"Notes",
+                                NSLocalizedString(@"folderModel.path.drafts", @"Localized Drafts folder's path en: \"Drafts\""),
+                                NSLocalizedString(@"folderModel.path.sent", @"Localized Sent folder's path en: \"[Gmail]/Sent Mail\""),
+                                NSLocalizedString(@"folderModel.path.notes", @"Localized Notes folder's path en: \"Notes\""),
                                 nil];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -141,11 +150,40 @@
     }
 }
 
+
+-(NSString*)decodeImapString:(NSString*)input{
+    NSMutableDictionary* translationTable = [[NSMutableDictionary alloc] init];
+    [translationTable setObject:@"&" forKey:@"&-"];
+    [translationTable setObject:@"é" forKey:@"&AOk-"];
+    [translationTable setObject:@"â" forKey:@"&AOI-"];
+    [translationTable setObject:@"à" forKey:@"&AOA-"];
+    [translationTable setObject:@"è" forKey:@"&AOg"];
+    [translationTable setObject:@"ç" forKey:@"&AOc"];
+    [translationTable setObject:@"ù" forKey:@"&APk"];
+    [translationTable setObject:@"ê" forKey:@"&AOo"];
+    [translationTable setObject:@"î" forKey:@"&AO4"];
+    [translationTable setObject:@"ó" forKey:@"&APM"];
+    [translationTable setObject:@"ñ" forKey:@"&APE"];
+    [translationTable setObject:@"á" forKey:@"&AOE"];
+    [translationTable setObject:@"ô" forKey:@"&APQ"];                   
+    [translationTable setObject:@"É" forKey:@"&AMk"];
+    [translationTable setObject:@"ë" forKey:@"&AOs"];
+    
+    for (NSString* key in [translationTable allKeys]){
+        input = [input stringByReplacingOccurrencesOfString:key withString:[translationTable objectForKey:key]];
+    }
+    return input;
+}
+
+
 /*
  * Commit local changes to the server.
  * If a message is not found on the server, it's deleted locally.
  */
 -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
+    if(![writeChangesLock tryLock]){
+        return true;
+    }
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -157,6 +195,7 @@
     if (fetchError){
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         [request release];
+        [writeChangesLock unlock];
         return false;
     }
     CTCoreFolder* folder = nil;
@@ -190,6 +229,7 @@
             @catch (NSException *exception) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
+                [writeChangesLock unlock];
                 return false; 
             }
         }else{
@@ -200,13 +240,14 @@
             @catch (NSException* exception) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
+                [writeChangesLock unlock];
                 return false;
             }
             model.path = model.newPath;
             model.newPath=nil;
         }
     }
-    
+    [writeChangesLock unlock];
     return true;
 }
 
@@ -296,7 +337,7 @@
     }
 }
 
--(void)sync {
+-(void)sync{
     dispatch_async( dispatch_get_global_queue(0, 0), ^{
         if(![syncLock tryLock]){
             return;
@@ -409,16 +450,31 @@
     return true;
 }
 
--(BOOL)move:(EmailModel*)model to:(NSString*)folder{
+-(void)move:(EmailModel*)model to:(NSString*)folder{
     if ([folder isEqualToString:@"INBOX"]){
         model.skippedIndex=[NSNumber numberWithInt:[model.skippedIndex intValue]+1];
     }else{
         model.newPath = folder;
     }
-    
-    NSError* error;
-    //[[model managedObjectContext] save:&error];
-        return true;
+    return;
+}
+
+
+-(void)updateRemoteMessagesAsync{
+    if ([writeChangesLock tryLock]){
+        [writeChangesLock unlock];
+        CTCoreAccount* account = [[CTCoreAccount alloc] init];
+        @try {
+            [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
+        }
+        @catch (NSException *exception) {
+            return;
+        }
+        NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:true] retain];
+        [self updateRemoteMessages:account context:context];
+        [context release];
+    }
+
 }
 
 -(NSArray*)folders{

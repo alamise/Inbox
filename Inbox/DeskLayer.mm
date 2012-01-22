@@ -48,11 +48,10 @@ enum {
     -(void)putFoldersZones;
     -(void) putInboxZone;
     -(void)putSettings;
-    -(void) setOrUpdateScene;
 @end
 
 @implementation DeskLayer
-@synthesize draggedNode,folders;
+@synthesize draggedNode,folders,isActive;
 
 -(id) initWithDelegate:(id<DeskProtocol>)d{
 	if( (self=[super init])) {
@@ -119,7 +118,7 @@ enum {
 #pragma mark - drag & drop
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    
+    if (!self.isActive) return NO;
     self.draggedNode = nil;
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     for (EmailNode* node in draggableNodes){        
@@ -142,6 +141,7 @@ enum {
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
+    if (!self.isActive) return;
     if (!self.draggedNode){
         return;
     }else{
@@ -174,6 +174,7 @@ enum {
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    if (!self.isActive) return;
     if (self.draggedNode==nil){
         return;
     }
@@ -379,21 +380,8 @@ enum {
     sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
 }
 
--(void)willAppear{
-    [self setOrUpdateScene];
-}
-
--(void)willRotate{
-    CCSprite* sprite = nil;
-    sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
-    if (sprite) sprite.visible=false;
-    
-    sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
-    if (sprite) sprite.visible=false;
-    CCLabelTTF* loadingLabel = (CCLabelTTF*)[self getChildByTag:tagArchiveSprite];
-    if (loadingLabel){
-        loadingLabel.visible = false;
-    }
+-(int)mailsOnSceneCount{
+    return [draggableNodes count];
 }
 
 -(void)cleanDesk{
@@ -403,7 +391,7 @@ enum {
     [draggableNodes removeAllObjects];
 }
 
--(void)didRotate{
+-(void) checkNodesCoords{
     for (EmailNode* node in draggableNodes){        
         CGRect rect = node.boundingBox;
         CGSize windowSize = [CCDirector sharedDirector].winSize;
@@ -416,7 +404,6 @@ enum {
             }
         }
     }
-    [self setOrUpdateScene];
 }
 
 -(void) tick: (ccTime) dt{

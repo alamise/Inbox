@@ -69,11 +69,13 @@
         if (!plistDic){
             plistDic = [[NSMutableDictionary alloc] initWithCapacity:2];
         }
+        if (![[plistDic objectForKey:@"email"] isEqualToString:emailField.text] || ![[plistDic objectForKey:@"password"] isEqualToString:passwordField.text]){
+            shouldResetModelOnDisappear = YES;
+        }
         [plistDic setValue:emailField.text forKey:@"email"];
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
         [plistDic release];
-        shouldResetModelOnDisappear = YES;
         [self dismissModalViewControllerAnimated:YES];
     }
 }

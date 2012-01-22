@@ -37,6 +37,7 @@
     DeskController* desk;
     NSError* error;
     BOOL shouldSyncOnDisappear;
+    NSDate* viewAppearsDate;
 }
 @property(nonatomic,retain) DeskController* desk;
 @property(nonatomic,retain) NSError* error;

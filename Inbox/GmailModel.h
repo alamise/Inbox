@@ -38,6 +38,7 @@
     NSString *email;
     NSString *password;
     NSLock *syncLock;
+    NSLock * writeChangesLock;
     BOOL shouldStopSync;
 }
 @property(readonly) NSString *email;
@@ -48,7 +49,7 @@
 -(BOOL)isSyncing;
 -(void)stopSync;
 -(EmailModel*)getLastEmailFrom:(NSString*)folder;
--(BOOL)move:(EmailModel*)model to:(NSString*)folder;
+-(void)move:(EmailModel*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;
 -(BOOL)fetchEmailBody:(EmailModel*)model;
 -(NSArray*)folders;

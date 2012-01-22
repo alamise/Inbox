@@ -13,3 +13,6 @@
 [submodule "iRate"]
 	path = iRate
 	url = git://github.com/nicklockwood/iRate.git
+[submodule "RegexKitLite"]
+	path = RegexKitLite
+	url = git://github.com/wezm/RegexKitLite.git

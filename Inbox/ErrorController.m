@@ -63,7 +63,6 @@
 }
 
 
-
 -(IBAction)dismiss{
     shouldSyncOnDisappear = YES;
     [self dismissModalViewControllerAnimated:YES];
@@ -109,6 +108,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     switch ([internetReachable currentReachabilityStatus]) {
         case NotReachable:
             isInternetReachable = NO;
@@ -128,6 +128,7 @@
         [internetReachable performSelector:@selector(startNotifier) withObject:nil afterDelay:1.5];
     }
     [self updateView];
+
 }
 
 - (void)viewDidLoad{

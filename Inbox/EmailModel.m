@@ -38,7 +38,5 @@
 +(NSString*)entityName{
     return @"Email";
 }
-- (void)didTurnIntoFault{
-    [super didTurnIntoFault];
-}
+
 @end

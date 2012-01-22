@@ -39,14 +39,16 @@
     NSTimeInterval lastTouchTime;
     SWTableView* foldersTable;
     NSArray* folders;
+    BOOL isActive;
 }
+@property(assign) BOOL isActive;
 @property(nonatomic,retain) NSArray* folders;
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
-
--(void)didRotate;
--(void)willRotate;
--(void)willAppear;
+-(void) checkNodesCoords;
 -(void)cleanDesk;
+-(void) setOrUpdateScene;
+
+-(int)mailsOnSceneCount;
 @end
 

@@ -32,11 +32,11 @@ static NSMutableArray* ORDER;
 
 +(void)initialize{
     ORDER = [[NSMutableArray alloc] init];
-    [ORDER addObject:@"[Gmail]/All Mail"];
-    [ORDER addObject:@"[Gmail]/Starred"];
-    [ORDER addObject:@"[Gmail]/Important"];
-    [ORDER addObject:@"[Gmail]/Spam"];
-    [ORDER addObject:@"[Gmail]/Trash"];
+    [ORDER addObject:NSLocalizedString(@"folderModel.path.archives", @"Localized Archives folder's path en: \"[Gmail]/All Mail\"")];
+    [ORDER addObject:NSLocalizedString(@"folderModel.path.starred", @"Localized Starred folder's path en:\"[Gmail]/Starred\"")];
+    [ORDER addObject:NSLocalizedString(@"folderModel.path.important", @"Localized Important folder's path en:\"[Gmail]/Important\"")];
+    [ORDER addObject:NSLocalizedString(@"folderModel.path.spam", @"Localized Spam folder's path en:\"[Gmail]/Spam\"")];
+    [ORDER addObject:NSLocalizedString(@"folderModel.path.trash", @"Localized Trash folder's path en:\"[Gmail]/Trash\"")];
 }
 
 +(NSString*)entityName{

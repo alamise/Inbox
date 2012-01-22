@@ -99,10 +99,12 @@
 
 
 -(void)showLoadingHud{
+    layer.isActive = NO;
     [loadingHud show:YES];
 }
 
 -(void)hideLoadingHud{
+    layer.isActive = YES;
     [loadingHud hide:YES];
 }
 
@@ -127,7 +129,7 @@
 
 -(void)syncStarted{
     isWaiting = TRUE;
-    [self performSelectorOnMainThread:@selector(showLoadingHub) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:YES];
 }
 
@@ -144,14 +146,14 @@
 }
 
 -(void)nextStep{
-    if (!isWaiting) return;
+    if ([layer mailsOnSceneCount]!=0) return;
     if ([model emailsCountInFolder:@"INBOX"]==0){
         if ([model isSyncing]){
             isWaiting = YES;
-            [self performSelectorOnMainThread:@selector(showLoadingHub) withObject:nil waitUntilDone:YES];    
+            [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
         }else{
             isWaiting = NO;
-            [self performSelectorOnMainThread:@selector(hideLoadingHub) withObject:nil waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
             // show done view;
         }
     }else{
@@ -176,7 +178,7 @@
     [self unlinkToModel];
     [layer cleanDesk];
     if (self.model && [self.model isSyncing]){
-        [loadingHud show:YES];
+        [self showLoadingHud];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
         [self.model stopSync];
@@ -186,6 +188,10 @@
 }
 
 -(void)onError{
+    [self performSelectorOnMainThread:@selector(presentErrorView) withObject:nil waitUntilDone:NO];
+}
+
+-(void)presentErrorView{
     [self unlinkToModel];
     isSyncing = false;
     isWaiting = false;
@@ -198,6 +204,7 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
+
 #pragma mark - view's lifecyle
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -205,7 +212,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden=YES;
     CCDirector *director = [CCDirector sharedDirector];
     CCScene *scene = [CCScene node];
     [scene addChild:layer];
@@ -217,7 +223,7 @@
         [director runWithScene:scene];
     }
     [director resume];
-    [layer willAppear];
+    [layer setOrUpdateScene];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -235,6 +241,7 @@
         [self presentModalViewController:navCtr animated:YES];
     }
     [plistDic release];
+    [layer setOrUpdateScene];    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -245,6 +252,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden=YES;
     glView = [[EAGLView viewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) pixelFormat:kEAGLColorFormatRGB565 depthFormat:0] retain];
     glView.autoresizingMask=UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:glView];
@@ -254,6 +262,7 @@
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
+    
 }
 
 - (void)viewDidUnload {
