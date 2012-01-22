@@ -22,37 +22,11 @@
  *
  */
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "CTCoreAccount.h"
-#define SYNC_STARTED @"sync started"
-#define SYNC_DONE @"sync done"
-#define SYNC_ABORTED @"sync aborted"
-#define INBOX_STATE_CHANGED @"new messages"
-#define FOLDERS_READY @"folders ready"
-#define MODEL_UNACTIVE @"model unactive"
-#define MODEL_ACTIVE @"model active"
-@protocol DeskProtocol;
-@class EmailModel;
-
-@interface GmailModel : NSObject{
-    NSString *email;
-    NSString *password;
-    NSLock *syncLock;
-    NSLock * writeChangesLock;
-    BOOL shouldStopSync;
-    int asyncOpsCount;
+#import <UIKit/UIKit.h>
+#import "DeskController.h"
+@interface InboxEmptyController : UIViewController{
+    DeskController* desk;
 }
-@property(readonly) NSString *email;
-@property(readonly) NSString *password;
-@property(readonly) BOOL isLooping;
--(id)initWithAccount:(NSString*)email password:(NSString*)password;
--(void)sync;
--(BOOL)isSyncing;
--(void)stopSync;
--(EmailModel*)getLastEmailFrom:(NSString*)folder;
--(void)move:(EmailModel*)model to:(NSString*)folder;
--(int)emailsCountInFolder:(NSString*)folder;
--(BOOL)fetchEmailBody:(EmailModel*)model;
--(NSArray*)folders;
+@property(nonatomic,retain) DeskController* desk;
+- (IBAction)onRefresh;
 @end

@@ -33,7 +33,7 @@
 #import "LoginController.h"
 #import "TutorialController.h"
 #import "CrashController.h"
-
+#import "GmailModel.h"
 @interface AppDelegate()
 -(void)resetDatabase;
 - (NSString *)databasePath;
@@ -55,6 +55,9 @@ void uncaughtExceptionHandler(NSException *exception) {
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityStarted) name:MODEL_ACTIVE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityEnded) name:MODEL_UNACTIVE object:nil];
+
     CCDirector *director = [CCDirector sharedDirector];
     [director setAnimationInterval:1.0/60];
     [director setDisplayFPS:YES];
@@ -71,6 +74,14 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [crashController sendCrashReportsToEmail:@"sim.w80+inbox@gmail.com" withViewController:navigationController];
 	[window makeKeyAndVisible];
+}
+
+-(void) asyncActivityStarted{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];   
+}
+
+-(void) asyncActivityEnded{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];    
 }
 
 - (void)dealloc {

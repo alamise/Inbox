@@ -50,6 +50,7 @@
         password = [pwd retain];
         syncLock = [[NSLock alloc] init];
         writeChangesLock = [[NSLock alloc] init];
+        asyncOpsCount=0;
     }
     return self;
 }
@@ -60,6 +61,24 @@
     [super dealloc];
 }
 
+
+-(void)asyncOpStarted{
+    @synchronized(self){
+        asyncOpsCount++;
+        if (asyncOpsCount==1){
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ACTIVE object:nil];
+        }
+    }
+}
+
+-(void)asyncOpEnded{
+    @synchronized(self){
+        asyncOpsCount--;
+        if (asyncOpsCount==0){
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_UNACTIVE object:nil];
+        }
+    }    
+}
 
 -(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context {
     NSSet* folders = nil;
@@ -184,6 +203,7 @@
     if(![writeChangesLock tryLock]){
         return true;
     }
+    [self asyncOpStarted];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -196,6 +216,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
         [request release];
         [writeChangesLock unlock];
+        [self asyncOpEnded];
         return false;
     }
     CTCoreFolder* folder = nil;
@@ -230,6 +251,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
                 [writeChangesLock unlock];
+                [self asyncOpEnded];
                 return false; 
             }
         }else{
@@ -241,6 +263,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 [request release];
                 [writeChangesLock unlock];
+                [self asyncOpEnded];
                 return false;
             }
             model.path = model.newPath;
@@ -248,6 +271,7 @@
         }
     }
     [writeChangesLock unlock];
+    [self asyncOpEnded];
     return true;
 }
 
@@ -355,12 +379,14 @@
             [syncLock unlock];
             return;
         }
+        [self asyncOpStarted];
         if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
             [account release];
             [context release];
             [syncLock unlock];
             return;
         }
+        [self asyncOpEnded];
         if ([self saveContext:context]){
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
         }        

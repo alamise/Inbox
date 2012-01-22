@@ -22,23 +22,37 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import "InboxEmptyController.h"
 
-@class DeskController;
-@class MBProgressHUD;
+@implementation InboxEmptyController
+@synthesize  desk;
 
-@interface SettingsController : UIViewController{
-    
-    IBOutlet UILabel *inboxCountValue;
-    IBOutlet UILabel *lastSyncValue;
-    IBOutlet UILabel *accountValue;
-    DeskController* desk;
-    MBProgressHUD* hud;
-    BOOL resync;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
 }
-@property(nonatomic,retain) DeskController* desk;
-- (IBAction)sync:(id)sender;
-- (IBAction)editAccount:(id)sender;
--(void)linkToModel;
--(void)unlinkToModel;
+
+-(void)dealloc{
+    self.desk = nil;
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+}
+
+- (void)viewDidUnload{
+    [super viewDidUnload];
+}
+
+- (IBAction)onRefresh {
+}
 @end

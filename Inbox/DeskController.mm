@@ -31,7 +31,7 @@
 #import "ErrorController.h"
 #import "GmailModel.h"
 #import "cocos2d.h"
-#import "SettingsController.h"
+#import "InboxEmptyController.h"
 #import "LoginController.h"
 
 @interface DeskController ()
@@ -93,7 +93,14 @@
     if ([model fetchEmailBody:email]){
         [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES];
     }else{
-//
+        [self unlinkToModel];
+        ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
+        errorController.desk = self;
+        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
+        [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
+        navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
+        navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:navCtr animated:YES];
     }
 }
 
@@ -147,19 +154,26 @@
 
 -(void)nextStep{
     if ([layer mailsOnSceneCount]!=0) return;
-    if ([model emailsCountInFolder:@"INBOX"]==0){
+    if ([model emailsCountInFolder:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")]==0){
         if ([model isSyncing]){
             isWaiting = YES;
             [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
         }else{
             isWaiting = NO;
             [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-            // show done view;
+            [self unlinkToModel];
+            InboxEmptyController* inboxEmptyController = [[InboxEmptyController alloc] initWithNibName:@"InboxEmptyView" bundle:nil];
+            inboxEmptyController.desk = self;
+            UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:inboxEmptyController];
+            [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
+            navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
+            navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:navCtr animated:YES];
         }
     }else{
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-        [layer putEmail:[model getLastEmailFrom:@"INBOX"]];
+        [layer putEmail:[model getLastEmailFrom:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")]];
     }
 }
 

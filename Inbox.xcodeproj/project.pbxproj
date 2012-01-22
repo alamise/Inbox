@@ -43,13 +43,11 @@
 		F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43819F014AB90CA0017C9BC /* FolderModel.m */; };
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
-		F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4381A0F14AC909D0017C9BC /* SettingsController.m */; };
 		F444A26314BE37BF00F1E316 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F444A26214BE37BF00F1E316 /* tutorialSettingsButton.png */; };
 		F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */; };
 		F444C0E514BA01F400D08560 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E714BA01F400D08560 /* TutorialView.xib */; };
 		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
 		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
-		F444C0F114BA026600D08560 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F314BA026600D08560 /* SettingsView.xib */; };
 		F444C0F714BA052200D08560 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F514BA052200D08560 /* Localizable.strings */; };
 		F44CB71114C1946B00EB24E8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB70E14C1946B00EB24E8 /* MBProgressHUD.m */; };
 		F44CB81F14C1964700EB24E8 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44CB81E14C1964700EB24E8 /* GLES-Render.mm */; };
@@ -63,6 +61,8 @@
 		F44CB84F14C199CB00EB24E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79C14C194F300EB24E8 /* libcocos2d.a */; };
 		F44CB85014C199D300EB24E8 /* libbox2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44CB79814C194F300EB24E8 /* libbox2d.a */; };
 		F46F717614CC573300C81028 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = F46F716A14CC573300C81028 /* RegexKitLite.m */; };
+		F46F717B14CC795400C81028 /* InboxEmptyController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46F717914CC795400C81028 /* InboxEmptyController.m */; };
+		F46F717C14CC795400C81028 /* InboxEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46F717A14CC795400C81028 /* InboxEmptyView.xib */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -658,15 +658,12 @@
 		F43819F014AB90CA0017C9BC /* FolderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderModel.m; sourceTree = "<group>"; };
 		F43819F214AC79530017C9BC /* settingsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsDown.png; sourceTree = "<group>"; };
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
-		F4381A0E14AC909D0017C9BC /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
-		F4381A0F14AC909D0017C9BC /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		F444A26214BE37BF00F1E316 /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialSettingsButton.png; sourceTree = "<group>"; };
 		F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formSheetWoodBackground.png; sourceTree = "<group>"; };
 		F444C0E614BA01F400D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TutorialView.xib; sourceTree = "<group>"; };
 		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EC14BA025400D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
-		F444C0F214BA026600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView.xib; sourceTree = "<group>"; };
 		F444C0F614BA052200D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Inbox/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		F444C0F814BA052A00D08560 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Inbox/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		F44CB70D14C1946B00EB24E8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -691,6 +688,9 @@
 		F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = ../MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F46F716814CC573300C81028 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		F46F716A14CC573300C81028 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		F46F717814CC795400C81028 /* InboxEmptyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxEmptyController.h; sourceTree = "<group>"; };
+		F46F717914CC795400C81028 /* InboxEmptyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxEmptyController.m; sourceTree = "<group>"; };
+		F46F717A14CC795400C81028 /* InboxEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InboxEmptyView.xib; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -797,7 +797,7 @@
 		F41E666314A9CFE300BA4712 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				F4381A0C14AC90620017C9BC /* settings */,
+				F46F717714CC791900C81028 /* inbox empty */,
 				F41E666714A9D00500BA4712 /* tutorial */,
 				F41E666614A9CFFE00BA4712 /* error */,
 				F41E666514A9CFF700BA4712 /* login */,
@@ -873,16 +873,6 @@
 				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 			);
 			name = desk;
-			sourceTree = "<group>";
-		};
-		F4381A0C14AC90620017C9BC /* settings */ = {
-			isa = PBXGroup;
-			children = (
-				F4381A0E14AC909D0017C9BC /* SettingsController.h */,
-				F4381A0F14AC909D0017C9BC /* SettingsController.m */,
-				F444C0F314BA026600D08560 /* SettingsView.xib */,
-			);
-			name = settings;
 			sourceTree = "<group>";
 		};
 		F44CB70A14C1946B00EB24E8 /* MBProgressHUD */ = {
@@ -1007,6 +997,16 @@
 				F46F716A14CC573300C81028 /* RegexKitLite.m */,
 			);
 			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
+		F46F717714CC791900C81028 /* inbox empty */ = {
+			isa = PBXGroup;
+			children = (
+				F46F717814CC795400C81028 /* InboxEmptyController.h */,
+				F46F717914CC795400C81028 /* InboxEmptyController.m */,
+				F46F717A14CC795400C81028 /* InboxEmptyView.xib */,
+			);
+			name = "inbox empty";
 			sourceTree = "<group>";
 		};
 		F4FB8467146D2FEE00B08513 = {
@@ -1645,11 +1645,11 @@
 				F426414014AB718500040EC9 /* sticker.png in Resources */,
 				F43819F414AC79530017C9BC /* settingsDown.png in Resources */,
 				F43819F514AC79530017C9BC /* settingsUp.png in Resources */,
-				F444C0F114BA026600D08560 /* SettingsView.xib in Resources */,
 				F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */,
 				F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */,
 				F444C0F714BA052200D08560 /* Localizable.strings in Resources */,
 				F444A26314BE37BF00F1E316 /* tutorialSettingsButton.png in Resources */,
+				F46F717C14CC795400C81028 /* InboxEmptyView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1675,7 +1675,6 @@
 				F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */,
 				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
 				F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */,
-				F4381A1114AC909D0017C9BC /* SettingsController.m in Sources */,
 				F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */,
 				F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */,
 				F44CB71114C1946B00EB24E8 /* MBProgressHUD.m in Sources */,
@@ -1688,6 +1687,7 @@
 				F44CB83314C196E000EB24E8 /* SWTableViewCell.m in Sources */,
 				F44CB83414C196E000EB24E8 /* SWTableViewSpriteCell.m in Sources */,
 				F46F717614CC573300C81028 /* RegexKitLite.m in Sources */,
+				F46F717B14CC795400C81028 /* InboxEmptyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1735,14 +1735,6 @@
 				F444C0EE14BA025A00D08560 /* en */,
 			);
 			name = EmailView.xib;
-			sourceTree = "<group>";
-		};
-		F444C0F314BA026600D08560 /* SettingsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F444C0F214BA026600D08560 /* en */,
-			);
-			name = SettingsView.xib;
 			sourceTree = "<group>";
 		};
 		F444C0F514BA052200D08560 /* Localizable.strings */ = {
