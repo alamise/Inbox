@@ -56,6 +56,8 @@
 }
 
 -(void)dealloc{
+    [syncLock release];
+    [writeChangesLock release];
     [email release];
     [password release];
     [super dealloc];
@@ -191,6 +193,7 @@
     for (NSString* key in [translationTable allKeys]){
         input = [input stringByReplacingOccurrencesOfString:key withString:[translationTable objectForKey:key]];
     }
+    [translationTable release];
     return input;
 }
 
@@ -389,7 +392,9 @@
         [self asyncOpEnded];
         if ([self saveContext:context]){
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
-        }        
+        }
+        [account release];
+        [context release];
         [syncLock unlock];
     });
 }
@@ -495,11 +500,13 @@
             [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
         }
         @catch (NSException *exception) {
+            [account release];
             return;
         }
         NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:true] retain];
         [self updateRemoteMessages:account context:context];
         [context release];
+        [account release];
     }
 
 }
@@ -534,10 +541,9 @@
     NSError* fetchError = nil;
     int count = [context countForFetchRequest:request error:&fetchError];
     [context release];
+    [request release];
     if (fetchError){
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
-        [request release];
-        [context release];
         return -1;
     }else{
         return count;

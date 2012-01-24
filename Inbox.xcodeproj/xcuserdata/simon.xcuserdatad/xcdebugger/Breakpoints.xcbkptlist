@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/GmailModel.m"
-         timestampString = "348944009.557109"
+         timestampString = "349138787.608905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "423"
-         endingLineNumber = "423"
+         startingLineNumber = "428"
+         endingLineNumber = "428"
          landmarkName = "-getLastEmailFrom:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/GmailModel.m"
-         timestampString = "348944042.378176"
+         timestampString = "349138787.608905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-asyncOpEnded"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/GmailModel.m"
-         timestampString = "348944137.286945"
+         timestampString = "349138787.608905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "-asyncOpStarted"
          landmarkType = "5">
       </FileBreakpoint>
@@ -126,32 +126,6 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "14"
          endingLineNumber = "14">
-         <Locations>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController desk]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "348946160.725531"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "30"
-               endingLineNumber = "30">
-            </Location>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController setDesk:]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "348946160.725875"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "30"
-               endingLineNumber = "30">
-            </Location>
-         </Locations>
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>

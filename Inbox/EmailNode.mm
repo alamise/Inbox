@@ -52,6 +52,7 @@
         fixtureDef.restitution = 1;
         body->CreateFixture(&fixtureDef);
         self.scale=0;
+        free(dynamicBox);
     }
     return self;    
 }

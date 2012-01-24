@@ -85,7 +85,7 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace" id="836649597">
+					<object class="NSColorSpace" key="NSCustomColorSpace">
 						<int key="NSID">2</int>
 					</object>
 				</object>
@@ -115,39 +115,44 @@
 					<object class="IBUILabel" id="604353991">
 						<reference key="NSNextResponder" ref="233413875"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{540, 78}</string>
+						<string key="NSFrame">{{0, 116}, {540, 78}}</string>
 						<reference key="NSSuperview" ref="233413875"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="686292570"/>
+						<reference key="NSNextKeyView" ref="946124901"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I'm built to keep your inbox empty</string>
-						<object class="NSColor" key="IBUITextColor">
+						<string key="IBUIText">HELLO</string>
+						<object class="NSColor" key="IBUITextColor" id="241693683">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="836649597"/>
+							<bytes key="NSWhite">MQA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MjMwMzgzMjEyAA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUINumberOfLines">0</int>
+						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
-							<double key="pointSize">35</double>
+							<double key="pointSize">52</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">35</double>
+							<double key="NSSize">52</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUILabel" id="686292570">
+					<object class="IBUILabel" id="946124901">
 						<reference key="NSNextResponder" ref="233413875"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{289, 259}, {251, 21}}</string>
+						<string key="NSFrame">{{20, 242}, {500, 166}}</string>
 						<reference key="NSSuperview" ref="233413875"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -157,22 +162,23 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Here is how ...</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAgMC44NQA</bytes>
-						</object>
+						<string key="IBUIText">I'm "Inbox".  I will help you clean your Gmail inbox.  Scroll right to see how.</string>
+						<reference key="IBUITextColor" ref="241693683"/>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MjMwMzgzMjEyAA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
+						<int key="IBUINumberOfLines">0</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
-							<double key="pointSize">17</double>
+							<double key="pointSize">29</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
+							<double key="NSSize">29</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -182,10 +188,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="584045275"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
-				<object class="NSColor" key="IBUIBackgroundColor" id="241693683">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="241693683"/>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -200,7 +203,7 @@
 						<string key="NSFrameSize">{540, 540}</string>
 						<reference key="NSSuperview" ref="1054150915"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="272339868"/>
+						<reference key="NSNextKeyView" ref="410729687"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -210,10 +213,10 @@
 					<object class="IBUIImageView" id="410729687">
 						<reference key="NSNextResponder" ref="1054150915"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{150, 188}, {240, 164}}</string>
+						<string key="NSFrame">{{20, 188}, {240, 164}}</string>
 						<reference key="NSSuperview" ref="1054150915"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="272339868"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -226,22 +229,26 @@
 					<object class="IBUILabel" id="272339868">
 						<reference key="NSNextResponder" ref="1054150915"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 74}, {285, 113}}</string>
+						<string key="NSFrame">{{268, 213}, {228, 113}}</string>
 						<reference key="NSSuperview" ref="1054150915"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="410729687"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MiAwAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I'm an email.  I pop from your inbox. You can drag me wherever you want</string>
+						<string key="IBUIText">I'm an email.  I pop from your inbox and you can drag me wherever you want.</string>
 						<reference key="IBUITextColor" ref="241693683"/>
 						<nil key="IBUIHighlightedColor"/>
 						<object class="NSColor" key="IBUIShadowColor">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41ODE5NjgyNDYAA</bytes>
+							<bytes key="NSWhite">MC41MgA</bytes>
 						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
@@ -308,18 +315,22 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MiAwAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I'm your inbox. Emails will pop from me. If you want to skip one just drag it back to me</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="836649597"/>
-						</object>
+						<string key="IBUIText">I'm your inbox.  Emails pop from me.  If you want to skip one just drag it back to me.</string>
+						<reference key="IBUITextColor" ref="241693683"/>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MgA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">0</int>
@@ -347,7 +358,7 @@
 						<string key="NSFrameSize">{540, 540}</string>
 						<reference key="NSSuperview" ref="327284675"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="255211061"/>
+						<reference key="NSNextKeyView" ref="998469890"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -357,10 +368,10 @@
 					<object class="IBUIImageView" id="998469890">
 						<reference key="NSNextResponder" ref="327284675"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{150, 157}, {240, 226}}</string>
+						<string key="NSFrame">{{7, 157}, {240, 226}}</string>
 						<reference key="NSSuperview" ref="327284675"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="255211061"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -373,23 +384,27 @@
 					<object class="IBUILabel" id="255211061">
 						<reference key="NSNextResponder" ref="327284675"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 52}, {285, 113}}</string>
+						<string key="NSFrame">{{255, 213}, {285, 113}}</string>
 						<reference key="NSSuperview" ref="327284675"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="998469890"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MiAwAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I'm a folder. Drag emails to me to sort them.</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="836649597"/>
-						</object>
+						<string key="IBUIText">I'm a folder.  Drag emails to me to sort them.</string>
+						<reference key="IBUITextColor" ref="241693683"/>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MgA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">0</int>
@@ -443,23 +458,27 @@
 					<object class="IBUILabel" id="322000169">
 						<reference key="NSNextResponder" ref="324819299"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{79, 119}, {383, 113}}</string>
+						<string key="NSFrame">{{117, 119}, {306, 113}}</string>
 						<reference key="NSSuperview" ref="324819299"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="69418486"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MiAwAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I'm the settings button. I can perform your changes on Gmail when you are or get new emails. I can also tell you how much emails you still have to sort. You just have to ask nicely</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="836649597"/>
-						</object>
+						<string key="IBUIText">I'm the account button.  Tap on me to change your current Gmail account.</string>
+						<reference key="IBUITextColor" ref="241693683"/>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41MgA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">0</int>
@@ -487,7 +506,7 @@
 						<string key="NSFrameSize">{540, 540}</string>
 						<reference key="NSSuperview" ref="404651314"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="470351569"/>
+						<reference key="NSNextKeyView" ref="900536262"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">5</int>
@@ -507,7 +526,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">Next</string>
+						<string key="IBUINormalTitle">Login </string>
 						<reference key="IBUIHighlightedTitleColor" ref="241693683"/>
 						<reference key="IBUINormalTitleColor" ref="61508769"/>
 						<object class="NSColor" key="IBUINormalTitleShadowColor">
@@ -525,44 +544,6 @@
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
-					<object class="IBUILabel" id="470351569">
-						<reference key="NSNextResponder" ref="404651314"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 191}, {500, 46}}</string>
-						<reference key="NSSuperview" ref="404651314"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="900536262"/>
-						<string key="NSReuseIdentifierKey">_NS:328</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">I think we are good don't you think ?</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="836649597"/>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<object class="NSColor" key="IBUIShadowColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-						</object>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUINumberOfLines">0</int>
-						<int key="IBUITextAlignment">1</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">1</int>
-							<double key="pointSize">19</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">19</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -731,8 +712,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="584045275"/>
-							<reference ref="686292570"/>
 							<reference ref="604353991"/>
+							<reference ref="946124901"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">tutorial view</string>
@@ -768,7 +749,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1056977689"/>
 							<reference ref="900536262"/>
-							<reference ref="470351569"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">tutorial view</string>
@@ -797,12 +777,6 @@
 						<string key="objectName">background</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">55</int>
-						<reference key="object" ref="470351569"/>
-						<reference key="parent" ref="404651314"/>
-						<string key="objectName">label</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">56</int>
 						<reference key="object" ref="69418486"/>
 						<reference key="parent" ref="324819299"/>
@@ -817,11 +791,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">58</int>
 						<reference key="object" ref="584045275"/>
-						<reference key="parent" ref="233413875"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">59</int>
-						<reference key="object" ref="686292570"/>
 						<reference key="parent" ref="233413875"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -905,6 +874,11 @@
 						<reference key="object" ref="760122771"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">78</int>
+						<reference key="object" ref="946124901"/>
+						<reference key="parent" ref="233413875"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -926,11 +900,9 @@
 					<string>45.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>54.IBPluginDependency</string>
-					<string>55.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
 					<string>58.IBPluginDependency</string>
-					<string>59.IBPluginDependency</string>
 					<string>60.IBPluginDependency</string>
 					<string>61.IBPluginDependency</string>
 					<string>62.IBPluginDependency</string>
@@ -942,13 +914,13 @@
 					<string>68.IBPluginDependency</string>
 					<string>69.IBPluginDependency</string>
 					<string>70.IBPluginDependency</string>
+					<string>78.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>TutorialController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -990,7 +962,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">77</int>
+			<int key="maxID">78</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

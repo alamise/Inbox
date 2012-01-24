@@ -184,7 +184,7 @@
     [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    self.model = [[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]];
+    self.model = [[[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]] autorelease];
     [plistDic release];
     [self.model sync];
 }

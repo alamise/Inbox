@@ -33,7 +33,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(goToNextStep)];          
+        UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"tutorial.skipbutton", @"navigation bar right button to skip the tutorial") style:UIBarButtonItemStylePlain target:self action:@selector(goToNextStep)];          
+        self.title=NSLocalizedString(@"tutorial.title",@"");
         self.navigationItem.rightBarButtonItem = skipButton;
         [skipButton release];
     }

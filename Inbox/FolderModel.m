@@ -23,20 +23,16 @@
  */
 
 #import "FolderModel.h"
-
+@interface FolderModel(){
+}
+@end
 
 @implementation FolderModel
-static NSMutableArray* ORDER;
 @dynamic path;
 
 
 +(void)initialize{
-    ORDER = [[NSMutableArray alloc] init];
-    [ORDER addObject:NSLocalizedString(@"folderModel.path.archives", @"Localized Archives folder's path en: \"[Gmail]/All Mail\"")];
-    [ORDER addObject:NSLocalizedString(@"folderModel.path.starred", @"Localized Starred folder's path en:\"[Gmail]/Starred\"")];
-    [ORDER addObject:NSLocalizedString(@"folderModel.path.important", @"Localized Important folder's path en:\"[Gmail]/Important\"")];
-    [ORDER addObject:NSLocalizedString(@"folderModel.path.spam", @"Localized Spam folder's path en:\"[Gmail]/Spam\"")];
-    [ORDER addObject:NSLocalizedString(@"folderModel.path.trash", @"Localized Trash folder's path en:\"[Gmail]/Trash\"")];
+    
 }
 
 +(NSString*)entityName{
@@ -44,10 +40,15 @@ static NSMutableArray* ORDER;
 }
 
 - (NSComparisonResult) compare:(FolderModel*) other{
-    
-    int myPos = [ORDER indexOfObject:self.path];
-    int itsPos = [ORDER indexOfObject:other.path];
-    
+    NSMutableArray* order = [[NSMutableArray alloc] init];
+    [order addObject:NSLocalizedString(@"folderModel.path.archives", @"Localized Archives folder's path en: \"[Gmail]/All Mail\"")];
+    [order addObject:NSLocalizedString(@"folderModel.path.starred", @"Localized Starred folder's path en:\"[Gmail]/Starred\"")];
+    [order addObject:NSLocalizedString(@"folderModel.path.important", @"Localized Important folder's path en:\"[Gmail]/Important\"")];
+    [order addObject:NSLocalizedString(@"folderModel.path.spam", @"Localized Spam folder's path en:\"[Gmail]/Spam\"")];
+    [order addObject:NSLocalizedString(@"folderModel.path.trash", @"Localized Trash folder's path en:\"[Gmail]/Trash\"")];
+    int myPos = [order indexOfObject:self.path];
+    int itsPos = [order indexOfObject:other.path];
+    [order release];
     if ((myPos!=NSNotFound)&&(itsPos!=NSNotFound)){
         if (myPos>itsPos){
             return NSOrderedDescending;

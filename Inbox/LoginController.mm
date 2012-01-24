@@ -32,6 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         shouldResetModelOnDisappear = NO;
+        self.title=NSLocalizedString(@"login.title", @"");
     }
     return self;
 }
