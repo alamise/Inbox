@@ -249,9 +249,9 @@
         [self resetModel];
     }else{
         [self unlinkToModel];
-        TutorialController* loginCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
-        loginCtr.field=self;
-        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginCtr];
+        TutorialController* tutorialCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
+        tutorialCtr.field=self;
+        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:tutorialCtr];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         [self presentModalViewController:navCtr animated:YES];
     }

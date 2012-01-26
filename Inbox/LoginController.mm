@@ -38,7 +38,7 @@
 }
 
 - (void)dealloc {
-    self.desk = nil;
+    //self.desk = nil;
     [emailField release];
     [passwordField release];
     [submitButton release];

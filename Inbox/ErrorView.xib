@@ -49,9 +49,9 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="338848240">
+						<object class="NSCustomResource" key="IBUIImage" id="938859980">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">woodBackground.jpg</string>
+							<string key="NSResourceName">woodBackground-ipad.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="55716638">
@@ -210,7 +210,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="338848240"/>
+						<reference key="IBUIImage" ref="938859980"/>
 					</object>
 					<object class="IBUIButton" id="670014164">
 						<reference key="NSNextResponder" ref="224360816"/>
@@ -281,7 +281,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="338848240"/>
+						<reference key="IBUIImage" ref="938859980"/>
 					</object>
 					<object class="IBUIButton" id="347048068">
 						<reference key="NSNextResponder" ref="11117671"/>
@@ -371,7 +371,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="338848240"/>
+						<reference key="IBUIImage" ref="938859980"/>
 					</object>
 					<object class="IBUIActivityIndicatorView" id="932033285">
 						<reference key="NSNextResponder" ref="773879885"/>
@@ -726,7 +726,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="buttonImage.png">{202, 50}</string>
-			<string key="woodBackground.jpg">{1024, 768}</string>
+			<string key="woodBackground-ipad.jpg">{1024, 768}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

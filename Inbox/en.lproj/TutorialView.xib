@@ -107,9 +107,9 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="417665830">
+						<object class="NSCustomResource" key="IBUIImage" id="34071485">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">woodBackground.jpg</string>
+							<string key="NSResourceName">woodBackground-ipad.jpg</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="604353991">
@@ -208,7 +208,7 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="417665830"/>
+						<reference key="IBUIImage" ref="34071485"/>
 					</object>
 					<object class="IBUIImageView" id="410729687">
 						<reference key="NSNextResponder" ref="1054150915"/>
@@ -223,7 +223,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">emailBackground.png</string>
+							<string key="NSResourceName">emailBackground-ipad.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="272339868">
@@ -289,7 +289,7 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="417665830"/>
+						<reference key="IBUIImage" ref="34071485"/>
 					</object>
 					<object class="IBUIImageView" id="201681661">
 						<reference key="NSNextResponder" ref="781183352"/>
@@ -363,7 +363,7 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="417665830"/>
+						<reference key="IBUIImage" ref="34071485"/>
 					</object>
 					<object class="IBUIImageView" id="998469890">
 						<reference key="NSNextResponder" ref="327284675"/>
@@ -437,7 +437,7 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="417665830"/>
+						<reference key="IBUIImage" ref="34071485"/>
 					</object>
 					<object class="IBUIImageView" id="69418486">
 						<reference key="NSNextResponder" ref="324819299"/>
@@ -452,7 +452,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">settingsDown.png</string>
+							<string key="NSResourceName">settingsUp-ipad.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="322000169">
@@ -512,7 +512,7 @@
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="417665830"/>
+						<reference key="IBUIImage" ref="34071485"/>
 					</object>
 					<object class="IBUIButton" id="900536262">
 						<reference key="NSNextResponder" ref="404651314"/>
@@ -1063,17 +1063,17 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>buttonImage.png</string>
 				<string>circle.png</string>
-				<string>emailBackground.png</string>
+				<string>emailBackground-ipad.png</string>
 				<string>inboxZone.png</string>
-				<string>settingsDown.png</string>
-				<string>woodBackground.jpg</string>
+				<string>settingsUp-ipad.png</string>
+				<string>woodBackground-ipad.jpg</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{202, 50}</string>
-				<string>{200, 200}</string>
+				<string>{16, 16}</string>
 				<string>{217, 132}</string>
-				<string>{217, 748}</string>
+				<string>{16, 16}</string>
 				<string>{62, 62}</string>
 				<string>{1024, 768}</string>
 			</object>

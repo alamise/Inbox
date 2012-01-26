@@ -69,10 +69,9 @@
 }
 
 -(IBAction)editAccount{
-    LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
+    LoginController* loginController = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];   
     loginController.desk=self.desk;
     [self.navigationController pushViewController:loginController animated:YES];
-    [loginController release];
 }
 
 - (void) checkNetworkStatus:(NSNotification *)notice{
