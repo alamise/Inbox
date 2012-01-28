@@ -882,8 +882,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="482.4334"
-     inkscape:cy="487.12841"
+     inkscape:cx="544.4334"
+     inkscape:cy="567.12841"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1247,11 +1247,11 @@
        sodipodi:cy="607.3941"
        sodipodi:rx="92.001396"
        sodipodi:ry="92.001396"
-       d="m 494.72448,607.3941 a 92.001396,92.001396 0 1 1 -184.00279,0 92.001396,92.001396 0 1 1 184.00279,0 z"
+       d="m 494.72448,607.3941 c 0,50.81097 -41.19043,92.0014 -92.0014,92.0014 -50.81096,0 -92.00139,-41.19043 -92.00139,-92.0014 0,-50.81096 41.19043,-92.00139 92.00139,-92.00139 50.81097,0 92.0014,41.19043 92.0014,92.00139 z"
        transform="matrix(1.0738207,0,0,1.0738207,471.92507,-256.49684)" />
     <path
        transform="matrix(1.0738207,0,0,1.0738207,471.92507,-256.49684)"
-       d="m 494.72448,607.3941 a 92.001396,92.001396 0 1 1 -184.00279,0 92.001396,92.001396 0 1 1 184.00279,0 z"
+       d="m 494.72448,607.3941 c 0,50.81097 -41.19043,92.0014 -92.0014,92.0014 -50.81096,0 -92.00139,-41.19043 -92.00139,-92.0014 0,-50.81096 41.19043,-92.00139 92.00139,-92.00139 50.81097,0 92.0014,41.19043 92.0014,92.00139 z"
        sodipodi:ry="92.001396"
        sodipodi:rx="92.001396"
        sodipodi:cy="607.3941"
@@ -1291,5 +1291,31 @@
            id="tspan4118"
            sodipodi:role="line">INBOX</tspan></text>
     </g>
+    <path
+       transform="translate(699,141.36218)"
+       d="m -49,238.5 a 73.5,73.5 0 1 1 -147,0 73.5,73.5 0 1 1 147,0 z"
+       sodipodi:ry="73.5"
+       sodipodi:rx="73.5"
+       sodipodi:cy="238.5"
+       sodipodi:cx="-122.5"
+       id="path3987"
+       style="fill:#00ff00;fill-opacity:0;fill-rule:evenodd;stroke:#ffffff;stroke-width:11.05900002;stroke-miterlimit:4;stroke-opacity:0.44247808;stroke-dasharray:none;stroke-dashoffset:0"
+       sodipodi:type="arc"
+       inkscape:export-filename="/Users/simon/Documents/projects/Inbox/Inbox/Resources/progressActivityBackground.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ff00;fill-opacity:0;fill-rule:evenodd;stroke:#000000;stroke-width:11.05900002;stroke-miterlimit:4;stroke-opacity:0.65929206;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3163"
+       sodipodi:cx="-122.5"
+       sodipodi:cy="238.5"
+       sodipodi:rx="73.5"
+       sodipodi:ry="73.5"
+       d="m -49,238.5 a 73.5,73.5 0 1 1 -147,0 73.5,73.5 0 1 1 147,0 z"
+       transform="translate(670,139.36218)"
+       inkscape:export-filename="/Users/simon/Documents/projects/Inbox/Inbox/Resources/progressActivityForeground.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
