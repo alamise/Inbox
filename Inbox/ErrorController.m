@@ -28,8 +28,7 @@
 #import "DeskController.h"
 #import "GmailModel.h"
 @interface ErrorController()
--(void)updateView;
--(void)saveInternetStatus:(NetworkStatus) status;
+-(void)updateViewWithNetworkStatus:(NetworkStatus)status;
 @end
 
 @implementation ErrorController
@@ -38,7 +37,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         shouldExecActionOnDismiss = NO;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+        // The network status is checked once, when the view is loaded. See the revision [master 3dac19c] for the version that listen to network events.
         internetReachable = [[Reachability reachabilityWithHostName:@"www.google.fr"] retain];
     }
     return self;
@@ -47,7 +46,6 @@
 -(void)dealloc{
     self.actionOnDismiss = nil;
     [internetReachable release];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
     [connectionIsBackView release];
     [noConnectionView release];
     [errorView release];
@@ -55,14 +53,22 @@
     [super dealloc];
 }
 
--(void)updateView{
-    if (!isInternetReachable){
-        self.view = noConnectionView;
-    }else{
-        self.view = errorView;
+-(void)updateViewWithNetworkStatus:(NetworkStatus)status{
+    switch (status){
+        case NotReachable:
+            self.view = noConnectionView;
+            break;
+        case ReachableViaWiFi:
+            self.view = errorView;
+            break;
+        case ReachableViaWWAN:
+            self.view = errorView;
+            break;
+        default:
+            self.view = errorView;
+            break;
     }
 }
-
 
 -(IBAction)dismiss{
     shouldExecActionOnDismiss = YES;
@@ -75,25 +81,8 @@
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
-- (void) checkNetworkStatus:(NSNotification *)notice{
-    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
-    [self saveInternetStatus:internetStatus];
-}
-
 -(void)saveInternetStatus:(NetworkStatus) status{
-    isInternetReachable = NO;
-    switch (status){
-        case NotReachable:
-            isInternetReachable=NO;
-            break;
-        case ReachableViaWiFi:
-            isInternetReachable = YES;
-            break;
-        case ReachableViaWWAN:
-            isInternetReachable = YES;
-            break;
-    }
-    [self updateView];
+       [self updateView];
 }
 
 #pragma mark - View lifecycle
@@ -111,13 +100,10 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
-    [self saveInternetStatus:[internetReachable currentReachabilityStatus]];
-    [self updateView];
-    [internetReachable startNotifier];
+    [self updateViewWithNetworkStatus:[internetReachable currentReachabilityStatus]];
 }
 
 - (void)viewDidUnload{
-    [internetReachable stopNotifier];
     [connectionIsBackView release];
     connectionIsBackView = nil;
     [noConnectionView release];
