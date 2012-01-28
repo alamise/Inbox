@@ -45,6 +45,7 @@
 
 -(void)setProgressTo:(int)count outOf:(int)total{
     [progressTimer setPercentage:100-(count*total)/100];
+    
     [label setString:[NSString stringWithFormat:@"%d",total-count]];
 }
 

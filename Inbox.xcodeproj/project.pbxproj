@@ -66,6 +66,14 @@
 		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
 		F4F80C9114D4693F00A7C356 /* progressActivityBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */; };
 		F4F80C9214D4693F00A7C356 /* progressActivityForeground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */; };
+		F4F80DD214D48A4B00A7C356 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DC314D48A4B00A7C356 /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD314D48A4B00A7C356 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DC514D48A4B00A7C356 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD414D48A4B00A7C356 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DC714D48A4B00A7C356 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD514D48A4B00A7C356 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DC914D48A4B00A7C356 /* DDLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD614D48A4B00A7C356 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DCB14D48A4B00A7C356 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DCE14D48A4B00A7C356 /* ContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80DD014D48A4B00A7C356 /* DispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F4F80DD914D48A4B00A7C356 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4F80DD114D48A4B00A7C356 /* README.txt */; };
 		F4FB8477146D2FEE00B08513 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8476146D2FEE00B08513 /* QuartzCore.framework */; };
 		F4FB8479146D2FEE00B08513 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8478146D2FEE00B08513 /* OpenGLES.framework */; };
 		F4FB847B146D2FEE00B08513 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB847A146D2FEE00B08513 /* OpenAL.framework */; };
@@ -693,6 +701,21 @@
 		F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
 		F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressActivityBackground.png; sourceTree = "<group>"; };
 		F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressActivityForeground.png; sourceTree = "<group>"; };
+		F4F80DC214D48A4B00A7C356 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		F4F80DC314D48A4B00A7C356 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		F4F80DC414D48A4B00A7C356 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		F4F80DC514D48A4B00A7C356 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		F4F80DC614D48A4B00A7C356 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		F4F80DC714D48A4B00A7C356 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		F4F80DC814D48A4B00A7C356 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		F4F80DC914D48A4B00A7C356 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		F4F80DCA14D48A4B00A7C356 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		F4F80DCB14D48A4B00A7C356 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		F4F80DCD14D48A4B00A7C356 /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		F4F80DCE14D48A4B00A7C356 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		F4F80DCF14D48A4B00A7C356 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		F4F80DD014D48A4B00A7C356 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		F4F80DD114D48A4B00A7C356 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		F4FB8472146D2FEE00B08513 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FB8476146D2FEE00B08513 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F4FB8478146D2FEE00B08513 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -768,8 +791,6 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */,
-				F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */,
 				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
 				F444C0F514BA052200D08560 /* Localizable.strings */,
 				F41E65AC14A9CFB700BA4712 /* Info.plist */,
@@ -788,6 +809,8 @@
 				F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */,
 				F41E65AA14A9CFB700BA4712 /* iconIpad.png */,
 				F41E65AB14A9CFB700BA4712 /* inboxZone.png */,
+				F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */,
+				F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1009,6 +1032,37 @@
 			name = "inbox empty";
 			sourceTree = "<group>";
 		};
+		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				F4F80DC214D48A4B00A7C356 /* DDAbstractDatabaseLogger.h */,
+				F4F80DC314D48A4B00A7C356 /* DDAbstractDatabaseLogger.m */,
+				F4F80DC414D48A4B00A7C356 /* DDASLLogger.h */,
+				F4F80DC514D48A4B00A7C356 /* DDASLLogger.m */,
+				F4F80DC614D48A4B00A7C356 /* DDFileLogger.h */,
+				F4F80DC714D48A4B00A7C356 /* DDFileLogger.m */,
+				F4F80DC814D48A4B00A7C356 /* DDLog.h */,
+				F4F80DC914D48A4B00A7C356 /* DDLog.m */,
+				F4F80DCA14D48A4B00A7C356 /* DDTTYLogger.h */,
+				F4F80DCB14D48A4B00A7C356 /* DDTTYLogger.m */,
+				F4F80DCC14D48A4B00A7C356 /* Extensions */,
+			);
+			name = Lumberjack;
+			path = CocoaLumberjack/Lumberjack;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4F80DCC14D48A4B00A7C356 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F4F80DCD14D48A4B00A7C356 /* ContextFilterLogFormatter.h */,
+				F4F80DCE14D48A4B00A7C356 /* ContextFilterLogFormatter.m */,
+				F4F80DCF14D48A4B00A7C356 /* DispatchQueueLogFormatter.h */,
+				F4F80DD014D48A4B00A7C356 /* DispatchQueueLogFormatter.m */,
+				F4F80DD114D48A4B00A7C356 /* README.txt */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F4FB8467146D2FEE00B08513 = {
 			isa = PBXGroup;
 			children = (
@@ -1029,6 +1083,7 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4F80DC114D48A4B00A7C356 /* Lumberjack */,
 				F46F715914CC573300C81028 /* RegexKitLite */,
 				F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */,
 				F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */,
@@ -1649,6 +1704,7 @@
 				F420671514D20FD800FE7A26 /* woodBackground.png in Resources */,
 				F4F80C9114D4693F00A7C356 /* progressActivityBackground.png in Resources */,
 				F4F80C9214D4693F00A7C356 /* progressActivityForeground.png in Resources */,
+				F4F80DD914D48A4B00A7C356 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1688,6 +1744,13 @@
 				F46F717614CC573300C81028 /* RegexKitLite.m in Sources */,
 				F46F717B14CC795400C81028 /* InboxEmptyController.m in Sources */,
 				F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */,
+				F4F80DD214D48A4B00A7C356 /* DDAbstractDatabaseLogger.m in Sources */,
+				F4F80DD314D48A4B00A7C356 /* DDASLLogger.m in Sources */,
+				F4F80DD414D48A4B00A7C356 /* DDFileLogger.m in Sources */,
+				F4F80DD514D48A4B00A7C356 /* DDLog.m in Sources */,
+				F4F80DD614D48A4B00A7C356 /* DDTTYLogger.m in Sources */,
+				F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */,
+				F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

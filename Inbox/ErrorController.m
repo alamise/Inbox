@@ -82,10 +82,6 @@
     [loginController release];
 }
 
--(void)saveInternetStatus:(NetworkStatus) status{
-       [self updateView];
-}
-
 #pragma mark - View lifecycle
 
 -(void)viewDidDisappear:(BOOL)animated{

@@ -19,3 +19,6 @@
 [submodule "GoogleAnalytics-SDK-iOS"]
 	path = GoogleAnalytics-SDK-iOS
 	url = git://github.com/danielctull/GoogleAnalytics-SDK-iOS.git
+[submodule "CocoaLumberjack"]
+	path = CocoaLumberjack
+	url = git://github.com/robbiehanson/CocoaLumberjack.git

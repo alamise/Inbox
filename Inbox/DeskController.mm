@@ -34,7 +34,7 @@
 #import "InboxEmptyController.h"
 #import "LoginController.h"
 
-@interface DeskController ()
+@interface DeskController (pvt)
 @property(nonatomic,retain,readwrite) GmailModel* model;
 -(void)updateProgressIndicator;
 @end

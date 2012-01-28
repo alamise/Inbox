@@ -28,8 +28,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "283"
          endingLineNumber = "283"
-         landmarkName = "-viewDidUnload"
-         landmarkType = "5">
+         landmarkName = "@implementation DeskController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -84,7 +84,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "75"
          endingLineNumber = "75"
-         landmarkName = "-showEmail:"
+         landmarkName = "-move:to:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -98,7 +98,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "94"
          endingLineNumber = "94"
-         landmarkName = "-fetchEmailBody:"
+         landmarkName = "-emailTouched:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -124,7 +124,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "155"
          endingLineNumber = "155"
-         landmarkName = "-nextStep"
+         landmarkName = "-updateProgressIndicator"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -152,8 +152,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "100"
          endingLineNumber = "100"
-         landmarkName = "-viewDidDisappear:"
-         landmarkType = "5">
+         landmarkName = "@implementation ErrorController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -166,7 +166,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "194"
          endingLineNumber = "194"
-         landmarkName = "-resetModel"
+         landmarkName = "-nextStep"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
