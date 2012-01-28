@@ -294,7 +294,7 @@ enum {
     if (sprite){
         sprite.visible = true;        
     }else{
-        sprite = [CCSprite spriteWithFile:@"woodBackground.jpg"];    
+        sprite = [CCSprite spriteWithFile:@"woodBackground.png"];    
         [self addChild:sprite z:0 tag:tagBackgroundSprite];
     }
     sprite.anchorPoint=CGPointMake(0, 0);
@@ -354,19 +354,6 @@ enum {
         return 3;
     }
 }
-
--(void)putArchiveZone{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagArchiveSprite];
-    if (sprite){
-        sprite.visible = true;        
-    }else{
-        sprite = [CCSprite spriteWithFile:@"archiveZone.png"];    
-        [self addChild:sprite z:0 tag:tagArchiveSprite];
-    }
-    CGSize windowSize = [CCDirector sharedDirector].winSize;
-    sprite.position=CGPointMake(windowSize.width-sprite.contentSize.width/2, windowSize.height/2);
-}
-
 
 -(void)putInboxZone{
     CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];

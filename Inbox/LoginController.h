@@ -28,9 +28,9 @@
     IBOutlet UITextField *emailField;
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *submitButton;
-    DeskController* desk;
-    BOOL shouldResetModelOnDisappear;
+    BOOL shouldExecActionOnDismiss;
+    NSInvocationOperation* actionOnDismiss;
 }
-@property(nonatomic,retain) DeskController* desk;
+@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 - (IBAction)onLogin:(id)sender;
 @end

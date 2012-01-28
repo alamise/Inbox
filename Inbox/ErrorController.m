@@ -29,24 +29,25 @@
 #import "GmailModel.h"
 @interface ErrorController()
 -(void)updateView;
-
+-(void)saveInternetStatus:(NetworkStatus) status;
 @end
 
 @implementation ErrorController
-@synthesize desk,error;
+@synthesize actionOnDismiss;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        shouldSyncOnDisappear = NO;
+        shouldExecActionOnDismiss = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
-        internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+        internetReachable = [[Reachability reachabilityWithHostName:@"www.google.fr"] retain];
     }
     return self;
 }
 
 -(void)dealloc{
+    self.actionOnDismiss = nil;
+    [internetReachable release];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    self.desk = nil;
     [connectionIsBackView release];
     [noConnectionView release];
     [errorView release];
@@ -64,78 +65,59 @@
 
 
 -(IBAction)dismiss{
-    shouldSyncOnDisappear = YES;
+    shouldExecActionOnDismiss = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)editAccount{
     LoginController* loginController = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];   
-    loginController.desk=self.desk;
+    loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
 - (void) checkNetworkStatus:(NSNotification *)notice{
     NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    [self saveInternetStatus:internetStatus];
+}
+
+-(void)saveInternetStatus:(NetworkStatus) status{
     isInternetReachable = NO;
-    isHostReachable = NO;
-    isWifi = NO;
-    switch (internetStatus){
+    switch (status){
         case NotReachable:
             isInternetReachable=NO;
             break;
         case ReachableViaWiFi:
             isInternetReachable = YES;
-            isWifi = YES;
             break;
         case ReachableViaWWAN:
             isInternetReachable = YES;
-            isWifi = NO;
             break;
     }
     [self updateView];
 }
 
-
-
 #pragma mark - View lifecycle
 
 -(void)viewDidDisappear:(BOOL)animated{
-    if (shouldSyncOnDisappear){
-        [self.desk linkToModel];
-        [self.desk.model sync];
+    if (shouldExecActionOnDismiss){
+        [actionOnDismiss start];
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    switch ([internetReachable currentReachabilityStatus]) {
-        case NotReachable:
-            isInternetReachable = NO;
-            isWifi = NO;
-            break;
-        case ReachableViaWiFi:
-            isInternetReachable = YES;
-            isWifi = YES;
-            break;
-        case ReachableViaWWAN:
-            isInternetReachable = YES;
-            isWifi = NO;
-            break;
-    }
-    if (!isInternetReachable){
-        internetReachable = [[Reachability reachabilityForInternetConnection] retain];
-        [internetReachable performSelector:@selector(startNotifier) withObject:nil afterDelay:1.5];
-    }
-    [self updateView];
-
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
+    [self saveInternetStatus:[internetReachable currentReachabilityStatus]];
+    [self updateView];
+    [internetReachable startNotifier];
 }
 
 - (void)viewDidUnload{
+    [internetReachable stopNotifier];
     [connectionIsBackView release];
     connectionIsBackView = nil;
     [noConnectionView release];

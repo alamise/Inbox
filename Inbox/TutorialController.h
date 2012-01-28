@@ -28,10 +28,10 @@
 
     IBOutlet UIScrollView *scrollView;
     IBOutlet UIPageControl *pageControl;
-    DeskController* field;
+    DeskController* desk;
     IBOutletCollection(UIView) NSArray *tutorialViews;
 }
-@property(nonatomic,retain) DeskController* field;
+@property(nonatomic,retain) DeskController* desk;
 -(IBAction)goToNextStep;
 -(IBAction)pageChanged;
 @end

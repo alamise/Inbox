@@ -27,7 +27,7 @@
 #define TUTORIAL_VIEW_WIDTH 540
 #define TUTORIAL_VIEW_HEIGHT 540
 @implementation TutorialController
-@synthesize field;
+@synthesize desk;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -42,7 +42,7 @@
 }
 
 - (void)dealloc {
-    self.field = nil;
+    self.desk = nil;
     [pageControl release];
     [scrollView release];
     [tutorialViews release];
@@ -92,7 +92,7 @@
 
 -(IBAction)goToNextStep{
     LoginController* loginView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
-    loginView.desk=self.field;
+    loginView.actionOnDismiss=[[NSInvocationOperation alloc] initWithTarget:self.desk selector:@selector(resetModel) object:nil];
     [self.navigationController pushViewController:loginView animated:YES];
     [loginView release];
 }

@@ -59,7 +59,7 @@
 -(void)openSettings{
     [self unlinkToModel];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
-    loginController.desk = self;
+    loginController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
     UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginController];
     navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
     navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
@@ -95,7 +95,7 @@
     }else{
         [self unlinkToModel];
         ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-        errorController.desk = self;
+        errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:email] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
         [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
         navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
@@ -212,7 +212,7 @@
     isWaiting = false;
     [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
     ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-    errorController.desk = self;
+    errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:errorController] autorelease];
     [errorController release];
     navigationController.modalPresentationStyle=UIModalPresentationFormSheet;
@@ -250,7 +250,7 @@
     }else{
         [self unlinkToModel];
         TutorialController* tutorialCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
-        tutorialCtr.field=self;
+        tutorialCtr.desk=self;
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:tutorialCtr];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         [self presentModalViewController:navCtr animated:YES];

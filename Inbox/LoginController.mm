@@ -27,18 +27,18 @@
 #import "DeskController.h"
 #import "GmailModel.h"
 @implementation LoginController
-@synthesize desk;
+@synthesize actionOnDismiss;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        shouldResetModelOnDisappear = NO;
+        shouldExecActionOnDismiss = NO;
         self.title=NSLocalizedString(@"login.title", @"");
     }
     return self;
 }
 
 - (void)dealloc {
-    //self.desk = nil;
+    self.actionOnDismiss = nil;
     [emailField release];
     [passwordField release];
     [submitButton release];
@@ -70,9 +70,9 @@
         if (!plistDic){
             plistDic = [[NSMutableDictionary alloc] initWithCapacity:2];
         }
-        if (![[plistDic objectForKey:@"email"] isEqualToString:emailField.text] || ![[plistDic objectForKey:@"password"] isEqualToString:passwordField.text]){
-            shouldResetModelOnDisappear = YES;
-        }
+
+        shouldExecActionOnDismiss = YES;
+
         [plistDic setValue:emailField.text forKey:@"email"];
         [plistDic setValue:passwordField.text forKey:@"password"];
         [plistDic writeToFile:plistPath atomically:YES];
@@ -84,13 +84,14 @@
 #pragma mark - View's lifecycle
 
 - (void)viewDidLoad{
+    [super viewDidLoad];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if (plistPath){
         emailField.text = [plistDic valueForKey:@"email"];
         passwordField.text = [plistDic valueForKey:@"password"];
     }
-    [super viewDidLoad];
+    [plistDic release];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 
@@ -101,8 +102,8 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    if (shouldResetModelOnDisappear){
-        [self.desk resetModel];
+    if (shouldExecActionOnDismiss){
+        [actionOnDismiss start];
     }
 }
 
@@ -115,11 +116,5 @@
     emailField = nil;
     [super viewDidUnload];
 }
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft)||(interfaceOrientation==UIInterfaceOrientationLandscapeRight));
-}
-
 
 @end

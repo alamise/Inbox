@@ -24,23 +24,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class Reachability, DeskController;
+@class Reachability;
 @interface ErrorController : UIViewController{
     Reachability* internetReachable;
     BOOL isInternetReachable;
-    BOOL isHostReachable;
-    BOOL isWifi;
     IBOutlet UIView *connectionIsBackView;
     IBOutlet UIView *noConnectionView;
     IBOutlet UIView *errorView;
     IBOutlet UIView *loadingView;
-    DeskController* desk;
-    NSError* error;
-    BOOL shouldSyncOnDisappear;
+    BOOL shouldExecActionOnDismiss;
     NSDate* viewAppearsDate;
+    NSInvocationOperation* actionOnDismiss;
 }
-@property(nonatomic,retain) DeskController* desk;
-@property(nonatomic,retain) NSError* error;
+@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
     - (void) checkNetworkStatus:(NSNotification *)notice;
     -(IBAction)dismiss;
     -(IBAction)editAccount;
