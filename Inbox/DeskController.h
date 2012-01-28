@@ -33,6 +33,7 @@
     MBProgressHUD* loadingHud;
     BOOL isWaiting;
     BOOL isSyncing;
+    int totalEmailsInThisSession;
 }
 @property(readonly) GmailModel* model;
 -(void)resetModel;

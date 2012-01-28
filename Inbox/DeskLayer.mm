@@ -32,6 +32,8 @@
 #import "EmailModel.h"
 #import "FolderModel.h"
 #import "GameConfig.h"
+#import "ProgressIndicator.h"
+
 #define TOUCHES_DELAY 0.1
 
 enum {
@@ -39,15 +41,17 @@ enum {
 	tagInboxSprite = 2,
     tagBackgroundSprite = 3,
     tagScrollZone = 4,
-    tagSettingsSprite = 5
+    tagSettingsSprite = 5,
+    tagProgressIndicator = 6
 };
 
 @interface DeskLayer() 
 @property(nonatomic,retain) EmailNode* draggedNode;
     -(void) putGround;
-    -(void)putFoldersZones;
+    -(void) putFoldersZones;
     -(void) putInboxZone;
-    -(void)putSettings;
+    -(void) putSettings;
+    -(void) putProgressIndicator;
 @end
 
 @implementation DeskLayer
@@ -111,6 +115,14 @@ enum {
 
     [draggableNodes addObject:node];
     [node release];
+}
+
+-(void)setProgressTo:(int)count outOf:(int)total{
+    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+    if (!indicator){
+        return;
+    }
+    [indicator setProgressTo:count outOf:total];    
 }
 
 
@@ -246,6 +258,7 @@ enum {
     [self putSettings];
     [self putFoldersZones];
     [self putInboxZone];
+    [self putProgressIndicator];
 }
 
 -(void)putSettings{
@@ -301,6 +314,18 @@ enum {
     sprite.position=CGPointMake(0,0);    
 }
 
+-(void)putProgressIndicator{
+    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+    if (!indicator){
+        indicator = [[ProgressIndicator alloc] init];
+        [self addChild:indicator z:1 tag: tagProgressIndicator];
+        [indicator release];
+    }
+    indicator.position=CGPointMake(105, 100);
+    
+    [indicator setProgressTo:90 outOf:100];
+
+}
 
 -(void)putFoldersZones{
     CGSize windowSize = [CCDirector sharedDirector].winSize;

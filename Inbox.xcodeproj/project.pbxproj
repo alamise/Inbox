@@ -63,6 +63,9 @@
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
+		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
+		F4F80C9114D4693F00A7C356 /* progressActivityBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */; };
+		F4F80C9214D4693F00A7C356 /* progressActivityForeground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */; };
 		F4FB8477146D2FEE00B08513 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8476146D2FEE00B08513 /* QuartzCore.framework */; };
 		F4FB8479146D2FEE00B08513 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8478146D2FEE00B08513 /* OpenGLES.framework */; };
 		F4FB847B146D2FEE00B08513 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB847A146D2FEE00B08513 /* OpenAL.framework */; };
@@ -686,6 +689,10 @@
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
+		F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
+		F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressActivityBackground.png; sourceTree = "<group>"; };
+		F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressActivityForeground.png; sourceTree = "<group>"; };
 		F4FB8472146D2FEE00B08513 /* Inbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FB8476146D2FEE00B08513 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F4FB8478146D2FEE00B08513 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -761,6 +768,8 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */,
+				F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */,
 				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
 				F444C0F514BA052200D08560 /* Localizable.strings */,
 				F41E65AC14A9CFB700BA4712 /* Info.plist */,
@@ -860,6 +869,8 @@
 				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
 				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
 				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
+				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
+				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
 			);
 			name = desk;
 			sourceTree = "<group>";
@@ -1636,6 +1647,8 @@
 				F46F717C14CC795400C81028 /* InboxEmptyView.xib in Resources */,
 				F420671314D20ECA00FE7A26 /* tutorialSettingsButton.png in Resources */,
 				F420671514D20FD800FE7A26 /* woodBackground.png in Resources */,
+				F4F80C9114D4693F00A7C356 /* progressActivityBackground.png in Resources */,
+				F4F80C9214D4693F00A7C356 /* progressActivityForeground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1674,6 +1687,7 @@
 				F44CB83414C196E000EB24E8 /* SWTableViewSpriteCell.m in Sources */,
 				F46F717614CC573300C81028 /* RegexKitLite.m in Sources */,
 				F46F717B14CC795400C81028 /* InboxEmptyController.m in Sources */,
+				F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

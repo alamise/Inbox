@@ -21,34 +21,13 @@
  * THE SOFTWARE.
  *
  */
+
 #import "cocos2d.h"
-#import "Box2D.h"
-#import "DeskProtocol.h"
-#import "DropZoneNode.h"
-#import "SWTableView.h"
-#import "GLES-Render.h"
-@class EmailNode, EmailModel, SWTableView;
-
-@interface DeskLayer : CCLayer<SWTableViewDataSource>{
-	b2World* world;
-	GLESDebugDraw *m_debugDraw;
-    NSMutableArray *draggableNodes;
-    EmailNode *draggedNode;
-    id<DeskProtocol> delegate;
-    CGPoint lastTouchPosition;
-    NSTimeInterval lastTouchTime;
-    SWTableView* foldersTable;
-    NSArray* folders;
-    BOOL isActive;
+@interface ProgressIndicator : CCNode{
+    BOOL drawMe;
+    CCProgressTimer* progressTimer;
+    CCLabelTTF* label;
+    
 }
-@property(assign) BOOL isActive;
-@property(nonatomic,retain) NSArray* folders;
--(id) initWithDelegate:(id<DeskProtocol>)d;
--(void) putEmail:(EmailModel*)model;
--(void) checkNodesCoords;
--(void) cleanDesk;
--(void) setOrUpdateScene;
--(void) setProgressTo:(int)count outOf:(int)total;
--(int) mailsOnSceneCount;
+-(void)setProgressTo:(int)count outOf:(int)total;
 @end
-

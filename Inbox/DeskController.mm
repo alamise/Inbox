@@ -36,6 +36,7 @@
 
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
+-(void)updateProgressIndicator;
 @end
 
 @implementation DeskController
@@ -43,6 +44,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+
 	}
 	return self;
 }
@@ -67,7 +69,9 @@
 }
 
 -(void)move:(EmailModel*)m to:(NSString*)folder{
+    
     [model move:m to:folder];
+    [layer setProgressTo:totalEmailsInThisSession-[model emailsCountInFolder:@"INBOX"] outOf:totalEmailsInThisSession];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
@@ -135,16 +139,28 @@
 }
 
 -(void)syncStarted{
-    isWaiting = TRUE;
+    [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:YES];
 }
 
 -(void)inboxChanged{
+    [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
+
+-(void)updateProgressIndicator{
+    int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
+    if (emailsInInbox>totalEmailsInThisSession){
+        totalEmailsInThisSession = emailsInInbox;
+    }
+    
+    [layer setProgressTo:totalEmailsInThisSession-emailsInInbox outOf:totalEmailsInThisSession];
+}
+
 -(void)syncDone{
+    [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 

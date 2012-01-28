@@ -21,34 +21,43 @@
  * THE SOFTWARE.
  *
  */
-#import "cocos2d.h"
-#import "Box2D.h"
-#import "DeskProtocol.h"
-#import "DropZoneNode.h"
-#import "SWTableView.h"
-#import "GLES-Render.h"
-@class EmailNode, EmailModel, SWTableView;
 
-@interface DeskLayer : CCLayer<SWTableViewDataSource>{
-	b2World* world;
-	GLESDebugDraw *m_debugDraw;
-    NSMutableArray *draggableNodes;
-    EmailNode *draggedNode;
-    id<DeskProtocol> delegate;
-    CGPoint lastTouchPosition;
-    NSTimeInterval lastTouchTime;
-    SWTableView* foldersTable;
-    NSArray* folders;
-    BOOL isActive;
+#import "ProgressIndicator.h"
+
+@implementation ProgressIndicator
+
+-(id)init{
+    if (self = [super init]){
+        drawMe = true;
+        progressTimer = [[CCProgressTimer progressWithFile:@"progressActivityForeground.png"] retain];
+        progressTimer.type = kCCProgressTimerTypeRadialCCW;
+        label = [CCLabelTTF labelWithString:@"----" fontName:@"Arial" fontSize:40];
+        label.color = ccc3(1, 1, 1);
+    }
+    return self;
 }
-@property(assign) BOOL isActive;
-@property(nonatomic,retain) NSArray* folders;
--(id) initWithDelegate:(id<DeskProtocol>)d;
--(void) putEmail:(EmailModel*)model;
--(void) checkNodesCoords;
--(void) cleanDesk;
--(void) setOrUpdateScene;
--(void) setProgressTo:(int)count outOf:(int)total;
--(int) mailsOnSceneCount;
-@end
 
+-(void)dealloc{
+    [label release];
+    [progressTimer release];
+    [super dealloc];
+}
+
+-(void)setProgressTo:(int)count outOf:(int)total{
+    [progressTimer setPercentage:100-(count*total)/100];
+    [label setString:[NSString stringWithFormat:@"%d",total-count]];
+}
+
+-(void) draw {
+    [super draw];
+    if (drawMe){
+        drawMe = false;
+        CCSprite* background = [CCSprite spriteWithFile:@"progressActivityBackground.png"];
+        [self addChild:background];
+        [self addChild:progressTimer];
+        progressTimer.position = CGPointMake(0, 0);
+        [self addChild:label];
+    }
+}
+
+@end
