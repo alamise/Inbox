@@ -76,9 +76,10 @@
 }
 
 -(IBAction)editAccount{
-    LoginController* loginController = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];   
+    LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
     loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
+    [loginController release];
 }
 
 -(void)saveInternetStatus:(NetworkStatus) status{

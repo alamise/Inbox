@@ -42,7 +42,6 @@
     [emailField release];
     [passwordField release];
     [submitButton release];
-    [emailField release];
     [super dealloc];
 }
 

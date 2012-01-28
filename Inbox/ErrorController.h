@@ -37,8 +37,7 @@
     NSInvocationOperation* actionOnDismiss;
 }
 @property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
-    - (void) checkNetworkStatus:(NSNotification *)notice;
-    -(IBAction)dismiss;
-    -(IBAction)editAccount;
+-(IBAction)dismiss;
+-(IBAction)editAccount;
     
 @end
