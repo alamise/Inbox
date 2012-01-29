@@ -84,6 +84,8 @@ enum {
     [draggableNodes release];
     self.draggedNode = nil;
     [delegate release];
+    [foldersTable release];
+    [indicator release];
 	[super dealloc];
 }
 
@@ -119,10 +121,11 @@ enum {
 }
 
 -(void)setPercentage:(float)percentage labelCount:(int)count{
+    indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
     if (!indicator){
         return;
     }
-    indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+    [indicator setPercentage:percentage labelCount:count];
 }
 
 
@@ -319,11 +322,9 @@ enum {
     if (!indicator){
         indicator = [[ProgressIndicator alloc] init];
         [self addChild:indicator z:1 tag: tagProgressIndicator];
-        [indicator release];
     }
     indicator.position=CGPointMake(105, 100);
 
-    [indicator setPercentage:0 labelCount:1000];
     [self progressIndicatorHidden:YES animated:NO];
 
 }
