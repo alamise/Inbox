@@ -186,7 +186,8 @@
             [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
             [self unlinkToModel];
             InboxEmptyController* inboxEmptyController = [[InboxEmptyController alloc] initWithNibName:@"InboxEmptyView" bundle:nil];
-            inboxEmptyController.desk = self;
+            inboxEmptyController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
+            
             UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:inboxEmptyController];
             [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
             navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
@@ -275,7 +276,7 @@
     }else{
         [self unlinkToModel];
         TutorialController* tutorialCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
-        tutorialCtr.desk=self;
+        tutorialCtr.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:tutorialCtr];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         [self presentModalViewController:navCtr animated:YES];

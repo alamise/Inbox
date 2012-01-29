@@ -25,8 +25,8 @@
 #import <UIKit/UIKit.h>
 #import "DeskController.h"
 @interface InboxEmptyController : UIViewController{
-    DeskController* desk;
+    NSInvocationOperation* actionOnDismiss;
 }
-@property(nonatomic,retain) DeskController* desk;
+@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 - (IBAction)onRefresh;
 @end

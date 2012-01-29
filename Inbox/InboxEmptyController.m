@@ -25,7 +25,7 @@
 #import "InboxEmptyController.h"
 
 @implementation InboxEmptyController
-@synthesize  desk;
+@synthesize  actionOnDismiss;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,7 +35,7 @@
 }
 
 -(void)dealloc{
-    self.desk = nil;
+    self.actionOnDismiss = nil;
     [super dealloc];
 }
 
@@ -54,5 +54,6 @@
 }
 
 - (IBAction)onRefresh {
+    [self.actionOnDismiss start];
 }
 @end

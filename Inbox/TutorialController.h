@@ -28,10 +28,10 @@
 
     IBOutlet UIScrollView *scrollView;
     IBOutlet UIPageControl *pageControl;
-    DeskController* desk;
+    NSInvocationOperation* actionOnDismiss;
     IBOutletCollection(UIView) NSArray *tutorialViews;
 }
-@property(nonatomic,retain) DeskController* desk;
+@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 -(IBAction)goToNextStep;
 -(IBAction)pageChanged;
 @end
