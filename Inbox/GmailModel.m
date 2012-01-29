@@ -493,6 +493,7 @@
 
 
 -(void)updateRemoteMessagesAsync{
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     if ([writeChangesLock tryLock]){
         [writeChangesLock unlock];
         CTCoreAccount* account = [[CTCoreAccount alloc] init];
@@ -508,7 +509,7 @@
         [context release];
         [account release];
     }
-
+    [pool release];
 }
 
 -(NSArray*)folders{

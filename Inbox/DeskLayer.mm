@@ -33,7 +33,7 @@
 #import "FolderModel.h"
 #import "GameConfig.h"
 #import "ProgressIndicator.h"
-#define ANIMATION_DELAY 0.4
+#define ANIMATION_DELAY 0.2
 
 #define TOUCHES_DELAY 0.1
 enum {
