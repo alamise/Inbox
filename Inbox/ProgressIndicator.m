@@ -23,7 +23,7 @@
  */
 
 #import "ProgressIndicator.h"
-
+#define ANIMATION_DELAY 0.4
 @implementation ProgressIndicator
 
 -(id)init{
@@ -43,10 +43,9 @@
     [super dealloc];
 }
 
--(void)setProgressTo:(int)count outOf:(int)total{
-    [progressTimer setPercentage:100-(count*total)/100];
-    
-    [label setString:[NSString stringWithFormat:@"%d",total-count]];
+-(void)setPercentage:(float)percentage labelCount:(int)count{
+    [progressTimer setPercentage:100-percentage];
+    [label setString:[NSString stringWithFormat:@"%d",count]];
 }
 
 -(void) draw {
@@ -60,5 +59,4 @@
         [self addChild:label];
     }
 }
-
 @end

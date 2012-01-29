@@ -29,5 +29,5 @@
     CCLabelTTF* label;
     
 }
--(void)setProgressTo:(int)count outOf:(int)total;
+-(void)setPercentage:(float)percentage labelCount:(int)count;
 @end

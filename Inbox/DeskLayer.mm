@@ -33,9 +33,9 @@
 #import "FolderModel.h"
 #import "GameConfig.h"
 #import "ProgressIndicator.h"
+#define ANIMATION_DELAY 0.4
 
 #define TOUCHES_DELAY 0.1
-
 enum {
 	tagArchiveSprite = 1,
 	tagInboxSprite = 2,
@@ -115,14 +115,14 @@ enum {
 
     [draggableNodes addObject:node];
     [node release];
+    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
 }
 
--(void)setProgressTo:(int)count outOf:(int)total{
-    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+-(void)setPercentage:(float)percentage labelCount:(int)count{
     if (!indicator){
         return;
     }
-    [indicator setProgressTo:count outOf:total];    
+    indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
 }
 
 
@@ -315,15 +315,16 @@ enum {
 }
 
 -(void)putProgressIndicator{
-    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+    indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
     if (!indicator){
         indicator = [[ProgressIndicator alloc] init];
         [self addChild:indicator z:1 tag: tagProgressIndicator];
         [indicator release];
     }
     indicator.position=CGPointMake(105, 100);
-    
-    [indicator setProgressTo:90 outOf:100];
+
+    [indicator setPercentage:0 labelCount:1000];
+    [self progressIndicatorHidden:YES animated:NO];
 
 }
 
@@ -340,6 +341,7 @@ enum {
     
     [foldersTable reloadData];
     [foldersTable scrollToTop];
+    [self foldersHidden:YES animated:NO];
     
 }
 -(CGSize)cellSizeForTable:(SWTableView *)table{
@@ -401,7 +403,48 @@ enum {
         [node scaleAndHide];
     }
     [draggableNodes removeAllObjects];
+    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
 }
+
+-(void)progressIndicatorHidden:(BOOL)hidden animated:(BOOL)animated{
+    if (!indicator){
+        return;
+    }
+    int newScale;
+    if (hidden){
+        newScale = 0;
+    }else{
+        newScale = 1;
+    }
+    if (indicator.scale != newScale){
+        if (animated){
+           [indicator runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:newScale]]; 
+        }else{
+            indicator.scale=newScale;
+        }
+    }
+}
+-(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated{
+    
+    if (!foldersTable){
+        return;
+    }
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    CGPoint newPos;
+    if (hidden){
+        newPos = CGPointMake(windowSize.width, 0);
+    }else{
+        newPos = CGPointMake(windowSize.width-230, 0);
+    }
+    if (CGPointEqualToPoint(foldersTable.position,newPos) == NO){
+        if (animated){
+            [foldersTable runAction:[CCMoveTo actionWithDuration:ANIMATION_DELAY position:newPos]];
+        }else{
+            foldersTable.position=newPos;
+        }
+    }
+}
+
 
 -(void) checkNodesCoords{
     for (EmailNode* node in draggableNodes){        

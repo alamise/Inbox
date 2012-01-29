@@ -27,6 +27,8 @@
 #import "DropZoneNode.h"
 #import "SWTableView.h"
 #import "GLES-Render.h"
+#import "ProgressIndicator.h"
+
 @class EmailNode, EmailModel, SWTableView;
 
 @interface DeskLayer : CCLayer<SWTableViewDataSource>{
@@ -38,6 +40,7 @@
     CGPoint lastTouchPosition;
     NSTimeInterval lastTouchTime;
     SWTableView* foldersTable;
+    ProgressIndicator* indicator;
     NSArray* folders;
     BOOL isActive;
 }
@@ -48,7 +51,10 @@
 -(void) checkNodesCoords;
 -(void) cleanDesk;
 -(void) setOrUpdateScene;
--(void) setProgressTo:(int)count outOf:(int)total;
+-(void)setPercentage:(float)percentage labelCount:(int)count;
 -(int) mailsOnSceneCount;
+-(void)cleanDesk;
+-(void)progressIndicatorHidden:(BOOL)hidden animated:(BOOL)animated;
+-(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated;
 @end
 

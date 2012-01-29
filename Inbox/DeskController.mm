@@ -33,7 +33,7 @@
 #import "cocos2d.h"
 #import "InboxEmptyController.h"
 #import "LoginController.h"
-
+#import "Math.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
 -(void)updateProgressIndicator;
@@ -71,7 +71,7 @@
 -(void)move:(EmailModel*)m to:(NSString*)folder{
     
     [model move:m to:folder];
-    [layer setProgressTo:totalEmailsInThisSession-[model emailsCountInFolder:@"INBOX"] outOf:totalEmailsInThisSession];
+    [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
@@ -147,6 +147,7 @@
 -(void)inboxChanged{
     [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+    [layer progressIndicatorHidden:NO animated:YES];
 }
 
 
@@ -155,8 +156,13 @@
     if (emailsInInbox>totalEmailsInThisSession){
         totalEmailsInThisSession = emailsInInbox;
     }
-    
-    [layer setProgressTo:totalEmailsInThisSession-emailsInInbox outOf:totalEmailsInThisSession];
+    int count = totalEmailsInThisSession-emailsInInbox;
+    int total = totalEmailsInThisSession;
+
+    float percentage= (float)100*count/total;
+    // TODO find a logarithm like function to increase the counter faster at the beginning.
+    DDLogVerbose(@"DeskController:updateProgressIndicator: percentage:%f%% label:%d",percentage,emailsInInbox);
+    [layer setPercentage:percentage labelCount:emailsInInbox];
 }
 
 -(void)syncDone{
@@ -166,6 +172,7 @@
 
 -(void)foldersReady{
     [layer setFolders:[model folders]];
+    [layer foldersHidden:NO animated:YES];
 }
 
 -(void)nextStep{
@@ -208,6 +215,8 @@
 -(void)resetModel{
     [self unlinkToModel];
     [layer cleanDesk];
+    [layer foldersHidden:YES animated:YES];
+    [layer progressIndicatorHidden:YES animated:YES];
     if (self.model && [self.model isSyncing]){
         [self showLoadingHud];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
