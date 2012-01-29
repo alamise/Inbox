@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "CrashController.h"
-#define IS_IPAD true
+#import "Logger.h"
 @class DesckController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate,CrashSaveDelegate> {

@@ -34,6 +34,9 @@
 #import "TutorialController.h"
 #import "CrashController.h"
 #import "GmailModel.h"
+#import "Logger.h"
+#import "LumberjackCrashLogger.h"
+#import "DDTTYLogger.h"
 @interface AppDelegate()
 -(void)resetDatabase;
 - (NSString *)databasePath;
@@ -44,16 +47,9 @@
 @implementation AppDelegate
 @synthesize window,navigationController;
 
-void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // Internal error reporting
-}
-
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
-    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityStarted) name:MODEL_ACTIVE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityEnded) name:MODEL_UNACTIVE object:nil];
@@ -71,8 +67,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     crashController = [[CrashController sharedInstance] retain];
     crashController.delegate = self;
-    
-    [crashController sendCrashReportsToEmail:@"sim.w80+inbox@gmail.com" withViewController:navigationController];
+    crashController.logger = [[[LumberjackCrashLogger alloc] init] autorelease];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
 	[window makeKeyAndVisible];
 }
 
@@ -96,6 +92,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)onCrash{
+    DDLogError(@"AppDelegate:onCrash:crashHandler: The app crashed");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Crash"
                                                     message:@"The App has crashed and will attempt to send a crash report"
                                                    delegate:nil
@@ -120,10 +117,20 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
 	[[CCDirector sharedDirector] purgeCachedData];
+    NSError* error;
+    [[self managedObjectContext:TRUE] save:&error];
+    if (error){
+        DDLogError(@"AppDelegate:applicationDidReceiveMemoryWarning:saveContext: %@", [error localizedDescription]);
+    }
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
 	[[CCDirector sharedDirector] stopAnimation];
+    NSError* error = nil;
+    [[self managedObjectContext:TRUE] save:&error];
+    if (error){
+        DDLogError(@"AppDelegate:applicationDidEnterBackground:saveContext: %@", [error localizedDescription]);
+    }
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
@@ -136,8 +143,12 @@ void uncaughtExceptionHandler(NSException *exception) {
     [director end];	
 	[window release];
 	[navigationController release];
+    NSError* error = nil;
+    [[self managedObjectContext:TRUE] save:&error];
+    if (error){
+        DDLogError(@"AppDelegate:applicationWillTerminate:saveContext: %@", [error localizedDescription]);
+    }
 }
-
 - (void)applicationSignificantTimeChange:(UIApplication *)application {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
@@ -157,7 +168,6 @@ void uncaughtExceptionHandler(NSException *exception) {
                                   initWithManagedObjectModel:[self managedObjectModel]];
     if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil URL:storeUrl options:nil error:&error]) {
-        NSLog(@"pers %@",[error localizedDescription]);
     }
     
     return persistentStoreCoordinator;
@@ -176,11 +186,7 @@ void uncaughtExceptionHandler(NSException *exception) {
         if (coordinator != nil) {
             context = [[NSManagedObjectContext alloc] init];
             [context setPersistentStoreCoordinator: coordinator];
-        }else{
-            NSLog(@"BOUM");
         }
-
-
         if (managedObjectContext){
             /*
              If the managedObjectContext exists here, that means we won't reuse it.

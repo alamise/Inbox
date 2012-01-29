@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F40B345514D5950300F1598B /* LumberjackCrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B345414D5950300F1598B /* LumberjackCrashLogger.m */; };
 		F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDE9E14B9D19800F2DC5F /* CrashController.m */; };
 		F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDEA014B9D19800F2DC5F /* CrashLogger.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
@@ -611,6 +612,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F40B345314D5950300F1598B /* LumberjackCrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LumberjackCrashLogger.h; sourceTree = "<group>"; };
+		F40B345414D5950300F1598B /* LumberjackCrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LumberjackCrashLogger.m; sourceTree = "<group>"; };
+		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F40BDE9D14B9D19800F2DC5F /* CrashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashController.h; path = CrashKit/Classes/CrashController.h; sourceTree = "<group>"; };
 		F40BDE9E14B9D19800F2DC5F /* CrashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashController.m; path = CrashKit/Classes/CrashController.m; sourceTree = "<group>"; };
 		F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLogger.h; path = CrashKit/Classes/CrashLogger.h; sourceTree = "<group>"; };
@@ -784,6 +788,9 @@
 				F41E659E14A9CFB700BA4712 /* Prefix.pch */,
 				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
 				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
+				F40B345614D59BB500F1598B /* Logger.h */,
+				F40B345314D5950300F1598B /* LumberjackCrashLogger.h */,
+				F40B345414D5950300F1598B /* LumberjackCrashLogger.m */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -1751,6 +1758,7 @@
 				F4F80DD614D48A4B00A7C356 /* DDTTYLogger.m in Sources */,
 				F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */,
 				F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */,
+				F40B345514D5950300F1598B /* LumberjackCrashLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

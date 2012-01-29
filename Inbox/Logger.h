@@ -22,21 +22,6 @@
  *
  */
 
-#import <UIKit/UIKit.h>
-#import "DeskProtocol.h"
-@class  MBProgressHUD,GmailModel,DeskLayer,EAGLView;
-@interface DeskController : UIViewController<DeskProtocol> {
-    GmailModel* model;
-    DeskLayer* layer;
-    BOOL isLoading;
-    EAGLView* glView;
-    MBProgressHUD* loadingHud;
-    BOOL isWaiting;
-    BOOL isSyncing;
-    int totalEmailsInThisSession;
-}
-@property(nonatomic,retain,readonly) GmailModel* model;
--(void)resetModel;
--(void)linkToModel;
--(void)unlinkToModel;
-@end
+#import <Foundation/Foundation.h>
+#import "DDLog.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
