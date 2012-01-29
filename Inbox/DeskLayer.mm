@@ -326,7 +326,6 @@ enum {
     indicator.position=CGPointMake(105, 100);
 
     [self progressIndicatorHidden:YES animated:NO];
-
 }
 
 -(void)putFoldersZones{
@@ -425,6 +424,7 @@ enum {
         }
     }
 }
+
 -(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated{
     
     if (!foldersTable){

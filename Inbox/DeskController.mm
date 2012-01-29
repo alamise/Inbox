@@ -218,6 +218,7 @@
     [layer cleanDesk];
     [layer foldersHidden:YES animated:YES];
     [layer progressIndicatorHidden:YES animated:YES];
+    totalEmailsInThisSession = 0;
     if (self.model && [self.model isSyncing]){
         [self showLoadingHud];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
