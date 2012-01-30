@@ -26,7 +26,7 @@
 @interface ProgressIndicator : CCNode{
     BOOL drawMe;
     CCProgressTimer* progressTimer;
-    CCLabelTTF* label;
+    CCLabelAtlas* label;
     
 }
 -(void)setPercentage:(float)percentage labelCount:(int)count;

@@ -48,7 +48,9 @@
     [label setString:[NSString stringWithFormat:@"%d",count]];
 }
 
+
 -(void) draw {
+    NSLog(@"draw");
     [super draw];
     if (drawMe){
         drawMe = false;

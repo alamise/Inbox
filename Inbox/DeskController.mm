@@ -142,6 +142,10 @@
     [self updateProgressIndicator];
     [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:YES];
+    if ([[model folders] count]>0){
+        [layer setFolders:[model folders]];
+        [layer foldersHidden:NO animated:YES];
+    }
 }
 
 -(void)inboxChanged{
@@ -152,17 +156,20 @@
 
 
 -(void)updateProgressIndicator{
-    int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
-    if (emailsInInbox>totalEmailsInThisSession){
-        totalEmailsInThisSession = emailsInInbox;
-    }
-    int count = totalEmailsInThisSession-emailsInInbox;
-    int total = totalEmailsInThisSession;
+    dispatch_async(dispatch_get_main_queue(), ^{
 
-    float percentage= (float)100*count/total;
-    // TODO find a logarithm like function to increase the counter faster at the beginning.
-    DDLogVerbose(@"DeskController:updateProgressIndicator: percentage:%f%% label:%d",percentage,emailsInInbox);
-    [layer setPercentage:percentage labelCount:emailsInInbox];
+        int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
+        if (emailsInInbox>totalEmailsInThisSession){
+            totalEmailsInThisSession = emailsInInbox;
+        }
+        int count = totalEmailsInThisSession-emailsInInbox;
+        int total = totalEmailsInThisSession;
+
+        float percentage= (float)100*count/total;
+        // TODO find a logarithm like function to increase the counter faster at the beginning.
+        DDLogVerbose(@"DeskController:updateProgressIndicator: percentage:%f%% label:%d",percentage,emailsInInbox);
+        [layer setPercentage:percentage labelCount:emailsInInbox];
+    });
 }
 
 -(void)syncDone{
