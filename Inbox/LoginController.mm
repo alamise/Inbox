@@ -101,7 +101,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    NSLog(@"sdsddssdds %@",actionOnDismiss);
     if (shouldExecActionOnDismiss){
         [actionOnDismiss start];
     }

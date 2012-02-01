@@ -277,6 +277,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [layer setOrUpdateScene];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
@@ -290,7 +291,7 @@
         [self presentModalViewController:navCtr animated:YES];
     }
     [plistDic release];
-    [layer setOrUpdateScene];    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
