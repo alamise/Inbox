@@ -9,26 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/GmailModel.m"
-         timestampString = "350129647.671753"
+         timestampString = "350748253.232507"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "480"
          endingLineNumber = "480"
          landmarkName = "-lastEmailFrom:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "350744544.987197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
-         landmarkName = "-emailTouched:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -42,32 +28,6 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "14"
          endingLineNumber = "14">
-         <Locations>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController actionOnDismiss]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "350746190.755538"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "30"
-               endingLineNumber = "30">
-            </Location>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController setActionOnDismiss:]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "350746190.755794"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "30"
-               endingLineNumber = "30">
-            </Location>
-         </Locations>
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -81,20 +41,6 @@
          startingLineNumber = "196"
          endingLineNumber = "196"
          landmarkName = "-nextStep"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Inbox/GmailModel.m"
-         timestampString = "350129647.671753"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "426"
-         endingLineNumber = "426"
-         landmarkName = "-sync"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -140,16 +86,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "350745262.123953"
+         timestampString = "350748505.936849"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
          landmarkName = "-nextStep"
          landmarkType = "5">
       </FileBreakpoint>
@@ -158,13 +104,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "350745363.620998"
+         filePath = "Inbox/GmailModel.m"
+         timestampString = "350749503.501053"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
-         landmarkName = "-nextStep"
+         startingLineNumber = "501"
+         endingLineNumber = "501"
+         landmarkName = "-fetchEmailBody:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -173,12 +119,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "350746239.38429"
+         timestampString = "350749662.109957"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "-nextStep"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "-fetchEmailBody:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

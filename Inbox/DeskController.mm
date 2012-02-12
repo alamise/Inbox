@@ -77,9 +77,9 @@
 -(void)showEmail:(NSManagedObjectID*)emailId{
     EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:emailId];
     if (!email.htmlBody){
-        [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:email animated:YES];    
+        [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
     }else{
-        EmailController* emailController = [[EmailController alloc] initWithEmailModel:email];
+        EmailController* emailController = [[EmailController alloc] initWithEmail:emailId];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:emailController];
         [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
         navCtr.modalPresentationStyle=UIModalPresentationPageSheet;

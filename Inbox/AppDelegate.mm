@@ -67,9 +67,9 @@
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    //crashController = [[CrashController sharedInstance] retain];
-    //crashController.delegate = self;
-    //crashController.logger = [[[LumberjackCrashLogger alloc] init] autorelease];
+    crashController = [[CrashController sharedInstance] retain];
+    crashController.delegate = self;
+    crashController.logger = [[CrashEmailLogger alloc] initWithEmail:@"sim.w80+crashinbox@gmail.com" viewController:navigationController];//[[[LumberjackCrashLogger alloc] init] autorelease];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
 	[window makeKeyAndVisible];

@@ -23,19 +23,19 @@
  */
 
 #import "EmailController.h"
-
+#import "AppDelegate.h"
 @implementation EmailController
--(id)initWithEmailModel:(EmailModel*)model{
+-(id)initWithEmail:(NSManagedObjectID*)email{
     if (self = [super initWithNibName:@"EmailView" bundle:nil]){
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
     
-        emailModel = [model retain];
+        emailId = [email retain];
     }
     return self;
 }
 -(void)dealloc{
     [webView release];
-    [emailModel release];
+    [emailId release];
     [super dealloc];
 }
 
@@ -43,7 +43,9 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [webView loadHTMLString:emailModel.htmlBody baseURL:nil];
+    NSManagedObjectContext* context = [((AppDelegate*)[UIApplication sharedApplication].delegate) newManagedObjectContext];
+    EmailModel* email = (EmailModel*)[context objectWithID:emailId];
+    [webView loadHTMLString:email.htmlBody baseURL:nil];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
 }
 

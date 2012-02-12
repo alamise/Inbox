@@ -26,9 +26,9 @@
 #import "EmailModel.h"
 
 @interface EmailController : UIViewController{
-    EmailModel* emailModel;
+    NSManagedObjectID* emailId;
     IBOutlet UIWebView* webView;
 
 }
--(id)initWithEmailModel:(EmailModel*)model;
+-(id)initWithEmail:(NSManagedObjectID*)emailId;
 @end
