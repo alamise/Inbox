@@ -36,7 +36,7 @@
 #import "Math.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
--(void)updateProgressIndicator;
+-(void)nextStep;
 @end
 
 @implementation DeskController
@@ -68,14 +68,14 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
--(void)move:(EmailModel*)m to:(NSString*)folder{
-    
-    [model move:m to:folder];
-    [self updateProgressIndicator];
+-(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
+    [model move:emailId to:folder];
+    [self nextStep];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
--(void)showEmail:(EmailModel*)email{
+-(void)showEmail:(NSManagedObjectID*)emailId{
+    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:emailId];
     if (!email.htmlBody){
         [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:email animated:YES];    
     }else{
@@ -89,20 +89,20 @@
 }
 
 
--(void)emailTouched:(EmailModel*)email{
-    [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES]; 
+-(void)emailTouched:(NSManagedObjectID*)emailId{
+    [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES]; 
 }
 
--(void)fetchEmailBody:(EmailModel*)email{
-    if ([model fetchEmailBody:email]){
-        [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES];
+-(void)fetchEmailBody:(NSManagedObjectID*)emailId{
+    if ([model fetchEmailBody:emailId]){
+        [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES];
     }else{
         [self unlinkToModel];
         ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-        errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:email] autorelease];
+        errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:emailId] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
         [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
-        navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
+        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
         navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:navCtr animated:YES];
     }
@@ -127,7 +127,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FOLDERS_READY object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_ERROR object:nil];
 }
 
 -(void)linkToModel{
@@ -135,54 +135,48 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncStarted) name:SYNC_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foldersReady) name:FOLDERS_READY object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:MODEL_ERROR object:nil];
 }
 
 -(void)syncStarted{
-    [self updateProgressIndicator];
-    [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];
-    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:YES];
-    if ([[model folders] count]>0){
-        [layer setFolders:[model folders]];
-        [layer foldersHidden:NO animated:YES];
-    }
+    [self showLoadingHud];
+    [self nextStep];
 }
 
 -(void)inboxChanged{
-    [self updateProgressIndicator];
-    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
-    [layer progressIndicatorHidden:NO animated:YES];
-}
-
-
--(void)updateProgressIndicator{
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
-        if (emailsInInbox>totalEmailsInThisSession){
-            totalEmailsInThisSession = emailsInInbox;
-        }
-        int count = totalEmailsInThisSession-emailsInInbox;
-        int total = totalEmailsInThisSession;
-
-        float percentage= (float)100*count/total;
-        // TODO find a logarithm like function to increase the counter faster at the beginning.
-        DDLogVerbose(@"DeskController:updateProgressIndicator: percentage:%f%% label:%d",percentage,emailsInInbox);
-        [layer setPercentage:percentage labelCount:emailsInInbox];
-    });
+    [self nextStep];
 }
 
 -(void)syncDone{
-    [self updateProgressIndicator];
-    [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+    [self nextStep];
 }
 
 -(void)foldersReady{
-    [layer setFolders:[model folders]];
-    [layer foldersHidden:NO animated:YES];
+    [self nextStep];
 }
 
 -(void)nextStep{
+
+    int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
+    if (emailsInInbox>totalEmailsInThisSession){
+        totalEmailsInThisSession = emailsInInbox;
+    }
+    int count = totalEmailsInThisSession-emailsInInbox;
+    int total = totalEmailsInThisSession;
+    
+    float percentage= (float)100*count/total;
+    // TODO find a logarithm like function to increase the counter faster at the beginning.
+    [layer setPercentage:percentage labelCount:emailsInInbox];
+    
+
+    if ([[model folders] count]!=0){
+        if (![layer.folders isEqualToArray:[model folders]]){
+            [layer foldersHidden:YES animated:YES];
+            [layer setFolders:[model folders]];
+            [layer foldersHidden:NO animated:YES];
+        }
+        [layer progressIndicatorHidden:FALSE animated:YES];
+    }
     if ([layer mailsOnSceneCount]!=0) return;
     if ([model emailsCountInFolder:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")]==0){
         if ([model isSyncing]){
@@ -197,20 +191,22 @@
             
             UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:inboxEmptyController];
             [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
-            navCtr.modalPresentationStyle=UIModalPresentationPageSheet;
+            navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
             navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
             [self presentModalViewController:navCtr animated:YES];
         }
     }else{
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-        [layer putEmail:[model getLastEmailFrom:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")]];
+        NSManagedObjectID* nextEmailId = [model lastEmailFrom:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")];
+        EmailModel* nextEmail = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:nextEmailId];
+        [layer putEmail:nextEmail];
     }
 }
 
 -(void)setNewModel{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_ABORTED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_ERROR object:nil];
     [self linkToModel];
     [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
@@ -226,10 +222,10 @@
     [layer foldersHidden:YES animated:YES];
     [layer progressIndicatorHidden:YES animated:YES];
     totalEmailsInThisSession = 0;
-    if (self.model && [self.model isSyncing]){
+    if (self.model && [self.model isBusy]){
         [self showLoadingHud];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:SYNC_DONE object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_ABORTED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:MODEL_UNACTIVE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:MODEL_ERROR object:nil];
         [self.model stopSync];
     }else{
         [self setNewModel];

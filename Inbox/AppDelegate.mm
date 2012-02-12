@@ -37,6 +37,8 @@
 #import "Logger.h"
 #import "LumberjackCrashLogger.h"
 #import "DDTTYLogger.h"
+#define APP_WILL_TERMINATE @"shouldSaveContext"
+#define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
 @interface AppDelegate()
 -(void)resetDatabase;
 - (NSString *)databasePath;
@@ -65,10 +67,11 @@
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    crashController = [[CrashController sharedInstance] retain];
-    crashController.delegate = self;
-    crashController.logger = [[[LumberjackCrashLogger alloc] init] autorelease];
+    //crashController = [[CrashController sharedInstance] retain];
+    //crashController.delegate = self;
+    //crashController.logger = [[[LumberjackCrashLogger alloc] init] autorelease];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
 	[window makeKeyAndVisible];
 }
 
@@ -84,7 +87,6 @@
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];
-    [managedObjectContext release];
     [managedObjectModel release];
     [persistentStoreCoordinator release];
     [crashController release];
@@ -117,20 +119,11 @@
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
 	[[CCDirector sharedDirector] purgeCachedData];
-    NSError* error;
-    [[self managedObjectContext:TRUE] save:&error];
-    if (error){
-        DDLogError(@"AppDelegate:applicationDidReceiveMemoryWarning:saveContext: %@", [error localizedDescription]);
-    }
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
 	[[CCDirector sharedDirector] stopAnimation];
-    NSError* error = nil;
-    [[self managedObjectContext:TRUE] save:&error];
-    if (error){
-        DDLogError(@"AppDelegate:applicationDidEnterBackground:saveContext: %@", [error localizedDescription]);
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:APP_DID_ENTER_BACKGROUND object:nil];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
@@ -138,21 +131,17 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:APP_WILL_TERMINATE object:nil];
 	CCDirector *director = [CCDirector sharedDirector];
 	[[director openGLView] removeFromSuperview];	
     [director end];	
 	[window release];
 	[navigationController release];
-    NSError* error = nil;
-    [[self managedObjectContext:TRUE] save:&error];
-    if (error){
-        DDLogError(@"AppDelegate:applicationWillTerminate:saveContext: %@", [error localizedDescription]);
-    }
 }
+
 - (void)applicationSignificantTimeChange:(UIApplication *)application {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
-
 
 #pragma mark - CoreData
 
@@ -168,44 +157,20 @@
                                   initWithManagedObjectModel:[self managedObjectModel]];
     if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil URL:storeUrl options:nil error:&error]) {
+        // TODO
     }
     
     return persistentStoreCoordinator;
 }
 
 
--(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse{
+-(NSManagedObjectContext*)newManagedObjectContext{
     @synchronized(self){
-        if (managedObjectContext != nil && reuse) {
-            return managedObjectContext;
-        }else if (managedObjectContext){
-            [managedObjectContext save:nil];
-        }
         NSManagedObjectContext* context;
-        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-        if (coordinator != nil) {
-            context = [[NSManagedObjectContext alloc] init];
-            [context setPersistentStoreCoordinator: coordinator];
-        }
-        if (managedObjectContext){
-            /*
-             If the managedObjectContext exists here, that means we won't reuse it.
-             */
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(mergeChangesWithMainContext:)
-                                                         name:NSManagedObjectContextDidSaveNotification
-                                                       object:context];
-            return [context autorelease];
-        }else{
-            managedObjectContext = context;
-            return managedObjectContext;
-        }
+        context = [[[NSManagedObjectContext alloc] init] autorelease];
+        [context setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+        return context;
     }
-}
-
-- (void)mergeChangesWithMainContext:(NSNotification *)notification{
-    NSManagedObjectContext *mainContext = [self managedObjectContext:YES];
-    [mainContext mergeChangesFromContextDidSaveNotification:notification];  
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
@@ -227,22 +192,15 @@
     if (!persistentStoreCoordinator){
         return;
     }
-    [managedObjectContext release];
-    managedObjectContext = nil;
-    if (persistentStoreCoordinator){
     NSArray *stores = [persistentStoreCoordinator persistentStores];
-        for(NSPersistentStore *store in stores) {
-            [persistentStoreCoordinator removePersistentStore:store error:nil];
-            [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
-        }
-        [persistentStoreCoordinator release];
-        persistentStoreCoordinator = nil;
+    for(NSPersistentStore *store in stores) {
+        [persistentStoreCoordinator removePersistentStore:store error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
     }
-    
+    [persistentStoreCoordinator release];
+    persistentStoreCoordinator = nil;
     [managedObjectModel release];
     managedObjectModel = nil;
 }
-
-
 
 @end

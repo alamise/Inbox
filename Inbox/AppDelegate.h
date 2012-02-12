@@ -32,13 +32,12 @@
 	UIWindow *window;
     UINavigationController* navigationController;
     NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     CrashController* crashController;
 }
 @property (nonatomic, retain,readwrite) UIWindow *window;
 -(NSString*)plistPath;
 
--(NSManagedObjectContext*)managedObjectContext:(BOOL)reuse;
+-(NSManagedObjectContext*)newManagedObjectContext;
 -(void)resetDatabase;
 @end

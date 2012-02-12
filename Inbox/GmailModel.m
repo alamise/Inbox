@@ -93,7 +93,7 @@
     }
     @catch (NSException *exception) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         });
         return false;
     }    
@@ -122,7 +122,7 @@
     NSArray* foldersToDelete = [context executeFetchRequest:request error:&fetchError];
     if (fetchError){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
         });
         [disabledFolders release];
         [request release];
@@ -134,7 +134,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             });
             [disabledFolders release];
             [request release];
@@ -150,7 +150,7 @@
             int folders = [context countForFetchRequest:request error:&fetchError];
             if (fetchError){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
                 });
                 [disabledFolders release];
                 [request release];
@@ -163,7 +163,7 @@
                     }
                     @catch (NSException *exception) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                         });
                         [disabledFolders release];
                         [request release];
@@ -233,7 +233,7 @@
     [request release];
     if (fetchError){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
         });
         [request release];
         [writeChangesLock unlock];
@@ -270,7 +270,7 @@
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 });
                 [request release];
                 [writeChangesLock unlock];
@@ -284,7 +284,7 @@
             }
             @catch (NSException* exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                 });
                 [request release];
                 [writeChangesLock unlock];
@@ -321,7 +321,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             });
             return false;
         }
@@ -334,7 +334,7 @@
             NSArray* objects = [context executeFetchRequest:request error:&fetchError];
             if (fetchError){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
                 });
                 [request release];
                 return false;   
@@ -347,7 +347,7 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
                     });
                     [request release];
                     return false;   
@@ -385,6 +385,20 @@
     return true;
 }
 
+-(BOOL)isBusy{
+    if([syncLock tryLock]){
+        [syncLock unlock];
+        if ([writeChangesLock tryLock]){
+            [writeChangesLock unlock];
+            return NO;
+        }else{
+            return YES;
+        }
+    }else{
+        return YES;
+    }
+}
+
 -(BOOL)isSyncing{
     if([syncLock tryLock]){
         [syncLock unlock];
@@ -395,21 +409,21 @@
 }
 
 -(void)sync{
-    dispatch_async( dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         if(![syncLock tryLock]){
             return;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STARTED object:nil];
         });
-        NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:false] retain];
+        NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
         CTCoreAccount* account = [[CTCoreAccount alloc] init];
         @try {
             [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             });
             [account release];
             [context release];
@@ -440,7 +454,7 @@
     [context save:&error];
     if (error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:error];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:error];
         });
         return false;
     }else{
@@ -448,8 +462,8 @@
     }
 }
 
--(EmailModel*)getLastEmailFrom:(NSString*)folder{
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:true] retain];    
+-(NSManagedObjectID*)lastEmailFrom:(NSString*)folder{
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -467,12 +481,12 @@
     [context release];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
         return nil;
     }else{
         if ([objects count]>0){
             EmailModel* model = [objects objectAtIndex:0];
-            return model;
+            return [model objectID];
         }else{
             return nil;
         }
@@ -484,13 +498,15 @@
     shouldStopSync = YES;
 }
 
--(BOOL)fetchEmailBody:(EmailModel*)model{
+-(BOOL)fetchEmailBody:(NSManagedObjectID*)emailId{
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    EmailModel* model = (EmailModel*)[context objectWithID:emailId];
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {
         [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
@@ -499,7 +515,7 @@
         inbox = [account folderWithPath:model.path];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
@@ -510,25 +526,15 @@
         [message fetchBody];
     }
     @catch (NSException *exception) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
         [account release];
         return false;
     }
     model.htmlBody = [message htmlBody];
+    [self saveContext:context];
     [account release];
     return true;
 }
-
--(void)move:(EmailModel*)model to:(NSString*)folder{
-    if ([folder isEqualToString:@"INBOX"]){
-        model.skippedIndex=[NSNumber numberWithInt:[model.skippedIndex intValue]+1];
-    }else{
-        model.newPath = folder;
-        [self performSelectorInBackground:@selector(updateRemoteMessagesAsync) withObject:nil];
-    }
-    return;
-}
-
 
 -(void)updateRemoteMessagesAsync{
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
@@ -542,35 +548,55 @@
             [account release];
             return;
         }
-        NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:false] retain];
+        NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
         [self updateRemoteMessages:account context:context];
+        [self saveContext:context];
         [context release];
         [account release];
     }
     [pool release];
 }
 
+#pragma mark - Model's methods
+
+-(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    EmailModel* model = (EmailModel*)[context objectWithID:emailId];
+    if ([folder isEqualToString:@"INBOX"]){
+        model.skippedIndex=[NSNumber numberWithInt:[model.skippedIndex intValue]+1];
+    }else{
+        model.newPath = folder;
+        [self performSelectorInBackground:@selector(updateRemoteMessagesAsync) withObject:nil];
+    }
+    [self saveContext:context];
+    return;
+}
+
 -(NSArray*)folders{
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:true] retain];    
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    
+    [request setPropertiesToFetch:[NSArray arrayWithObject:[[entity propertiesByName] objectForKey:@"path"]]];
     NSError* fetchError = nil;
     NSArray* folders = [context executeFetchRequest:request error:&fetchError];
     [context release];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
         return nil;
     }else{
+        NSMutableArray* results = [NSMutableArray array];
         folders = [folders sortedArrayUsingSelector:@selector(compare:)];
-        return folders;
+        for (FolderModel* folder in folders){
+            [results addObject:folder.path];
+        }
+        return results;
     }
 }
 
 -(int)emailsCountInFolder:(NSString*)folder{
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate managedObjectContext:true] retain];    
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -582,7 +608,7 @@
     [context release];
     [request release];
     if (fetchError){
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_ABORTED object:fetchError];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:fetchError];
         return -1;
     }else{
         return count;

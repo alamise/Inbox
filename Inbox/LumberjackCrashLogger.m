@@ -34,9 +34,9 @@
 }
 
 - (void)sendCrash:(NSDictionary*)crash{
-    [self pumpRunLoop];
+    //[self pumpRunLoop];
     DDLogError(@"LumberjackCrashLogger:sendCrash:", [crash description]);
-    self.finishPump = YES;
+    //self.finishPump = YES;
 }
 
 @end

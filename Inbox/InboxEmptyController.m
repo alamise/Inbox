@@ -23,6 +23,7 @@
  */
 
 #import "InboxEmptyController.h"
+#import "LoginController.h"
 
 @implementation InboxEmptyController
 @synthesize  actionOnDismiss;
@@ -30,6 +31,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        shouldExecActionOnDismiss = NO;
     }
     return self;
 }
@@ -53,7 +55,25 @@
     [super viewDidUnload];
 }
 
-- (IBAction)onRefresh {
-    [self.actionOnDismiss start];
+-(void)viewDidDisappear:(BOOL)animated{
+    if (shouldExecActionOnDismiss){
+        [self.actionOnDismiss start];
+    }
 }
+
+- (IBAction)onRefresh {
+    shouldExecActionOnDismiss = YES;
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)onEditAccount {
+    LoginController* loginCtr = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
+    loginCtr.actionOnDismiss = self.actionOnDismiss;
+    [self.navigationController pushViewController:loginCtr animated:YES];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
 @end

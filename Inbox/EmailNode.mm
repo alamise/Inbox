@@ -26,16 +26,23 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GameConfig.h"
+#import "AppDelegate.h"
 #define ANIMATION_DELAY 0.3
+
+@interface EmailNode ()
+-(void) draw:(NSString*)subject senderName:(NSString*)senderName;
+@end
+
 @implementation EmailNode
-@synthesize emailModel,didMoved,isAppearing,isDisappearing;
+
+@synthesize emailId,didMoved,isAppearing,isDisappearing;
 
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
     self = [super init];
     if (self) {
         world = w;
-        self.emailModel = model;
-        drawMe = true;
+        self.emailId = [model objectID];
+        [self draw:model.subject senderName:model.senderName];
 
         // Body
         bodyDef.type = b2_dynamicBody;
@@ -57,28 +64,28 @@
     return self;    
 }
 
--(void) draw {
-    [super draw];
-    if (drawMe){
-        drawMe = false;
-        // 217x135
-        CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
-        sprite.position=CGPointMake(105,67);
-        [self addChild:sprite];
-        title = [[CCLabelTTF labelWithString:self.emailModel.senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
-        title.color=ccc3(150, 150, 150);
-        title.position=CGPointMake(105, 105);
-        [self addChild:title];
-        
-        content = [[CCLabelTTF labelWithString:self.emailModel.subject dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
 
-        content.color=ccc3(0, 1, 0);
-        content.position=CGPointMake(105, 56);
-        
-        [self addChild:content];
-        [self setContentSize:CGSizeMake(217, 135)];
-        [self setAnchorPoint:CGPointMake(0.5, 0.5)];
-    }
+
+-(void) draw:(NSString*)subject senderName:(NSString*)senderName {
+    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:self.emailId];
+    // 217x135
+    CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
+    sprite.position=CGPointMake(105,67);
+    [self addChild:sprite];
+    title = [[CCLabelTTF labelWithString:senderName dimensions:CGSizeMake(180, 20) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:15] retain];
+    title.color=ccc3(150, 150, 150);
+    title.position=CGPointMake(105, 105);
+    [self addChild:title];
+    
+    content = [[CCLabelTTF labelWithString:subject dimensions:CGSizeMake(180, 65) alignment:UITextAlignmentLeft lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:13] retain];
+    
+    content.color=ccc3(0, 1, 0);
+    content.position=CGPointMake(105, 56);
+    
+    [self addChild:content];
+    [self setContentSize:CGSizeMake(217, 135)];
+    [self setAnchorPoint:CGPointMake(0.5, 0.5)];
+
 }
 
 -(void)onEnter{
@@ -100,7 +107,7 @@
 -(void)dealloc{
     body = nil;
     world = nil;
-    self.emailModel = nil;
+    self.emailId = nil;
     [title release];
     [content release];
     [super dealloc];

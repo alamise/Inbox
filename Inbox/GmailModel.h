@@ -27,7 +27,7 @@
 #import "CTCoreAccount.h"
 #define SYNC_STARTED @"sync started"
 #define SYNC_DONE @"sync done"
-#define SYNC_ABORTED @"sync aborted"
+#define MODEL_ERROR @"error"
 #define INBOX_STATE_CHANGED @"new messages"
 #define FOLDERS_READY @"folders ready"
 #define MODEL_UNACTIVE @"model unactive"
@@ -48,11 +48,12 @@
 @property(readonly) BOOL isLooping;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
--(BOOL)isSyncing;
+-(BOOL)isBusy;
 -(void)stopSync;
--(EmailModel*)getLastEmailFrom:(NSString*)folder;
--(void)move:(EmailModel*)model to:(NSString*)folder;
+-(NSManagedObjectID*)lastEmailFrom:(NSString*)folder;
+-(void)move:(NSManagedObjectID*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;
--(BOOL)fetchEmailBody:(EmailModel*)model;
+-(BOOL)fetchEmailBody:(NSManagedObjectID*)model;
 -(NSArray*)folders;
+-(BOOL)isSyncing;
 @end

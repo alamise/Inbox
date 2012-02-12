@@ -24,17 +24,18 @@
 
 #import "CCNode.h"
 #import "Box2D.h"
+#import <CoreData/CoreData.h>
+
 @class CCLabelTTF,EmailModel;
 @interface EmailNode : CCNode{
-    EmailModel* emailModel;
+    NSManagedObjectID* emailId;
     CCLabelTTF *title;
     CCLabelTTF *content;
-    BOOL drawMe;
     BOOL didMoved;
     b2Body* body;
     b2World* world;
 }
-@property(nonatomic,retain) EmailModel* emailModel;
+@property(nonatomic,retain) NSManagedObjectID* emailId;
 @property(nonatomic,assign) BOOL didMoved;
 @property(nonatomic,assign) BOOL isAppearing;
 @property(nonatomic,assign) BOOL isDisappearing;

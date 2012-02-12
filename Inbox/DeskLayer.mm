@@ -194,24 +194,24 @@ enum {
         return;
     }
     if(!self.draggedNode.didMoved){
-        [delegate emailTouched:self.draggedNode.emailModel];
+        [delegate emailTouched:self.draggedNode.emailId];
         return;
     }
     CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
     int cellIndex = [table cellIndexAt:newLocation] ;
     if (cellIndex!=-1){
-        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
-        [delegate move:self.draggedNode.emailModel to:folder.path];
+        NSString* path = [self.folders objectAtIndex:cellIndex];
+        [delegate move:self.draggedNode.emailId to:path];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
     }else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
-        [delegate move:self.draggedNode.emailModel to:@"[Gmail]/All Mail"];
+        [delegate move:self.draggedNode.emailId to:@"[Gmail]/All Mail"];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
         
     }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
-        [delegate move:self.draggedNode.emailModel to:@"INBOX"];
+        [delegate move:self.draggedNode.emailId to:@"INBOX"];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
     }else{
@@ -352,8 +352,8 @@ enum {
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
     
     if (folders){
-        FolderModel* folder = [self.folders objectAtIndex:idx];
-        node.folderPath=folder.path;
+        NSString* folderPath = [self.folders objectAtIndex:idx];
+        node.folderPath=folderPath;
     }else{
         switch (idx) {
             case 0:
