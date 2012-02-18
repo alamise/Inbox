@@ -40,16 +40,15 @@
     NSString *password;
     NSLock *syncLock;
     NSLock * writeChangesLock;
-    BOOL shouldStopSync;
-    int asyncOpsCount;
+    BOOL stopActivitiesAsap;
+    int activitiesCount;
 }
 @property(readonly) NSString *email;
 @property(readonly) NSString *password;
-@property(readonly) BOOL isLooping;
 -(id)initWithAccount:(NSString*)email password:(NSString*)password;
 -(void)sync;
--(BOOL)isBusy;
--(void)stopSync;
+-(BOOL)isActive;
+-(void)stopActivitiesAsap;
 -(NSManagedObjectID*)lastEmailFrom:(NSString*)folder;
 -(void)move:(NSManagedObjectID*)model to:(NSString*)folder;
 -(int)emailsCountInFolder:(NSString*)folder;

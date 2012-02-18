@@ -70,7 +70,6 @@
 
 -(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
     [model move:emailId to:folder];
-    [self nextStep];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
@@ -111,7 +110,9 @@
 
 -(void)showLoadingHud{
     layer.isActive = NO;
-    [loadingHud show:YES];
+    if (loadingHud.alpha==0.0f){
+        [loadingHud show:YES];    
+    }
 }
 
 -(void)hideLoadingHud{
@@ -205,7 +206,7 @@
 }
 
 -(void)setNewModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_UNACTIVE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_ERROR object:nil];
     [self linkToModel];
     [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
@@ -222,11 +223,10 @@
     [layer foldersHidden:YES animated:YES];
     [layer progressIndicatorHidden:YES animated:YES];
     totalEmailsInThisSession = 0;
-    if (self.model && [self.model isBusy]){
+    if (self.model && [self.model isActive]){
         [self showLoadingHud];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:MODEL_UNACTIVE object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:MODEL_ERROR object:nil];
-        [self.model stopSync];
     }else{
         [self setNewModel];
     }
