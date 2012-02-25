@@ -169,7 +169,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							</object>
 							<string key="IBUIColorCocoaTouchKeyPath">groupTableViewBackgroundColor</string>
 						</object>
-						<object class="NSColor" key="IBUIShadowColor" id="394262016">
+						<object class="NSColor" key="IBUIShadowColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 						</object>
@@ -244,10 +244,13 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Can't connect to the internet, please check your connectivity and try again</string>
+						<string key="IBUIText">Can't connect to the internet, please check your connectivity and try again.</string>
 						<reference key="IBUITextColor" ref="94643937"/>
 						<reference key="IBUIHighlightedColor" ref="239290271"/>
-						<reference key="IBUIShadowColor" ref="394262016"/>
+						<object class="NSColor" key="IBUIShadowColor" id="169781323">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44MDAwMDAwMTE5IDAuODAwMDAwMDExOSAwLjgwMDAwMDAxMTkAA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">0</int>
@@ -325,7 +328,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="647831223">
 						<reference key="NSNextResponder" ref="11117671"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 20}, {502, 286}}</string>
+						<string key="NSFrame">{{20, 20}, {507, 286}}</string>
 						<reference key="NSSuperview" ref="11117671"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="746819332"/>
@@ -335,12 +338,13 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Something wen wrong, did you change your password on Gmail ?</string>
+						<string key="IBUIText">Something went wrong, did you change your Gmail password ?</string>
 						<reference key="IBUITextColor" ref="94643937"/>
 						<reference key="IBUIHighlightedColor" ref="239290271"/>
-						<reference key="IBUIShadowColor" ref="394262016"/>
+						<reference key="IBUIShadowColor" ref="169781323"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="176957207"/>
 						<reference key="IBUIFont" ref="113149944"/>
 					</object>
@@ -366,7 +370,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<string key="NSFrameSize">{540, 576}</string>
 						<reference key="NSSuperview" ref="773879885"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1050603711"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -385,29 +389,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<bool key="IBUIHidesWhenStopped">NO</bool>
 						<bool key="IBUIAnimating">YES</bool>
 						<int key="IBUIStyle">0</int>
-						<reference key="IBUIColor" ref="247850289"/>
-					</object>
-					<object class="IBUILabel" id="1050603711">
-						<reference key="NSNextResponder" ref="773879885"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{38, 22}, {465, 21}}</string>
-						<reference key="NSSuperview" ref="773879885"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="932033285"/>
-						<string key="NSReuseIdentifierKey">_NS:345</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Hold on, something wen wrong. We are gathering some infos</string>
-						<reference key="IBUITextColor" ref="247850289"/>
-						<reference key="IBUIHighlightedColor" ref="394262016"/>
-						<reference key="IBUIShadowColor" ref="394262016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="176957207"/>
-						<reference key="IBUIFont" ref="113149944"/>
+						<reference key="IBUIColor" ref="398972358"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{540, 576}</string>
@@ -548,8 +530,8 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="347048068"/>
 							<reference ref="746819332"/>
-							<reference ref="647831223"/>
 							<reference ref="826627992"/>
+							<reference ref="647831223"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Error</string>
@@ -558,17 +540,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="objectID">6</int>
 						<reference key="object" ref="773879885"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1050603711"/>
 							<reference ref="932033285"/>
 							<reference ref="229446564"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Gathering</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="1050603711"/>
-						<reference key="parent" ref="773879885"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
@@ -661,7 +637,6 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>

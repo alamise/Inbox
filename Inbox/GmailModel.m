@@ -418,12 +418,14 @@
 
 -(void)sync{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        __block NSManagedObjectContext* context;
-        __block CTCoreAccount* account;
+        __block NSManagedObjectContext* context = nil;
+        __block CTCoreAccount* account = nil;
         
         void (^finalize)(void) = ^{
             [context release];
+            context = nil;
             [account release];
+            account = nil;
             [syncLock unlock];
             [self activityEnded];
         };
@@ -445,7 +447,6 @@
             [self executeCallbackCode: ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
             }];
-            [account release];
             finalize();
             return;
         }
@@ -455,11 +456,14 @@
         }
         
         if ([self saveContext:context]){
+            finalize();
             [self executeCallbackCode: ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
             }];
+        }else{
+            finalize();
         }
-        finalize();
+        
     });
 }
 
@@ -577,6 +581,9 @@
             [account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
         }
         @catch (NSException *exception) {
+            [self executeCallbackCode:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:MODEL_ERROR object:[NSError errorWithDomain:[exception description] code:0 userInfo:nil]];
+            }];
             [account release];
             [self activityEnded];
             return;

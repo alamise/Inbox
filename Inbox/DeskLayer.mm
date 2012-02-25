@@ -332,12 +332,12 @@ enum {
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     foldersTable = (SWTableView*)[self getChildByTag:tagScrollZone];
     if (!foldersTable){
-        foldersTable = [[SWTableView viewWithDataSource:self size:CGSizeMake(200, 748) container:nil] retain];
+        foldersTable = [[SWTableView viewWithDataSource:self size:CGSizeMake(240, 748) container:nil] retain];
         [foldersTable setVerticalFillOrder:SWTableViewFillTopDown];
         [self addChild:foldersTable z:0 tag:tagScrollZone];
     }
     
-    foldersTable.position=CGPointMake(windowSize.width-230,0);
+    foldersTable.position=CGPointMake(windowSize.width-240,0);
     
     [foldersTable reloadData];
     [foldersTable scrollToTop];
@@ -345,7 +345,7 @@ enum {
     
 }
 -(CGSize)cellSizeForTable:(SWTableView *)table{
-    return CGSizeMake(200, 280);
+    return CGSizeMake(240, 280);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
@@ -435,7 +435,7 @@ enum {
     if (hidden){
         newPos = CGPointMake(windowSize.width, 0);
     }else{
-        newPos = CGPointMake(windowSize.width-230, 0);
+        newPos = CGPointMake(windowSize.width-240, 0);
     }
     if (CGPointEqualToPoint(foldersTable.position,newPos) == NO){
         if (animated){

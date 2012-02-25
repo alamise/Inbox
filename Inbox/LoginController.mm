@@ -80,6 +80,11 @@
     }
 }
 
+-(IBAction)openSecurityPage{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/simon-watiau/Inbox/wiki/aboutsecurity"]];
+}
+
+
 #pragma mark - View's lifecycle
 
 - (void)viewDidLoad{

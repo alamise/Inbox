@@ -62,7 +62,7 @@
 
 -(IBAction)pageChanged{
     int page = pageControl.currentPage;
-    [scrollView scrollRectToVisible:CGRectMake(page*TUTORIAL_VIEW_WIDTH, 0, TUTORIAL_VIEW_WIDTH, TUTORIAL_VIEW_HEIGHT) animated:YES];
+    [scrollView scrollRectToVisible:CGRectMake(page*TUTORIAL_VIEW_WIDTH, 0, TUTORIAL_VIEW_WIDTH, TUTORIAL_VIEW_HEIGHT) animated:NO];
 }
 
 - (void)viewDidLoad{
@@ -89,6 +89,7 @@
     tutorialViews = nil;
     [super viewDidUnload];
 }
+
 
 -(IBAction)goToNextStep{
     LoginController* loginView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
