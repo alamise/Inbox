@@ -1838,8 +1838,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -1852,8 +1852,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
+				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
 				SDKROOT = iphoneos5.0;
 			};
 			name = Debug;
@@ -1862,8 +1862,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1875,8 +1875,8 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4F171DB-8C28-4AE5-8E91-EE7C27072925";
+				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
 				SDKROOT = iphoneos5.0;
 			};
 			name = Release;
