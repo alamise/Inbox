@@ -34,5 +34,4 @@
 @property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 -(IBAction)goToNextStep;
 -(IBAction)pageChanged;
--(IBAction)openSecurityPage;
 @end

@@ -24,6 +24,7 @@
 
 #import "EmailController.h"
 #import "AppDelegate.h"
+#import "GANTracker.h"
 @implementation EmailController
 -(id)initWithEmail:(NSManagedObjectID*)email{
     if (self = [super initWithNibName:@"EmailView" bundle:nil]){
@@ -47,6 +48,11 @@
     EmailModel* email = (EmailModel*)[context objectWithID:emailId];
     [webView loadHTMLString:email.htmlBody baseURL:nil];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[GANTracker sharedTracker] trackPageview:@"/show_email" withError:nil];
 }
 
 - (void)viewDidUnload{

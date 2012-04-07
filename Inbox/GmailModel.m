@@ -32,6 +32,7 @@
 #import "MailCoreTypes.h"
 #import "FolderModel.h"
 #import "RegexKitLite.h"
+#import "GANTracker.h"
 
 @interface GmailModel()
 -(BOOL)saveContext:(NSManagedObjectContext*)context;
@@ -601,6 +602,7 @@
 #pragma mark - Model's methods
 
 -(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
+    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/model/move/%@",folder] withError:nil];
     [self activityStarted];
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     EmailModel* model = (EmailModel*)[context objectWithID:emailId];

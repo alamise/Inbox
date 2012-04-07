@@ -24,6 +24,7 @@
 
 #import "InboxEmptyController.h"
 #import "LoginController.h"
+#import "GANTracker.h"
 
 @implementation InboxEmptyController
 @synthesize  actionOnDismiss;
@@ -61,12 +62,19 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[GANTracker sharedTracker] trackPageview:@"/inbox_empty" withError:nil];
+}
+
 - (IBAction)onRefresh {
+    [[GANTracker sharedTracker] trackPageview:@"/inbox_empty/refresh" withError:nil];
     shouldExecActionOnDismiss = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)onEditAccount {
+    [[GANTracker sharedTracker] trackPageview:@"/inbox_empty/edit_account" withError:nil];
     LoginController* loginCtr = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
     loginCtr.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginCtr animated:YES];

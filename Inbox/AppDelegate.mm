@@ -37,6 +37,7 @@
 #import "Logger.h"
 #import "LumberjackCrashLogger.h"
 #import "DDTTYLogger.h"
+#import "GANTracker.h"
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
 @interface AppDelegate()
@@ -67,11 +68,16 @@
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-0000000-1"
+                                           dispatchPeriod:10
+                                                 delegate:nil];
+
+    
     crashController = [[CrashController sharedInstance] retain];
     crashController.delegate = self;
     crashController.logger = [[CrashEmailLogger alloc] initWithEmail:@"sim.w80+crashinbox@gmail.com" viewController:navigationController];//[[[LumberjackCrashLogger alloc] init] autorelease];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
+    [[GANTracker sharedTracker] trackPageview:@"/app_started" withError:nil];
 	[window makeKeyAndVisible];
 }
 
@@ -84,6 +90,7 @@
 }
 
 - (void)dealloc {
+    [[GANTracker sharedTracker] stopTracker];
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];

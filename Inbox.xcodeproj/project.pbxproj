@@ -68,6 +68,11 @@
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
+		F4E28090153040300093C3F5 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */; };
+		F4E28091153040300093C3F5 /* libGoogleAnalytics_NoThumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */; };
+		F4E28092153040300093C3F5 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4E2808F153040300093C3F5 /* ReadMe.txt */; };
+		F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E28093153040640093C3F5 /* libsqlite3.0.dylib */; };
+		F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E280951530407A0093C3F5 /* CFNetwork.framework */; };
 		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
 		F4F80C9114D4693F00A7C356 /* progressActivityBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */; };
 		F4F80C9214D4693F00A7C356 /* progressActivityForeground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */; };
@@ -709,6 +714,12 @@
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F4E2808C153040300093C3F5 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_NoThumb.a; sourceTree = "<group>"; };
+		F4E2808F153040300093C3F5 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		F4E28093153040640093C3F5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		F4E280951530407A0093C3F5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
 		F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
 		F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressActivityBackground.png; sourceTree = "<group>"; };
@@ -748,6 +759,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */,
+				F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */,
 				F4FF347314CAFA250091DA69 /* libmailcore.a in Frameworks */,
 				F4FF347214CAFA200091DA69 /* libetpan_ios.a in Frameworks */,
 				F4FF347014CAFA1A0091DA69 /* libssl.a in Frameworks */,
@@ -767,6 +780,8 @@
 				F4FB8481146D2FEE00B08513 /* UIKit.framework in Frameworks */,
 				F4FB8483146D2FEE00B08513 /* Foundation.framework in Frameworks */,
 				F4FB8485146D2FEE00B08513 /* CoreGraphics.framework in Frameworks */,
+				F4E28090153040300093C3F5 /* libGoogleAnalytics.a in Frameworks */,
+				F4E28091153040300093C3F5 /* libGoogleAnalytics_NoThumb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,6 +1066,17 @@
 			name = "inbox empty";
 			sourceTree = "<group>";
 		};
+		F4E2808B153040300093C3F5 /* GoogleAnalytics-SDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F4E2808C153040300093C3F5 /* GANTracker.h */,
+				F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */,
+				F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */,
+				F4E2808F153040300093C3F5 /* ReadMe.txt */,
+			);
+			path = "GoogleAnalytics-SDK-iOS";
+			sourceTree = "<group>";
+		};
 		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1102,6 +1128,9 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4E280951530407A0093C3F5 /* CFNetwork.framework */,
+				F4E28093153040640093C3F5 /* libsqlite3.0.dylib */,
+				F4E2808B153040300093C3F5 /* GoogleAnalytics-SDK-iOS */,
 				F4F80DC114D48A4B00A7C356 /* Lumberjack */,
 				F46F715914CC573300C81028 /* RegexKitLite */,
 				F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */,
@@ -1728,6 +1757,7 @@
 				F427E77A14D9FA7F007C3E64 /* Icon-Small.png in Resources */,
 				F427E77B14D9FA7F007C3E64 /* Icon-Small@2x.png in Resources */,
 				F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */,
+				F4E28092153040300093C3F5 /* ReadMe.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1838,8 +1868,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -1852,9 +1882,9 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
-				SDKROOT = iphoneos5.0;
+				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				SDKROOT = iphoneos5.1;
 			};
 			name = Debug;
 		};
@@ -1862,8 +1892,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1875,9 +1905,9 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
-				SDKROOT = iphoneos5.0;
+				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				SDKROOT = iphoneos5.1;
 			};
 			name = Release;
 		};
@@ -1906,6 +1936,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)\"/**",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
@@ -1913,7 +1944,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos5.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
@@ -1944,6 +1975,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)\"/**",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
@@ -1951,7 +1983,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos5.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;

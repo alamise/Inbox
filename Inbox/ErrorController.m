@@ -27,6 +27,7 @@
 #import "LoginController.h"
 #import "DeskController.h"
 #import "GmailModel.h"
+#import "GANTracker.h"
 @interface ErrorController()
 -(void)updateViewWithNetworkStatus:(NetworkStatus)status;
 @end
@@ -76,6 +77,7 @@
 }
 
 -(IBAction)editAccount{
+    [[GANTracker sharedTracker] trackPageview:@"/error/edit_account" withError:nil];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
     loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
@@ -92,6 +94,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [[GANTracker sharedTracker] trackPageview:@"/error" withError:nil];
 }
 
 - (void)viewDidLoad{
