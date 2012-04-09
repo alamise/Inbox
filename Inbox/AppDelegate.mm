@@ -35,9 +35,8 @@
 #import "GmailModel.h"
 #import "Logger.h"
 #import "DDTTYLogger.h"
-//#import "GANTracker.h"
-//#import "BWQuincyManager.h"
-//#import "FlurryAnalytics.h"
+#import "BWQuincyManager.h"
+#import "FlurryAnalytics.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
@@ -67,17 +66,12 @@
 
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
-	[window addSubview: navigationController.view];
-    
-    //[[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30673935-1"
-                                           //dispatchPeriod:10
-                                             //    delegate:nil];
-
-    
+	[window addSubview: navigationController.view];    
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    //[[GANTracker sharedTracker] trackPageview:@"/app_started" withError:nil];
-    //[FlurryAnalytics logEvent:@"app_started" timed:NO];
-    //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
+
+    [FlurryAnalytics startSession:@""];
+    [FlurryAnalytics logEvent:@"app_started" timed:NO];
+    [[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
     //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     //[FlurryAnalytics startSession:@"P6ZVR2Y2BH45WPL41EIK"];
  

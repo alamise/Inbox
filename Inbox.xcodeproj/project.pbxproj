@@ -65,6 +65,12 @@
 		F47DBBF815330C16008A5373 /* libetpan_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBBF415330C16008A5373 /* libetpan_ios.a */; };
 		F47DBBF915330C16008A5373 /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBBF515330C16008A5373 /* libsasl2.a */; };
 		F47DBBFA15330C16008A5373 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBBF615330C16008A5373 /* libssl.a */; };
+		F47DBCA8153319B3008A5373 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBCA7153319B3008A5373 /* libFlurryAnalytics.a */; };
+		F47DBD4415331A47008A5373 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBCAE15331A47008A5373 /* BWQuincyManager.m */; };
+		F47DBD4515331A47008A5373 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBCAF15331A47008A5373 /* CrashReporter.framework */; };
+		F47DBD4615331A47008A5373 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47DBCB015331A47008A5373 /* LICENSE.txt */; };
+		F47DBD4715331A47008A5373 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47DBCB115331A47008A5373 /* Quincy.bundle */; };
+		F47DBDB515331B3E008A5373 /* private.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47DBDB415331B3E008A5373 /* private.plist */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -603,6 +609,13 @@
 			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
 			remoteInfo = cocos2d;
 		};
+		F47DBDB215331A48008A5373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F47DBCB315331A47008A5373 /* QuincyLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 36892BEC145EC96A0036932D;
+			remoteInfo = QuincyLib;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -690,6 +703,15 @@
 		F47DBBF415330C16008A5373 /* libetpan_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libetpan_ios.a; path = "MailCore/libetpan/build-mac/build/Release-iphoneos/libetpan_ios.a"; sourceTree = "<group>"; };
 		F47DBBF515330C16008A5373 /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsasl2.a; path = "MailCore/iOSPorts/ports/security/cyrus-sasl/build/Release-iphoneos/libsasl2.a"; sourceTree = "<group>"; };
 		F47DBBF615330C16008A5373 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "MailCore/iOSPorts/ports/security/openssl/build/Release-iphoneos/libssl.a"; sourceTree = "<group>"; };
+		F47DBCA6153319B3008A5373 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		F47DBCA7153319B3008A5373 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
+		F47DBCAD15331A47008A5373 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
+		F47DBCAE15331A47008A5373 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
+		F47DBCAF15331A47008A5373 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		F47DBCB015331A47008A5373 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		F47DBCB115331A47008A5373 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
+		F47DBCB315331A47008A5373 /* QuincyLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = QuincyLib.xcodeproj; sourceTree = "<group>"; };
+		F47DBDB415331B3E008A5373 /* private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = private.plist; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -751,6 +773,8 @@
 				F4FB8481146D2FEE00B08513 /* UIKit.framework in Frameworks */,
 				F4FB8483146D2FEE00B08513 /* Foundation.framework in Frameworks */,
 				F4FB8485146D2FEE00B08513 /* CoreGraphics.framework in Frameworks */,
+				F47DBCA8153319B3008A5373 /* libFlurryAnalytics.a in Frameworks */,
+				F47DBD4515331A47008A5373 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +794,7 @@
 				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
 				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
 				F40B345614D59BB500F1598B /* Logger.h */,
+				F47DBDB415331B3E008A5373 /* private.plist */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -1031,6 +1056,60 @@
 			name = "modules libs";
 			sourceTree = "<group>";
 		};
+		F47DBCA5153319B3008A5373 /* FlurryAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBCA6153319B3008A5373 /* FlurryAnalytics.h */,
+				F47DBCA7153319B3008A5373 /* libFlurryAnalytics.a */,
+			);
+			path = FlurryAnalytics;
+			sourceTree = "<group>";
+		};
+		F47DBCA915331A46008A5373 /* QuincyKit */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBCAB15331A46008A5373 /* client */,
+			);
+			path = QuincyKit;
+			sourceTree = "<group>";
+		};
+		F47DBCAB15331A46008A5373 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBCAC15331A46008A5373 /* iOS */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		F47DBCAC15331A46008A5373 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBCAD15331A47008A5373 /* BWQuincyManager.h */,
+				F47DBCAE15331A47008A5373 /* BWQuincyManager.m */,
+				F47DBCAF15331A47008A5373 /* CrashReporter.framework */,
+				F47DBCB015331A47008A5373 /* LICENSE.txt */,
+				F47DBCB115331A47008A5373 /* Quincy.bundle */,
+				F47DBCB215331A47008A5373 /* QuincyLib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		F47DBCB215331A47008A5373 /* QuincyLib */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBCB315331A47008A5373 /* QuincyLib.xcodeproj */,
+			);
+			path = QuincyLib;
+			sourceTree = "<group>";
+		};
+		F47DBCB415331A47008A5373 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBDB315331A48008A5373 /* libQuincyLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1161,8 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F47DBCA915331A46008A5373 /* QuincyKit */,
+				F47DBCA5153319B3008A5373 /* FlurryAnalytics */,
 				F47DBCA415331653008A5373 /* modules libs */,
 				F41EAEA0153304EA00928BD7 /* MailCore.xcodeproj */,
 				F4E280951530407A0093C3F5 /* CFNetwork.framework */,
@@ -1160,6 +1241,10 @@
 				{
 					ProductGroup = F41EAEA1153304EA00928BD7 /* Products */;
 					ProjectRef = F41EAEA0153304EA00928BD7 /* MailCore.xcodeproj */;
+				},
+				{
+					ProductGroup = F47DBCB415331A47008A5373 /* Products */;
+					ProjectRef = F47DBCB315331A47008A5373 /* QuincyLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1667,6 +1752,13 @@
 			remoteRef = F44CB81B14C194F300EB24E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F47DBDB315331A48008A5373 /* libQuincyLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libQuincyLib.a;
+			remoteRef = F47DBDB215331A48008A5373 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1703,6 +1795,9 @@
 				F427E77A14D9FA7F007C3E64 /* Icon-Small.png in Resources */,
 				F427E77B14D9FA7F007C3E64 /* Icon-Small@2x.png in Resources */,
 				F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */,
+				F47DBD4615331A47008A5373 /* LICENSE.txt in Resources */,
+				F47DBD4715331A47008A5373 /* Quincy.bundle in Resources */,
+				F47DBDB515331B3E008A5373 /* private.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1745,6 +1840,7 @@
 				F4F80DD614D48A4B00A7C356 /* DDTTYLogger.m in Sources */,
 				F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */,
 				F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */,
+				F47DBD4415331A47008A5373 /* BWQuincyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1855,7 +1951,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"/**",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Inbox/Prefix.pch;
@@ -1865,10 +1964,15 @@
 					"\"$(SRCROOT)/cocos2d-iphone/cocos2d\"/**",
 					"\"$(SRCROOT)/cocos2d-iphone/external/Box2d\"/**",
 					"\"$(SRCROOT)/MailCore/include/MailCore\"/**",
+					"\"$(SRCROOT)/FlurryAnalytics\"/**",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 				);
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/FlurryAnalytics\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
 					"-licucore",
@@ -1887,7 +1991,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"/**",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Inbox/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = YES;
@@ -1896,10 +2003,15 @@
 					"\"$(SRCROOT)/cocos2d-iphone/cocos2d\"/**",
 					"\"$(SRCROOT)/cocos2d-iphone/external/Box2d\"/**",
 					"\"$(SRCROOT)/MailCore/include/MailCore\"/**",
+					"\"$(SRCROOT)/FlurryAnalytics\"/**",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 				);
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/FlurryAnalytics\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
 					"-licucore",

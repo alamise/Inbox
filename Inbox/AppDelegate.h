@@ -25,8 +25,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Logger.h"
-//#import "BWQuincyManager.h"
-@interface AppDelegate : NSObject <UIApplicationDelegate/*,BWQuincyManagerDelegate*/> {
+#import "BWQuincyManager.h"
+@interface AppDelegate : NSObject <UIApplicationDelegate,BWQuincyManagerDelegate> {
 	UIWindow *window;
     UINavigationController* navigationController;
     NSManagedObjectModel *managedObjectModel;
