@@ -618,6 +618,13 @@
 			remoteGlobalIDString = 36892BEC145EC96A0036932D;
 			remoteInfo = QuincyLib;
 		};
+		F47DBDC7153328A1008A5373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F41EAEA0153304EA00928BD7 /* MailCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8618B5610DADB5C00C41188;
+			remoteInfo = "MailCore iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1214,6 +1221,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F47DBDC8153328A1008A5373 /* PBXTargetDependency */,
 				F44CB84E14C199BA00EB24E8 /* PBXTargetDependency */,
 				F44CB84C14C199B600EB24E8 /* PBXTargetDependency */,
 			);
@@ -1869,6 +1877,11 @@
 			name = cocos2d;
 			targetProxy = F44CB84D14C199BA00EB24E8 /* PBXContainerItemProxy */;
 		};
+		F47DBDC8153328A1008A5373 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MailCore iOS";
+			targetProxy = F47DBDC7153328A1008A5373 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1929,7 +1942,7 @@
 				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				SDKROOT = iphoneos5.1;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 			};
 			name = Debug;
 		};
@@ -1954,7 +1967,7 @@
 				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				SDKROOT = iphoneos5.1;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 			};
 			name = Release;
 		};
