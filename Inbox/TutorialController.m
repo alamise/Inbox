@@ -24,8 +24,8 @@
 
 #import "TutorialController.h"
 #import "LoginController.h"
-#import "GANTracker.h"
-#import "FlurryAnalytics.h"
+//#import "GANTracker.h"
+//#import "FlurryAnalytics.h"
 #define TUTORIAL_VIEW_WIDTH 540
 #define TUTORIAL_VIEW_HEIGHT 540
 @implementation TutorialController
@@ -94,8 +94,8 @@
 
 
 -(IBAction)goToNextStep{
-    [[GANTracker sharedTracker] trackPageview:@"/tutorial/skipped" withError:nil];
-    [FlurryAnalytics logEvent:@"tutorial_skipped" timed:NO];
+    //[[GANTracker sharedTracker] trackPageview:@"/tutorial/skipped" withError:nil];
+    //[FlurryAnalytics logEvent:@"tutorial_skipped" timed:NO];
     LoginController* loginView = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
     loginView.actionOnDismiss=self.actionOnDismiss;
     [self.navigationController pushViewController:loginView animated:YES];

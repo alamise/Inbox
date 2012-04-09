@@ -31,9 +31,9 @@
 #import "EmailModel.h"
 #import "MailCoreTypes.h"
 #import "FolderModel.h"
-#import "RegexKitLite.h"
-#import "GANTracker.h"
-#import "FlurryAnalytics.h"
+//#import "RegexKitLite.h"
+//#import "GANTracker.h"
+//#import "FlurryAnalytics.h"
 @interface GmailModel()
 -(BOOL)saveContext:(NSManagedObjectContext*)context;
 -(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context;
@@ -602,8 +602,8 @@
 #pragma mark - Model's methods
 
 -(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/model/move/%@",folder] withError:nil];
-    [FlurryAnalytics logEvent:@"move_email" withParameters:[NSDictionary dictionaryWithObject:folder forKey:@"destination"]];
+    //[[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/model/move/%@",folder] withError:nil];
+    //[FlurryAnalytics logEvent:@"move_email" withParameters:[NSDictionary dictionaryWithObject:folder forKey:@"destination"]];
     [self activityStarted];
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     EmailModel* model = (EmailModel*)[context objectWithID:emailId];

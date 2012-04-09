@@ -35,9 +35,9 @@
 #import "GmailModel.h"
 #import "Logger.h"
 #import "DDTTYLogger.h"
-#import "GANTracker.h"
-#import "BWQuincyManager.h"
-#import "FlurryAnalytics.h"
+//#import "GANTracker.h"
+//#import "BWQuincyManager.h"
+//#import "FlurryAnalytics.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
@@ -69,24 +69,24 @@
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30673935-1"
-                                           dispatchPeriod:10
-                                                 delegate:nil];
+    //[[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30673935-1"
+                                           //dispatchPeriod:10
+                                             //    delegate:nil];
 
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [[GANTracker sharedTracker] trackPageview:@"/app_started" withError:nil];
-    [FlurryAnalytics logEvent:@"app_started" timed:NO];
-    [[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [FlurryAnalytics startSession:@"P6ZVR2Y2BH45WPL41EIK"];
+    //[[GANTracker sharedTracker] trackPageview:@"/app_started" withError:nil];
+    //[FlurryAnalytics logEvent:@"app_started" timed:NO];
+    //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
+    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    //[FlurryAnalytics startSession:@"P6ZVR2Y2BH45WPL41EIK"];
  
 	[window makeKeyAndVisible];
 }
 
 
 void uncaughtExceptionHandler(NSException *exception) {
-    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
+    //[FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 
@@ -99,7 +99,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)dealloc {
-    [[GANTracker sharedTracker] stopTracker];
+    //[[GANTracker sharedTracker] stopTracker];
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];

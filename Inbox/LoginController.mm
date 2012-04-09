@@ -26,8 +26,8 @@
 #import "AppDelegate.h"
 #import "DeskController.h"
 #import "GmailModel.h"
-#import "GANTracker.h"
-#import "FlurryAnalytics.h"
+//#import "GANTracker.h"
+//#import "FlurryAnalytics.h"
 
 @implementation LoginController
 @synthesize actionOnDismiss;
@@ -61,15 +61,15 @@
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.invalidemail.title", @"title of the alert shown when the login email is invalid") message:NSLocalizedString(@"login.invalidemail.message", @"message of the alert shown when the login email is invalid") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.invalidemail.button", @"button title of the alert shown when the login email is invalid") otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [[GANTracker sharedTracker] trackPageview:@"/login/email_invalide" withError:nil];
-        [FlurryAnalytics logEvent:@"login_email_invalid" timed:NO];
+        //[[GANTracker sharedTracker] trackPageview:@"/login/email_invalide" withError:nil];
+        //[FlurryAnalytics logEvent:@"login_email_invalid" timed:NO];
         
     }else if ([passwordField.text isEqualToString:@""]){
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.emptypassword.title","title of the alert shown when the login password is empty") message:NSLocalizedString(@"login.emptypassword.message", @"message of the alert shown when the login password is empty") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.emptypassword.button", @"button title of the alert shown when the login password is empty") otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [[GANTracker sharedTracker] trackPageview:@"/login/password_invalid" withError:nil];
-        [FlurryAnalytics logEvent:@"login_password_invalid" timed:NO];
+        //[[GANTracker sharedTracker] trackPageview:@"/login/password_invalid" withError:nil];
+        //[FlurryAnalytics logEvent:@"login_password_invalid" timed:NO];
     }else{
         NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
         NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
@@ -82,14 +82,14 @@
         [plistDic writeToFile:plistPath atomically:YES];
         [plistDic release];
         [self dismissModalViewControllerAnimated:YES];
-        [[GANTracker sharedTracker] trackPageview:@"/login/saved" withError:nil];
-        [FlurryAnalytics logEvent:@"login_saved" timed:NO];
+        //[[GANTracker sharedTracker] trackPageview:@"/login/saved" withError:nil];
+        //[FlurryAnalytics logEvent:@"login_saved" timed:NO];
     }
 }
 
 -(IBAction)openSecurityPage{
-    [[GANTracker sharedTracker] trackPageview:@"/security" withError:nil];
-    [FlurryAnalytics logEvent:@"security" timed:NO];
+    //[[GANTracker sharedTracker] trackPageview:@"/security" withError:nil];
+    //[FlurryAnalytics logEvent:@"security" timed:NO];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/simon-watiau/Inbox/wiki/aboutsecurity"]];
 }
 
@@ -110,8 +110,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[GANTracker sharedTracker] trackPageview:@"/login" withError:nil];
-    [FlurryAnalytics logEvent:@"login" timed:NO];
+    //[[GANTracker sharedTracker] trackPageview:@"/login" withError:nil];
+    //[FlurryAnalytics logEvent:@"login" timed:NO];
 }
 
 
