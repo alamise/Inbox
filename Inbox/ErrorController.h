@@ -24,9 +24,9 @@
 
 #import <UIKit/UIKit.h>
 
-//@class Reachability;
+@class Reachability;
 @interface ErrorController : UIViewController{
-    //Reachability* internetReachable;
+    Reachability* internetReachable;
     BOOL isInternetReachable;
     IBOutlet UIView *connectionIsBackView;
     IBOutlet UIView *noConnectionView;

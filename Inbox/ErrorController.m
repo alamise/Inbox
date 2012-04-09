@@ -23,14 +23,13 @@
  */
 
 #import "ErrorController.h"
-//#import "Reachability.h"
+#import "Reachability.h"
 #import "LoginController.h"
 #import "DeskController.h"
 #import "GmailModel.h"
-//#import "GANTracker.h"
-//#import "FlurryAnalytics.h"
+#import "FlurryAnalytics.h"
 @interface ErrorController()
-//-(void)updateViewWithNetworkStatus:(NetworkStatus)status;
+-(void)updateViewWithNetworkStatus:(NetworkStatus)status;
 @end
 
 @implementation ErrorController
@@ -40,21 +39,21 @@
     if (self) {
         shouldExecActionOnDismiss = NO;
         // The network status is checked once, when the view is loaded. See the revision [master 3dac19c] for the version that listen to network events.
-        //internetReachable = [[Reachability reachabilityWithHostName:@"www.google.fr"] retain];
+        internetReachable = [[Reachability reachabilityWithHostName:@"www.google.fr"] retain];
     }
     return self;
 }
 
 -(void)dealloc{
     self.actionOnDismiss = nil;
-    //[internetReachable release];
+    [internetReachable release];
     [connectionIsBackView release];
     [noConnectionView release];
     [errorView release];
     [loadingView release];
     [super dealloc];
 }
-/*
+
 -(void)updateViewWithNetworkStatus:(NetworkStatus)status{
     switch (status){
         case NotReachable:
@@ -71,15 +70,14 @@
             break;
     }
 }
-*/
+
 -(IBAction)dismiss{
     shouldExecActionOnDismiss = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)editAccount{
-    //[[GANTracker sharedTracker] trackPageview:@"/error/edit_account" withError:nil];
-    //[FlurryAnalytics logEvent:@"error_edit_account" timed:NO];
+    [FlurryAnalytics logEvent:@"error - edit account" timed:NO];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
     loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
@@ -96,14 +94,13 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //[[GANTracker sharedTracker] trackPageview:@"/error" withError:nil];
-    //[FlurryAnalytics logEvent:@"error" timed:NO];
+    [FlurryAnalytics logEvent:@"error" timed:NO];
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
-    //[self updateViewWithNetworkStatus:[internetReachable currentReachabilityStatus]];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self updateViewWithNetworkStatus:[internetReachable currentReachabilityStatus]];
 }
 
 - (void)viewDidUnload{

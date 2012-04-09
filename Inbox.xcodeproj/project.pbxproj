@@ -70,6 +70,9 @@
 		F47DBD4515331A47008A5373 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47DBCAF15331A47008A5373 /* CrashReporter.framework */; };
 		F47DBD4615331A47008A5373 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47DBCB015331A47008A5373 /* LICENSE.txt */; };
 		F47DBD4715331A47008A5373 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47DBCB115331A47008A5373 /* Quincy.bundle */; };
+		F47DBDB715331CE4008A5373 /* private.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47DBDB615331CE4008A5373 /* private.plist */; };
+		F47DBDBB15331E35008A5373 /* PrivateValues.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDBA15331E35008A5373 /* PrivateValues.m */; };
+		F47DBDBE1533212E008A5373 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDBD1533212E008A5373 /* Reachability.m */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -710,6 +713,11 @@
 		F47DBCB015331A47008A5373 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		F47DBCB115331A47008A5373 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		F47DBCB315331A47008A5373 /* QuincyLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = QuincyLib.xcodeproj; sourceTree = "<group>"; };
+		F47DBDB615331CE4008A5373 /* private.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = private.plist; path = ../private.plist; sourceTree = "<group>"; };
+		F47DBDB915331E35008A5373 /* PrivateValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateValues.h; sourceTree = "<group>"; };
+		F47DBDBA15331E35008A5373 /* PrivateValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateValues.m; sourceTree = "<group>"; };
+		F47DBDBC1533212E008A5373 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F47DBDBD1533212E008A5373 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -792,6 +800,10 @@
 				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
 				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
 				F40B345614D59BB500F1598B /* Logger.h */,
+				F47DBDB915331E35008A5373 /* PrivateValues.h */,
+				F47DBDBA15331E35008A5373 /* PrivateValues.m */,
+				F47DBDBC1533212E008A5373 /* Reachability.h */,
+				F47DBDBD1533212E008A5373 /* Reachability.m */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -799,6 +811,7 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F47DBDB615331CE4008A5373 /* private.plist */,
 				F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */,
 				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
 				F444C0F514BA052200D08560 /* Localizable.strings */,
@@ -1794,6 +1807,7 @@
 				F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */,
 				F47DBD4615331A47008A5373 /* LICENSE.txt in Resources */,
 				F47DBD4715331A47008A5373 /* Quincy.bundle in Resources */,
+				F47DBDB715331CE4008A5373 /* private.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,6 +1851,8 @@
 				F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */,
 				F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */,
 				F47DBD4415331A47008A5373 /* BWQuincyManager.m in Sources */,
+				F47DBDBB15331E35008A5373 /* PrivateValues.m in Sources */,
+				F47DBDBE1533212E008A5373 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

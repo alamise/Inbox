@@ -24,8 +24,7 @@
 
 #import "InboxEmptyController.h"
 #import "LoginController.h"
-//#import "GANTracker.h"
-//#import "FlurryAnalytics.h"
+#import "FlurryAnalytics.h"
 @implementation InboxEmptyController
 @synthesize  actionOnDismiss;
 
@@ -64,20 +63,17 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //[[GANTracker sharedTracker] trackPageview:@"/inbox_empty" withError:nil];
-    //[FlurryAnalytics logEvent:@"inbox_empty" timed:NO];
+    [FlurryAnalytics logEvent:@"inbox empty" timed:NO];
 }
 
 - (IBAction)onRefresh {
-    //[[GANTracker sharedTracker] trackPageview:@"/inbox_empty/refresh" withError:nil];
-    //[FlurryAnalytics logEvent:@"inbox_empty_refresh" timed:NO];
+    [FlurryAnalytics logEvent:@"inbox empty - refresh" timed:NO];
     shouldExecActionOnDismiss = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)onEditAccount {
-    //[[GANTracker sharedTracker] trackPageview:@"/inbox_empty/edit_account" withError:nil];
-    //[FlurryAnalytics logEvent:@"inbox_empty_edit_account" timed:NO];
+    [FlurryAnalytics logEvent:@"inbox empty - edit account" timed:NO];
     LoginController* loginCtr = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
     loginCtr.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginCtr animated:YES];

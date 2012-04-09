@@ -37,6 +37,7 @@
 #import "DDTTYLogger.h"
 #import "BWQuincyManager.h"
 #import "FlurryAnalytics.h"
+#import "PrivateValues.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
@@ -69,18 +70,16 @@
 	[window addSubview: navigationController.view];    
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
-    [FlurryAnalytics startSession:@""];
-    [FlurryAnalytics logEvent:@"app_started" timed:NO];
-    [[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
-    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    //[FlurryAnalytics startSession:@"P6ZVR2Y2BH45WPL41EIK"];
- 
+    [FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
+    //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[window makeKeyAndVisible];
 }
 
 
 void uncaughtExceptionHandler(NSException *exception) {
-    //[FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
+    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 
@@ -93,7 +92,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)dealloc {
-    //[[GANTracker sharedTracker] stopTracker];
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];
@@ -102,27 +100,18 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[super dealloc];
 }
 
-- (void)onCrash{
-    DDLogError(@"AppDelegate:onCrash:crashHandler: The app crashed");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Crash"
-                                                    message:@"The App has crashed and will attempt to send a crash report"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-}
-
 -(NSString*)plistPath{
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [documentsDirectory stringByAppendingPathComponent:@"infos.plist"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    [FlurryAnalytics endTimedEvent:@"app in use" withParameters:nil];
 	[[CCDirector sharedDirector] pause];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[[CCDirector sharedDirector] resume];
 }
 
@@ -131,15 +120,18 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
+    [FlurryAnalytics endTimedEvent:@"app in use" withParameters:nil];
 	[[CCDirector sharedDirector] stopAnimation];
     [[NSNotificationCenter defaultCenter] postNotificationName:APP_DID_ENTER_BACKGROUND object:nil];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
+    [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[[CCDirector sharedDirector] startAnimation];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [FlurryAnalytics endTimedEvent:@"app in use" withParameters:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:APP_WILL_TERMINATE object:nil];
 	CCDirector *director = [CCDirector sharedDirector];
 	[[director openGLView] removeFromSuperview];	
