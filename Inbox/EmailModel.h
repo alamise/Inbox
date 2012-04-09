@@ -24,25 +24,25 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+@class EmailAccountModel;
+@class FolderModel;
 @interface EmailModel : NSManagedObject{
     NSString* uid;
     NSString* subject;
     NSDate* sentDate; /* GMT time */
-    NSNumber* skippedIndex;
     NSString* senderName;
     NSString* senderEmail;
-    NSString* path; /* path from the server*/ 
-    NSString* newPath; /* next path of the email, will be update during the next round*/
-    NSString* htmlBody;    
+    NSString* serverPath; /* path from the server*/ 
+    NSString* htmlBody;  
+    FolderModel* folder;
 }
 @property(nonatomic,retain) NSString* uid;
 @property(nonatomic,retain) NSString* subject;
 @property(nonatomic,retain) NSDate* sentDate;
-@property(nonatomic,retain) NSNumber* skippedIndex;
 @property(nonatomic,retain) NSString* senderName;
 @property(nonatomic,retain) NSString* senderEmail;
-@property(nonatomic,retain) NSString* path;
-@property(nonatomic,retain) NSString* newPath;
+@property(nonatomic,retain) NSString* serverPath;
 @property(nonatomic,retain) NSString* htmlBody;
+@property(nonatomic,retain) FolderModel* folder;
 +(NSString*)entityName;
 @end

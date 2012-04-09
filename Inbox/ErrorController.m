@@ -26,7 +26,7 @@
 #import "Reachability.h"
 #import "LoginController.h"
 #import "DeskController.h"
-#import "GmailModel.h"
+#import "models.h"
 #import "FlurryAnalytics.h"
 @interface ErrorController()
 -(void)updateViewWithNetworkStatus:(NetworkStatus)status;

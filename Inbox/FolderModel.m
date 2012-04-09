@@ -29,7 +29,7 @@
 
 @implementation FolderModel
 @dynamic path;
-
+@dynamic account;
 
 +(void)initialize{
     

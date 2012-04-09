@@ -29,7 +29,7 @@
 #import "EmailController.h"
 #import "TutorialController.h"
 #import "ErrorController.h"
-#import "GmailModel.h"
+#import "models.h"
 #import "cocos2d.h"
 #import "InboxEmptyController.h"
 #import "LoginController.h"

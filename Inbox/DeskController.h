@@ -24,7 +24,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DeskProtocol.h"
-@class  MBProgressHUD,GmailModel,DeskLayer,EAGLView;
+@class  MBProgressHUD,DeskLayer,EAGLView;
+
 @interface DeskController : UIViewController<DeskProtocol> {
     GmailModel* model;
     DeskLayer* layer;

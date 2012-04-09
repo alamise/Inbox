@@ -22,19 +22,40 @@
  *
  */
 
-#import "EmailModel.h"
-#import "FolderModel.h"
-@implementation EmailModel
-@dynamic uid;
-@dynamic subject;
-@dynamic sentDate;
-@dynamic senderName;
-@dynamic senderEmail;
-@dynamic htmlBody;
-@dynamic serverPath;
-@dynamic folder;
-+(NSString*)entityName{
-    return @"Email";
-}
+#import <Foundation/Foundation.h>
 
+#import "CTCoreAccount.h"
+#define SYNC_STARTED @"sync started"
+#define SYNC_DONE @"sync done"
+#define MODEL_UNACTIVE @"model unactive"
+#define MODEL_ACTIVE @"model active"
+
+#define MODEL_ERROR @"error"
+#define INBOX_STATE_CHANGED @"new messages"
+#define FOLDERS_READY @"folders ready"
+
+@protocol DeskProtocol;
+@class EmailModel;
+@class EmailAccountModel;
+@interface EmailAccount : NSObject{
+    EmailAccountModel* accountModel;
+    NSLock *syncLock;
+    NSLock * writeChangesLock;
+    BOOL stopActivitiesAsap;
+    int activitiesCount;
+}
+@property(readonly) EmailAccountModel *accountModel;
+-(id)initWithAccountModel:(EmailAccountModel*)accountModel;
+
+-(void)sync;
+-(BOOL)isActive;
+-(void)stopActivitiesAsap;
+
+
+-(NSManagedObjectID*)lastEmailFromFolder:(NSManagedObjectID*)folderId;
+-(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId;
+-(int)emailsCountInFolder:(NSManagedObjectID*)folderId;
+-(BOOL)fetchEmailBody:(NSManagedObjectID*)model;
+-(NSArray*)folders;
+-(BOOL)isSyncing;
 @end

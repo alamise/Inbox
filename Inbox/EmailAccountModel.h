@@ -22,19 +22,22 @@
  *
  */
 
-#import "EmailModel.h"
-#import "FolderModel.h"
-@implementation EmailModel
-@dynamic uid;
-@dynamic subject;
-@dynamic sentDate;
-@dynamic senderName;
-@dynamic senderEmail;
-@dynamic htmlBody;
-@dynamic serverPath;
-@dynamic folder;
-+(NSString*)entityName{
-    return @"Email";
-}
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h> 
 
+@interface EmailAccountModel : NSManagedObject{
+    NSString* login;
+    NSString* password;
+    NSString* serverAddr;
+    int conType;
+    int authType;
+    int port;
+}
+@property(nonatomic,retain) NSString* login;
+@property(nonatomic,retain) NSString* password;
+@property(nonatomic,retain) NSString* serverAddr;
+@property(nonatomic,assign) int conType;
+@property(nonatomic,assign) int authType;
+@property(nonatomic,assign) int port;
++(NSString*)entityName;
 @end

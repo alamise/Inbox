@@ -27,7 +27,7 @@
 #import "CCNode.h"
 #import "EmailNode.h"
 #import "DeskProtocol.h"
-#import "GmailModel.h"
+#import "models.h"
 #import "GLES-Render.h"
 #import "EmailModel.h"
 #import "FolderModel.h"

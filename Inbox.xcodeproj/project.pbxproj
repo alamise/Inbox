@@ -18,7 +18,7 @@
 		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
 		F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.m */; };
 		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
-		F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659314A9CFB700BA4712 /* GmailModel.m */; };
+		F41E664C14A9CFB800BA4712 /* EmailAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659314A9CFB700BA4712 /* EmailAccount.m */; };
 		F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E659614A9CFB700BA4712 /* LoginController.mm */; };
 		F41E664F14A9CFB800BA4712 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659814A9CFB700BA4712 /* main.m */; };
 		F41E665514A9CFB800BA4712 /* buttonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65A314A9CFB700BA4712 /* buttonImage.png */; };
@@ -47,6 +47,11 @@
 		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
 		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
 		F444C0F714BA052200D08560 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F514BA052200D08560 /* Localizable.strings */; };
+		F44B060115334E6F003B801D /* ModelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B060015334E6F003B801D /* ModelsManager.m */; };
+		F44B0607153365BE003B801D /* Synchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B0606153365BD003B801D /* Synchronizer.m */; };
+		F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B0609153365CE003B801D /* EmailSynchronizer.m */; };
+		F44B061015336E62003B801D /* EmailReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B060F15336E62003B801D /* EmailReader.m */; };
+		F44B061315336E6D003B801D /* Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B061215336E6D003B801D /* Reader.m */; };
 		F44CB71114C1946B00EB24E8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB70E14C1946B00EB24E8 /* MBProgressHUD.m */; };
 		F44CB81F14C1964700EB24E8 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = F44CB81E14C1964700EB24E8 /* GLES-Render.mm */; };
 		F44CB82E14C196E000EB24E8 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F44CB82114C196E000EB24E8 /* CCNode+Autolayout.m */; };
@@ -73,6 +78,7 @@
 		F47DBDB715331CE4008A5373 /* private.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47DBDB615331CE4008A5373 /* private.plist */; };
 		F47DBDBB15331E35008A5373 /* PrivateValues.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDBA15331E35008A5373 /* PrivateValues.m */; };
 		F47DBDBE1533212E008A5373 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDBD1533212E008A5373 /* Reachability.m */; };
+		F47DBDCB153336E8008A5373 /* EmailAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDCA153336E6008A5373 /* EmailAccountModel.m */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
@@ -649,8 +655,8 @@
 		F41E658D14A9CFB700BA4712 /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
 		F41E658E14A9CFB700BA4712 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		F41E658F14A9CFB700BA4712 /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
-		F41E659214A9CFB700BA4712 /* GmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailModel.h; sourceTree = "<group>"; };
-		F41E659314A9CFB700BA4712 /* GmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailModel.m; sourceTree = "<group>"; };
+		F41E659214A9CFB700BA4712 /* EmailAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAccount.h; sourceTree = "<group>"; };
+		F41E659314A9CFB700BA4712 /* EmailAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAccount.m; sourceTree = "<group>"; };
 		F41E659514A9CFB700BA4712 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F41E659614A9CFB700BA4712 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
 		F41E659814A9CFB700BA4712 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -686,6 +692,17 @@
 		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
 		F444C0F614BA052200D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Inbox/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		F44B05FF15334E6E003B801D /* ModelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsManager.h; sourceTree = "<group>"; };
+		F44B060015334E6F003B801D /* ModelsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelsManager.m; sourceTree = "<group>"; };
+		F44B0605153365BD003B801D /* Synchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synchronizer.h; sourceTree = "<group>"; };
+		F44B0606153365BD003B801D /* Synchronizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Synchronizer.m; sourceTree = "<group>"; };
+		F44B0608153365CE003B801D /* EmailSynchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSynchronizer.h; sourceTree = "<group>"; };
+		F44B0609153365CE003B801D /* EmailSynchronizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSynchronizer.m; sourceTree = "<group>"; };
+		F44B060C153369A9003B801D /* errorCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = errorCodes.h; sourceTree = "<group>"; };
+		F44B060E15336E62003B801D /* EmailReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailReader.h; sourceTree = "<group>"; };
+		F44B060F15336E62003B801D /* EmailReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailReader.m; sourceTree = "<group>"; };
+		F44B061115336E6D003B801D /* Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reader.h; sourceTree = "<group>"; };
+		F44B061215336E6D003B801D /* Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reader.m; sourceTree = "<group>"; };
 		F44CB70D14C1946B00EB24E8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F44CB70E14C1946B00EB24E8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cocos2d-ios.xcodeproj"; path = "cocos2d-iphone/cocos2d-ios.xcodeproj"; sourceTree = "<group>"; };
@@ -725,6 +742,9 @@
 		F47DBDBA15331E35008A5373 /* PrivateValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateValues.m; sourceTree = "<group>"; };
 		F47DBDBC1533212E008A5373 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		F47DBDBD1533212E008A5373 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		F47DBDC9153336E6008A5373 /* EmailAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAccountModel.h; sourceTree = "<group>"; };
+		F47DBDCA153336E6008A5373 /* EmailAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAccountModel.m; sourceTree = "<group>"; };
+		F47DBDCD15333B74008A5373 /* models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = models.h; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -902,12 +922,12 @@
 		F41E666814A9D09900BA4712 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				F41E658714A9CFB700BA4712 /* EmailModel.h */,
-				F41E658814A9CFB700BA4712 /* EmailModel.m */,
-				F41E659214A9CFB700BA4712 /* GmailModel.h */,
-				F41E659314A9CFB700BA4712 /* GmailModel.m */,
-				F43819EF14AB90CA0017C9BC /* FolderModel.h */,
-				F43819F014AB90CA0017C9BC /* FolderModel.m */,
+				F44B060B153365D4003B801D /* synchronizer */,
+				F44B060D15336E48003B801D /* reader */,
+				F47DBDCC1533396C008A5373 /* DAO */,
+				F47DBDCD15333B74008A5373 /* models.h */,
+				F44B05FF15334E6E003B801D /* ModelsManager.h */,
+				F44B060015334E6F003B801D /* ModelsManager.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -938,6 +958,29 @@
 				F41EAEBA153304EB00928BD7 /* libmailcore.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F44B060B153365D4003B801D /* synchronizer */ = {
+			isa = PBXGroup;
+			children = (
+				F44B0605153365BD003B801D /* Synchronizer.h */,
+				F44B0606153365BD003B801D /* Synchronizer.m */,
+				F44B0608153365CE003B801D /* EmailSynchronizer.h */,
+				F44B0609153365CE003B801D /* EmailSynchronizer.m */,
+				F44B060C153369A9003B801D /* errorCodes.h */,
+			);
+			name = synchronizer;
+			sourceTree = "<group>";
+		};
+		F44B060D15336E48003B801D /* reader */ = {
+			isa = PBXGroup;
+			children = (
+				F44B060E15336E62003B801D /* EmailReader.h */,
+				F44B060F15336E62003B801D /* EmailReader.m */,
+				F44B061115336E6D003B801D /* Reader.h */,
+				F44B061215336E6D003B801D /* Reader.m */,
+			);
+			name = reader;
 			sourceTree = "<group>";
 		};
 		F44CB70A14C1946B00EB24E8 /* MBProgressHUD */ = {
@@ -1125,6 +1168,21 @@
 				F47DBDB315331A48008A5373 /* libQuincyLib.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F47DBDCC1533396C008A5373 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				F41E659214A9CFB700BA4712 /* EmailAccount.h */,
+				F41E659314A9CFB700BA4712 /* EmailAccount.m */,
+				F41E658714A9CFB700BA4712 /* EmailModel.h */,
+				F41E658814A9CFB700BA4712 /* EmailModel.m */,
+				F43819EF14AB90CA0017C9BC /* FolderModel.h */,
+				F43819F014AB90CA0017C9BC /* FolderModel.m */,
+				F47DBDC9153336E6008A5373 /* EmailAccountModel.h */,
+				F47DBDCA153336E6008A5373 /* EmailAccountModel.m */,
+			);
+			name = DAO;
 			sourceTree = "<group>";
 		};
 		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
@@ -1833,7 +1891,7 @@
 				F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */,
 				F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */,
 				F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */,
-				F41E664C14A9CFB800BA4712 /* GmailModel.m in Sources */,
+				F41E664C14A9CFB800BA4712 /* EmailAccount.m in Sources */,
 				F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */,
 				F41E664F14A9CFB800BA4712 /* main.m in Sources */,
 				F41E666014A9CFB800BA4712 /* TutorialController.m in Sources */,
@@ -1861,6 +1919,12 @@
 				F47DBD4415331A47008A5373 /* BWQuincyManager.m in Sources */,
 				F47DBDBB15331E35008A5373 /* PrivateValues.m in Sources */,
 				F47DBDBE1533212E008A5373 /* Reachability.m in Sources */,
+				F47DBDCB153336E8008A5373 /* EmailAccountModel.m in Sources */,
+				F44B060115334E6F003B801D /* ModelsManager.m in Sources */,
+				F44B0607153365BE003B801D /* Synchronizer.m in Sources */,
+				F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */,
+				F44B061015336E62003B801D /* EmailReader.m in Sources */,
+				F44B061315336E6D003B801D /* Reader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

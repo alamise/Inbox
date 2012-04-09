@@ -23,11 +23,13 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-
+#import <CoreData/CoreData.h> 
+@class EmailAccountModel;
 @interface FolderModel : NSManagedObject{
     NSString* path;
+    EmailAccountModel* account;
 }
 @property(nonatomic,retain) NSString* path;
+@property(nonatomic,retain) EmailAccountModel* account;
 +(NSString*)entityName;
 @end

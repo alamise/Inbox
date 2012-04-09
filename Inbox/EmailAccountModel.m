@@ -22,37 +22,19 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import "EmailAccountModel.h"
 #import <CoreData/CoreData.h>
-#import "CTCoreAccount.h"
-#define SYNC_STARTED @"sync started"
-#define SYNC_DONE @"sync done"
-#define MODEL_ERROR @"error"
-#define INBOX_STATE_CHANGED @"new messages"
-#define FOLDERS_READY @"folders ready"
-#define MODEL_UNACTIVE @"model unactive"
-#define MODEL_ACTIVE @"model active"
-@protocol DeskProtocol;
-@class EmailModel;
 
-@interface GmailModel : NSObject{
-    NSString *email;
-    NSString *password;
-    NSLock *syncLock;
-    NSLock * writeChangesLock;
-    BOOL stopActivitiesAsap;
-    int activitiesCount;
+@implementation EmailAccountModel
+@dynamic login;
+@dynamic password;
+@dynamic serverAddr;
+@dynamic conType;
+@dynamic authType;
+@dynamic port;
+
+
++(NSString*)entityName{
+    return @"EmailAccount";
 }
-@property(readonly) NSString *email;
-@property(readonly) NSString *password;
--(id)initWithAccount:(NSString*)email password:(NSString*)password;
--(void)sync;
--(BOOL)isActive;
--(void)stopActivitiesAsap;
--(NSManagedObjectID*)lastEmailFrom:(NSString*)folder;
--(void)move:(NSManagedObjectID*)model to:(NSString*)folder;
--(int)emailsCountInFolder:(NSString*)folder;
--(BOOL)fetchEmailBody:(NSManagedObjectID*)model;
--(NSArray*)folders;
--(BOOL)isSyncing;
 @end
