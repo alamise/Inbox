@@ -22,3 +22,6 @@
 [submodule "CocoaLumberjack"]
 	path = CocoaLumberjack
 	url = git://github.com/robbiehanson/CocoaLumberjack.git
+[submodule "QuincyKit"]
+	path = QuincyKit
+	url = https://github.com/TheRealKerni/QuincyKit.git

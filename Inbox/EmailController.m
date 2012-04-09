@@ -25,6 +25,7 @@
 #import "EmailController.h"
 #import "AppDelegate.h"
 #import "GANTracker.h"
+#import "FlurryAnalytics.h"
 @implementation EmailController
 -(id)initWithEmail:(NSManagedObjectID*)email{
     if (self = [super initWithNibName:@"EmailView" bundle:nil]){
@@ -53,6 +54,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [[GANTracker sharedTracker] trackPageview:@"/show_email" withError:nil];
+    [FlurryAnalytics logEvent:@"show_email" timed:NO];
 }
 
 - (void)viewDidUnload{

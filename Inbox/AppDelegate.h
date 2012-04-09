@@ -24,16 +24,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "CrashController.h"
 #import "Logger.h"
-@class DesckController;
-
-@interface AppDelegate : NSObject <UIApplicationDelegate,CrashSaveDelegate> {
+#import "BWQuincyManager.h"
+@interface AppDelegate : NSObject <UIApplicationDelegate,BWQuincyManagerDelegate> {
 	UIWindow *window;
     UINavigationController* navigationController;
     NSManagedObjectModel *managedObjectModel;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    CrashController* crashController;
 }
 @property (nonatomic, retain,readwrite) UIWindow *window;
 -(NSString*)plistPath;

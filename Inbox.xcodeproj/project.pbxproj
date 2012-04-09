@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */; };
-		F40B345514D5950300F1598B /* LumberjackCrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B345414D5950300F1598B /* LumberjackCrashLogger.m */; };
-		F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDE9E14B9D19800F2DC5F /* CrashController.m */; };
-		F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BDEA014B9D19800F2DC5F /* CrashLogger.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F41E65B314A9CFB800BA4712 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E644114A9CFB700BA4712 /* AppDelegate.mm */; };
@@ -65,12 +62,13 @@
 		F46F717614CC573300C81028 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = F46F716A14CC573300C81028 /* RegexKitLite.m */; };
 		F46F717B14CC795400C81028 /* InboxEmptyController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46F717914CC795400C81028 /* InboxEmptyController.m */; };
 		F46F717C14CC795400C81028 /* InboxEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46F717A14CC795400C81028 /* InboxEmptyView.xib */; };
+		F476392F1532E25500049647 /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F476392E1532E25500049647 /* libsasl2.a */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
-		F4E28090153040300093C3F5 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */; };
-		F4E28091153040300093C3F5 /* libGoogleAnalytics_NoThumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */; };
-		F4E28092153040300093C3F5 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4E2808F153040300093C3F5 /* ReadMe.txt */; };
+		F4C3E9831532D6D800640D4B /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F46BBE3114CAF3B300310273 /* libmailcore.a */; };
+		F4C3E9851532D6EC00640D4B /* libetpan_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C3E9841532D6EC00640D4B /* libetpan_ios.a */; };
+		F4C3E9891532D6F500640D4B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C3E9871532D6F500640D4B /* libssl.a */; };
 		F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E28093153040640093C3F5 /* libsqlite3.0.dylib */; };
 		F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E280951530407A0093C3F5 /* CFNetwork.framework */; };
 		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
@@ -92,11 +90,6 @@
 		F4FB8481146D2FEE00B08513 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8480146D2FEE00B08513 /* UIKit.framework */; };
 		F4FB8483146D2FEE00B08513 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8482146D2FEE00B08513 /* Foundation.framework */; };
 		F4FB8485146D2FEE00B08513 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8484146D2FEE00B08513 /* CoreGraphics.framework */; };
-		F4FF346C14CAFA110091DA69 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FF346B14CAFA110091DA69 /* libcrypto.a */; };
-		F4FF346E14CAFA160091DA69 /* libsasl2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FF346D14CAFA160091DA69 /* libsasl2.a */; };
-		F4FF347014CAFA1A0091DA69 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FF346F14CAFA1A0091DA69 /* libssl.a */; };
-		F4FF347214CAFA200091DA69 /* libetpan_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FF347114CAFA200091DA69 /* libetpan_ios.a */; };
-		F4FF347314CAFA250091DA69 /* libmailcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F46BBE3114CAF3B300310273 /* libmailcore.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -590,6 +583,13 @@
 			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
 			remoteInfo = cocos2d;
 		};
+		F452A5731532D38D0048070B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8618B5610DADB5C00C41188;
+			remoteInfo = "MailCore iOS";
+		};
 		F46BBE2C14CAF3B300310273 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */;
@@ -611,24 +611,11 @@
 			remoteGlobalIDString = F8618B5710DADB5C00C41188;
 			remoteInfo = "MailCore iOS";
 		};
-		F4FF345814CAF9AF0091DA69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8618B5610DADB5C00C41188;
-			remoteInfo = "MailCore iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldersWoodBackground.png; sourceTree = "<group>"; };
-		F40B345314D5950300F1598B /* LumberjackCrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LumberjackCrashLogger.h; sourceTree = "<group>"; };
-		F40B345414D5950300F1598B /* LumberjackCrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LumberjackCrashLogger.m; sourceTree = "<group>"; };
 		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		F40BDE9D14B9D19800F2DC5F /* CrashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashController.h; path = CrashKit/Classes/CrashController.h; sourceTree = "<group>"; };
-		F40BDE9E14B9D19800F2DC5F /* CrashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashController.m; path = CrashKit/Classes/CrashController.m; sourceTree = "<group>"; };
-		F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLogger.h; path = CrashKit/Classes/CrashLogger.h; sourceTree = "<group>"; };
-		F40BDEA014B9D19800F2DC5F /* CrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashLogger.m; path = CrashKit/Classes/CrashLogger.m; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
 		F41E644014A9CFB700BA4712 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -711,13 +698,12 @@
 		F46F717814CC795400C81028 /* InboxEmptyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxEmptyController.h; sourceTree = "<group>"; };
 		F46F717914CC795400C81028 /* InboxEmptyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxEmptyController.m; sourceTree = "<group>"; };
 		F46F717A14CC795400C81028 /* InboxEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InboxEmptyView.xib; sourceTree = "<group>"; };
+		F476392E1532E25500049647 /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libsasl2.a; path = "../MailCore/iOSPorts/ports/security/cyrus-sasl/build/Release-iphoneos/libsasl2.a"; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		F4E2808C153040300093C3F5 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
-		F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
-		F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_NoThumb.a; sourceTree = "<group>"; };
-		F4E2808F153040300093C3F5 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		F4C3E9841532D6EC00640D4B /* libetpan_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libetpan_ios.a; path = "../MailCore/libetpan/build-mac/build/Release-iphoneos/libetpan_ios.a"; sourceTree = "<group>"; };
+		F4C3E9871532D6F500640D4B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../MailCore/iOSPorts/ports/security/openssl/build/Release-iphoneos/libssl.a"; sourceTree = "<group>"; };
 		F4E28093153040640093C3F5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F4E280951530407A0093C3F5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
@@ -748,10 +734,6 @@
 		F4FB8480146D2FEE00B08513 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4FB8482146D2FEE00B08513 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4FB8484146D2FEE00B08513 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		F4FF346B14CAFA110091DA69 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos/libcrypto.a"; sourceTree = "<group>"; };
-		F4FF346D14CAFA160091DA69 /* libsasl2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsasl2.a; path = "../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos/libsasl2.a"; sourceTree = "<group>"; };
-		F4FF346F14CAFA1A0091DA69 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos/libssl.a"; sourceTree = "<group>"; };
-		F4FF347114CAFA200091DA69 /* libetpan_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libetpan_ios.a; path = "../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos/libetpan_ios.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -759,13 +741,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F476392F1532E25500049647 /* libsasl2.a in Frameworks */,
+				F4C3E9891532D6F500640D4B /* libssl.a in Frameworks */,
+				F4C3E9851532D6EC00640D4B /* libetpan_ios.a in Frameworks */,
+				F4C3E9831532D6D800640D4B /* libmailcore.a in Frameworks */,
 				F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */,
 				F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */,
-				F4FF347314CAFA250091DA69 /* libmailcore.a in Frameworks */,
-				F4FF347214CAFA200091DA69 /* libetpan_ios.a in Frameworks */,
-				F4FF347014CAFA1A0091DA69 /* libssl.a in Frameworks */,
-				F4FF346E14CAFA160091DA69 /* libsasl2.a in Frameworks */,
-				F4FF346C14CAFA110091DA69 /* libcrypto.a in Frameworks */,
 				F44CB85014C199D300EB24E8 /* libbox2d.a in Frameworks */,
 				F44CB84F14C199CB00EB24E8 /* libcocos2d.a in Frameworks */,
 				F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */,
@@ -780,25 +761,12 @@
 				F4FB8481146D2FEE00B08513 /* UIKit.framework in Frameworks */,
 				F4FB8483146D2FEE00B08513 /* Foundation.framework in Frameworks */,
 				F4FB8485146D2FEE00B08513 /* CoreGraphics.framework in Frameworks */,
-				F4E28090153040300093C3F5 /* libGoogleAnalytics.a in Frameworks */,
-				F4E28091153040300093C3F5 /* libGoogleAnalytics_NoThumb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F40BDEA314B9D19D00F2DC5F /* crashKit */ = {
-			isa = PBXGroup;
-			children = (
-				F40BDE9D14B9D19800F2DC5F /* CrashController.h */,
-				F40BDE9E14B9D19800F2DC5F /* CrashController.m */,
-				F40BDE9F14B9D19800F2DC5F /* CrashLogger.h */,
-				F40BDEA014B9D19800F2DC5F /* CrashLogger.m */,
-			);
-			name = crashKit;
-			sourceTree = "<group>";
-		};
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -812,8 +780,6 @@
 				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
 				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
 				F40B345614D59BB500F1598B /* Logger.h */,
-				F40B345314D5950300F1598B /* LumberjackCrashLogger.h */,
-				F40B345414D5950300F1598B /* LumberjackCrashLogger.m */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -1066,17 +1032,6 @@
 			name = "inbox empty";
 			sourceTree = "<group>";
 		};
-		F4E2808B153040300093C3F5 /* GoogleAnalytics-SDK-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				F4E2808C153040300093C3F5 /* GANTracker.h */,
-				F4E2808D153040300093C3F5 /* libGoogleAnalytics.a */,
-				F4E2808E153040300093C3F5 /* libGoogleAnalytics_NoThumb.a */,
-				F4E2808F153040300093C3F5 /* ReadMe.txt */,
-			);
-			path = "GoogleAnalytics-SDK-iOS";
-			sourceTree = "<group>";
-		};
 		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,23 +1085,20 @@
 			children = (
 				F4E280951530407A0093C3F5 /* CFNetwork.framework */,
 				F4E28093153040640093C3F5 /* libsqlite3.0.dylib */,
-				F4E2808B153040300093C3F5 /* GoogleAnalytics-SDK-iOS */,
 				F4F80DC114D48A4B00A7C356 /* Lumberjack */,
 				F46F715914CC573300C81028 /* RegexKitLite */,
 				F46BBDF914CAF39F00310273 /* MailCore.xcodeproj */,
 				F44CB71214C194F000EB24E8 /* cocos2d-ios.xcodeproj */,
 				F44CB70A14C1946B00EB24E8 /* MBProgressHUD */,
 				F44CB83514C196E900EB24E8 /* cocos2d-table */,
-				F40BDEA314B9D19D00F2DC5F /* crashKit */,
 				F41E659F14A9CFB700BA4712 /* Reachability.h */,
 				F41E65A014A9CFB700BA4712 /* Reachability.m */,
 				F44CB81D14C1964700EB24E8 /* GLES-Render.h */,
 				F44CB81E14C1964700EB24E8 /* GLES-Render.mm */,
-				F4FF347114CAFA200091DA69 /* libetpan_ios.a */,
-				F4FF346F14CAFA1A0091DA69 /* libssl.a */,
-				F4FF346D14CAFA160091DA69 /* libsasl2.a */,
-				F4FF346B14CAFA110091DA69 /* libcrypto.a */,
 				F484D0D81470156700F7CA1A /* libiconv.dylib */,
+				F476392E1532E25500049647 /* libsasl2.a */,
+				F4C3E9871532D6F500640D4B /* libssl.a */,
+				F4C3E9841532D6EC00640D4B /* libetpan_ios.a */,
 				F49A766414A89AB400C8E133 /* SystemConfiguration.framework */,
 				F482021C14917FC800C0576C /* CoreData.framework */,
 				F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */,
@@ -1176,7 +1128,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F4FF345914CAF9AF0091DA69 /* PBXTargetDependency */,
+				F452A5741532D38D0048070B /* PBXTargetDependency */,
 				F44CB84E14C199BA00EB24E8 /* PBXTargetDependency */,
 				F44CB84C14C199B600EB24E8 /* PBXTargetDependency */,
 			);
@@ -1757,7 +1709,6 @@
 				F427E77A14D9FA7F007C3E64 /* Icon-Small.png in Resources */,
 				F427E77B14D9FA7F007C3E64 /* Icon-Small@2x.png in Resources */,
 				F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */,
-				F4E28092153040300093C3F5 /* ReadMe.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1783,8 +1734,6 @@
 				F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */,
 				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
 				F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */,
-				F40BDEA114B9D19900F2DC5F /* CrashController.m in Sources */,
-				F40BDEA214B9D19900F2DC5F /* CrashLogger.m in Sources */,
 				F44CB71114C1946B00EB24E8 /* MBProgressHUD.m in Sources */,
 				F44CB81F14C1964700EB24E8 /* GLES-Render.mm in Sources */,
 				F44CB82E14C196E000EB24E8 /* CCNode+Autolayout.m in Sources */,
@@ -1804,7 +1753,6 @@
 				F4F80DD614D48A4B00A7C356 /* DDTTYLogger.m in Sources */,
 				F4F80DD714D48A4B00A7C356 /* ContextFilterLogFormatter.m in Sources */,
 				F4F80DD814D48A4B00A7C356 /* DispatchQueueLogFormatter.m in Sources */,
-				F40B345514D5950300F1598B /* LumberjackCrashLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1821,10 +1769,10 @@
 			name = cocos2d;
 			targetProxy = F44CB84D14C199BA00EB24E8 /* PBXContainerItemProxy */;
 		};
-		F4FF345914CAF9AF0091DA69 /* PBXTargetDependency */ = {
+		F452A5741532D38D0048070B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MailCore iOS";
-			targetProxy = F4FF345814CAF9AF0091DA69 /* PBXContainerItemProxy */;
+			targetProxy = F452A5731532D38D0048070B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1881,10 +1829,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Inbox;
 				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				SDKROOT = iphoneos5.1;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1904,10 +1854,12 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Inbox;
 				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
 				SDKROOT = iphoneos5.1;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1917,31 +1869,32 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/QuincyKit/client/iOS/\"/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Inbox/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/cocos2d-iphone\"/**",
-					"\"$(SRCROOT)/MBProgressHUD\"/**",
-					"\"$(SRCROOT)/MailCore/Source\"/**",
-					"\"$(SRCROOT)/MailCore/libetpan/build-mac\"/**",
-					"\"$(SRCROOT)/CrashKit/Classes\"/**",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"/**",
+					"\"$(SRCROOT)/cocos2d-iphone/cocos2d\"/**",
+					"\"$(SRCROOT)/MailCore/Source\"",
+					"\"$(SRCROOT)/cocos2d-iphone/external/Box2d/\"/**",
 				);
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)\"/**",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS/\"/**",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-lz",
+					"-all_load",
+					"-objC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos5.1;
@@ -1957,30 +1910,31 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/QuincyKit/client/iOS/\"/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Inbox/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/cocos2d-iphone\"/**",
-					"\"$(SRCROOT)/MBProgressHUD\"/**",
-					"\"$(SRCROOT)/CrashKit/Classes\"/**",
-					"\"$(SRCROOT)/MailCore/libetpan/build-mac/include\"/**",
-					"\"$(SRCROOT)/MailCore/Source\"/**",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/QuincyKit/client/iOS\"/**",
+					"\"$(SRCROOT)/cocos2d-iphone/cocos2d\"/**",
+					"\"$(SRCROOT)/MailCore/Source\"",
+					"\"$(SRCROOT)/cocos2d-iphone/external/Box2d/\"/**",
 				);
 				INFOPLIST_FILE = Inbox/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)\"/**",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Inbox-cdlhqhhdopboczgjfoiwnhmpzvyp/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAnalytics-SDK-iOS/\"/**",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-lz",
+					"-all_load",
+					"-objC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos5.1;

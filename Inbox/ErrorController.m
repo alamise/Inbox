@@ -28,6 +28,7 @@
 #import "DeskController.h"
 #import "GmailModel.h"
 #import "GANTracker.h"
+#import "FlurryAnalytics.h"
 @interface ErrorController()
 -(void)updateViewWithNetworkStatus:(NetworkStatus)status;
 @end
@@ -78,6 +79,7 @@
 
 -(IBAction)editAccount{
     [[GANTracker sharedTracker] trackPageview:@"/error/edit_account" withError:nil];
+    [FlurryAnalytics logEvent:@"error_edit_account" timed:NO];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
     loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
@@ -95,6 +97,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [[GANTracker sharedTracker] trackPageview:@"/error" withError:nil];
+    [FlurryAnalytics logEvent:@"error" timed:NO];
 }
 
 - (void)viewDidLoad{

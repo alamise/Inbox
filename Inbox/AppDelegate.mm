@@ -32,12 +32,13 @@
 #import "GmailModel.h"
 #import "LoginController.h"
 #import "TutorialController.h"
-#import "CrashController.h"
 #import "GmailModel.h"
 #import "Logger.h"
-#import "LumberjackCrashLogger.h"
 #import "DDTTYLogger.h"
 #import "GANTracker.h"
+#import "BWQuincyManager.h"
+#import "FlurryAnalytics.h"
+
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
 @interface AppDelegate()
@@ -68,18 +69,26 @@
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
 	[window addSubview: navigationController.view];
     
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-0000000-1"
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30673935-1"
                                            dispatchPeriod:10
                                                  delegate:nil];
 
     
-    crashController = [[CrashController sharedInstance] retain];
-    crashController.delegate = self;
-    crashController.logger = [[CrashEmailLogger alloc] initWithEmail:@"sim.w80+crashinbox@gmail.com" viewController:navigationController];//[[[LumberjackCrashLogger alloc] init] autorelease];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [[GANTracker sharedTracker] trackPageview:@"/app_started" withError:nil];
+    [FlurryAnalytics logEvent:@"app_started" timed:NO];
+    [[BWQuincyManager sharedQuincyManager] setSubmissionURL:@"http://yourserver.com/crash_v200.php"];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [FlurryAnalytics startSession:@"P6ZVR2Y2BH45WPL41EIK"];
+ 
 	[window makeKeyAndVisible];
 }
+
+
+void uncaughtExceptionHandler(NSException *exception) {
+    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
+
 
 -(void) asyncActivityStarted{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];   
@@ -96,7 +105,6 @@
     [navigationController release];
     [managedObjectModel release];
     [persistentStoreCoordinator release];
-    [crashController release];
 	[super dealloc];
 }
 
