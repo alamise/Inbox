@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "models.h"
+#define SYNC_DONE @"sync_done"
+#define SYNC_FAILED @"sync_failed"
 @interface ModelsManager : NSObject{
+    NSMutableArray* synchronizers;
+    int runningSync;
 }
 
 @end

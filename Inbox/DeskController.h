@@ -24,10 +24,12 @@
 
 #import <UIKit/UIKit.h>
 #import "DeskProtocol.h"
-@class  MBProgressHUD,DeskLayer,EAGLView;
+@class  MBProgressHUD,DeskLayer,EAGLView,ModelsManager;
 
 @interface DeskController : UIViewController<DeskProtocol> {
-    GmailModel* model;
+    ModelsManager* modelsManager;
+    
+    
     DeskLayer* layer;
     BOOL isLoading;
     EAGLView* glView;
@@ -36,7 +38,7 @@
     BOOL isSyncing;
     int totalEmailsInThisSession;
 }
-@property(nonatomic,retain,readonly) GmailModel* model;
+@property(nonatomic,retain,readonly) ModelsManager* modelsManager;
 -(void)resetModel;
 -(void)linkToModel;
 -(void)unlinkToModel;

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */; };
+		F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */ = {isa = PBXBuildFile; fileRef = F406110E1534D42500A7CA0A /* NSObject+Queues.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F41E65B314A9CFB800BA4712 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E644114A9CFB700BA4712 /* AppDelegate.mm */; };
@@ -18,7 +19,6 @@
 		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
 		F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.m */; };
 		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
-		F41E664C14A9CFB800BA4712 /* EmailAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659314A9CFB700BA4712 /* EmailAccount.m */; };
 		F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E659614A9CFB700BA4712 /* LoginController.mm */; };
 		F41E664F14A9CFB800BA4712 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659814A9CFB700BA4712 /* main.m */; };
 		F41E665514A9CFB800BA4712 /* buttonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65A314A9CFB700BA4712 /* buttonImage.png */; };
@@ -635,6 +635,8 @@
 
 /* Begin PBXFileReference section */
 		F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldersWoodBackground.png; sourceTree = "<group>"; };
+		F406110D1534D42500A7CA0A /* NSObject+Queues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Queues.h"; sourceTree = "<group>"; };
+		F406110E1534D42500A7CA0A /* NSObject+Queues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Queues.m"; sourceTree = "<group>"; };
 		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
@@ -655,8 +657,6 @@
 		F41E658D14A9CFB700BA4712 /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
 		F41E658E14A9CFB700BA4712 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		F41E658F14A9CFB700BA4712 /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
-		F41E659214A9CFB700BA4712 /* EmailAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAccount.h; sourceTree = "<group>"; };
-		F41E659314A9CFB700BA4712 /* EmailAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAccount.m; sourceTree = "<group>"; };
 		F41E659514A9CFB700BA4712 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F41E659614A9CFB700BA4712 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
 		F41E659814A9CFB700BA4712 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -814,9 +814,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40611101534D44700A7CA0A /* system */ = {
+			isa = PBXGroup;
+			children = (
+				F406110D1534D42500A7CA0A /* NSObject+Queues.h */,
+				F406110E1534D42500A7CA0A /* NSObject+Queues.m */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				F40611101534D44700A7CA0A /* system */,
 				F41E666914A9D0B500BA4712 /* desk */,
 				F41E666814A9D09900BA4712 /* models */,
 				F41E666314A9CFE300BA4712 /* views */,
@@ -1173,8 +1183,6 @@
 		F47DBDCC1533396C008A5373 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
-				F41E659214A9CFB700BA4712 /* EmailAccount.h */,
-				F41E659314A9CFB700BA4712 /* EmailAccount.m */,
 				F41E658714A9CFB700BA4712 /* EmailModel.h */,
 				F41E658814A9CFB700BA4712 /* EmailModel.m */,
 				F43819EF14AB90CA0017C9BC /* FolderModel.h */,
@@ -1891,7 +1899,6 @@
 				F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */,
 				F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */,
 				F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */,
-				F41E664C14A9CFB800BA4712 /* EmailAccount.m in Sources */,
 				F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */,
 				F41E664F14A9CFB800BA4712 /* main.m in Sources */,
 				F41E666014A9CFB800BA4712 /* TutorialController.m in Sources */,
@@ -1925,6 +1932,7 @@
 				F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */,
 				F44B061015336E62003B801D /* EmailReader.m in Sources */,
 				F44B061315336E6D003B801D /* Reader.m in Sources */,
+				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

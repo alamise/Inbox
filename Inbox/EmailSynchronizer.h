@@ -10,6 +10,8 @@
 #import "Synchronizer.h"
 
 @class EmailAccountModel;
-@interface EmailSynchronizer : Synchronizer
--(BOOL)syncAccount:(EmailAccountModel*)accountModel;
+@interface EmailSynchronizer : Synchronizer{
+    EmailAccountModel* emailAccountModel;
+}
+-(id)initWithAccount:(EmailAccountModel*)accountModel;
 @end

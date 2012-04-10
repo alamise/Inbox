@@ -18,8 +18,17 @@
 
 @implementation EmailSynchronizer
 
+-(id)initWithAccount:(EmailAccountModel*)accountModel{
+    if (self = [super init]){
+        emailAccountModel = [accountModel retain];
+    }
+    return self;
+}
 
-
+-(void)dealloc{
+    [EmailAccountModel release];
+    [super dealloc];
+}
 -(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context {
     NSSet* folders = nil;
     @try {
@@ -277,7 +286,7 @@
 }
 
 
--(BOOL)syncAccount:(EmailAccountModel*)accountModel{
+-(BOOL)sync{
     __block NSManagedObjectContext* context = nil;
     __block CTCoreAccount* account = nil;
     context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
@@ -290,7 +299,7 @@
     };
     @try {
         //[account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
-        [account connectToServer:accountModel.serverAddr port:accountModel.port connectionType:accountModel.conType authType:accountModel.authType login:accountModel.login password:accountModel.password];
+        [account connectToServer:emailAccountModel.serverAddr port:emailAccountModel.port connectionType:emailAccountModel.conType authType:emailAccountModel.authType login:emailAccountModel.login password:emailAccountModel.password];
     }
     @catch (NSException *exception) {
         [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];

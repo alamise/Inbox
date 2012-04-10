@@ -7,10 +7,26 @@
 //
 
 #import "Synchronizer.h"
-
+#import "NSObject+Queues.h"
 @implementation Synchronizer
 
+
+-(id)init{
+    if (self = [super init]){
+        syncLock = [[NSLock alloc] init];
+    }
+    return self;
+}
+
+-(void)dealloc{
+    [syncLock release];
+    [super dealloc];
+}
+
 -(void)onError:(NSError*)error{
+    [self executeOnMainQueue:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
+    }];
 }
 
 -(NSString*)decodeImapString:(NSString*)input{
@@ -38,7 +54,27 @@
     return input;
 }
 
+-(BOOL)startSync{
+    [syncLock lock];
+    shouldStopAsap = false;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modelFailed) name:INTERNAL_SYNC_FAILED object:nil];
+    BOOL returnValue = [self sync];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:INTERNAL_SYNC_FAILED];
+    [syncLock unlock];
+    [self executeOnMainQueue:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_DONE object:nil];
+    }];
+    return returnValue;
+}
 
+-(BOOL)sync{
+    return true;
+}
+
+-(void)syncFailed{
+    [syncLock unlock];
+    [self stopAsap];
+}
 
 -(BOOL)saveContext:(NSManagedObjectContext*)context errorCode:(int)errorCode{
     NSError* error = nil;
@@ -49,6 +85,10 @@
     }else{
         return true;
     }
+}
+
+-(void)stopAsap{
+    shouldStopAsap = true;
 }
 
 @end

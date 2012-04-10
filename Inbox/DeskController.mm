@@ -34,6 +34,8 @@
 #import "InboxEmptyController.h"
 #import "LoginController.h"
 #import "Math.h"
+#import "ModelsManager.h"
+
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) GmailModel* model;
 -(void)nextStep;
@@ -44,13 +46,13 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-
+        self.modelsManager = [[ModelsManager alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc {
-    [self.model stopSync];
+    self.modelsManager = nil;
     self.model = nil;
     [layer release];
     [glView removeFromSuperview];
