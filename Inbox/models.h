@@ -9,3 +9,5 @@
 #import "FolderModel.h"
 #import "EmailAccountModel.h"
 #import "EmailSynchronizer.h"
+#import "EmailReader.h"
+#import "Reader.h"

@@ -9,10 +9,29 @@
 #import "EmailReader.h"
 #import "CTCoreMessage.h"
 #import "CTCoreFolder.h"
+#import "CTCoreAccount.h"
 
 @implementation EmailReader
 
++(EmailReader*)sharedInstance{
+    if (![self getInstance]){
+        [self setInstance:[[[EmailReader alloc]init]autorelease]];
+    }
+    return (EmailReader*)[self getInstance];
+}
 
+
+
+-(int)emailsCountInInboxes:(NSError**)error{
+    int returnvalue = 0;
+    for (NSManagedObject* inbox in [self inboxes:error]){
+        returnvalue+= [self emailsCountInFolder:inbox.objectID error:error];
+        if (error){
+            return returnvalue;
+        }
+    }
+    return returnvalue;
+}
 
 -(int)emailsCountInFolder:(NSManagedObjectID*)folderId error:(NSError**)error{
     error = nil;
@@ -73,6 +92,38 @@
     }
     email.folder = folder;
     [context save:error];
+}
+
+-(NSArray*)inboxes:(NSError**)error{
+    *error = nil;
+    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", @"INBOX"];          
+    [request setPredicate:predicate];
+    NSArray* inboxes = [context executeFetchRequest:request error:error];
+    [context release];
+    [request release];
+    return inboxes;
+}
+
+-(NSManagedObjectID*)lastEmailFromInbox:(NSError**)error{
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
+    NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
+    NSManagedObjectID* returnValue = nil;
+    for (NSManagedObject* obj in [self inboxes:error]){
+        NSManagedObjectID* lastEmail = [self lastEmailFromFolder:obj.objectID error:error];
+        if (*error){
+            return nil;
+        }
+        NSDate* currentEmailDate = ((EmailModel*)[context objectWithID:lastEmail]).sentDate;
+        if ([currentEmailDate timeIntervalSince1970] > [lastEmailDate timeIntervalSince1970]){
+            lastEmailDate = currentEmailDate;
+            returnValue = lastEmail;
+        }
+    }
+    return returnValue;
 }
 
 

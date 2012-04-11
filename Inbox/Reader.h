@@ -12,5 +12,8 @@
 #import "AppDelegate.h"
 
 @interface Reader : NSObject
+
 -(NSManagedObjectContext*)newContext;
++(void)setInstance:(Reader*)ins;
++(Reader*)getInstance;
 @end

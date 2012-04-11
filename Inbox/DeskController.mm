@@ -35,25 +35,24 @@
 #import "LoginController.h"
 #import "Math.h"
 #import "ModelsManager.h"
-
+#import "models.h"
 @interface DeskController ()
-@property(nonatomic,retain,readwrite) GmailModel* model;
+@property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
 -(void)nextStep;
 @end
 
 @implementation DeskController
-@synthesize model;
+@synthesize modelsManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.modelsManager = [[ModelsManager alloc] init];
+        self.modelsManager = [[[ModelsManager alloc] init] autorelease];
 	}
 	return self;
 }
 
 - (void)dealloc {
     self.modelsManager = nil;
-    self.model = nil;
     [layer release];
     [glView removeFromSuperview];
     [glView release];
@@ -70,8 +69,9 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
--(void)move:(NSManagedObjectID*)emailId to:(NSString*)folder{
-    [model move:emailId to:folder];
+
+-(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId{
+    [[EmailReader sharedInstance] moveEmail:emailId toFolder:folderId error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
@@ -95,7 +95,9 @@
 }
 
 -(void)fetchEmailBody:(NSManagedObjectID*)emailId{
-    if ([model fetchEmailBody:emailId]){
+    NSError* error = nil;
+    [[EmailReader sharedInstance] fetchEmailBody:emailId error:&error];
+    if (!error){
         [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES];
     }else{
         [self unlinkToModel];
@@ -125,22 +127,6 @@
 
 #pragma mark model handlers
 
--(void)unlinkToModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:INBOX_STATE_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_STARTED object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:FOLDERS_READY object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_ERROR object:nil];
-}
-
--(void)linkToModel{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inboxChanged) name:INBOX_STATE_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncStarted) name:SYNC_STARTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foldersReady) name:FOLDERS_READY object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:MODEL_ERROR object:nil];
-}
-
 -(void)syncStarted{
     [self showLoadingHud];
     [self nextStep];
@@ -159,8 +145,8 @@
 }
 
 -(void)nextStep{
-
-    int emailsInInbox = [model emailsCountInFolder:@"INBOX"];
+    NSError* error;
+    int emailsInInbox = [[EmailReader sharedInstance] emailsCountInInboxes:&error];
     if (emailsInInbox>totalEmailsInThisSession){
         totalEmailsInThisSession = emailsInInbox;
     }
@@ -172,7 +158,7 @@
     [layer setPercentage:percentage labelCount:emailsInInbox];
     
 
-    if ([[model folders] count]!=0){
+    if ([[model folder] count]!=0){
         if (![layer.folders isEqualToArray:[model folders]]){
             [layer foldersHidden:YES animated:YES];
             [layer setFolders:[model folders]];
@@ -181,14 +167,16 @@
         [layer progressIndicatorHidden:FALSE animated:YES];
     }
     if ([layer mailsOnSceneCount]!=0) return;
-    if ([model emailsCountInFolder:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")]==0){
+    
+    
+    if ([[EmailReader sharedInstance]emailsCountInInboxes:&error]==0){
         if ([model isSyncing]){
             isWaiting = YES;
             [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
         }else{
             isWaiting = NO;
             [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-            [self unlinkToModel];
+
             InboxEmptyController* inboxEmptyController = [[InboxEmptyController alloc] initWithNibName:@"InboxEmptyView" bundle:nil];
             inboxEmptyController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
             

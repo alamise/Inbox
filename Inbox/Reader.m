@@ -7,10 +7,25 @@
 //
 
 #import "Reader.h"
+static Reader* instance;
 
 @implementation Reader
 
 -(NSManagedObjectContext*)newContext{
     return [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
 }
+
++(void)setInstance:(Reader*)ins{
+    [instance autorelease];
+    instance = [ins retain];
+}
+
++(Reader*)getInstance{
+    return instance;
+}
+
++(Reader*)sharedInstance{
+    return nil;
+}
+
 @end

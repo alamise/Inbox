@@ -25,7 +25,7 @@
 
 @class EmailModel,GmailModel;
 @protocol DeskProtocol <NSObject>
-    -(void)move:(NSManagedObjectID*)email to:(NSString*)folder;
+-(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId;
     -(void)emailTouched:(NSManagedObjectID*)email;
     -(void)openSettings;
 @end

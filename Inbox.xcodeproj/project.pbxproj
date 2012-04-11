@@ -945,17 +945,9 @@
 		F41E666914A9D0B500BA4712 /* desk */ = {
 			isa = PBXGroup;
 			children = (
-				F41E658914A9CFB700BA4712 /* EmailNode.h */,
-				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
+				F4B4E61815362889008FDC7F /* graphical */,
 				F41E658014A9CFB700BA4712 /* DeskController.h */,
 				F41E658114A9CFB700BA4712 /* DeskController.mm */,
-				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
-				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
-				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
-				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
-				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
-				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
-				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
 			);
 			name = desk;
 			sourceTree = "<group>";
@@ -1191,6 +1183,22 @@
 				F47DBDCA153336E6008A5373 /* EmailAccountModel.m */,
 			);
 			name = DAO;
+			sourceTree = "<group>";
+		};
+		F4B4E61815362889008FDC7F /* graphical */ = {
+			isa = PBXGroup;
+			children = (
+				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
+				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
+				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
+				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
+				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
+				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
+				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
+				F41E658914A9CFB700BA4712 /* EmailNode.h */,
+				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
+			);
+			name = graphical;
 			sourceTree = "<group>";
 		};
 		F4F80DC114D48A4B00A7C356 /* Lumberjack */ = {
