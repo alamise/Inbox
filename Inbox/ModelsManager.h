@@ -14,5 +14,5 @@
     NSMutableArray* synchronizers;
     int runningSync;
 }
-
+-(void)startSync;
 @end

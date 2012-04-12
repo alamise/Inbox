@@ -28,8 +28,10 @@
 @interface FolderModel : NSManagedObject{
     NSString* path;
     EmailAccountModel* account;
+    NSMutableSet* emails;
 }
 @property(nonatomic,retain) NSString* path;
 @property(nonatomic,retain) EmailAccountModel* account;
+@property(nonatomic,retain) NSMutableSet* emails;
 +(NSString*)entityName;
 @end

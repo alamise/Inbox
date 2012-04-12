@@ -35,7 +35,10 @@
 #import "LoginController.h"
 #import "Math.h"
 #import "ModelsManager.h"
-#import "models.h"
+#import "EmailReader.h"
+#import "CTCoreAccount.h"
+#import "EmailAccountModel.h"
+#import "FolderModel.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
 -(void)nextStep;
@@ -47,6 +50,9 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.modelsManager = [[[ModelsManager alloc] init] autorelease];
+        isSyncing = true;
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+        [self.modelsManager startSync];
 	}
 	return self;
 }
@@ -60,7 +66,6 @@
 }
 
 -(void)openSettings{
-    [self unlinkToModel];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];
     loginController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
     UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:loginController];
@@ -100,7 +105,6 @@
     if (!error){
         [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES];
     }else{
-        [self unlinkToModel];
         ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
         errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:emailId] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
@@ -137,6 +141,7 @@
 }
 
 -(void)syncDone{
+    isSyncing =false;
     [self nextStep];
 }
 
@@ -156,21 +161,27 @@
     float percentage= (float)100*count/total;
     // TODO find a logarithm like function to increase the counter faster at the beginning.
     [layer setPercentage:percentage labelCount:emailsInInbox];
-    
 
-    if ([[model folder] count]!=0){
-        if (![layer.folders isEqualToArray:[model folders]]){
-            [layer foldersHidden:YES animated:YES];
-            [layer setFolders:[model folders]];
-            [layer foldersHidden:NO animated:YES];
-        }
-        [layer progressIndicatorHidden:FALSE animated:YES];
-    }
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
+
+
     if ([layer mailsOnSceneCount]!=0) return;
+    
+    NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
+    EmailModel* nextEmail = (EmailModel*)[context objectWithID:nextEmailId];
+    
+    if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]]){
+        [layer foldersHidden:YES animated:YES];
+        [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]];
+        [layer foldersHidden:NO animated:YES];
+    }
+    
+    [layer progressIndicatorHidden:FALSE animated:YES];
+    [layer putEmail:nextEmail];
     
     
     if ([[EmailReader sharedInstance]emailsCountInInboxes:&error]==0){
-        if ([model isSyncing]){
+        if (isSyncing){
             isWaiting = YES;
             [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
         }else{
@@ -189,37 +200,38 @@
     }else{
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-        NSManagedObjectID* nextEmailId = [model lastEmailFrom:NSLocalizedString(@"folderModel.path.inbox", @"Localized Inbox folder's path en: \"INBOX\"")];
+        NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];
         EmailModel* nextEmail = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:nextEmailId];
         [layer putEmail:nextEmail];
     }
 }
 
 -(void)setNewModel{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_UNACTIVE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MODEL_ERROR object:nil];
-    [self linkToModel];
-    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    self.model = [[[GmailModel alloc] initWithAccount:[plistDic valueForKey:@"email"] password:[plistDic valueForKey:@"password"]] autorelease];
-    [plistDic release];
-    [self.model sync];
 }
 
 -(void)resetModel{
-    [self unlinkToModel];
-    [layer cleanDesk];
-    [layer foldersHidden:YES animated:YES];
-    [layer progressIndicatorHidden:YES animated:YES];
-    totalEmailsInThisSession = 0;
-    if (self.model && [self.model isActive]){
-        [self showLoadingHud];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNewModel) name:MODEL_UNACTIVE object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:MODEL_ERROR object:nil];
-    }else{
-        [self setNewModel];
+    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    EmailAccountModel* account = nil;
+    @try {
+        account = [NSEntityDescription insertNewObjectForEntityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     }
+    @catch (NSException *exception) {
+        NSLog(@"mere");
+    }
+    [account retain];
+    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
+    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    account.serverAddr = @"imap.gmail.com";
+    account.port = [NSNumber numberWithInt:993];
+    account.conType = [NSNumber numberWithInt:CONNECTION_TYPE_TLS];
+    account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
+    account.login = [plistDic objectForKey:@"login"];
+    account.password = [plistDic objectForKey:@"password"];
+    [context save:nil];
+    [account release];
+    [self.modelsManager startSync];
+    [self nextStep];
 }
 
 -(void)onError{
@@ -227,7 +239,6 @@
 }
 
 -(void)presentErrorView{
-    [self unlinkToModel];
     isSyncing = false;
     isWaiting = false;
     [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
@@ -269,7 +280,6 @@
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
         [self resetModel];
     }else{
-        [self unlinkToModel];
         TutorialController* tutorialCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
         tutorialCtr.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:tutorialCtr];

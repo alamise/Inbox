@@ -201,11 +201,11 @@ enum {
     SWTableView* table = (SWTableView*)[self getChildByTag:tagScrollZone];
     int cellIndex = [table cellIndexAt:newLocation] ;
     if (cellIndex!=-1){
-        NSString* path = [self.folders objectAtIndex:cellIndex];
-        [delegate move:self.draggedNode.emailId to:path];
+        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
+        [delegate moveEmail:self.draggedNode.emailId toFolder:folder.objectID];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
-    }else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
+    }/*else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
         [delegate move:self.draggedNode.emailId to:@"[Gmail]/All Mail"];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
@@ -214,7 +214,7 @@ enum {
         [delegate move:self.draggedNode.emailId to:@"INBOX"];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
-    }else{
+    }*/else{
         // No effect if the mail is dropped in a zone.
         if (lastTouchTime<[NSDate timeIntervalSinceReferenceDate]+TOUCHES_DELAY){
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){

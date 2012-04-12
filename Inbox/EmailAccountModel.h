@@ -26,18 +26,20 @@
 #import <CoreData/CoreData.h> 
 
 @interface EmailAccountModel : NSManagedObject{
+    NSNumber* authType;
+    NSNumber* conType;
     NSString* login;
     NSString* password;
+    NSNumber* port;
     NSString* serverAddr;
-    int conType;
-    int authType;
-    int port;
+    NSMutableSet* folders;
 }
+@property(nonatomic,retain) NSNumber* authType;
+@property(nonatomic,retain) NSNumber* conType;
 @property(nonatomic,retain) NSString* login;
 @property(nonatomic,retain) NSString* password;
+@property(nonatomic,retain) NSNumber* port;
 @property(nonatomic,retain) NSString* serverAddr;
-@property(nonatomic,assign) int conType;
-@property(nonatomic,assign) int authType;
-@property(nonatomic,assign) int port;
+@property(nonatomic,retain) NSMutableSet* folders;
 +(NSString*)entityName;
 @end

@@ -8,9 +8,10 @@
 
 #import "ModelsManager.h"
 #import "AppDelegate.h"
-#import "models.h"
 #import "NSObject+Queues.h"
-
+#import "EmailSynchronizer.h"
+#import "Synchronizer.h"
+#import "EmailAccountModel.h"
 @implementation ModelsManager
 
 
@@ -42,7 +43,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    [request setPropertiesToFetch:[entity properties]];
+    //[request setPropertiesToFetch:[entity properties]];
     NSError* fetchError;
     NSArray* emailsModels = [context executeFetchRequest:request error:&fetchError];
     if (fetchError){

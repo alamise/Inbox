@@ -29,19 +29,19 @@
 @interface EmailModel : NSManagedObject{
     NSString* uid;
     NSString* subject;
+    NSString* serverPath;
     NSDate* sentDate; /* GMT time */
     NSString* senderName;
     NSString* senderEmail;
-    NSString* serverPath; /* path from the server*/ 
     NSString* htmlBody;  
     FolderModel* folder;
 }
 @property(nonatomic,retain) NSString* uid;
 @property(nonatomic,retain) NSString* subject;
+@property(nonatomic,retain) NSString* serverPath;
 @property(nonatomic,retain) NSDate* sentDate;
 @property(nonatomic,retain) NSString* senderName;
 @property(nonatomic,retain) NSString* senderEmail;
-@property(nonatomic,retain) NSString* serverPath;
 @property(nonatomic,retain) NSString* htmlBody;
 @property(nonatomic,retain) FolderModel* folder;
 +(NSString*)entityName;

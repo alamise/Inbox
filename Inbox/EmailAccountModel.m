@@ -32,6 +32,7 @@
 @dynamic conType;
 @dynamic authType;
 @dynamic port;
+@dynamic folders;
 
 
 +(NSString*)entityName{

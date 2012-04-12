@@ -15,7 +15,8 @@
 #import "CTCoreFolder.h"
 #import "MailCoreTypes.h"
 #import "CTCoreAddress.h"
-
+#import "FolderModel.h"
+#import "EmailModel.h"
 @implementation EmailSynchronizer
 
 -(id)initWithAccount:(EmailAccountModel*)accountModel{

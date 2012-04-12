@@ -10,7 +10,9 @@
 #import "CTCoreMessage.h"
 #import "CTCoreFolder.h"
 #import "CTCoreAccount.h"
-
+#import "FolderModel.h"
+#import "EmailModel.h"
+#import "EmailAccountModel.h"
 @implementation EmailReader
 
 +(EmailReader*)sharedInstance{
@@ -76,7 +78,7 @@
         NSMutableArray* results = [NSMutableArray array];
         folders = [folders sortedArrayUsingSelector:@selector(compare:)];
         for (FolderModel* folder in folders){
-            [results addObject:folder.objectID];
+            [results addObject:folder];
         }
         return results;
     }

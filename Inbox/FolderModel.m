@@ -30,6 +30,7 @@
 @implementation FolderModel
 @dynamic path;
 @dynamic account;
+@dynamic emails;
 
 +(void)initialize{
     

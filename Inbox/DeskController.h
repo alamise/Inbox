@@ -40,6 +40,4 @@
 }
 @property(nonatomic,retain,readonly) ModelsManager* modelsManager;
 -(void)resetModel;
--(void)linkToModel;
--(void)unlinkToModel;
 @end

@@ -8,26 +8,25 @@
         <attribute name="serverPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
-        <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" syncable="YES"/>
+        <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="emails" inverseEntity="Folder" syncable="YES"/>
     </entity>
     <entity name="EmailAccount" syncable="YES">
-        <attribute name="authType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="conType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="authType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="conType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="port" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="serverAddr" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="emails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Email" syncable="YES"/>
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="account" inverseEntity="Folder" syncable="YES"/>
     </entity>
     <entity name="Folder" representedClassName="FolderModel" syncable="YES">
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="account" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EmailAccount" inverseName="folders" inverseEntity="EmailAccount" syncable="YES"/>
-        <relationship name="emails" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="emails" inverseEntity="Folder" syncable="YES"/>
+        <relationship name="emails" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Email" inverseName="folder" inverseEntity="Email" syncable="YES"/>
     </entity>
     <elements>
         <element name="Email" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="EmailAccount" positionX="-290" positionY="-18" width="128" height="165"/>
+        <element name="EmailAccount" positionX="-290" positionY="-18" width="128" height="150"/>
         <element name="Folder" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

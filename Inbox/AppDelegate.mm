@@ -55,9 +55,6 @@
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityStarted) name:MODEL_ACTIVE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncActivityEnded) name:MODEL_UNACTIVE object:nil];
-
     CCDirector *director = [CCDirector sharedDirector];
     [director setAnimationInterval:1.0/60];
     [director setDisplayFPS:YES];

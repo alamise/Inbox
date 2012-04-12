@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Reader.h"
-#import "models.h"
 #import "errorCodes.h"
 @interface EmailReader : Reader
 +(EmailReader*)sharedInstance;

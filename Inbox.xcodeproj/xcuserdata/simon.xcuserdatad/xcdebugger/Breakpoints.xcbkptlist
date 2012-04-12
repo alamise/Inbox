@@ -133,11 +133,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "351347759.552299"
+         timestampString = "355957384.41179"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "187"
-         endingLineNumber = "187"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "-nextStep"
          landmarkType = "5">
       </FileBreakpoint>
@@ -147,12 +147,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "351348929.222113"
+         timestampString = "355958568.639568"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
-         landmarkName = "-onError"
+         startingLineNumber = "246"
+         endingLineNumber = "246"
+         landmarkName = "-presentErrorView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -223,6 +223,32 @@
          startingLineNumber = "579"
          endingLineNumber = "579"
          landmarkName = "-updateRemoteMessagesAsync"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskController.mm"
+         timestampString = "355957581.844584"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "-resetModel"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskController.mm"
+         timestampString = "355958141.66942"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
+         landmarkName = "-resetModel"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
