@@ -136,7 +136,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path = %@ AND newPath = nil) OR (newPath = %@)", folder.path, folder.path];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder.path = %@)", folder.path, folder.path];          
     [request setPredicate:predicate];
     NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];
@@ -163,8 +163,7 @@
     EmailModel* email = (EmailModel*)[context objectWithID:emailId];
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {
-        //[account connectToServer:@"imap.gmail.com" port:993 connectionType:CONNECTION_TYPE_TLS authType:IMAP_AUTH_TYPE_PLAIN login:email password:password];
-        [account connectToServer:email.folder.account.serverAddr port:email.folder.account.port connectionType:email.folder.account.conType authType:email.folder.account.authType login:email.folder.account.login password:email.folder.account.password];
+        [account connectToServer:email.folder.account.serverAddr port:[email.folder.account.port intValue] connectionType:[email.folder.account.conType  intValue] authType:[email.folder.account.authType intValue] login:email.folder.account.login password:email.folder.account.password];
     }
     @catch (NSException *exception) {
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:FETCH_EMAIL_BODY userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];

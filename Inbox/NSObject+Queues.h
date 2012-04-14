@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Queues)
--(void)executeOnMainQueue:(dispatch_block_t) block;
+-(void)executeOnMainQueueSync:(dispatch_block_t) block;
+-(void)executeOnMainQueueAsync:(dispatch_block_t) block;
 @end

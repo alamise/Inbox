@@ -8,8 +8,9 @@
 
 #import "Synchronizer.h"
 #import "NSObject+Queues.h"
+#import <CoreData/CoreData.h>
 @implementation Synchronizer
-
+@synthesize shouldStopAsap;
 
 -(id)init{
     if (self = [super init]){
@@ -23,8 +24,15 @@
     [super dealloc];
 }
 
+-(void)onStateChanged{
+    [self executeOnMainQueueAsync:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];
+    }];
+}
+
 -(void)onError:(NSError*)error{
-    [self executeOnMainQueue:^{
+    NSLog(@"%@",error);
+    [self executeOnMainQueueSync:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
     }];
 }
@@ -57,11 +65,11 @@
 -(BOOL)startSync{
     [syncLock lock];
     shouldStopAsap = false;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modelFailed) name:INTERNAL_SYNC_FAILED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     BOOL returnValue = [self sync];
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:INTERNAL_SYNC_FAILED];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:INTERNAL_SYNC_FAILED object:nil];
     [syncLock unlock];
-    [self executeOnMainQueue:^{
+    [self executeOnMainQueueSync:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_DONE object:nil];
     }];
     return returnValue;

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Synchronizer.h"
-
 @class EmailAccountModel;
 @interface EmailSynchronizer : Synchronizer{
     EmailAccountModel* emailAccountModel;

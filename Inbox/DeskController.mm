@@ -39,6 +39,7 @@
 #import "CTCoreAccount.h"
 #import "EmailAccountModel.h"
 #import "FolderModel.h"
+#import "Synchronizer.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
 -(void)nextStep;
@@ -51,7 +52,8 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.modelsManager = [[[ModelsManager alloc] init] autorelease];
         isSyncing = true;
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+        //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+        //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [self.modelsManager startSync];
 	}
 	return self;
@@ -132,20 +134,17 @@
 #pragma mark model handlers
 
 -(void)syncStarted{
+    isSyncing = true;
     [self showLoadingHud];
     [self nextStep];
 }
 
--(void)inboxChanged{
+-(void)stateChanged{
     [self nextStep];
 }
 
 -(void)syncDone{
-    isSyncing =false;
-    [self nextStep];
-}
-
--(void)foldersReady{
+    isSyncing = false;
     [self nextStep];
 }
 
@@ -168,26 +167,16 @@
     if ([layer mailsOnSceneCount]!=0) return;
     
     NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
-    EmailModel* nextEmail = (EmailModel*)[context objectWithID:nextEmailId];
-    
-    if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]]){
-        [layer foldersHidden:YES animated:YES];
-        [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]];
-        [layer foldersHidden:NO animated:YES];
-    }
-    
-    [layer progressIndicatorHidden:FALSE animated:YES];
-    [layer putEmail:nextEmail];
     
     
-    if ([[EmailReader sharedInstance]emailsCountInInboxes:&error]==0){
+    if (nextEmailId==nil){
         if (isSyncing){
             isWaiting = YES;
             [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
         }else{
             isWaiting = NO;
             [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-
+            
             InboxEmptyController* inboxEmptyController = [[InboxEmptyController alloc] initWithNibName:@"InboxEmptyView" bundle:nil];
             inboxEmptyController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
             
@@ -198,11 +187,17 @@
             [self presentModalViewController:navCtr animated:YES];
         }
     }else{
+        EmailModel* nextEmail = (EmailModel*)[context objectWithID:nextEmailId];
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
         NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];
-        EmailModel* nextEmail = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:nextEmailId];
         [layer putEmail:nextEmail];
+        if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]]){
+            [layer foldersHidden:YES animated:YES];
+            [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]];
+            [layer foldersHidden:NO animated:YES];
+        }
+
     }
 }
 
@@ -210,7 +205,7 @@
 }
 
 -(void)resetModel{
-    [(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
+    //[(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     EmailAccountModel* account = nil;
     @try {
@@ -226,8 +221,8 @@
     account.port = [NSNumber numberWithInt:993];
     account.conType = [NSNumber numberWithInt:CONNECTION_TYPE_TLS];
     account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
-    account.login = [plistDic objectForKey:@"login"];
-    account.password = [plistDic objectForKey:@"password"];
+    account.login = @"sim.w80@gmail.com";
+    account.password = @"XXXX"; // to test the sync
     [context save:nil];
     [account release];
     [self.modelsManager startSync];

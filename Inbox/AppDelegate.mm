@@ -159,7 +159,7 @@ void uncaughtExceptionHandler(NSException *exception) {
                                   initWithManagedObjectModel:[self managedObjectModel]];
     if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil URL:storeUrl options:options error:&error]) {
-        // TODO
+        NSLog(@"ERROR %@",error);
     }
     
     return persistentStoreCoordinator;

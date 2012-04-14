@@ -14,16 +14,12 @@
 #import "EmailAccountModel.h"
 @implementation ModelsManager
 
-
-
 -(id)init{
     if (self = [super init]){
         synchronizers = [[NSMutableArray alloc] init];
-        [self refreshEmailAccountsPool];
     }
     return self;
 }
-
 
 -(void)dealloc{
     for (Synchronizer* sync in synchronizers){
@@ -33,7 +29,7 @@
     [super dealloc];
 }
 
--(void)refreshEmailAccountsPool{
+-(BOOL)refreshEmailAccounts{
     for (Synchronizer* sync in synchronizers){
         [sync stopAsap];
     }
@@ -43,12 +39,13 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    //[request setPropertiesToFetch:[entity properties]];
-    NSError* fetchError;
+    NSError* fetchError = nil;
     NSArray* emailsModels = [context executeFetchRequest:request error:&fetchError];
     if (fetchError){
-        // TODO
-        return;
+        
+        [context release];
+        [request release];
+        return false;
     }
 
     for (EmailAccountModel* account in emailsModels){
@@ -58,12 +55,17 @@
     
     [context release];
     [request release];
+    return true;
 }
 
 
 -(void)startSync{
+    if(![self refreshEmailAccounts]){
+        [self onSyncFailed];
+        return;
+    }
     runningSync = [synchronizers count];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFail) name:INTERNAL_SYNC_FAILED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
     for (Synchronizer* sync in synchronizers){
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -72,11 +74,13 @@
     }
 }
 
+
 -(void)onSyncDone{
     @synchronized(self){
         runningSync--;
         if (runningSync==0){
-            [self executeOnMainQueue:^{
+            [self executeOnMainQueueSync:^{
+                [synchronizers removeAllObjects];
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
             }];
 
@@ -85,7 +89,11 @@
 }
 
 -(void)onSyncFailed{
-    [self executeOnMainQueue:^{
+    for (Synchronizer* sync in synchronizers){
+        [sync stopAsap];
+    }
+    [synchronizers removeAllObjects];
+    [self executeOnMainQueueSync:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
     }];
 }

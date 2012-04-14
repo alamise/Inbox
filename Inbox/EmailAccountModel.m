@@ -38,4 +38,5 @@
 +(NSString*)entityName{
     return @"EmailAccount";
 }
+
 @end

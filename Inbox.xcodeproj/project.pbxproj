@@ -82,6 +82,7 @@
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
+		F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */; };
 		F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E28093153040640093C3F5 /* libsqlite3.0.dylib */; };
 		F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E280951530407A0093C3F5 /* CFNetwork.framework */; };
 		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
@@ -748,6 +749,8 @@
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsHelper.h; sourceTree = "<group>"; };
+		F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsHelper.m; sourceTree = "<group>"; };
 		F4E28093153040640093C3F5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F4E280951530407A0093C3F5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
@@ -1181,6 +1184,8 @@
 				F43819F014AB90CA0017C9BC /* FolderModel.m */,
 				F47DBDC9153336E6008A5373 /* EmailAccountModel.h */,
 				F47DBDCA153336E6008A5373 /* EmailAccountModel.m */,
+				F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */,
+				F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */,
 			);
 			name = DAO;
 			sourceTree = "<group>";
@@ -1941,6 +1946,7 @@
 				F44B061015336E62003B801D /* EmailReader.m in Sources */,
 				F44B061315336E6D003B801D /* Reader.m in Sources */,
 				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
+				F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
