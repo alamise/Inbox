@@ -15,4 +15,5 @@
     int runningSync;
 }
 -(void)startSync;
+-(void)abortSync;
 @end

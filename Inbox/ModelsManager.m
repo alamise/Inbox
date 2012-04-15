@@ -75,6 +75,15 @@
 }
 
 
+-(void)abortSync{
+    for (Synchronizer* sync in synchronizers){
+        [sync stopAsap];
+    }
+    [synchronizers removeAllObjects];
+}
+
+
+
 -(void)onSyncDone{
     @synchronized(self){
         runningSync--;

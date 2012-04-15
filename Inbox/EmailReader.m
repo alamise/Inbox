@@ -42,7 +42,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path = %@ AND newPath = nil) OR (newPath = %@)", folder.path, folder.path];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder.path = %@)", folder.path];          
     [request setPredicate:predicate];
     
     int count = [context countForFetchRequest:request error:error];

@@ -35,13 +35,18 @@
 }
 
 -(BOOL)updateLocalFolders{
+    if (self.shouldStopAsap){
+        return true;
+    }
     DDLogVerbose(@"[%@] update local folders started",emailAccountModel.login);
     NSSet* folders = nil;
     CTCoreAccount* account = [self account];
     if (account==nil){
         return false;
     }
-    
+    if (self.shouldStopAsap){
+        return true;
+    }
     @try {
         folders = [account allFolders];
     }
@@ -49,6 +54,9 @@
         DDLogError(@"[%@] error when retrieving the folders",emailAccountModel.login);
         [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
         return false;
+    }
+    if (self.shouldStopAsap){
+        return true;
     }
     NSMutableSet* decodedFolders = [NSMutableSet setWithCapacity:[folders count]];
     for (NSString* folderName in folders){
@@ -79,7 +87,13 @@
         [request release];
         return false;
     }
+    if (self.shouldStopAsap){
+        return true;
+    }
     for (FolderModel* folder in foldersToDelete){
+        if (self.shouldStopAsap){
+            return true;
+        }
         @try {
             [context deleteObject:folder];
         }
@@ -93,6 +107,9 @@
     }
     DDLogVerbose(@"[%@] folders deleted",emailAccountModel.login);
     for (NSString* path in folders){
+        if (self.shouldStopAsap){
+            return true;
+        }
         if (![disabledFolders containsObject:path]){
             DDLogVerbose(@"[%@] processing folder %@",emailAccountModel.login, path);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
@@ -128,6 +145,9 @@
     [disabledFolders release];
     [request release];
     DDLogVerbose(@"[%@] folders updated, saving context",emailAccountModel.login);
+    if (self.shouldStopAsap){
+        return true;
+    }
     if (![self saveContextWithError:EMAIL_FOLDERS_ERROR]){
         DDLogError(@"[%@] Error when saving the context",emailAccountModel.login);
         return false;
@@ -142,6 +162,9 @@
  * If a message is not found on the server, it's deleted locally.
  */
 -(BOOL)updateRemoteMessages{
+    if (self.shouldStopAsap){
+        return true;
+    }
     DDLogVerbose(@"[%@] committing local changes",emailAccountModel.login);
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
@@ -160,7 +183,13 @@
     CTCoreFolder* folder = nil;
     BOOL skip;
     CTCoreAccount* account = nil;
+    if (self.shouldStopAsap){
+        return true;
+    }
     for (EmailModel* email in models){
+        if (self.shouldStopAsap){
+            return true;
+        }
         skip = false;
         if (folder==nil || ![folder.path isEqualToString:email.folder.path]){
             [folder disconnect];
@@ -217,6 +246,9 @@
 }
 
 -(BOOL)updateLocalMessages{
+    if (self.shouldStopAsap){
+        return true;
+    }
     DDLogVerbose(@"[%@] Updating local messages",emailAccountModel.login);
     CTCoreFolder *currentFolder = nil;    
     NSSet* messages = nil;
@@ -247,10 +279,15 @@
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [sortDescriptor release];
     
-    
+    if (self.shouldStopAsap){
+        return true;
+    }
     int folderIndex = 0;
     DDLogVerbose(@"[%@] Syncing started",emailAccountModel.login);
     while ([folders count]!=0){
+        if (self.shouldStopAsap){
+            return true;
+        }
         DDLogVerbose(@"[%@] ---- loop(%d folders left) ----",emailAccountModel.login, [folders count]);
         @try {
             CTCoreAccount* account = [self account];
@@ -268,7 +305,9 @@
             [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
             return false;
         }
-
+        if (self.shouldStopAsap){
+            return true;
+        }
         @try {
             NSLog(@"page: %d (%d %d)",page, page*pageSize+1, (page+1)*pageSize);
 
@@ -281,8 +320,13 @@
         }
 
         DDLogVerbose(@"[%@] Processing folder %@",emailAccountModel.login,currentFolder.path);
-        
+        if (self.shouldStopAsap){
+            return true;
+        }
         for (CTCoreMessage* message in messages){
+            if (self.shouldStopAsap){
+                return true;
+            }
             EmailModel* emailModel=nil;
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@ AND folder.path = %@", message.uid,currentFolder.path];
             [request setPredicate:predicate];
@@ -327,6 +371,10 @@
             emailModel.serverPath = ((FolderModel*)[folders objectAtIndex:folderIndex]).path;
             emailModel.folder = [folders objectAtIndex:folderIndex];
         }
+        
+        if (self.shouldStopAsap){
+            return true;
+        }
         /* If ther eis no more messages in a folder. We remove it from the list */
         if ([messages count]==0){
             DDLogVerbose(@"[%@] no more emails in that folder, removing it from the list",emailAccountModel.login);
@@ -338,7 +386,7 @@
             return false;
         }
         
-        //[self onStateChanged];
+        [self onStateChanged];
         /* process the following 20 mails of the next folder */
         folderIndex = (folderIndex+1) % [folders count];
         DDLogVerbose(@"[%@] new index = %d",emailAccountModel.login, folderIndex);
@@ -375,6 +423,9 @@
     DDLogVerbose(@"[%@] Sync started for account",emailAccountModel.login);
     if (![self updateLocalFolders] || ![self updateRemoteMessages] || ![self updateLocalMessages]){
         return false;
+    }
+    if (self.shouldStopAsap){
+        return true;
     }
     DDLogVerbose(@"[%@] Sync done, saving context",emailAccountModel.login);
     if ([self saveContextWithError:EMAIL_ERROR]){

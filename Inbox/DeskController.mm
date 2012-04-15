@@ -53,9 +53,10 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.modelsManager = [[[ModelsManager alloc] init] autorelease];
         isSyncing = true;
-        //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-        //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
-        [self.modelsManager startSync];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
+        //[self.modelsManager startSync];
 	}
 	return self;
 }
@@ -77,7 +78,6 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
-
 -(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId{
     [[EmailReader sharedInstance] moveEmail:emailId toFolder:folderId error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
@@ -96,7 +96,6 @@
         [self presentModalViewController:navCtr animated:YES];
     }
 }
-
 
 -(void)emailTouched:(NSManagedObjectID*)emailId{
     [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES]; 
@@ -118,7 +117,6 @@
     }
 }
 
-
 -(void)showLoadingHud{
     layer.isActive = NO;
     if (loadingHud.alpha==0.0f){
@@ -131,27 +129,13 @@
     [loadingHud hide:YES];
 }
 
-
-#pragma mark model handlers
-
--(void)syncStarted{
-    isSyncing = true;
-    [self showLoadingHud];
-    [self nextStep];
-}
-
 -(void)stateChanged{
     [self nextStep];
 }
 
--(void)syncDone{
-    isSyncing = false;
-    [self nextStep];
-}
-
 -(void)nextStep{
-    return ;
     NSError* error;
+    /* set the counter */
     int emailsInInbox = [[EmailReader sharedInstance] emailsCountInInboxes:&error];
     if (emailsInInbox>totalEmailsInThisSession){
         totalEmailsInThisSession = emailsInInbox;
@@ -160,16 +144,16 @@
     int total = totalEmailsInThisSession;
     
     float percentage= (float)100*count/total;
-    // TODO find a logarithm like function to increase the counter faster at the beginning.
+
     [layer setPercentage:percentage labelCount:emailsInInbox];
-
+    [layer progressIndicatorHidden:NO animated:YES];
+    
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
-
+    return;
 
     if ([layer mailsOnSceneCount]!=0) return;
     
     NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
-    
     
     if (nextEmailId==nil){
         if (isSyncing){
@@ -203,12 +187,27 @@
     }
 }
 
--(void)setNewModel{
-}
-
 -(void)resetModel{
-    //[(AppDelegate*)[UIApplication sharedApplication].delegate resetDatabase];
+
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    [self.modelsManager abortSync];
+    
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+    NSError* fetchError = nil;
+    NSArray* emailsModels = [context executeFetchRequest:request error:&fetchError];
+    if (fetchError){
+        return;
+    }
+    
+    for (EmailAccountModel* account in emailsModels){
+        [context deleteObject:account];
+    }
+    
+
+    
     EmailAccountModel* account = nil;
     @try {
         account = [NSEntityDescription insertNewObjectForEntityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
@@ -227,8 +226,6 @@
     account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
     [context save:nil];
     [account release];
-    
-
     [self.modelsManager startSync];
     [self nextStep];
 }
@@ -317,11 +314,6 @@
     [glView release];
     [loadingHud release];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end
 

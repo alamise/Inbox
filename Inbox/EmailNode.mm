@@ -67,7 +67,6 @@
 
 
 -(void) draw:(NSString*)subject senderName:(NSString*)senderName {
-    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:self.emailId];
     // 217x135
     CCSprite* sprite = [CCSprite spriteWithFile:@"emailBackground.png"];
     sprite.position=CGPointMake(105,67);

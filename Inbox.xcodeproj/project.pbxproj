@@ -935,9 +935,9 @@
 		F41E666814A9D09900BA4712 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				F47DBDCC1533396C008A5373 /* DAO */,
 				F44B060B153365D4003B801D /* synchronizer */,
 				F44B060D15336E48003B801D /* reader */,
-				F47DBDCC1533396C008A5373 /* DAO */,
 				F47DBDCD15333B74008A5373 /* models.h */,
 				F44B05FF15334E6E003B801D /* ModelsManager.h */,
 				F44B060015334E6F003B801D /* ModelsManager.m */,
