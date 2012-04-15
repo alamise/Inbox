@@ -16,4 +16,6 @@
 -(NSString*)flurryApiKey;
 
 -(NSString*)quincyServer;
+
+-(NSString*)myPassword;
 @end

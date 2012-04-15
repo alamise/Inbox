@@ -40,6 +40,7 @@
 #import "EmailAccountModel.h"
 #import "FolderModel.h"
 #import "Synchronizer.h"
+#import "PrivateValues.h"
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
 -(void)nextStep;
@@ -149,6 +150,7 @@
 }
 
 -(void)nextStep{
+    return ;
     NSError* error;
     int emailsInInbox = [[EmailReader sharedInstance] emailsCountInInboxes:&error];
     if (emailsInInbox>totalEmailsInThisSession){
@@ -222,9 +224,11 @@
     account.conType = [NSNumber numberWithInt:CONNECTION_TYPE_TLS];
     account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
     account.login = @"sim.w80@gmail.com";
-    account.password = @"XXXX"; // to test the sync
+    account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
     [context save:nil];
     [account release];
+    
+
     [self.modelsManager startSync];
     [self nextStep];
 }

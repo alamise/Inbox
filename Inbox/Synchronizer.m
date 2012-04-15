@@ -9,9 +9,11 @@
 #import "Synchronizer.h"
 #import "NSObject+Queues.h"
 #import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+
 @implementation Synchronizer
 @synthesize shouldStopAsap;
-
+@synthesize context;
 -(id)init{
     if (self = [super init]){
         syncLock = [[NSLock alloc] init];
@@ -20,6 +22,7 @@
 }
 
 -(void)dealloc{
+    [context release];
     [syncLock release];
     [super dealloc];
 }
@@ -31,7 +34,7 @@
 }
 
 -(void)onError:(NSError*)error{
-    NSLog(@"%@",error);
+    NSLog(@"%@",[error userInfo]);
     [self executeOnMainQueueSync:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
     }];
@@ -64,9 +67,11 @@
 
 -(BOOL)startSync{
     [syncLock lock];
+    self.context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     shouldStopAsap = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     BOOL returnValue = [self sync];
+    self.context = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:INTERNAL_SYNC_FAILED object:nil];
     [syncLock unlock];
     [self executeOnMainQueueSync:^{
@@ -84,9 +89,9 @@
     [self stopAsap];
 }
 
--(BOOL)saveContext:(NSManagedObjectContext*)context errorCode:(int)errorCode{
+-(BOOL)saveContextWithError:(int)errorCode{
     NSError* error = nil;
-    [context save:&error];
+    [self.context save:&error];
     if (error){
         [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:errorCode userInfo:[NSDictionary dictionaryWithObject:error forKey:ROOT_ERROR]]];
         return false;

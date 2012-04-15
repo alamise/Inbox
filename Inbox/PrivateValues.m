@@ -33,4 +33,8 @@ static PrivateValues* instance;
     return [values objectForKey:@"quincyServer"];
 }
 
+-(NSString*)myPassword{
+    return [values objectForKey:@"myPassword"];
+}
+
 @end

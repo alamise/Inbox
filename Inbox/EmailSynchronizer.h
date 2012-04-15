@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Synchronizer.h"
-@class EmailAccountModel;
+@class EmailAccountModel,CTCoreAccount,NSManagedObjectID;
 @interface EmailSynchronizer : Synchronizer{
     EmailAccountModel* emailAccountModel;
+    CTCoreAccount* coreAccount;
+    NSManagedObjectID* emailAccountModelId;
 }
--(id)initWithAccount:(EmailAccountModel*)accountModel;
+-(id)initWithAccountId:(NSManagedObjectID*)accountId;
 @end

@@ -21,20 +21,27 @@
 #define ddLogLevel LOG_LEVEL_VERBOSE
 @implementation EmailSynchronizer
 
--(id)initWithAccount:(EmailAccountModel*)accountModel{
+-(id)initWithAccountId:(id)accountId{
     if (self = [super init]){
-        emailAccountModel = [accountModel retain];
+        emailAccountModelId = accountId;
     }
     return self;
 }
 
 -(void)dealloc{
-    [EmailAccountModel release];
+    [emailAccountModel release];
+    [emailAccountModelId release];
     [super dealloc];
 }
--(BOOL)updateLocalFolders:(CTCoreAccount*)account context:(NSManagedObjectContext*)context {
+
+-(BOOL)updateLocalFolders{
     DDLogVerbose(@"[%@] update local folders started",emailAccountModel.login);
     NSSet* folders = nil;
+    CTCoreAccount* account = [self account];
+    if (account==nil){
+        return false;
+    }
+    
     @try {
         folders = [account allFolders];
     }
@@ -43,7 +50,6 @@
         [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
         return false;
     }
-    
     NSMutableSet* decodedFolders = [NSMutableSet setWithCapacity:[folders count]];
     for (NSString* folderName in folders){
         [decodedFolders addObject:[self decodeImapString:folderName]];
@@ -122,7 +128,7 @@
     [disabledFolders release];
     [request release];
     DDLogVerbose(@"[%@] folders updated, saving context",emailAccountModel.login);
-    if (![self saveContext:context errorCode:EMAIL_FOLDERS_ERROR]){
+    if (![self saveContextWithError:EMAIL_FOLDERS_ERROR]){
         DDLogError(@"[%@] Error when saving the context",emailAccountModel.login);
         return false;
     }else{
@@ -135,30 +141,39 @@
  * Commit local changes to the server.
  * If a message is not found on the server, it's deleted locally.
  */
--(BOOL)updateRemoteMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
+-(BOOL)updateRemoteMessages{
+    DDLogVerbose(@"[%@] committing local changes",emailAccountModel.login);
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folder.path != serverPath"];
     [request setPredicate:predicate];
     NSError* fetchError = nil;
-    NSArray* models = [context executeFetchRequest:request error:&fetchError];
+    NSArray* models = [self.context executeFetchRequest:request error:&fetchError];
     [request release];
     if (fetchError){
+        DDLogError(@"[%@] Error when getting the modified messages ",emailAccountModel.login);
         [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]]];
         [request release];
         return false;
     }
     CTCoreFolder* folder = nil;
     BOOL skip;
+    CTCoreAccount* account = nil;
     for (EmailModel* email in models){
         skip = false;
         if (folder==nil || ![folder.path isEqualToString:email.folder.path]){
+            [folder disconnect];
             @try {
+                account = [self account];
+                if (account == nil){
+                    return false;
+                }
                 folder = [account folderWithPath:email.serverPath];
             }
             @catch (NSException *exception) {
                 skip = true;
+                DDLogVerbose(@"[%@] error when getting the matching folder on the server, skipping this email",emailAccountModel.login);
             }
         }
         
@@ -169,20 +184,24 @@
             }
             @catch (NSException *exception) {
                 skip = true;
+                DDLogVerbose(@"[%@] error when getting the matching message in the folder, skipping this email",emailAccountModel.login);
             }
         }
         
         // If there were an issue finding the email on the server, the message is deleted.
         if (skip){
+            DDLogVerbose(@"[%@] The current message is skipped : deleting it locally",emailAccountModel.login);
             @try {
-                [context deleteObject:email];
+                [self.context deleteObject:email];
             }
             @catch (NSException *exception) {
+                DDLogError(@"[%@] Error when deleting the current email",emailAccountModel.login);
                 [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
                 [request release];
                 return false; 
             }
         }else{
+            DDLogVerbose(@"[%@] error when getting the matching folder on the server, skipping this email",emailAccountModel.login);
             @try {
                 [folder moveMessage:email.folder.path forMessage:message];
             }
@@ -197,7 +216,7 @@
     return true;
 }
 
--(BOOL)updateLocalMessages:(CTCoreAccount*)account context:(NSManagedObjectContext*)context{
+-(BOOL)updateLocalMessages{
     DDLogVerbose(@"[%@] Updating local messages",emailAccountModel.login);
     CTCoreFolder *currentFolder = nil;    
     NSSet* messages = nil;
@@ -234,14 +253,33 @@
     while ([folders count]!=0){
         DDLogVerbose(@"[%@] ---- loop(%d folders left) ----",emailAccountModel.login, [folders count]);
         @try {
+            CTCoreAccount* account = [self account];
+            if (account==nil){
+                return false;
+            }
+            
+            // Check this : http://github.com/mronge/MailCore/issues/2
+            [currentFolder disconnect];
             currentFolder = [account folderWithPath:((FolderModel*)[folders objectAtIndex:folderIndex]).path]; 
-            messages = [currentFolder messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
+            [currentFolder connect];
         }
         @catch (NSException *exception) {
             DDLogError(@"[%@] error when getting the current folder %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:folderIndex]).path);
             [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
             return false;
         }
+
+        @try {
+            NSLog(@"page: %d (%d %d)",page, page*pageSize+1, (page+1)*pageSize);
+
+            messages = [currentFolder messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
+        }
+        @catch (NSException *exception) {
+            DDLogError(@"[%@] error when getting the messages for %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:folderIndex]).path);
+            [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
+            return false;
+        }
+
         DDLogVerbose(@"[%@] Processing folder %@",emailAccountModel.login,currentFolder.path);
         
         for (CTCoreMessage* message in messages){
@@ -262,7 +300,7 @@
             }else{
                 DDLogVerbose(@"[%@] email does not exist, creating",emailAccountModel.login);
                 @try {
-                    emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
+                    emailModel = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:self.context];
                 }
                 @catch (NSException *exception) {
                     DDLogVerbose(@"[%@] error when creating the new email",emailAccountModel.login);
@@ -295,7 +333,7 @@
             [folders removeObject:[folders objectAtIndex:folderIndex]];
         }
         DDLogVerbose(@"[%@] saving the context",emailAccountModel.login);
-        if (![self saveContext:context errorCode:EMAIL_MESSAGES_ERROR]){
+        if (![self saveContextWithError:EMAIL_MESSAGES_ERROR]){
             DDLogError(@"[%@] error when saving the context",emailAccountModel.login);
             return false;
         }
@@ -306,54 +344,47 @@
         DDLogVerbose(@"[%@] new index = %d",emailAccountModel.login, folderIndex);
         /* Increase the current page when we loaded this one for all the folders */
         if (folderIndex==0){
-            DDLogVerbose(@"[%@] switching to page %d ",emailAccountModel.login,page);
             page++;
+            DDLogVerbose(@"[%@] switching to page %d ",emailAccountModel.login,page);
+            
         }
     }
     [request release];
     return true;
 }
 
+-(CTCoreAccount*)account{
+    if (coreAccount==nil){
+        coreAccount = [[CTCoreAccount alloc] init];
+    }
+    if (![coreAccount isConnected]){
+        @try {
+            [coreAccount connectToServer:emailAccountModel.serverAddr port:[emailAccountModel.port intValue] connectionType:[emailAccountModel.conType intValue] authType:[emailAccountModel.authType intValue] login:emailAccountModel.login password:emailAccountModel.password];            
+        }
+        @catch (NSException *exception) {
+            DDLogError(@"[%@] Connection to account failed",emailAccountModel.login);
+            [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
+            return nil;
+        }
+    }
+    return coreAccount;
+}
 
 -(BOOL)sync{
+    emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
     DDLogVerbose(@"[%@] Sync started for account",emailAccountModel.login);
-    __block NSManagedObjectContext* context = nil;
-    __block CTCoreAccount* account = nil;
-    context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
-    account = [[CTCoreAccount alloc] init];
-    void (^finalize)(void) = ^{
-        [context release];
-        context = nil;
-        [account release];
-        account = nil;
-    };
-    DDLogVerbose(@"[%@] Connection to account...",emailAccountModel.login);
-    @try {
-        [account connectToServer:emailAccountModel.serverAddr port:[emailAccountModel.port intValue] connectionType:[emailAccountModel.conType intValue] authType:[emailAccountModel.authType intValue] login:emailAccountModel.login password:emailAccountModel.password];
-    }
-    @catch (NSException *exception) {
-        DDLogError(@"[%@] Connection to account failed",emailAccountModel.login);
-        [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
-        finalize();
-        return false;
-    }
-    DDLogVerbose(@"[%@] Connected to account",emailAccountModel.login);
-    if (![self updateLocalFolders:account context:context] || ![self updateRemoteMessages:account context:context] || ![self updateLocalMessages:account context:context]){
-        finalize();
+    if (![self updateLocalFolders] || ![self updateRemoteMessages] || ![self updateLocalMessages]){
         return false;
     }
     DDLogVerbose(@"[%@] Sync done, saving context",emailAccountModel.login);
-    if ([self saveContext:context errorCode:EMAIL_ERROR]){
+    if ([self saveContextWithError:EMAIL_ERROR]){
         DDLogVerbose(@"Context saved, DONE!");
-        finalize();
         return true;
     }else{
         DDLogError(@"[%@] Error when saving the context",emailAccountModel.login);
-        finalize();
         return false;
     }
-    
-
+    [emailAccountModel release];
 }
 
 @end

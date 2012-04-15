@@ -49,7 +49,7 @@
     }
 
     for (EmailAccountModel* account in emailsModels){
-        EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccount:account];
+        EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
     

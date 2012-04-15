@@ -14,10 +14,11 @@
 #define INTERNAL_SYNC_FAILED @"int_sync_failed"
 #define INTERNAL_SYNC_DONE @"int_sync_done"
 #define STATE_UPDATED @"state_updated"
-
+@class NSManagedObjectContext;
 @interface Synchronizer : NSObject{
     BOOL shouldStopAsap;
     NSLock* syncLock;
+    NSManagedObjectContext* context;
 }
 -(BOOL)startSync;
 -(void)stopAsap;
@@ -27,6 +28,7 @@
 -(void)onStateChanged;
 -(void)onError:(NSError*)error;
 -(NSString*)decodeImapString:(NSString*)input;
--(BOOL)saveContext:(NSManagedObjectContext*)context errorCode:(int)errorCode;
+-(BOOL)saveContextWithError:(int)errorCode;
 @property(readonly,assign) BOOL shouldStopAsap;
+@property(nonatomic,retain) NSManagedObjectContext* context;
 @end
