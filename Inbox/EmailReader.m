@@ -46,7 +46,6 @@
     [request setPredicate:predicate];
     
     int count = [context countForFetchRequest:request error:error];
-    [context release];
     [request release];
     if (error){
         return -1;
@@ -58,7 +57,7 @@
 
 -(NSArray*)foldersForAccount:(NSManagedObjectID*)accountId error:(NSError**)error{
     error = nil;
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
+    NSManagedObjectContext* context = [self newContext];    
     EmailAccountModel* account = (EmailAccountModel*) [context objectWithID:accountId];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -70,7 +69,6 @@
     [request setPredicate:predicate];
     
     NSArray* folders = [context executeFetchRequest:request error:error];
-    [context release];
     [request release];
     if (error){
         return [NSArray array];
@@ -98,20 +96,19 @@
 
 -(NSArray*)inboxes:(NSError**)error{
     *error = nil;
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
+    NSManagedObjectContext* context = [self newContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", @"INBOX"];          
     [request setPredicate:predicate];
     NSArray* inboxes = [context executeFetchRequest:request error:error];
-    [context release];
     [request release];
     return inboxes;
 }
 
 -(NSManagedObjectID*)lastEmailFromInbox:(NSError**)error{
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
+    NSManagedObjectContext* context = [self newContext];    
     NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
     NSManagedObjectID* returnValue = nil;
     for (NSManagedObject* obj in [self inboxes:error]){
@@ -131,7 +128,7 @@
 
 -(NSManagedObjectID*)lastEmailFromFolder:(NSManagedObjectID *)folderId error:(NSError**)error{
     *error = nil;
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];    
+    NSManagedObjectContext* context = [self newContext];    
     FolderModel* folder = (FolderModel*)[context objectWithID:folderId];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
@@ -144,7 +141,6 @@
     [request setPropertiesToFetch:[entity properties]];
     
     NSArray* objects = [context executeFetchRequest:request error:error];
-    [context release];
     [request release];
     if (error){
         return nil;
@@ -159,7 +155,7 @@
 }
 
 -(void)fetchEmailBody:(NSManagedObjectID*)emailId error:(NSError**)error{
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    NSManagedObjectContext* context = [self newContext];
     EmailModel* email = (EmailModel*)[context objectWithID:emailId];
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {

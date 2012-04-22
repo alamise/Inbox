@@ -22,22 +22,25 @@
 }
 
 -(void)dealloc{
-    [context release];
+    self.context = nil;
     [syncLock release];
     [super dealloc];
 }
 
 -(void)onStateChanged{
-    [self executeOnMainQueueAsync:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];
-    }];
+    if (!self.shouldStopAsap){
+        [self executeOnMainQueueAsync:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];
+        }];
+    }
 }
 
 -(void)onError:(NSError*)error{
-    NSLog(@"%@",[error userInfo]);
-    [self executeOnMainQueueSync:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
-    }];
+    if (!self.shouldStopAsap){
+        [self executeOnMainQueueSync:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
+        }];
+    }
 }
 
 -(NSString*)decodeImapString:(NSString*)input{
@@ -74,9 +77,11 @@
     self.context = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:INTERNAL_SYNC_FAILED object:nil];
     [syncLock unlock];
-    [self executeOnMainQueueSync:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_DONE object:nil];
-    }];
+    if (!self.shouldStopAsap){
+        [self executeOnMainQueueSync:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_DONE object:nil];
+        }];
+    }
     return returnValue;
 }
 
@@ -92,7 +97,7 @@
 -(BOOL)saveContextWithError:(int)errorCode{
     NSError* error = nil;
     [self.context save:&error];
-    if (error){
+    if (error && !self.shouldStopAsap){
         [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:errorCode userInfo:[NSDictionary dictionaryWithObject:error forKey:ROOT_ERROR]]];
         return false;
     }else{

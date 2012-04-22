@@ -35,15 +35,13 @@
     }
     [synchronizers removeAllObjects];
     
-    NSManagedObjectContext* context = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
     NSError* fetchError = nil;
     NSArray* emailsModels = [context executeFetchRequest:request error:&fetchError];
     if (fetchError){
-        
-        [context release];
         [request release];
         return false;
     }
@@ -52,8 +50,6 @@
         EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
-    
-    [context release];
     [request release];
     return true;
 }
@@ -69,7 +65,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
     for (Synchronizer* sync in synchronizers){
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [sync retain];
             [sync startSync];
+            [sync release];
         });
     }
 }
@@ -82,8 +80,6 @@
     [synchronizers removeAllObjects];
 }
 
-
-
 -(void)onSyncDone{
     @synchronized(self){
         runningSync--;
@@ -92,7 +88,6 @@
                 [synchronizers removeAllObjects];
                 [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
             }];
-
         }
     }
 }

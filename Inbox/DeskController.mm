@@ -223,7 +223,7 @@
     account.conType = [NSNumber numberWithInt:CONNECTION_TYPE_TLS];
     account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
     account.login = @"sim.w80@gmail.com";
-    account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
+    account.password = @"Picardia80!";//[[PrivateValues sharedInstance] myPassword]; // to test the sync
     [context save:nil];
     [account release];
     [self.modelsManager startSync];

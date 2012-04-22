@@ -72,13 +72,13 @@
                                 nil];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;
     // Delete local folders that does not exist remotely
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(path IN %@) OR (path IN %@)", folders,disabledFolders];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(NOT(path IN %@) OR (path IN %@)) AND account = %@", folders,disabledFolders,emailAccountModel];          
     [request setPredicate:predicate];
     NSError* fetchError = nil;
-    NSArray* foldersToDelete = [context executeFetchRequest:request error:&fetchError];
+    NSArray* foldersToDelete = [self.context executeFetchRequest:request error:&fetchError];
         DDLogVerbose(@"[%@] Deleting folders that does not exist on the server",emailAccountModel.login);
     if (fetchError){
         DDLogError(@"[%@] Error when getting the folders to delete list",emailAccountModel.login);
@@ -95,7 +95,7 @@
             return true;
         }
         @try {
-            [context deleteObject:folder];
+            [self.context deleteObject:folder];
         }
         @catch (NSException *exception) {
             DDLogError(@"[%@] error when deleting folders",emailAccountModel.login);
@@ -112,11 +112,11 @@
         }
         if (![disabledFolders containsObject:path]){
             DDLogVerbose(@"[%@] processing folder %@",emailAccountModel.login, path);
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@", path];          
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"path = %@ AND account=%@", path, emailAccountModel];          
             [request setPredicate:predicate];
             
             NSError* fetchError = nil;
-            int folders = [context countForFetchRequest:request error:&fetchError];
+            int folders = [self.context countForFetchRequest:request error:&fetchError];
             if (fetchError){
                 DDLogError(@"[%@] Error when testing if the folder %@ exists",emailAccountModel.login, path);
                 [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]]];
@@ -169,7 +169,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folder.path != serverPath"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder.path != serverPath) AND account = %@",emailAccountModel];
     [request setPredicate:predicate];
     NSError* fetchError = nil;
     NSArray* models = [self.context executeFetchRequest:request error:&fetchError];
@@ -250,18 +250,15 @@
         return true;
     }
     DDLogVerbose(@"[%@] Updating local messages",emailAccountModel.login);
-    CTCoreFolder *currentFolder = nil;    
-    NSSet* messages = nil;
-    int page = 0;
-    int pageSize = 20;
+
     
     /* get the folders model */
     NSFetchRequest *foldersRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *folderDescription = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    NSEntityDescription *folderDescription = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
     foldersRequest.entity =folderDescription;
     
     NSError* fetchError = nil;
-    NSMutableArray* folders = [NSMutableArray arrayWithArray:[context executeFetchRequest:foldersRequest error:&fetchError]];
+    NSMutableArray* folders = [NSMutableArray arrayWithArray:[self.context executeFetchRequest:foldersRequest error:&fetchError]];
     DDLogVerbose(@"[%@] Getting the folders",emailAccountModel.login);
     if (fetchError){
         DDLogError(@"[%@] Error when getting folders",emailAccountModel.login);
@@ -273,18 +270,30 @@
     
     /* Prepare the request used to test if a message is already is the base */
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [sortDescriptor release];
+
+    /* Prepare the request to get the folder corresponding to a message path*/
+    NSFetchRequest *folderRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *folderEntity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
+    folderRequest.entity = folderEntity;
+    [folderRequest setFetchLimit:1];
+
+    
     
     if (self.shouldStopAsap){
         return true;
     }
-    int folderIndex = 0;
     DDLogVerbose(@"[%@] Syncing started",emailAccountModel.login);
     while ([folders count]!=0){
+        NSSet* messagesBuffer = nil;
+        int page = 0;
+        int pageSize = 20;
+        int currentFolderIndex = 0;
+        CTCoreFolder *currentCoreFolder = nil;
         if (self.shouldStopAsap){
             return true;
         }
@@ -296,12 +305,12 @@
             }
             
             // Check this : http://github.com/mronge/MailCore/issues/2
-            [currentFolder disconnect];
-            currentFolder = [account folderWithPath:((FolderModel*)[folders objectAtIndex:folderIndex]).path]; 
-            [currentFolder connect];
+            [currentCoreFolder disconnect];
+            currentCoreFolder = [account folderWithPath:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).path]; 
+            [currentCoreFolder connect];
         }
         @catch (NSException *exception) {
-            DDLogError(@"[%@] error when getting the current folder %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:folderIndex]).path);
+            DDLogError(@"[%@] error when getting the current folder %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:currentFolderIndex]).path);
             [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
             return false;
         }
@@ -311,27 +320,50 @@
         @try {
             NSLog(@"page: %d (%d %d)",page, page*pageSize+1, (page+1)*pageSize);
 
-            messages = [currentFolder messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
+            messagesBuffer = [currentCoreFolder messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
         }
         @catch (NSException *exception) {
-            DDLogError(@"[%@] error when getting the messages for %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:folderIndex]).path);
+            DDLogError(@"[%@] error when getting the messages for %@",emailAccountModel.login, ((FolderModel*)[folders objectAtIndex:currentFolderIndex]).path);
             [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
             return false;
         }
 
-        DDLogVerbose(@"[%@] Processing folder %@",emailAccountModel.login,currentFolder.path);
+        DDLogVerbose(@"[%@] Processing folder %@",emailAccountModel.login,currentCoreFolder.path);
         if (self.shouldStopAsap){
             return true;
         }
-        for (CTCoreMessage* message in messages){
+        for (CTCoreMessage* message in messagesBuffer){
+            FolderModel* currentFolderModel = nil;
             if (self.shouldStopAsap){
                 return true;
             }
+            
+            // get the email's folder model            
+            
+            NSPredicate *folderPredicate = [NSPredicate predicateWithFormat:@"path = %@ AND account = %@",[self decodeImapString:currentCoreFolder.path],emailAccountModel];
+            [folderRequest setPredicate:folderPredicate];
+            NSError* fetchFolderError = nil;
+            NSArray* folders = [self.context executeFetchRequest:request error:&fetchFolderError];
+            if (fetchFolderError != nil){
+                DDLogError(@"[%@] Can't get the corresponding folder",emailAccountModel.login);
+                [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]]];
+                [request release];
+                return false;
+            }else if ([folders count]!= 1){
+                DDLogError(@"[%@] Can't get the corresponding folder",emailAccountModel.login);
+                [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:nil]];
+                [request release];
+                return false;
+            }
+            currentFolderModel = [folders lastObject];
+            
+            
+            
             EmailModel* emailModel=nil;
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@ AND folder.path = %@", message.uid,currentFolder.path];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@ AND folder = %@", message.uid,currentCoreFolder];
             [request setPredicate:predicate];
             NSError* fetchError = nil;
-            NSArray* objects = [context executeFetchRequest:request error:&fetchError];
+            NSArray* objects = [self.context executeFetchRequest:request error:&fetchError];
             if (fetchError){
                 DDLogError(@"[%@] Can't test if the message already exist",emailAccountModel.login);
                 [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]]];
@@ -362,23 +394,22 @@
             }else{
                 from = message.sender;
             }
-            
             emailModel.senderName = from.name;
             emailModel.senderEmail = from.email;
             emailModel.subject=message.subject;
             emailModel.sentDate = message.sentDateGMT;
             emailModel.uid = message.uid;
-            emailModel.serverPath = ((FolderModel*)[folders objectAtIndex:folderIndex]).path;
-            emailModel.folder = [folders objectAtIndex:folderIndex];
+            emailModel.serverPath = currentCoreFolder.path;
+            emailModel.folder = currentFolderModel;
         }
         
         if (self.shouldStopAsap){
             return true;
         }
         /* If ther eis no more messages in a folder. We remove it from the list */
-        if ([messages count]==0){
+        if ([messagesBuffer count]==0){
             DDLogVerbose(@"[%@] no more emails in that folder, removing it from the list",emailAccountModel.login);
-            [folders removeObject:[folders objectAtIndex:folderIndex]];
+            [folders removeObject:[folders objectAtIndex:currentFolderIndex]];
         }
         DDLogVerbose(@"[%@] saving the context",emailAccountModel.login);
         if (![self saveContextWithError:EMAIL_MESSAGES_ERROR]){
@@ -388,10 +419,10 @@
         
         [self onStateChanged];
         /* process the following 20 mails of the next folder */
-        folderIndex = (folderIndex+1) % [folders count];
-        DDLogVerbose(@"[%@] new index = %d",emailAccountModel.login, folderIndex);
+        currentFolderIndex = (currentFolderIndex+1) % [folders count];
+        DDLogVerbose(@"[%@] new index = %d",emailAccountModel.login, currentFolderIndex);
         /* Increase the current page when we loaded this one for all the folders */
-        if (folderIndex==0){
+        if (currentFolderIndex==0){
             page++;
             DDLogVerbose(@"[%@] switching to page %d ",emailAccountModel.login,page);
             
@@ -436,6 +467,7 @@
         return false;
     }
     [emailAccountModel release];
+    emailAccountModel = nil;
 }
 
 @end
