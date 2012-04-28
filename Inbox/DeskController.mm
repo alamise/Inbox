@@ -78,8 +78,8 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
--(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId{
-    [[EmailReader sharedInstance] moveEmail:emailId toFolder:folderId error:nil];
+-(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{
+    [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
@@ -101,14 +101,14 @@
     [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES]; 
 }
 
--(void)fetchEmailBody:(NSManagedObjectID*)emailId{
+-(void)fetchEmailBody:(EmailModel*)email{
     NSError* error = nil;
-    [[EmailReader sharedInstance] fetchEmailBody:emailId error:&error];
+    [[EmailReader sharedInstance] fetchEmailBody:email error:&error];
     if (!error){
-        [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES];
     }else{
         ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-        errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:emailId] autorelease];
+        errorController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchEmailBody:) object:email] autorelease];
         UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
         [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
         navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
@@ -153,9 +153,9 @@
 
     if ([layer mailsOnSceneCount]!=0) return;
     
-    NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
+    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
     
-    if (nextEmailId==nil){
+    if (nextEmail==nil){
         if (isSyncing){
             isWaiting = YES;
             [self performSelectorOnMainThread:@selector(showLoadingHud) withObject:nil waitUntilDone:YES];    
@@ -173,14 +173,12 @@
             [self presentModalViewController:navCtr animated:YES];
         }
     }else{
-        EmailModel* nextEmail = (EmailModel*)[context objectWithID:nextEmailId];
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-        NSManagedObjectID* nextEmailId = [[EmailReader sharedInstance] lastEmailFromInbox:&error];
         [layer putEmail:nextEmail];
-        if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]]){
+        if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]]){
             [layer foldersHidden:YES animated:YES];
-            [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account.objectID error:&error]];
+            [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
             [layer foldersHidden:NO animated:YES];
         }
 
@@ -223,7 +221,7 @@
     account.conType = [NSNumber numberWithInt:CONNECTION_TYPE_TLS];
     account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
     account.login = @"sim.w80@gmail.com";
-    account.password = @"Picardia80!";//[[PrivateValues sharedInstance] myPassword]; // to test the sync
+    account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
     [context save:nil];
     [account release];
     [self.modelsManager startSync];

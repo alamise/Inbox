@@ -9,14 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "Reader.h"
 #import "errorCodes.h"
+@class  EmailModel,FolderModel,EmailAccountModel;
 @interface EmailReader : Reader
 +(EmailReader*)sharedInstance;
 
-- (void) fetchEmailBody:(NSManagedObjectID*)emailId error:(NSError**)error;
--(NSManagedObjectID*)lastEmailFromInbox:(NSError**)error;
-- (NSManagedObjectID*) lastEmailFromFolder:(NSManagedObjectID *)folderId error:(NSError**)error;
-- (void) moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID *)folderId error:(NSError**)error;
-- (NSArray*) foldersForAccount:(NSManagedObjectID*)accountId error:(NSError**)error;
+- (void) fetchEmailBody:(EmailModel*)emailId error:(NSError**)error;
+-(EmailModel*)lastEmailFromInbox:(NSError**)error;
+- (EmailModel*) lastEmailFromFolder:(FolderModel *)folderId error:(NSError**)error;
+- (void) moveEmail:(EmailModel*)emailId toFolder:(FolderModel *)folderId error:(NSError**)error;
+- (NSArray*) foldersForAccount:(EmailAccountModel*)accountId error:(NSError**)error;
 -(int)emailsCountInInboxes:(NSError**)error;
-- (int) emailsCountInFolder:(NSManagedObjectID*)folderId error:(NSError**)error;
+- (int) emailsCountInFolder:(FolderModel*)folderId error:(NSError**)error;
 @end

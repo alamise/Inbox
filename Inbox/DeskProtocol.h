@@ -23,9 +23,9 @@
  */
 #import <CoreData/CoreData.h>
 
-@class EmailModel,GmailModel;
+@class EmailModel,FolderModel;
 @protocol DeskProtocol <NSObject>
--(void)moveEmail:(NSManagedObjectID*)emailId toFolder:(NSManagedObjectID*)folderId;
-    -(void)emailTouched:(NSManagedObjectID*)email;
+    -(void)moveEmail:(EmailModel*)emailId toFolder:(FolderModel*)folderId;
+    -(void)emailTouched:(EmailModel*)email;
     -(void)openSettings;
 @end
