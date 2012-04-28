@@ -24,11 +24,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SWTableViewCell.h"
-@class CCLabelTTF;
+@class CCLabelTTF,FolderModel;
 @interface DropZoneNode : SWTableViewCell{
     CCLabelTTF* label;
     BOOL drawMe;
-    NSString* folderPath;
+    FolderModel* folder;
 }
-@property(nonatomic,retain)NSString* folderPath;
+@property(nonatomic,retain) FolderModel* folder;
 @end

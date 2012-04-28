@@ -35,13 +35,13 @@
 
 @implementation EmailNode
 
-@synthesize emailId,didMoved,isAppearing,isDisappearing;
+@synthesize email,didMoved,isAppearing,isDisappearing;
 
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
     self = [super init];
     if (self) {
         world = w;
-        self.emailId = [model objectID];
+        self.email = model;
         [self draw:model.subject senderName:model.senderName];
 
         // Body
@@ -106,7 +106,7 @@
 -(void)dealloc{
     body = nil;
     world = nil;
-    self.emailId = nil;
+    self.email = nil;
     [title release];
     [content release];
     [super dealloc];

@@ -19,7 +19,7 @@ static PrivateValues* instance;
 
 -(id)init{
     if (self = [super init]){
-        values = [[NSDictionary dictionaryWithContentsOfFile:@"private.plist"] retain];
+        values = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"private" ofType:@"plist"]] retain];
     }
     return self;
 }

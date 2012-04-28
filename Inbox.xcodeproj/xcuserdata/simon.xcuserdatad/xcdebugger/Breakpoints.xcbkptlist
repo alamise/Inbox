@@ -133,11 +133,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "356216185.99289"
+         timestampString = "357322073.931459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "240"
-         endingLineNumber = "240"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
          landmarkName = "-presentErrorView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356194448.183596"
+         timestampString = "357318378.905401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
          landmarkName = "-updateLocalFolders"
          landmarkType = "5">
       </FileBreakpoint>
@@ -280,38 +280,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "356216185.99289"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "-nextStep"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "356216185.99289"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
-         landmarkName = "-stateChanged"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356216384.603109"
+         timestampString = "357318378.905401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
          landmarkName = "-updateLocalFolders"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356216516.042147"
+         timestampString = "357318378.905401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
          landmarkName = "-updateLocalFolders"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,24 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356216534.633572"
+         timestampString = "357318378.905401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "-updateLocalFolders"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356216685.284916"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-updateLocalFolders"
          landmarkType = "5">
       </FileBreakpoint>
@@ -384,26 +345,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "356564642.014785"
+         filePath = "Inbox/EmailSynchronizer.m"
+         timestampString = "357318378.905401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
-         landmarkName = "-nextStep"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailReader.m"
-         timestampString = "356564754.596216"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "29"
-         endingLineNumber = "29"
-         landmarkName = "-emailsCountInInboxes:"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
+         landmarkName = "-updateLocalFolders"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -411,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356787007.091627"
+         timestampString = "357318991.814891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "424"
+         endingLineNumber = "424"
          landmarkName = "-updateLocalMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,12 +372,77 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "356787051.588922"
+         timestampString = "357318378.905401"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-updateLocalFolders"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/EmailSynchronizer.m"
+         timestampString = "357318378.905401"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-updateLocalFolders"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/EmailSynchronizer.m"
+         timestampString = "357319538.872013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
+         landmarkName = "-updateLocalMessages"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/EmailSynchronizer.m"
+         timestampString = "357321279.206129"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "395"
+         endingLineNumber = "395"
+         landmarkName = "-updateLocalMessages"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/EmailSynchronizer.m"
+         timestampString = "357321306.212805"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "396"
+         endingLineNumber = "396"
+         landmarkName = "-updateLocalMessages"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/EmailReader.m"
+         timestampString = "357324000.211169"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "120"
          endingLineNumber = "120"
-         landmarkName = "-updateLocalFolders"
+         landmarkName = "-lastEmailFromFolder:error:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

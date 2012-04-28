@@ -24,18 +24,18 @@
 
 #import "DropZoneNode.h"
 #import "cocos2d.h"
-
+#import "FolderModel.h"
 @interface DropZoneNode()
 @property(nonatomic,retain) CCLabelTTF* label;
 -(NSString*)readableLabelForPath:(NSString*)path;
 @end
 
 @implementation DropZoneNode
-@synthesize label,folderPath;
+@synthesize label,folder;
 -(id)init{
     if (self = [super init]){
         drawMe = true;
-        self.folderPath=@"";
+        self.folder=nil;
     }
     return self;
 }
@@ -55,7 +55,7 @@
         sprite.position=CGPointMake(20,150);
         [self addChild:sprite];
         
-        label = [[CCLabelTTF labelWithString:[self readableLabelForPath:self.folderPath] dimensions:CGSizeMake(185, 90) alignment:UITextAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:30] retain];
+        label = [[CCLabelTTF labelWithString:[self readableLabelForPath:self.folder.path] dimensions:CGSizeMake(185, 90) alignment:UITextAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:30] retain];
         label.position = CGPointMake(28, 145);
         label.color=ccc3(0, 0, 0);
         label.anchorPoint=CGPointMake(0, 0);

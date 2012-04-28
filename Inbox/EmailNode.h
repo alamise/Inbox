@@ -28,14 +28,14 @@
 
 @class CCLabelTTF,EmailModel;
 @interface EmailNode : CCNode{
-    NSManagedObjectID* emailId;
+    EmailModel* email;
     CCLabelTTF *title;
     CCLabelTTF *content;
     BOOL didMoved;
     b2Body* body;
     b2World* world;
 }
-@property(nonatomic,retain) NSManagedObjectID* emailId;
+@property(nonatomic,retain) EmailModel* email;
 @property(nonatomic,assign) BOOL didMoved;
 @property(nonatomic,assign) BOOL isAppearing;
 @property(nonatomic,assign) BOOL isDisappearing;

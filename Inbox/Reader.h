@@ -11,9 +11,10 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 
-@interface Reader : NSObject
-
--(NSManagedObjectContext*)newContext;
+@interface Reader : NSObject{
+    NSManagedObjectContext* coreDataContext;
+}
 +(void)setInstance:(Reader*)ins;
 +(Reader*)getInstance;
+-(NSManagedObjectContext*)sharedContext;
 @end

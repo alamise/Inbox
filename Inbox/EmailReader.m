@@ -35,7 +35,7 @@
 
 -(int)emailsCountInFolder:(FolderModel*)folder error:(NSError**)error{
     error = nil;
-    NSManagedObjectContext* context = [self newContext];    
+    NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -54,7 +54,7 @@
 
 -(NSArray*)foldersForAccount:(EmailAccountModel*)account error:(NSError**)error{
     error = nil;
-    NSManagedObjectContext* context = [self newContext];    
+    NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -79,17 +79,15 @@
 
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
     if ([folder.account isEqual:email.folder.account]){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
     email.folder = folder;
-    [context save:error];
 }
 
 -(NSArray*)inboxes:(NSError**)error{
     *error = nil;
-    NSManagedObjectContext* context = [self newContext];    
+    NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -101,11 +99,11 @@
 }
 
 -(EmailModel*)lastEmailFromInbox:(NSError**)error{
-    NSManagedObjectContext* context = [self newContext];    
+    NSManagedObjectContext* context = [self sharedContext];    
     NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
     EmailModel* returnValue = nil;
-    for (NSManagedObject* obj in [self inboxes:error]){
-        EmailModel* lastEmail = [self lastEmailFromFolder:obj.objectID error:error];
+    for (FolderModel* obj in [self inboxes:error]){
+        EmailModel* lastEmail = [self lastEmailFromFolder:obj error:error];
         if (*error){
             return nil;
         }
@@ -121,11 +119,11 @@
 
 -(EmailModel*)lastEmailFromFolder:(FolderModel *)folder error:(NSError**)error{
     *error = nil;
-    NSManagedObjectContext* context = [self newContext];    
+    NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder.path = %@)", folder.path, folder.path];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folder = %@", folder];          
     [request setPredicate:predicate];
     NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];
@@ -134,7 +132,7 @@
     
     NSArray* objects = [context executeFetchRequest:request error:error];
     [request release];
-    if (error){
+    if (*error){
         return nil;
     }else{
         if ([objects count]>0){
@@ -147,7 +145,7 @@
 }
 
 -(void)fetchEmailBody:(EmailModel*)email error:(NSError**)error{
-    NSManagedObjectContext* context = [self newContext];
+    NSManagedObjectContext* context = [self sharedContext];
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {
         [account connectToServer:email.folder.account.serverAddr port:[email.folder.account.port intValue] connectionType:[email.folder.account.conType  intValue] authType:[email.folder.account.authType intValue] login:email.folder.account.login password:email.folder.account.password];

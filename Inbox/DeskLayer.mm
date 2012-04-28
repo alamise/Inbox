@@ -194,7 +194,7 @@ enum {
         return;
     }
     if(!self.draggedNode.didMoved){
-        [delegate emailTouched:self.draggedNode.emailId];
+        [delegate emailTouched:self.draggedNode.email];
         return;
     }
     CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
@@ -202,7 +202,7 @@ enum {
     int cellIndex = [table cellIndexAt:newLocation] ;
     if (cellIndex!=-1){
         FolderModel* folder = [self.folders objectAtIndex:cellIndex];
-        [delegate moveEmail:self.draggedNode.emailId toFolder:folder.objectID];
+        [delegate moveEmail:self.draggedNode.email toFolder:folder];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
     }/*else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
@@ -352,23 +352,10 @@ enum {
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
     
     if (folders){
-        NSString* folderPath = [self.folders objectAtIndex:idx];
-        node.folderPath=folderPath;
+        FolderModel* folder = [self.folders objectAtIndex:idx];
+        node.folder = folder;
     }else{
-        switch (idx) {
-            case 0:
-                node.folderPath=@"Archive";
-                break;
-            case 1:
-                node.folderPath=@"Starred";
-                break;
-            case 2:
-                node.folderPath=@"Important";
-                break;
-            default:
-                break;
-        }
-
+        node.folder =  nil; 
     }
     return node;
 }

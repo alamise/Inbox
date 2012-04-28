@@ -149,7 +149,6 @@
     [layer progressIndicatorHidden:NO animated:YES];
     
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
-    return;
 
     if ([layer mailsOnSceneCount]!=0) return;
     
