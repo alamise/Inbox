@@ -437,12 +437,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailReader.m"
-         timestampString = "357324000.211169"
+         timestampString = "357325149.60675"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "120"
-         endingLineNumber = "120"
-         landmarkName = "-lastEmailFromFolder:error:"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-moveEmail:toFolder:error:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskController.mm"
+         timestampString = "357325747.483492"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "-nextStep"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -276,7 +276,13 @@
     int page = 0;
     int pageSize = 20;
     CTCoreFolder *currentCoreFolder = nil;
+    int updateRemoteCounter = 0;
     while ([folders count]!=0){
+        if (updateRemoteCounter++%30 == 0){
+            if (![self updateRemoteMessages]){/* This can take a long time! We should update the remote messages sometimes */
+                return false;
+            }
+        }
         NSSet* messagesBuffer = nil;
         if (self.shouldStopAsap){
             return true;

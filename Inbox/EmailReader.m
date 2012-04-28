@@ -79,7 +79,7 @@
 
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
-    if ([folder.account isEqual:email.folder.account]){
+    if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
     email.folder = folder;
@@ -128,7 +128,7 @@
     NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];
     [sortBySentDate release];
-    [request setPropertiesToFetch:[entity properties]];
+    //[request setPropertiesToFetch:[entity properties]];
     
     NSArray* objects = [context executeFetchRequest:request error:error];
     [request release];

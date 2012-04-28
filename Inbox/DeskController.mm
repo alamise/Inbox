@@ -176,7 +176,7 @@
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
         [layer putEmail:nextEmail];
         if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]]){
-            [layer foldersHidden:YES animated:YES];
+            [layer foldersHidden:YES animated:NO];
             [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
             [layer foldersHidden:NO animated:YES];
         }

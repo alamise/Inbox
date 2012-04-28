@@ -72,12 +72,12 @@
     }
 }
 
-
 -(void)abortSync{
     for (Synchronizer* sync in synchronizers){
         [sync stopAsap];
     }
     [synchronizers removeAllObjects];
+    runningSync = 0;
 }
 
 -(void)onSyncDone{
@@ -92,15 +92,20 @@
     }
 }
 
+
 -(void)onSyncFailed{
     for (Synchronizer* sync in synchronizers){
         [sync stopAsap];
     }
     [synchronizers removeAllObjects];
+    runningSync = 0;
     [self executeOnMainQueueSync:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
     }];
 }
 
+-(BOOL)isSyncing{
+    return runningSync == 0;
+}
 
 @end
