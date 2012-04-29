@@ -81,6 +81,7 @@
 		F47DBDCB153336E8008A5373 /* EmailAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DBDCA153336E6008A5373 /* EmailAccountModel.m */; };
 		F482021D14917FC800C0576C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F482021C14917FC800C0576C /* CoreData.framework */; };
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
+		F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = F48E5B45154D41E20016B34D /* InboxStack.mm */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
 		F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */; };
 		F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E28093153040640093C3F5 /* libsqlite3.0.dylib */; };
@@ -748,6 +749,8 @@
 		F47DBDCD15333B74008A5373 /* models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = models.h; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		F48E5B44154D41E10016B34D /* InboxStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxStack.h; sourceTree = "<group>"; };
+		F48E5B45154D41E20016B34D /* InboxStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InboxStack.mm; sourceTree = "<group>"; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsHelper.h; sourceTree = "<group>"; };
 		F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsHelper.m; sourceTree = "<group>"; };
@@ -1202,6 +1205,8 @@
 				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
 				F41E658914A9CFB700BA4712 /* EmailNode.h */,
 				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
+				F48E5B44154D41E10016B34D /* InboxStack.h */,
+				F48E5B45154D41E20016B34D /* InboxStack.mm */,
 			);
 			name = graphical;
 			sourceTree = "<group>";
@@ -1947,6 +1952,7 @@
 				F44B061315336E6D003B801D /* Reader.m in Sources */,
 				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
 				F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */,
+				F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

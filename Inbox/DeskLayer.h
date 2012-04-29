@@ -28,7 +28,7 @@
 #import "SWTableView.h"
 #import "GLES-Render.h"
 #import "ProgressIndicator.h"
-
+#import "InboxStack.h"
 @class EmailNode, EmailModel, SWTableView;
 
 @interface DeskLayer : CCLayer<SWTableViewDataSource>{
@@ -43,6 +43,9 @@
     ProgressIndicator* indicator;
     NSArray* folders;
     BOOL isActive;
+    
+    
+    InboxStack* inboxStack; 
 }
 @property(assign) BOOL isActive;
 @property(nonatomic,retain) NSArray* folders;

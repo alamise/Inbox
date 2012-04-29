@@ -57,6 +57,7 @@
         fixtureDef.density = 5.f;
         fixtureDef.friction = 5.f;
         fixtureDef.restitution = 1;
+        fixtureDef.filter.categoryBits = 0x000000;
         body->CreateFixture(&fixtureDef);
         self.scale=0;
         free(dynamicBox);

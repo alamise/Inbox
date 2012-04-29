@@ -33,6 +33,7 @@
 #import "FolderModel.h"
 #import "GameConfig.h"
 #import "ProgressIndicator.h"
+#import "InboxStack.h"
 #define ANIMATION_DELAY 0.2
 
 #define TOUCHES_DELAY 0.1
@@ -107,6 +108,11 @@ enum {
     }    
 }
 -(void) putEmail:(EmailModel*)model{
+    
+    
+    [draggableNodes addObject:[inboxStack addEmail:model]];
+    return;
+    
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(100/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
     bodyDef.linearVelocity=b2Vec2(20,0);
@@ -370,15 +376,20 @@ enum {
 }
 
 -(void)putInboxZone{
-    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];
-    if (sprite){
-        sprite.visible=true;        
-    }else{
-        sprite = [CCSprite spriteWithFile:@"inboxZone.png"];    
-        [self addChild:sprite z:0 tag:tagInboxSprite];
-    }
     CGSize windowSize = [CCDirector sharedDirector].winSize;    
-    sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
+    inboxStack = [[InboxStack alloc] initWithWorld:world];
+    inboxStack.position=CGPointMake(inboxStack.contentSize.width/2, windowSize.height/2);
+    [self addChild:inboxStack z:0 tag:tagInboxSprite];
+    return;
+//    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];
+//    if (sprite){
+//        sprite.visible=true;        
+//    }else{
+//        sprite = [CCSprite spriteWithFile:@"inboxZone.png"];    
+//        [self addChild:sprite z:0 tag:tagInboxSprite];
+//    }
+//    CGSize windowSize = [CCDirector sharedDirector].winSize;    
+//    sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
 }
 
 -(int)mailsOnSceneCount{
