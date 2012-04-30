@@ -29,6 +29,11 @@
 #import "GLES-Render.h"
 #import "ProgressIndicator.h"
 #import "InboxStack.h"
+
+#define EMAIL_CATEGORY 0x0001
+#define GROUND_CATEGORY 0x0002
+
+#define EMAIL_MASK GROUND_CATEGORY
 @class EmailNode, EmailModel, SWTableView;
 
 @interface DeskLayer : CCLayer<SWTableViewDataSource>{
@@ -44,11 +49,12 @@
     NSArray* folders;
     BOOL isActive;
     
-    
+    int lastTopIndex;
     InboxStack* inboxStack; 
 }
 @property(assign) BOOL isActive;
 @property(nonatomic,retain) NSArray* folders;
+
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
 -(void) checkNodesCoords;

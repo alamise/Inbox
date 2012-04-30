@@ -27,6 +27,7 @@
 #import "Box2D.h"
 #import "GameConfig.h"
 #import "AppDelegate.h"
+#import "DeskLayer.h"
 #define ANIMATION_DELAY 0.3
 
 @interface EmailNode ()
@@ -57,14 +58,14 @@
         fixtureDef.density = 5.f;
         fixtureDef.friction = 5.f;
         fixtureDef.restitution = 1;
-        fixtureDef.filter.categoryBits = 0x000000;
+        fixtureDef.filter.categoryBits = EMAIL_CATEGORY;
+        fixtureDef.filter.maskBits = EMAIL_MASK;
         body->CreateFixture(&fixtureDef);
         self.scale=0;
         free(dynamicBox);
     }
     return self;    
 }
-
 
 
 -(void) draw:(NSString*)subject senderName:(NSString*)senderName {
@@ -81,7 +82,6 @@
     
     content.color=ccc3(0, 1, 0);
     content.position=CGPointMake(105, 56);
-    
     [self addChild:content];
     [self setContentSize:CGSizeMake(217, 135)];
     [self setAnchorPoint:CGPointMake(0.5, 0.5)];

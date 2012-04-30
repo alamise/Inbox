@@ -77,11 +77,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskLayer.h"
-         timestampString = "357385700.674117"
+         timestampString = "357494173.161547"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
          landmarkName = "@interface DeskLayer"
          landmarkType = "2">
       </FileBreakpoint>
@@ -446,29 +446,29 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357386607.671429"
+         filePath = "Inbox/InboxStack.mm"
+         timestampString = "357495571.060314"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
-         landmarkName = "-ccTouchBegan:withEvent:"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-getAngularVelocity"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357386770.828651"
+         filePath = "Inbox/EmailNode.mm"
+         timestampString = "357497873.985146"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
-         landmarkName = "-ccTouchBegan:withEvent:"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
+         landmarkName = "-remove"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

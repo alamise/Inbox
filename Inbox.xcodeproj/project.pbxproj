@@ -968,6 +968,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F427D837154F000F001953C4 /* desk */ = {
+			isa = PBXGroup;
+			children = (
+				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
+				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
+			);
+			name = desk;
+			sourceTree = "<group>";
+		};
 		F44B060B153365D4003B801D /* synchronizer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1196,8 +1205,7 @@
 		F4B4E61815362889008FDC7F /* graphical */ = {
 			isa = PBXGroup;
 			children = (
-				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
-				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
+				F427D837154F000F001953C4 /* desk */,
 				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
 				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
 				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,

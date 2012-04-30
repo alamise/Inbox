@@ -13,31 +13,45 @@
 #import "EmailNode.h"
 @implementation InboxStack
 
-
--(id)initWithWorld:(b2World*)w{
+-(id)initWithGround:(CCLayer*)node world:(b2World*)w{
     if (self = [super init]){
-        elements = [[NSMutableArray alloc] init];
+        ground = node;
         world = w;
     }
-    [self setContentSize:CGSizeMake(400, 400)];
-    [self setAnchorPoint:CGPointMake(0.5, 0.5)];
     return self;
 }
 
 
 -(void)dealloc{
-    [elements release];
     [super dealloc];
 }
 
 
 -(EmailNode*)addEmail:(EmailModel*)emailModel{
     b2BodyDef bodyDef;
-	bodyDef.position.Set(400/2/PTM_RATIO, 400/2/PTM_RATIO);
-    bodyDef.linearDamping=1.4;
+    
+	bodyDef.position.Set(200/PTM_RATIO,400/PTM_RATIO);
+    bodyDef.linearDamping=10;
+    bodyDef.linearVelocity = [self getLinearVelocityVector];
+    bodyDef.angularDamping=4;
+    bodyDef.angularVelocity=[self getAngularVelocity];
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:emailModel bodyDef:bodyDef world:world];
-    [self addChild:node z:4587645];
+    [ground addChild:node z:0];
     return node;
+}
+
+-(float)getAngularVelocity{
+    int range=1;
+    float v = arc4random() % (2*range);
+    return v-range;
+}
+
+-(b2Vec2)getLinearVelocityVector{
+    double angle = arc4random() % 360;
+    int distance = 20;
+    float x = distance*cos(angle);
+    float y = distance*sin(angle);
+    return b2Vec2(x,y);
 }
 
 @end

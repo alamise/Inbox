@@ -34,6 +34,7 @@
 #import "GameConfig.h"
 #import "ProgressIndicator.h"
 #import "InboxStack.h"
+#import "AppDelegate.h"
 #define ANIMATION_DELAY 0.2
 
 #define TOUCHES_DELAY 0.1
@@ -48,11 +49,6 @@ enum {
 
 @interface DeskLayer() 
 @property(nonatomic,retain) EmailNode* draggedNode;
-    -(void) putGround;
-    -(void) putFoldersZones;
-    -(void) putInboxZone;
-    -(void) putSettings;
-    -(void) putProgressIndicator;
 @end
 
 @implementation DeskLayer
@@ -70,7 +66,7 @@ enum {
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
 		uint32 flags = 0;
 		flags += b2DebugDraw::e_shapeBit;
-		m_debugDraw->SetFlags(flags);		
+		m_debugDraw->SetFlags(flags);	
 		folders = nil;
 		draggableNodes = [[NSMutableArray alloc] init];
 		[self schedule: @selector(tick:)];
@@ -94,36 +90,48 @@ enum {
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:1 swallowsTouches:NO];
 }
 
+#pragma mark right views (folders, etc..)
+
 -(void)setFolders:(NSArray *)f{
     BOOL shouldScrollToTop = true;
     if (folders){
         shouldScrollToTop=false;
-        [folders release];
+        [folders autorelease];
         folders = nil;
     }
     folders = [f retain];
     [foldersTable reloadData];
     if (shouldScrollToTop){
         [foldersTable scrollToTop];
-    }    
+    }
 }
+
+-(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated{
+    
+    if (!foldersTable){
+        return;
+    }
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
+    CGPoint newPos;
+    if (hidden){
+        newPos = CGPointMake(windowSize.width, 0);
+    }else{
+        newPos = CGPointMake(windowSize.width-240, 0);
+    }
+    if (CGPointEqualToPoint(foldersTable.position,newPos) == NO){
+        if (animated){
+            [foldersTable runAction:[CCMoveTo actionWithDuration:ANIMATION_DELAY position:newPos]];
+        }else{
+            foldersTable.position=newPos;
+        }
+    }
+}
+
+#pragma mark add/remove/change elements methods
+
 -(void) putEmail:(EmailModel*)model{
-    
-    
-    [draggableNodes addObject:[inboxStack addEmail:model]];
-    return;
-    
-	b2BodyDef bodyDef;
-	bodyDef.position.Set(100/PTM_RATIO, [CCDirector sharedDirector].winSize.height/2/PTM_RATIO);
-    bodyDef.linearVelocity=b2Vec2(20,0);
-    bodyDef.linearDamping=1.4;
-
-    EmailNode* node = [[EmailNode alloc] initWithEmailModel:model bodyDef:bodyDef world:world];
-    [self addChild:node z:1];
-
-    [draggableNodes addObject:node];
-    [node release];
-    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
+    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) newManagedObjectContext];
+    [draggableNodes insertObject:[inboxStack addEmail:model] atIndex:0];
 }
 
 -(void)setPercentage:(float)percentage labelCount:(int)count{
@@ -154,8 +162,9 @@ enum {
                     b->SetTransform(b->GetPosition(), 0);
                     b->SetAwake(true);
                     break;
-                }	
+                }
             }
+            return YES;
         }
     }
     return YES;
@@ -191,7 +200,6 @@ enum {
         lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
         lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     }
-    return;
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -211,16 +219,7 @@ enum {
         [delegate moveEmail:self.draggedNode.email toFolder:folder];
         [draggableNodes removeObject:self.draggedNode];
         [self.draggedNode scaleAndHide];
-    }/*else if (CGRectContainsPoint([self getChildByTag:tagArchiveSprite].boundingBox, newLocation)){
-        [delegate move:self.draggedNode.emailId to:@"[Gmail]/All Mail"];
-        [draggableNodes removeObject:self.draggedNode];
-        [self.draggedNode scaleAndHide];
-        
-    }else if (CGRectContainsPoint([self getChildByTag:tagInboxSprite].boundingBox, newLocation)){
-        [delegate move:self.draggedNode.emailId to:@"INBOX"];
-        [draggableNodes removeObject:self.draggedNode];
-        [self.draggedNode scaleAndHide];
-    }*/else{
+    }else{
         // No effect if the mail is dropped in a zone.
         if (lastTouchTime<[NSDate timeIntervalSinceReferenceDate]+TOUCHES_DELAY){
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
@@ -235,8 +234,6 @@ enum {
     foldersTable.isTouchEnabled=TRUE;
     return;
 }
-
-
 
 #pragma mark - draw battlefield
 
@@ -301,16 +298,32 @@ enum {
     b2PolygonShape groundBox;		
     // bottom
     groundBox.SetAsEdge(b2Vec2(-margin/PTM_RATIO,-margin/PTM_RATIO), b2Vec2(windowSize.width-margin/PTM_RATIO,2*margin/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    b2FixtureDef def1;
+	def1.shape = &groundBox;
+	def1.density = 0;
+    def1.filter.categoryBits=GROUND_CATEGORY;
+    groundBody->CreateFixture(&def1);
     // top
     groundBox.SetAsEdge(b2Vec2(0,windowSize.height/PTM_RATIO), b2Vec2(windowSize.width/PTM_RATIO,windowSize.height/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    b2FixtureDef def2;
+	def2.shape = &groundBox;
+	def2.density = 0;
+    def2.filter.categoryBits=GROUND_CATEGORY;
+    groundBody->CreateFixture(&def2);
     // left
     groundBox.SetAsEdge(b2Vec2(0,windowSize.height/PTM_RATIO), b2Vec2(0,0));
-    groundBody->CreateFixture(&groundBox,0);
+    b2FixtureDef def3;
+	def3.shape = &groundBox;
+	def3.density = 0;
+    def3.filter.categoryBits=GROUND_CATEGORY;
+    groundBody->CreateFixture(&def3);
     // right
     groundBox.SetAsEdge(b2Vec2(windowSize.width/PTM_RATIO,windowSize.height/PTM_RATIO), b2Vec2(windowSize.width/PTM_RATIO,0));
-    groundBody->CreateFixture(&groundBox,0);
+    b2FixtureDef def4;
+	def4.shape = &groundBox;
+	def4.density = 0;
+    def4.filter.categoryBits=GROUND_CATEGORY;
+    groundBody->CreateFixture(&def4);
     
     CCSprite* sprite = (CCSprite*)[self getChildByTag:tagBackgroundSprite];
     if (sprite){
@@ -322,6 +335,7 @@ enum {
     sprite.anchorPoint=CGPointMake(0, 0);
     sprite.position=CGPointMake(0,0);    
 }
+
 
 -(void)putProgressIndicator{
     indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
@@ -377,19 +391,7 @@ enum {
 
 -(void)putInboxZone{
     CGSize windowSize = [CCDirector sharedDirector].winSize;    
-    inboxStack = [[InboxStack alloc] initWithWorld:world];
-    inboxStack.position=CGPointMake(inboxStack.contentSize.width/2, windowSize.height/2);
-    [self addChild:inboxStack z:0 tag:tagInboxSprite];
-    return;
-//    CCSprite* sprite = (CCSprite*)[self getChildByTag:tagInboxSprite];
-//    if (sprite){
-//        sprite.visible=true;        
-//    }else{
-//        sprite = [CCSprite spriteWithFile:@"inboxZone.png"];    
-//        [self addChild:sprite z:0 tag:tagInboxSprite];
-//    }
-//    CGSize windowSize = [CCDirector sharedDirector].winSize;    
-//    sprite.position=CGPointMake(sprite.contentSize.width/2, windowSize.height/2);
+    inboxStack = [[InboxStack alloc] initWithGround:self world:world];
 }
 
 -(int)mailsOnSceneCount{
@@ -422,28 +424,6 @@ enum {
         }
     }
 }
-
--(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated{
-    
-    if (!foldersTable){
-        return;
-    }
-    CGSize windowSize = [CCDirector sharedDirector].winSize;
-    CGPoint newPos;
-    if (hidden){
-        newPos = CGPointMake(windowSize.width, 0);
-    }else{
-        newPos = CGPointMake(windowSize.width-240, 0);
-    }
-    if (CGPointEqualToPoint(foldersTable.position,newPos) == NO){
-        if (animated){
-            [foldersTable runAction:[CCMoveTo actionWithDuration:ANIMATION_DELAY position:newPos]];
-        }else{
-            foldersTable.position=newPos;
-        }
-    }
-}
-
 
 -(void) checkNodesCoords{
     for (EmailNode* node in draggableNodes){        

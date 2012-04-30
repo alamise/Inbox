@@ -267,6 +267,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    return;
     [layer setOrUpdateScene];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
