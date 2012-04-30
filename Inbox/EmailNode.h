@@ -25,9 +25,10 @@
 #import "CCNode.h"
 #import "Box2D.h"
 #import <CoreData/CoreData.h>
+#import "ElementNodeProtocol.h"
 
 @class CCLabelTTF,EmailModel;
-@interface EmailNode : CCNode{
+@interface EmailNode : CCNode<ElementNodeProtocol>{
     EmailModel* email;
     CCLabelTTF *title;
     CCLabelTTF *content;
@@ -40,5 +41,5 @@
 @property(nonatomic,assign) BOOL isAppearing;
 @property(nonatomic,assign) BOOL isDisappearing;
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)world;
--(void)scaleAndHide;
+-(void)scaleOut;
 @end

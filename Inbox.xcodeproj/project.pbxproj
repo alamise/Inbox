@@ -36,6 +36,10 @@
 		F420671314D20ECA00FE7A26 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */; };
 		F420671514D20FD800FE7A26 /* woodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F420671414D20FD700FE7A26 /* woodBackground.png */; };
 		F426414014AB718500040EC9 /* sticker.png in Resources */ = {isa = PBXBuildFile; fileRef = F426413F14AB718500040EC9 /* sticker.png */; };
+		F427D83A154F19B0001953C4 /* InteractionsManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F427D839154F19B0001953C4 /* InteractionsManager.mm */; };
+		F427D842154F2368001953C4 /* DrawingManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F427D841154F2368001953C4 /* DrawingManager.mm */; };
+		F427D848154F35DB001953C4 /* ContextualRightSidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = F427D847154F35DB001953C4 /* ContextualRightSidePanel.m */; };
+		F427D84B154F3D53001953C4 /* FoldersTable.m in Sources */ = {isa = PBXBuildFile; fileRef = F427D84A154F3D53001953C4 /* FoldersTable.m */; };
 		F427E77914D9FA7F007C3E64 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */; };
 		F427E77A14D9FA7F007C3E64 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77714D9FA7F007C3E64 /* Icon-Small.png */; };
 		F427E77B14D9FA7F007C3E64 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */; };
@@ -682,6 +686,18 @@
 		F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialSettingsButton.png; sourceTree = "<group>"; };
 		F420671414D20FD700FE7A26 /* woodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woodBackground.png; sourceTree = "<group>"; };
 		F426413F14AB718500040EC9 /* sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker.png; sourceTree = "<group>"; };
+		F427D838154F19B0001953C4 /* InteractionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionsManager.h; sourceTree = "<group>"; };
+		F427D839154F19B0001953C4 /* InteractionsManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InteractionsManager.mm; sourceTree = "<group>"; };
+		F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElementNodeProtocol.h; sourceTree = "<group>"; };
+		F427D83C154F1CFC001953C4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		F427D83D154F1F84001953C4 /* InteractionsManagerDelegateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractionsManagerDelegateProtocol.h; sourceTree = "<group>"; };
+		F427D840154F2368001953C4 /* DrawingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingManager.h; sourceTree = "<group>"; };
+		F427D841154F2368001953C4 /* DrawingManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawingManager.mm; sourceTree = "<group>"; };
+		F427D843154F25D7001953C4 /* DrawingManagerDelegateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawingManagerDelegateProtocol.h; sourceTree = "<group>"; };
+		F427D846154F35DB001953C4 /* ContextualRightSidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextualRightSidePanel.h; sourceTree = "<group>"; };
+		F427D847154F35DB001953C4 /* ContextualRightSidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextualRightSidePanel.m; sourceTree = "<group>"; };
+		F427D849154F3D53001953C4 /* FoldersTable.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FoldersTable.h; sourceTree = "<group>"; };
+		F427D84A154F3D53001953C4 /* FoldersTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersTable.m; sourceTree = "<group>"; };
 		F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		F427E77714D9FA7F007C3E64 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -971,10 +987,67 @@
 		F427D837154F000F001953C4 /* desk */ = {
 			isa = PBXGroup;
 			children = (
+				F427D83F154F22A3001953C4 /* drawing */,
+				F427D83E154F228C001953C4 /* interactions */,
 				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
 				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
+				F427D83C154F1CFC001953C4 /* config.h */,
 			);
 			name = desk;
+			sourceTree = "<group>";
+		};
+		F427D83E154F228C001953C4 /* interactions */ = {
+			isa = PBXGroup;
+			children = (
+				F427D838154F19B0001953C4 /* InteractionsManager.h */,
+				F427D839154F19B0001953C4 /* InteractionsManager.mm */,
+				F427D83D154F1F84001953C4 /* InteractionsManagerDelegateProtocol.h */,
+			);
+			name = interactions;
+			sourceTree = "<group>";
+		};
+		F427D83F154F22A3001953C4 /* drawing */ = {
+			isa = PBXGroup;
+			children = (
+				F427D840154F2368001953C4 /* DrawingManager.h */,
+				F427D841154F2368001953C4 /* DrawingManager.mm */,
+				F427D843154F25D7001953C4 /* DrawingManagerDelegateProtocol.h */,
+				F427D844154F29A2001953C4 /* components */,
+				F427D845154F2E16001953C4 /* elements */,
+			);
+			name = drawing;
+			sourceTree = "<group>";
+		};
+		F427D844154F29A2001953C4 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				F48E5B44154D41E10016B34D /* InboxStack.h */,
+				F48E5B45154D41E20016B34D /* InboxStack.mm */,
+				F427D846154F35DB001953C4 /* ContextualRightSidePanel.h */,
+				F427D847154F35DB001953C4 /* ContextualRightSidePanel.m */,
+				F427D849154F3D53001953C4 /* FoldersTable.h */,
+				F427D84A154F3D53001953C4 /* FoldersTable.m */,
+				F427D84C154F3EB8001953C4 /* folder's dropzone */,
+			);
+			name = components;
+			sourceTree = "<group>";
+		};
+		F427D845154F2E16001953C4 /* elements */ = {
+			isa = PBXGroup;
+			children = (
+				F41E658914A9CFB700BA4712 /* EmailNode.h */,
+				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
+			);
+			name = elements;
+			sourceTree = "<group>";
+		};
+		F427D84C154F3EB8001953C4 /* folder's dropzone */ = {
+			isa = PBXGroup;
+			children = (
+				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
+				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
+			);
+			name = "folder's dropzone";
 			sourceTree = "<group>";
 		};
 		F44B060B153365D4003B801D /* synchronizer */ = {
@@ -1207,14 +1280,9 @@
 			children = (
 				F427D837154F000F001953C4 /* desk */,
 				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
-				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
-				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
 				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
-				F41E658914A9CFB700BA4712 /* EmailNode.h */,
-				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
-				F48E5B44154D41E10016B34D /* InboxStack.h */,
-				F48E5B45154D41E20016B34D /* InboxStack.mm */,
+				F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */,
 			);
 			name = graphical;
 			sourceTree = "<group>";
@@ -1961,6 +2029,10 @@
 				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
 				F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */,
 				F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */,
+				F427D83A154F19B0001953C4 /* InteractionsManager.mm in Sources */,
+				F427D842154F2368001953C4 /* DrawingManager.mm in Sources */,
+				F427D848154F35DB001953C4 /* ContextualRightSidePanel.m in Sources */,
+				F427D84B154F3D53001953C4 /* FoldersTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

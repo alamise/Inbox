@@ -11,9 +11,8 @@
 #import "Box2D.h"
 @class EmailModel,EmailNode;
 @interface InboxStack : NSObject{
-    CCLayer* ground;
     b2World* world;
 }
--(id)initWithGround:(CCLayer*)node world:(b2World*)world;
+-(id)initWithWorld:(b2World*)w;
 -(EmailNode*)addEmail:(EmailModel*)emailModel;
 @end

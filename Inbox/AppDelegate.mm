@@ -25,7 +25,7 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "GameConfig.h"
+#import "config.h"
 #import "DeskController.h"
 #import "DeskLayer.h"
 #import "CTCoreAccount.h"

@@ -22,7 +22,7 @@
  *
  */
 #import "DeskController.h"
-#import "GameConfig.h"
+#import "config.h"
 #import "AppDelegate.h"
 #import "DeskLayer.h"
 #import "MBProgressHUD.h"
@@ -118,14 +118,12 @@
 }
 
 -(void)showLoadingHud{
-    layer.isActive = NO;
     if (loadingHud.alpha==0.0f){
         [loadingHud show:YES];    
     }
 }
 
 -(void)hideLoadingHud{
-    layer.isActive = YES;
     [loadingHud hide:YES];
 }
 
@@ -269,6 +267,7 @@
     [super viewDidAppear:animated];
     return;
     [layer setOrUpdateScene];
+    [self nextStep];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){

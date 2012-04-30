@@ -29,35 +29,26 @@
 #import "GLES-Render.h"
 #import "ProgressIndicator.h"
 #import "InboxStack.h"
+#import "InteractionsManagerDelegateProtocol.h"
+#import "DrawingManagerDelegateProtocol.h"
 
-#define EMAIL_CATEGORY 0x0001
-#define GROUND_CATEGORY 0x0002
+@class EmailNode, EmailModel, SWTableView,InteractionsManager,DrawingManager;
 
-#define EMAIL_MASK GROUND_CATEGORY
-@class EmailNode, EmailModel, SWTableView;
-
-@interface DeskLayer : CCLayer<SWTableViewDataSource>{
-	b2World* world;
-	GLESDebugDraw *m_debugDraw;
-    NSMutableArray *draggableNodes;
-    EmailNode *draggedNode;
+@interface DeskLayer : CCLayer<SWTableViewDataSource,DrawingManagerDelegateProtocol,InteractionsManagerDelegateProtocol>{
     id<DeskProtocol> delegate;
-    CGPoint lastTouchPosition;
-    NSTimeInterval lastTouchTime;
-    SWTableView* foldersTable;
+
     ProgressIndicator* indicator;
     NSArray* folders;
-    BOOL isActive;
     
-    int lastTopIndex;
-    InboxStack* inboxStack; 
+    InteractionsManager* interactionsManager;
+    DrawingManager* drawingManager;
 }
-@property(assign) BOOL isActive;
+
 @property(nonatomic,retain) NSArray* folders;
 
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
--(void) checkNodesCoords;
+
 -(void) cleanDesk;
 -(void) setOrUpdateScene;
 -(void)setPercentage:(float)percentage labelCount:(int)count;

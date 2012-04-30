@@ -25,7 +25,7 @@
 #import "EmailModel.h"
 #import "cocos2d.h"
 #import "Box2D.h"
-#import "GameConfig.h"
+#import "config.h"
 #import "AppDelegate.h"
 #import "DeskLayer.h"
 #define ANIMATION_DELAY 0.3
@@ -93,12 +93,15 @@
     [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
 }
 
--(void)scaleAndHide{
+-(void)scaleOut{
     world->DestroyBody(body);
     [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0]];
     [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 
+-(CCNode*)visualNode{
+    return self;
+}
 
 -(void)remove{
     [self removeFromParentAndCleanup:YES];    

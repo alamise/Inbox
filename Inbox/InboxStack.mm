@@ -9,13 +9,12 @@
 #import "InboxStack.h"
 #import "cocos2d.h"
 #import "Box2D.h"
-#import "GameConfig.h"
+#import "config.h"
 #import "EmailNode.h"
 @implementation InboxStack
 
--(id)initWithGround:(CCLayer*)node world:(b2World*)w{
+-(id)initWithWorld:(b2World*)w{
     if (self = [super init]){
-        ground = node;
         world = w;
     }
     return self;
@@ -35,8 +34,8 @@
     bodyDef.linearVelocity = [self getLinearVelocityVector];
     bodyDef.angularDamping=4;
     bodyDef.angularVelocity=[self getAngularVelocity];
+    
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:emailModel bodyDef:bodyDef world:world];
-    [ground addChild:node z:0];
     return node;
 }
 
