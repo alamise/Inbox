@@ -8,17 +8,17 @@
 
 #import "FoldersTable.h"
 #import "DropZoneNode.h"
+#import "cocos2d.h"
+#import "FolderModel.h"
+@interface FoldersTable()
+@end
 
 @implementation FoldersTable
 @synthesize folders;
 -(id)init{
     if (self = [super init]){
-        self.contentSize = CGSizeMake(240, 748);
-        table = [[SWTableView viewWithDataSource:self size:CGSizeMake(240, 748) container:nil] retain];
+        table = [[SWTableView viewWithDataSource:self size:CGSizeMake(240, 748)] retain];
         [table setVerticalFillOrder:SWTableViewFillTopDown];
-        [self addChild:table z:0];
-        table.position=CGPointMake(0,0);
-        self.position = CGPointMake(0, 0);
     }
     return self;
 }
@@ -29,17 +29,22 @@
     [super dealloc];
 }
 
+-(CCNode*)view{
+    return table;
+}
+
 -(void)setFolders:(NSArray *)f{
     [folders autorelease];
     folders = [f retain];
     [table reloadData];
+    [table scrollToTop];
 }
 
--(CGSize)cellSizeForTable:(SWTableView *)table{
+-(CGSize)cellSizeForTable:(SWTableView *)t{
     return CGSizeMake(240, 280);
 }
 
--(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx{
+-(SWTableViewCell *)table:(SWTableView *)t cellAtIndex:(NSUInteger)idx{
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
     
     if (folders){
@@ -51,13 +56,21 @@
     return node;
 }
 
--(NSUInteger)numberOfCellsInTableView:(SWTableView *)table{
+-(NSUInteger)numberOfCellsInTableView:(SWTableView *)t{
     if (self.folders){
         int count = [self.folders count];
         return count;
     }
-    return 0;
+    return 10;
 }
 
+-(FolderModel*) folderModelAtPoint:(CGPoint)point{
+    int cellIndex = [table cellIndexAt:point];
+    if (cellIndex!=-1){
+        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
+        return folder;
+    }
+    return nil;
+}
 
 @end

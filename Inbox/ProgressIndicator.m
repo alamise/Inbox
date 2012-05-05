@@ -45,7 +45,12 @@
 
 -(void)setPercentage:(float)percentage labelCount:(int)count{
     [progressTimer setPercentage:100-percentage];
-    [label setString:[NSString stringWithFormat:@"%d",count]];
+    if (count==-1){
+        [label setString:@"----"];
+    }else{
+        [label setString:[NSString stringWithFormat:@"%d",count]];
+    }
+    
 }
 
 

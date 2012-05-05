@@ -8,11 +8,13 @@
 
 #import "CCNode.h"
 #import "SWTableView.h"
-
-@interface FoldersTable : CCNode<SWTableViewDataSource>{
+#import "CCController.h"
+@class FolderModel;
+@interface FoldersTable : NSObject<SWTableViewDataSource,CCController>{
     SWTableView* table;
     NSArray* folders;
 }
 @property(nonatomic,retain) NSArray* folders;
-
+-(FolderModel*) folderModelAtPoint:(CGPoint)point;
+-(CCNode*)view;
 @end

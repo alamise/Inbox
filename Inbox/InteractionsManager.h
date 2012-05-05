@@ -11,9 +11,10 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "InteractionsManagerDelegateProtocol.h"
+#import "cocos2d.h"
 
 @class CCLayer;
-@interface InteractionsManager : NSObject{
+@interface InteractionsManager : NSObject<CCTargetedTouchDelegate>{
     id<ElementNodeProtocol> draggedNode;
     NSMutableArray* visibleNodes;
     BOOL didDraggedNodeMoved;
@@ -28,9 +29,6 @@
 @property(readonly) b2World* world;
 @property(readonly) NSArray* visibleNodes;
 -(id)initWithDelegate:(id<InteractionsManagerDelegateProtocol>)d;
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event;
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
 -(void) tick: (ccTime) dt;
 -(void) validateNodesCoords;
 

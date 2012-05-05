@@ -29,4 +29,5 @@
 -(id) initWithDelegate:(id<DrawingManagerDelegateProtocol>)d;
 -(void) removeChildAndBody:(CCNode*)node;
 -(void) refresh;
+
 @end

@@ -37,7 +37,8 @@
 #import "AppDelegate.h"
 #import "InteractionsManager.h"
 #import "DrawingManager.h"
-
+#import "ContextualRightSidePanel.h"
+#import "FoldersTable.h"
 #define ANIMATION_DELAY 0.2
 #define SCROLL 23435543
 
@@ -47,33 +48,30 @@
 @end
 
 @implementation DeskLayer
-@synthesize folders;
 
 -(id) initWithDelegate:(id<DeskProtocol>)d{
 	if( (self=[super init])) {
         delegate = d;
         self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
-		folders = nil;
 		[self schedule: @selector(tick:)];
         interactionsManager = [[InteractionsManager alloc] initWithDelegate:self];
         drawingManager = [[DrawingManager alloc] initWithDelegate:self];
-        [self offlineTests];
+        
+        foldersTable = [[FoldersTable alloc] init];
+
+        //[self offlineTests];
 	}
 	return self;
 }
 
 -(void)registerWithTouchDispatcher {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:1 swallowsTouches:NO];
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:interactionsManager priority:1 swallowsTouches:NO];
 }
 
 - (void) dealloc{
     [interactionsManager release];
     [drawingManager release];
-    
-    [delegate release];
-    [indicator release];
-    [interactionsManager release];
 	[super dealloc];
 }
 
@@ -82,7 +80,14 @@
     for (int i=0;i<5;i++){
         EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
         [self putEmail:email];
+    }  
+
+    NSMutableArray* ff = [NSMutableArray array];
+    for (int i=0;i<5;i++){
+        FolderModel* folder = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
+        [ff addObject:folder];
     }
+    //[table setFolders:ff];
 }
 
 -(CCLayer*)layer {
@@ -91,42 +96,6 @@
 
 -(b2World*)world{
     return interactionsManager.world;
-}
-#pragma mark right views (folders, etc..)
-
--(void)setFolders:(NSArray *)f{
-    BOOL shouldScrollToTop = true;
-    if (folders){
-        shouldScrollToTop=false;
-        [folders autorelease];
-        folders = nil;
-    }
-    folders = [f retain];
-    [foldersTable reloadData];
-    if (shouldScrollToTop){
-        [foldersTable scrollToTop];
-    }
-}
-
--(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated{
-    
-    if (!foldersTable){
-        return;
-    }
-    CGSize windowSize = [CCDirector sharedDirector].winSize;
-    CGPoint newPos;
-    if (hidden){
-        newPos = CGPointMake(windowSize.width, 0);
-    }else{
-        newPos = CGPointMake(windowSize.width-240, 0);
-    }
-    if (CGPointEqualToPoint(foldersTable.position,newPos) == NO){
-        if (animated){
-            [foldersTable runAction:[CCMoveTo actionWithDuration:ANIMATION_DELAY position:newPos]];
-        }else{
-            foldersTable.position=newPos;
-        }
-    }
 }
 
 #pragma mark add/remove/change elements methods
@@ -141,39 +110,33 @@
     [drawingManager.progressIndicator setPercentage:percentage labelCount:count];
 }
 
-
-
 #pragma mark - drag & drop
 
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    return [interactionsManager ccTouchBegan:touch withEvent:event];
+-(void)showFolders:(NSArray*)folders{
+    [self showFolders_hideAndSet:folders];
 }
 
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
-    [interactionsManager ccTouchMoved:touch withEvent:event];
-}
-
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
-    [interactionsManager ccTouchEnded:touch withEvent:event];
-}
--(void) elementTouched:(id<ElementNodeProtocol>)element{
-    if ([element isKindOfClass:[EmailNode class]]){
-        [delegate emailTouched:((EmailNode*)element).email];
-    }
-}
-
--(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point{
-    SWTableView* table = (SWTableView*)[self getChildByTag:SCROLL];
-    int cellIndex = [table cellIndexAt:point];
-    if (cellIndex!=-1){
-        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
-        if ([element isKindOfClass:[EmailNode class]]){
-            [delegate moveEmail:((EmailNode*)element).email toFolder:folder];
+-(void)showFolders_hideAndSet:(NSArray *)folders{
+    if (!drawingManager.rightSidePanel.isHidden){
+        [drawingManager.rightSidePanel hideAnimated:YES callback:^{
+            if (!foldersTable.view.parent){
+                [self addChild:foldersTable.view];
+            }
+            [drawingManager.rightSidePanel setController:foldersTable];        
+            [foldersTable setFolders:folders];
+            [self showFolders_show];
+        }];
+    }else{
+        if (!foldersTable.view.parent){
+            [self addChild:foldersTable.view];
         }
-        [element scaleOut];
-        return false;
+        [drawingManager.rightSidePanel setController:foldersTable];
+        [self showFolders_show];
     }
-    return true;
+}
+
+-(void)showFolders_show{
+    [drawingManager.rightSidePanel showAnimated:YES callback:nil];
 }
 
 -(void) interactionStarted{
@@ -189,48 +152,35 @@
     [interactionsManager drawDebugData];
 }
 
--(void)setOrUpdateScene{
+-(void)refresh{
     [interactionsManager refresh];
     [drawingManager refresh];
-    [self putFoldersZones];
 }
 
 -(void)settingsButtonTapped {
     [delegate openSettings];
 }
 
-
-
--(int)mailsOnSceneCount{
+-(int)elementsOnTheDesk{
     return [interactionsManager.visibleNodes count];
 }
 
-//
-//-(void)cleanDesk{
-//    for (EmailNode* node in draggableNodes){
-//        [node scaleAndHide];
-//    }
-//    [draggableNodes removeAllObjects];
-//    ProgressIndicator* indicator = (ProgressIndicator*)[self getChildByTag:tagProgressIndicator];
-//}
+-(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point{
+    
+}
 
--(void)progressIndicatorHidden:(BOOL)hidden animated:(BOOL)animated{
-    if (!indicator){
-        return;
+-(void)cleanDesk{
+    for (EmailNode* node in interactionsManager.visibleNodes){
+        [interactionsManager unregisterNode:node];
+        CCFiniteTimeAction* scale = [CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0];
+        CCFiniteTimeAction* callback = [CCCallBlock actionWithBlock:^{
+            [drawingManager removeChildAndBody:node];
+        }];
+        
+        CCAction* sequence = [CCSequence actionOne:scale two:callback];
+        [node runAction:sequence];
     }
-    int newScale;
-    if (hidden){
-        newScale = 0;
-    }else{
-        newScale = 1;
-    }
-    if (indicator.scale != newScale){
-        if (animated){
-           [indicator runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:newScale]]; 
-        }else{
-            indicator.scale=newScale;
-        }
-    }
+    [self setPercentage:0 labelCount:0];
 }
 
 -(void) tick: (ccTime) dt{

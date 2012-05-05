@@ -696,7 +696,7 @@
 		F427D843154F25D7001953C4 /* DrawingManagerDelegateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawingManagerDelegateProtocol.h; sourceTree = "<group>"; };
 		F427D846154F35DB001953C4 /* ContextualRightSidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextualRightSidePanel.h; sourceTree = "<group>"; };
 		F427D847154F35DB001953C4 /* ContextualRightSidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextualRightSidePanel.m; sourceTree = "<group>"; };
-		F427D849154F3D53001953C4 /* FoldersTable.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FoldersTable.h; sourceTree = "<group>"; };
+		F427D849154F3D53001953C4 /* FoldersTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersTable.h; sourceTree = "<group>"; };
 		F427D84A154F3D53001953C4 /* FoldersTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersTable.m; sourceTree = "<group>"; };
 		F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		F427E77714D9FA7F007C3E64 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -768,6 +768,7 @@
 		F48E5B44154D41E10016B34D /* InboxStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxStack.h; sourceTree = "<group>"; };
 		F48E5B45154D41E20016B34D /* InboxStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InboxStack.mm; sourceTree = "<group>"; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F4CCAB391555883D0025BEDC /* CCController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCController.h; sourceTree = "<group>"; };
 		F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsHelper.h; sourceTree = "<group>"; };
 		F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsHelper.m; sourceTree = "<group>"; };
 		F4E28093153040640093C3F5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -967,9 +968,8 @@
 		F41E666914A9D0B500BA4712 /* desk */ = {
 			isa = PBXGroup;
 			children = (
+				F47A763A1555A6E000561E81 /* controllers */,
 				F4B4E61815362889008FDC7F /* graphical */,
-				F41E658014A9CFB700BA4712 /* DeskController.h */,
-				F41E658114A9CFB700BA4712 /* DeskController.mm */,
 			);
 			name = desk;
 			sourceTree = "<group>";
@@ -1021,6 +1021,8 @@
 		F427D844154F29A2001953C4 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
+				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
 				F48E5B44154D41E10016B34D /* InboxStack.h */,
 				F48E5B45154D41E20016B34D /* InboxStack.mm */,
 				F427D846154F35DB001953C4 /* ContextualRightSidePanel.h */,
@@ -1195,6 +1197,15 @@
 			name = "inbox empty";
 			sourceTree = "<group>";
 		};
+		F47A763A1555A6E000561E81 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F41E658014A9CFB700BA4712 /* DeskController.h */,
+				F41E658114A9CFB700BA4712 /* DeskController.mm */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
 		F47DBCA415331653008A5373 /* modules libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,10 +1289,9 @@
 		F4B4E61815362889008FDC7F /* graphical */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCAB391555883D0025BEDC /* CCController.h */,
 				F427D837154F000F001953C4 /* desk */,
 				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
-				F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */,
-				F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */,
 				F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */,
 			);
 			name = graphical;

@@ -31,30 +31,26 @@
 #import "InboxStack.h"
 #import "InteractionsManagerDelegateProtocol.h"
 #import "DrawingManagerDelegateProtocol.h"
+#import "FoldersTable.h"
 
 @class EmailNode, EmailModel, SWTableView,InteractionsManager,DrawingManager;
 
-@interface DeskLayer : CCLayer<SWTableViewDataSource,DrawingManagerDelegateProtocol,InteractionsManagerDelegateProtocol>{
+@interface DeskLayer : CCLayer<DrawingManagerDelegateProtocol,InteractionsManagerDelegateProtocol>{
     id<DeskProtocol> delegate;
-
-    ProgressIndicator* indicator;
-    NSArray* folders;
-    
     InteractionsManager* interactionsManager;
     DrawingManager* drawingManager;
+    
+    FoldersTable* foldersTable;
 }
-
-@property(nonatomic,retain) NSArray* folders;
 
 -(id) initWithDelegate:(id<DeskProtocol>)d;
 -(void) putEmail:(EmailModel*)model;
 
 -(void) cleanDesk;
--(void) setOrUpdateScene;
+-(int) elementsOnTheDesk;
+-(void) refresh;
+
 -(void)setPercentage:(float)percentage labelCount:(int)count;
--(int) mailsOnSceneCount;
--(void)cleanDesk;
--(void)progressIndicatorHidden:(BOOL)hidden animated:(BOOL)animated;
--(void)foldersHidden:(BOOL)hidden animated:(BOOL)animated;
+-(void)showFolders:(NSArray*)folders;
 @end
 

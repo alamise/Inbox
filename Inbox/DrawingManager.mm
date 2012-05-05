@@ -35,7 +35,7 @@
     [self drawGround];
     [self drawProgressIndicator];
     [self drawSettingsButton];
-    [self drawContextualRightSide];
+    [self setupContextualRightSideManager];
 }
 
 -(void)drawGround{
@@ -48,13 +48,10 @@
     sprite.position=CGPointMake(0,0);    
 }
 
--(void)drawContextualRightSide{
-    rightSidePanel = (ContextualRightSidePanel*)[layer getChildByTag:CONTEXTUAL_SIDE_TAG];
+-(void)setupContextualRightSideManager{
     if (!rightSidePanel){
         rightSidePanel = [[ContextualRightSidePanel alloc] initWithLayer:layer];
     }
-    [layer addChild:rightSidePanel];
-    [rightSidePanel refreshPositionAnimated:NO];
 }
 
 -(void)drawProgressIndicator{

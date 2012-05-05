@@ -9,9 +9,11 @@
 #import "ContextualRightSidePanel.h"
 #import "CCLayer.h"
 #import "cocos2d.h"
+#import "CCActionInstant.h"
+
 #define SLIDE_DURATION 1
 @implementation ContextualRightSidePanel
-
+@synthesize isHidden;
 
 -(id)initWithLayer:(CCLayer*)l{
     if (self = [super init]){
@@ -21,37 +23,53 @@
     return self;
 }
 
--(void)onEnter{
-    [super onEnter];
-    [self refreshPositionAnimated:NO];
+-(void)dealloc{
+    [controller release];
+    [super dealloc];
 }
 
--(void)refreshPositionAnimated:(BOOL)animated{
-    self.contentSize = CGSizeMake(300, layer.contentSize.height);
-    self.anchorPoint = CGPointMake(0, 0);
+-(void)setController:(id<CCController>)c{
+    [controller autorelease];
+    controller = [c retain];
+    [self refreshPositionAnimated:NO callback:nil];
+}
+
+-(void)refreshPositionAnimated:(BOOL)animated callback:(void(^)())callback{
+    if (!callback){
+        callback = ^{};
+    }
     if (isHidden){
         if (animated){
-            [self runAction:[CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024, 0)]];
+            CCSequence* sequence = [[CCSequence alloc] initOne:[CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024, 0)]
+                                    two:[CCCallBlock actionWithBlock:callback]];
+            [controller.view runAction:sequence];
         }else{
-            self.position = CGPointMake(1024, 0);
+            controller.view.position = CGPointMake(1024, 0);
+            callback();
         }
     }else{
         if (animated){
-            [self runAction:[CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024-300, 0)]];
+            CCSequence* sequence = [[CCSequence alloc]
+                                    initOne:
+                                    [CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024 - controller.view.boundingBox.size.width, 0)]
+                                    two:[CCCallBlock actionWithBlock:callback]];
+            [controller.view runAction:sequence];
         }else{
-            self.position = CGPointMake(1024-300, 0);
+            controller.view.position = CGPointMake(1024-240, 0);
+            callback();
         }
     }
 }
 
--(void)showAnimated:(BOOL)animated{
+
+-(void)showAnimated:(BOOL)animated callback:(void(^)())callback{
     isHidden = false;
-    [self refreshPositionAnimated:animated];
+    [self refreshPositionAnimated:animated callback:callback];
 }
 
--(void)hideAnimated:(BOOL)animated{
+-(void)hideAnimated:(BOOL)animated callback:(void(^)())callback{
     isHidden = true;
-    [self refreshPositionAnimated:animated];
+    [self refreshPositionAnimated:animated callback:callback];
 }
 
 @end

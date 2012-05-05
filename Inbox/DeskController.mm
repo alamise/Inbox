@@ -41,6 +41,7 @@
 #import "FolderModel.h"
 #import "Synchronizer.h"
 #import "PrivateValues.h"
+#define MAX_ELEMENTS 5
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
 -(void)nextStep;
@@ -56,7 +57,7 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
-        //[self.modelsManager startSync];
+        [self.modelsManager startSync];
 	}
 	return self;
 }
@@ -135,20 +136,22 @@
     NSError* error;
     /* set the counter */
     int emailsInInbox = [[EmailReader sharedInstance] emailsCountInInboxes:&error];
-    if (emailsInInbox>totalEmailsInThisSession){
+    if (emailsInInbox > totalEmailsInThisSession){
         totalEmailsInThisSession = emailsInInbox;
     }
-    int count = totalEmailsInThisSession-emailsInInbox;
+    int count = totalEmailsInThisSession - emailsInInbox;
     int total = totalEmailsInThisSession;
     
     float percentage= (float)100*count/total;
 
     [layer setPercentage:percentage labelCount:emailsInInbox];
-    [layer progressIndicatorHidden:NO animated:YES];
     
     NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
 
-    if ([layer mailsOnSceneCount]!=0) return;
+    
+    if ([layer elementsOnTheDesk] >= MAX_ELEMENTS){
+        return;
+    }
     
     EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
     
@@ -172,13 +175,10 @@
     }else{
         isWaiting = NO;
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
+        [layer showFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
+        
+        nextEmail.folder = nil;
         [layer putEmail:nextEmail];
-        if (![layer.folders isEqualToArray:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]]){
-            [layer foldersHidden:YES animated:NO];
-            [layer setFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
-            [layer foldersHidden:NO animated:YES];
-        }
-
     }
 }
 
@@ -219,7 +219,8 @@
     account.authType = [NSNumber numberWithInt:IMAP_AUTH_TYPE_PLAIN];
     account.login = @"sim.w80@gmail.com";
     account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
-    [context save:nil];
+    NSError* error = nil;
+    [context save:&error];
     [account release];
     [self.modelsManager startSync];
     [self nextStep];
@@ -260,13 +261,12 @@
         [director runWithScene:scene];
     }
     [director resume];
-    [layer setOrUpdateScene];
+    [layer refresh];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    return;
-    [layer setOrUpdateScene];
+    [layer refresh];
     [self nextStep];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
     NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
