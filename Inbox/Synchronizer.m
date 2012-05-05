@@ -70,7 +70,7 @@
 
 -(BOOL)startSync{
     [syncLock lock];
-    self.context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    self.context = [(AppDelegate*)[UIApplication sharedApplication].delegate syncContext];
     shouldStopAsap = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     BOOL returnValue = [self sync];

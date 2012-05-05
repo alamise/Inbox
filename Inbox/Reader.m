@@ -8,7 +8,6 @@
 
 #import "Reader.h"
 static Reader* instance;
-static NSManagedObjectContext* coreDataContext;
 @implementation Reader
 
 +(void)setInstance:(Reader*)ins{
@@ -25,10 +24,7 @@ static NSManagedObjectContext* coreDataContext;
 }
 
 -(NSManagedObjectContext*)sharedContext{
-    if (!coreDataContext){
-        coreDataContext = [[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] retain];
-    }
-    return coreDataContext;
+    return [(AppDelegate*)[UIApplication sharedApplication].delegate mainContext];
 }
 
 @end

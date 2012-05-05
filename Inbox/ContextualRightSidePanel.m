@@ -11,7 +11,7 @@
 #import "cocos2d.h"
 #import "CCActionInstant.h"
 
-#define SLIDE_DURATION 1
+#define SLIDE_DURATION 0.3
 @implementation ContextualRightSidePanel
 @synthesize isHidden;
 
@@ -51,7 +51,7 @@
         if (animated){
             CCSequence* sequence = [[CCSequence alloc]
                                     initOne:
-                                    [CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024 - controller.view.boundingBox.size.width, 0)]
+                                    [CCMoveTo actionWithDuration:SLIDE_DURATION position:CGPointMake(1024 - 240, 0)]
                                     two:[CCCallBlock actionWithBlock:callback]];
             [controller.view runAction:sequence];
         }else{

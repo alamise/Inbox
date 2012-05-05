@@ -76,7 +76,7 @@
 }
 
 -(void)offlineTests{
-    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) newManagedObjectContext];
+    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
     for (int i=0;i<5;i++){
         EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
         [self putEmail:email];
@@ -113,7 +113,9 @@
 #pragma mark - drag & drop
 
 -(void)showFolders:(NSArray*)folders{
-    [self showFolders_hideAndSet:folders];
+    if (![foldersTable.folders isEqualToArray:folders]){
+        [self showFolders_hideAndSet:folders];
+    }
 }
 
 -(void)showFolders_hideAndSet:(NSArray *)folders{
@@ -166,7 +168,22 @@
 }
 
 -(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point{
-    
+    FolderModel* folder = [foldersTable folderModelAtPoint:point];
+    if (folder != nil){
+        if ([element isKindOfClass:[EmailNode class]]){
+            [delegate moveEmail:((EmailNode*)element).email toFolder:folder];
+            [interactionsManager unregisterNode:element];
+            CCFiniteTimeAction* scale = [CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0];
+            CCFiniteTimeAction* callback = [CCCallBlock actionWithBlock:^{
+                [drawingManager removeChildAndBody:element];
+            }];
+            
+            CCAction* sequence = [CCSequence actionOne:scale two:callback];
+            [[element visualNode] runAction:sequence];
+        }
+        return false;
+    }
+    return true;
 }
 
 -(void)cleanDesk{

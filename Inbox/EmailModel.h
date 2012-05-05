@@ -33,7 +33,8 @@
     NSDate* sentDate; /* GMT time */
     NSString* senderName;
     NSString* senderEmail;
-    NSString* htmlBody;  
+    NSString* htmlBody; 
+    bool isOnDesk;
     FolderModel* folder;
 }
 @property(nonatomic,retain) NSString* uid;
@@ -43,6 +44,7 @@
 @property(nonatomic,retain) NSString* senderName;
 @property(nonatomic,retain) NSString* senderEmail;
 @property(nonatomic,retain) NSString* htmlBody;
+@property(nonatomic,assign) bool isOnDesk;
 @property(nonatomic,retain) FolderModel* folder;
 +(NSString*)entityName;
 @end

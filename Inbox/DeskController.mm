@@ -85,7 +85,7 @@
 }
 
 -(void)showEmail:(NSManagedObjectID*)emailId{
-    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext] objectWithID:emailId];
+    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate mainContext] objectWithID:emailId];
     if (!email.htmlBody){
         [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
     }else{
@@ -146,9 +146,6 @@
 
     [layer setPercentage:percentage labelCount:emailsInInbox];
     
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];    
-
-    
     if ([layer elementsOnTheDesk] >= MAX_ELEMENTS){
         return;
     }
@@ -179,12 +176,16 @@
         
         nextEmail.folder = nil;
         [layer putEmail:nextEmail];
+        if ([layer elementsOnTheDesk] < MAX_ELEMENTS){
+            [self nextStep];
+        }
     }
+    
 }
 
 -(void)resetModel{
 
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate newManagedObjectContext];
+    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate mainContext];
     [self.modelsManager abortSync];
     
 
@@ -301,7 +302,6 @@
     loadingHud.labelText = NSLocalizedString(@"field.loading.title",@"Loading title used in the loading HUD of the field");
     loadingHud.detailsLabelText = NSLocalizedString(@"field.loading.message",@"Loading message used in the loading HUD of the field");
     [self.view addSubview:loadingHud];
-    
 }
 
 - (void)viewDidUnload {

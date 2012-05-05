@@ -2,6 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Email" representedClassName="EmailModel">
         <attribute name="htmlBody" optional="YES" attributeType="String"/>
+        <attribute name="isOnDesk" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="senderEmail" optional="YES" attributeType="String"/>
         <attribute name="senderName" optional="YES" attributeType="String"/>
         <attribute name="sentDate" optional="YES" attributeType="Date"/>
@@ -25,7 +26,7 @@
         <relationship name="emails" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Email" inverseName="folder" inverseEntity="Email" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Email" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Email" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="EmailAccount" positionX="-290" positionY="-18" width="128" height="150"/>
         <element name="Folder" positionX="160" positionY="192" width="128" height="90"/>
     </elements>

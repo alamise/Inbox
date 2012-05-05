@@ -46,10 +46,13 @@
 - (NSString *)databasePath;
 - (NSManagedObjectModel *)managedObjectModel;
 @property (nonatomic, retain) UINavigationController* navigationController;
+
+@property(nonatomic,retain) NSManagedObjectContext* mainContext;
+@property(nonatomic,retain) NSManagedObjectContext* syncContext;
 @end
 
 @implementation AppDelegate
-@synthesize window,navigationController;
+@synthesize window,navigationController,mainContext,syncContext;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
@@ -71,6 +74,14 @@
     //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
+
+    
+    
+    self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
+    [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+    self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
+    [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+    
 	[window makeKeyAndVisible];
 }
 
@@ -163,16 +174,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
     
     return persistentStoreCoordinator;
-}
-
-
--(NSManagedObjectContext*)newManagedObjectContext{
-    @synchronized(self){
-        NSManagedObjectContext* context;
-        context = [[[NSManagedObjectContext alloc] init] autorelease];
-        [context setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-        return context;
-    }
 }
 
 - (NSManagedObjectModel *)managedObjectModel {

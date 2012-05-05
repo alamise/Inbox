@@ -35,7 +35,7 @@
                continueAfterRunningActions = "No"
                symbolName = "-[LoginController actionOnDismiss]"
                urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "357937707.64425"
+               timestampString = "357937867.013442"
                startingColumnNumber = "9223372036854775807"
                endingColumnNumber = "9223372036854775807"
                startingLineNumber = "32"
@@ -47,7 +47,7 @@
                continueAfterRunningActions = "No"
                symbolName = "-[LoginController setActionOnDismiss:]"
                urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "357937707.644631"
+               timestampString = "357937867.013827"
                startingColumnNumber = "9223372036854775807"
                endingColumnNumber = "9223372036854775807"
                startingLineNumber = "32"
@@ -145,11 +145,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "357936488.218141"
+         timestampString = "357942149.31637"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "238"
-         endingLineNumber = "238"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
          landmarkName = "-presentErrorView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -354,19 +354,6 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "357385700.674117"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "430"
-         endingLineNumber = "430"
-         landmarkName = "-updateLocalMessages"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -500,25 +487,12 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "357935975.142906"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "450"
-         endingLineNumber = "450"
-         landmarkName = "-sync"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "357936476.937598"
+         timestampString = "357942149.31637"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "223"
-         endingLineNumber = "223"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
          landmarkName = "-resetModel"
          landmarkType = "5">
       </FileBreakpoint>
@@ -527,11 +501,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "357936548.322375"
+         timestampString = "357942149.31637"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "185"
-         endingLineNumber = "185"
+         startingLineNumber = "186"
+         endingLineNumber = "186"
          landmarkName = "-resetModel"
          landmarkType = "5">
       </FileBreakpoint>
@@ -540,11 +514,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357936987.026196"
+         timestampString = "357938424.620005"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "139"
-         endingLineNumber = "139"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
          landmarkName = "-showFolders_show"
          landmarkType = "5">
       </FileBreakpoint>
@@ -553,11 +527,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357937623.961657"
+         timestampString = "357938424.620005"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
          landmarkName = "-showFolders_hideAndSet:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -566,11 +540,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357937619.354014"
+         timestampString = "357938424.620005"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
          landmarkName = "-showFolders_hideAndSet:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -579,11 +553,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskLayer.mm"
-         timestampString = "357937602.858502"
+         timestampString = "357938424.620005"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
          landmarkName = "-showFolders_hideAndSet:"
          landmarkType = "5">
       </FileBreakpoint>
