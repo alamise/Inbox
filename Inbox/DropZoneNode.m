@@ -27,17 +27,22 @@
 #import "FolderModel.h"
 @interface DropZoneNode()
 @property(nonatomic,retain) CCLabelTTF* label;
--(NSString*)readableLabelForPath:(NSString*)path;
 @end
 
 @implementation DropZoneNode
-@synthesize label,folder;
+@synthesize label,title;
 -(id)init{
     if (self = [super init]){
         drawMe = true;
-        self.folder=nil;
+        self.title=@"";
     }
     return self;
+}
+
+-(void)setTitle:(NSString *)t{
+    [title autorelease];
+    title =[t retain];
+    [label setString:title];
 }
 
 -(void) draw {
@@ -55,7 +60,7 @@
         sprite.position=CGPointMake(20,150);
         [self addChild:sprite];
         
-        label = [[CCLabelTTF labelWithString:[self readableLabelForPath:self.folder.path] dimensions:CGSizeMake(185, 90) alignment:UITextAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:30] retain];
+        label = [[CCLabelTTF labelWithString:self.title dimensions:CGSizeMake(185, 90) alignment:UITextAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation fontName:@"Arial" fontSize:30] retain];
         label.position = CGPointMake(28, 145);
         label.color=ccc3(0, 0, 0);
         label.anchorPoint=CGPointMake(0, 0);
@@ -67,14 +72,5 @@
     }
 }
 
--(NSString*)readableLabelForPath:(NSString*)path{
-    NSString* str=path;
-    if ([path hasPrefix:@"[Gmail]/"]){
-        str = [path substringFromIndex:8];
-    }
-    if ([str isEqualToString:@"All Mail"]){
-        return @"Archive";
-    }
-    return str;
-}
+
 @end

@@ -26,6 +26,7 @@
 @class EmailModel,FolderModel;
 @protocol DeskProtocol <NSObject>
     -(void)moveEmail:(EmailModel*)emailId toFolder:(FolderModel*)folderId;
+    -(void)archiveEmail:(EmailModel*)emailId;
     -(void)emailTouched:(EmailModel*)email;
     -(void)openSettings;
 @end

@@ -1029,7 +1029,8 @@
 				F427D847154F35DB001953C4 /* ContextualRightSidePanel.m */,
 				F427D849154F3D53001953C4 /* FoldersTable.h */,
 				F427D84A154F3D53001953C4 /* FoldersTable.m */,
-				F427D84C154F3EB8001953C4 /* folder's dropzone */,
+				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
+				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -1041,15 +1042,6 @@
 				F41E658A14A9CFB700BA4712 /* EmailNode.mm */,
 			);
 			name = elements;
-			sourceTree = "<group>";
-		};
-		F427D84C154F3EB8001953C4 /* folder's dropzone */ = {
-			isa = PBXGroup;
-			children = (
-				F41E667714A9E1F800BA4712 /* DropZoneNode.h */,
-				F41E667814A9E1F800BA4712 /* DropZoneNode.m */,
-			);
-			name = "folder's dropzone";
 			sourceTree = "<group>";
 		};
 		F44B060B153365D4003B801D /* synchronizer */ = {

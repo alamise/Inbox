@@ -49,9 +49,9 @@
     
     if (folders){
         FolderModel* folder = [self.folders objectAtIndex:idx];
-        node.folder = folder;
+        node.title = [folder hrTitle];
     }else{
-        node.folder =  nil; 
+        node.title =  @""; 
     }
     return node;
 }

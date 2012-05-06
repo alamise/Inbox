@@ -28,7 +28,7 @@
 @interface DropZoneNode : SWTableViewCell{
     CCLabelTTF* label;
     BOOL drawMe;
-    FolderModel* folder;
+    NSString* title;
 }
-@property(nonatomic,retain) FolderModel* folder;
+@property(nonatomic,retain) NSString* title;
 @end

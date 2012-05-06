@@ -57,7 +57,7 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
-        [self.modelsManager startSync];
+        //[self.modelsManager startSync];
 	}
 	return self;
 }
@@ -82,6 +82,10 @@
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{
     [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+}
+
+-(void)archiveEmail:(EmailModel *)email{
+
 }
 
 -(void)showEmail:(NSManagedObjectID*)emailId{
@@ -159,15 +163,7 @@
         }else{
             isWaiting = NO;
             [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
-            
-            InboxEmptyController* inboxEmptyController = [[InboxEmptyController alloc] initWithNibName:@"InboxEmptyView" bundle:nil];
-            inboxEmptyController.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
-            
-            UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:inboxEmptyController];
-            [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
-            navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
-            navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
-            [self presentModalViewController:navCtr animated:YES];
+            // Inbox empty
         }
     }else{
         isWaiting = NO;
@@ -266,6 +262,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    return;
     [layer refresh];
     [self nextStep];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];

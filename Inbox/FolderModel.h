@@ -32,5 +32,6 @@
 @property(nonatomic,retain) NSString* path;
 @property(nonatomic,retain) EmailAccountModel* account;
 @property(nonatomic,retain) NSMutableSet* emails;
+-(NSString*)hrTitle; // Human Readable title
 +(NSString*)entityName;
 @end

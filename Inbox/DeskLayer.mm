@@ -60,7 +60,7 @@
         
         foldersTable = [[FoldersTable alloc] init];
 
-        //[self offlineTests];
+        [self offlineTests];
 	}
 	return self;
 }
@@ -82,12 +82,18 @@
         [self putEmail:email];
     }  
 
+}
+
+-(void)onEnter{
+    [super onEnter];
+    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
     NSMutableArray* ff = [NSMutableArray array];
     for (int i=0;i<5;i++){
         FolderModel* folder = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
         [ff addObject:folder];
     }
-    //[table setFolders:ff];
+    [self performSelector:@selector(showFolders:) withObject:ff afterDelay:1];
+
 }
 
 -(CCLayer*)layer {
@@ -120,7 +126,7 @@
 
 -(void)showFolders_hideAndSet:(NSArray *)folders{
     if (!drawingManager.rightSidePanel.isHidden){
-        [drawingManager.rightSidePanel hideAnimated:YES callback:^{
+        [drawingManager.rightSidePanel hideAnimated:NO callback:^{
             if (!foldersTable.view.parent){
                 [self addChild:foldersTable.view];
             }
@@ -138,7 +144,7 @@
 }
 
 -(void)showFolders_show{
-    [drawingManager.rightSidePanel showAnimated:YES callback:nil];
+    [drawingManager.rightSidePanel showAnimated:NO callback:nil];
 }
 
 -(void) interactionStarted{
@@ -188,31 +194,27 @@
         if ([element isKindOfClass:[EmailNode class]]){
             [delegate moveEmail:((EmailNode*)element).email toFolder:folder];
             [interactionsManager unregisterNode:element];
-            CCFiniteTimeAction* scale = [CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0];
-            CCFiniteTimeAction* callback = [CCCallBlock actionWithBlock:^{
-                [drawingManager removeChildAndBody:element];
-            }];
-            
-            CCAction* sequence = [CCSequence actionOne:scale two:callback];
-            [[element visualNode] runAction:sequence];
+            [drawingManager scaleOut:[element visualNode]];
         }
+        return false;
+    }else if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
+        if ([element isKindOfClass:[EmailNode class]]){
+            [delegate archiveEmail:((EmailNode*)element).email];
+            [interactionsManager unregisterNode:element];
+            [drawingManager scaleOut:[element visualNode]];
+        }
+
         return false;
     }
     return true;
 }
 
 -(void)cleanDesk{
-    for (EmailNode* node in interactionsManager.visibleNodes){
+    for (id<ElementNodeProtocol> node in interactionsManager.visibleNodes){
         [interactionsManager unregisterNode:node];
-        CCFiniteTimeAction* scale = [CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0];
-        CCFiniteTimeAction* callback = [CCCallBlock actionWithBlock:^{
-            [drawingManager removeChildAndBody:node];
-        }];
-        
-        CCAction* sequence = [CCSequence actionOne:scale two:callback];
-        [node runAction:sequence];
+        [drawingManager scaleOut:[node visualNode]];
     }
-    [self setPercentage:0 labelCount:0];
+    [self setPercentage:0 labelCount:-1];
 }
 
 -(void) tick: (ccTime) dt{
