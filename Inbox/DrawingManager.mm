@@ -67,12 +67,13 @@
 }
 
 -(void)drawFastArchiveZone{
+    CGSize windowSize = [CCDirector sharedDirector].winSize;
     fastArchiveZone = (DropZoneNode*)[layer getChildByTag:FAST_ARCHIVE_TAG];
     if (!fastArchiveZone){
         fastArchiveZone = [[DropZoneNode alloc] init];
         [layer addChild:fastArchiveZone z:0 tag: FAST_ARCHIVE_TAG];
     }
-    fastArchiveZone.position = CGPointMake(300, 300);
+    fastArchiveZone.position = CGPointMake(20, 470);
     fastArchiveZone.title = NSLocalizedString(@"Archive", @"");
 }
 
@@ -84,7 +85,7 @@
         starMenu = [CCMenu menuWithItems:starMenuItem, nil];
         [layer addChild:starMenu z:0 tag:SETTINGS_BUTTON_TAG];        
     }
-    starMenu.position = CGPointMake(60,windowSize.height-60);
+    starMenu.position = CGPointMake(60,windowSize.height - 60);
 }
 
 -(void)openSettings:(id)sender{

@@ -10,7 +10,7 @@
         <attribute name="shouldPropagate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
-        <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="emails" inverseEntity="Folder" syncable="YES"/>
+        <relationship name="folder" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="emails" inverseEntity="Folder" syncable="YES"/>
     </entity>
     <entity name="EmailAccount" representedClassName="EmailAccountModel" syncable="YES">
         <attribute name="authType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -23,7 +23,7 @@
     </entity>
     <entity name="Folder" representedClassName="FolderModel" syncable="YES">
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="account" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EmailAccount" inverseName="folders" inverseEntity="EmailAccount" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EmailAccount" inverseName="folders" inverseEntity="EmailAccount" syncable="YES"/>
         <relationship name="emails" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Email" inverseName="folder" inverseEntity="Email" syncable="YES"/>
     </entity>
     <elements>

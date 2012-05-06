@@ -66,7 +66,7 @@
     [request setFetchLimit:1];
     NSArray* folders = [context executeFetchRequest:request error:error];
     [request release];
-    if (error){
+    if (*error){
         return nil;
     }else{
         if ([folders count] < 1){
@@ -105,11 +105,17 @@
 
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
+    *error = nil;
     if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
     email.shouldPropagate = true;
     email.folder = folder;
+    
+    [email.managedObjectContext save:error];
+    if (*error){
+        NSLog(@"merdeu %@",*error);
+    }
 }
 
 -(NSArray*)inboxes:(NSError**)error{
