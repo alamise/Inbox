@@ -52,6 +52,32 @@
 }
 
 
+-(FolderModel*)archiveFolderForEmail:(EmailModel*)email error:(NSError**)error{
+    *error = nil;
+    NSManagedObjectContext* context = [self sharedContext];    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+
+    NSMutableArray* array = [NSMutableArray array];
+    [array addObject:@"[Gmail]/All Mail"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path IN %@) AND account = %@",array,email.folder.account];
+    [request setPredicate:predicate];
+    [request setFetchLimit:1];
+    NSArray* folders = [context executeFetchRequest:request error:error];
+    [request release];
+    if (error){
+        return nil;
+    }else{
+        if ([folders count] < 1){
+            return email.folder;
+        }else{
+            return [folders lastObject];
+        }
+    }
+}
+
+
 -(NSArray*)foldersForAccount:(EmailAccountModel*)account error:(NSError**)error{
     error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
@@ -82,6 +108,7 @@
     if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
+    email.shouldPropagate = true;
     email.folder = folder;
 }
 
@@ -98,12 +125,12 @@
     return inboxes;
 }
 
--(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails error:(NSError**)error{
+-(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
     NSManagedObjectContext* context = [self sharedContext];    
     NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
     EmailModel* returnValue = nil;
     for (FolderModel* obj in [self inboxes:error]){
-        EmailModel* lastEmail = [self lastEmailFromFolder:obj exclude:excludedMails error:error];
+        EmailModel* lastEmail = [self lastEmailFromFolder:obj exclude:excludedMails read:read error:error];
         if (*error){
             return nil;
         }
@@ -116,13 +143,13 @@
     return returnValue;
 }
 
-- (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails error:(NSError**)error{
+- (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
     *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder = %@) AND NOT(self IN %@)", folder,excludedMails];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder = %@) AND NOT(self IN %@) AND read = %@", folder,excludedMails,[NSNumber numberWithBool: read]];          
     [request setPredicate:predicate];
     NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];

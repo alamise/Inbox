@@ -61,7 +61,7 @@
         fixtureDef.filter.categoryBits = EMAIL_CATEGORY;
         fixtureDef.filter.maskBits = EMAIL_MASK;
         body->CreateFixture(&fixtureDef);
-        self.scale=0;
+        //self.scale=0;
         free(dynamicBox);
     }
     return self;    
@@ -90,7 +90,7 @@
 
 -(void)onEnter{
     [super onEnter];
-    [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
+    //[self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
 }
 
 -(void)scaleOut{

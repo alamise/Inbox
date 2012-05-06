@@ -166,7 +166,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder.path != serverPath) AND folder.account = %@",emailAccountModel];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(shouldPropagate == YES) AND folder.account = %@",emailAccountModel];
     [request setPredicate:predicate];
     NSError* fetchError = nil;
     NSArray* models = [self.context executeFetchRequest:request error:&fetchError];
@@ -237,6 +237,7 @@
                 return false;
             }
             email.serverPath = folder.path;
+            email.shouldPropagate = NO;
         }
     }
     return true;
@@ -255,6 +256,7 @@
     foldersRequest.entity =folderDescription;
     
     NSError* fetchError = nil;
+    NSLog(@"%@",self.context);
     NSMutableArray* folders = [NSMutableArray arrayWithArray:[self.context executeFetchRequest:foldersRequest error:&fetchError]];
     DDLogVerbose(@"[%@] Getting the folders",emailAccountModel.login);
     if (fetchError){
@@ -398,6 +400,7 @@
             emailModel.sentDate = message.sentDateGMT;
             emailModel.uid = message.uid;
             emailModel.serverPath = currentCoreFolder.path;
+            emailModel.read = !message.isUnread;
             emailModel.folder = currentFolderModel;
         }
         

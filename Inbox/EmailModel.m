@@ -33,7 +33,8 @@
 @dynamic htmlBody;
 @dynamic serverPath;
 @dynamic folder;
-@dynamic isOnDesk;
+@dynamic read;
+@dynamic shouldPropagate;
 
 +(NSString*)entityName{
     return @"Email";

@@ -57,7 +57,7 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
-        //[self.modelsManager startSync];
+        [self.modelsManager startSync];
 	}
 	return self;
 }
@@ -85,7 +85,10 @@
 }
 
 -(void)archiveEmail:(EmailModel *)email{
-
+    NSError* error;
+    FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
+    [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
+    
 }
 
 -(void)showEmail:(NSManagedObjectID*)emailId{
@@ -154,7 +157,7 @@
         return;
     }
     
-    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] error:&error];    
+    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] read:false error:&error];    
     
     if (nextEmail==nil){
         if (isSyncing){
@@ -262,7 +265,6 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    return;
     [layer refresh];
     [self nextStep];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];

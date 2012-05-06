@@ -41,7 +41,7 @@
 #import "FoldersTable.h"
 #define ANIMATION_DELAY 0.2
 #define SCROLL 23435543
-
+static int zIndex = INT_MAX;
 
 
 @interface DeskLayer() 
@@ -57,10 +57,8 @@
 		[self schedule: @selector(tick:)];
         interactionsManager = [[InteractionsManager alloc] initWithDelegate:self];
         drawingManager = [[DrawingManager alloc] initWithDelegate:self];
-        
         foldersTable = [[FoldersTable alloc] init];
-
-        [self offlineTests];
+        //[self offlineTests];
 	}
 	return self;
 }
@@ -81,11 +79,11 @@
         EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
         [self putEmail:email];
     }  
-
 }
 
 -(void)onEnter{
     [super onEnter];
+    return;
     NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
     NSMutableArray* ff = [NSMutableArray array];
     for (int i=0;i<5;i++){
@@ -93,7 +91,6 @@
         [ff addObject:folder];
     }
     [self performSelector:@selector(showFolders:) withObject:ff afterDelay:1];
-
 }
 
 -(CCLayer*)layer {
@@ -105,10 +102,11 @@
 }
 
 #pragma mark add/remove/change elements methods
-
+static int plop = 2000;
 -(void) putEmail:(EmailModel*)model{
     id<ElementNodeProtocol> node = [drawingManager.inboxStack addEmail:model];
-    [self addChild:[node visualNode]];
+    [self addChild:[node visualNode] z:zIndex--]; // until I find a better solution :(
+    [self sortAllChildren];
     [interactionsManager registerNode:node];
 }
 
@@ -203,7 +201,6 @@
             [interactionsManager unregisterNode:element];
             [drawingManager scaleOut:[element visualNode]];
         }
-
         return false;
     }
     return true;

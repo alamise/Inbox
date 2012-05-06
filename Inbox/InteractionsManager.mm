@@ -65,10 +65,8 @@
                     b->SetAngularVelocity(0);
                     b->SetTransform(b->GetPosition(), 0);
                     b->SetAwake(true);
-                    return YES; /* To get the front element */
                 }
             }
-
         }
     }
     return YES;
