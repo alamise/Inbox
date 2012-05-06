@@ -11,6 +11,7 @@
 		F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */ = {isa = PBXBuildFile; fileRef = F406110E1534D42500A7CA0A /* NSObject+Queues.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
+		F418426D1556F31500753265 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F418426C1556F31200753265 /* CoreDataManager.m */; };
 		F41E65B314A9CFB800BA4712 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E644114A9CFB700BA4712 /* AppDelegate.mm */; };
 		F41E664314A9CFB800BA4712 /* DeskController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658114A9CFB700BA4712 /* DeskController.mm */; };
 		F41E664414A9CFB800BA4712 /* DeskLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658314A9CFB700BA4712 /* DeskLayer.mm */; };
@@ -646,6 +647,8 @@
 		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
+		F418426B1556F31200753265 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		F418426C1556F31200753265 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		F41E644014A9CFB700BA4712 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F41E644114A9CFB700BA4712 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		F41E658014A9CFB700BA4712 /* DeskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeskController.h; sourceTree = "<group>"; };
@@ -961,6 +964,8 @@
 				F47DBDCD15333B74008A5373 /* models.h */,
 				F44B05FF15334E6E003B801D /* ModelsManager.h */,
 				F44B060015334E6F003B801D /* ModelsManager.m */,
+				F418426B1556F31200753265 /* CoreDataManager.h */,
+				F418426C1556F31200753265 /* CoreDataManager.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -2035,6 +2040,7 @@
 				F427D842154F2368001953C4 /* DrawingManager.mm in Sources */,
 				F427D848154F35DB001953C4 /* ContextualRightSidePanel.m in Sources */,
 				F427D84B154F3D53001953C4 /* FoldersTable.m in Sources */,
+				F418426D1556F31500753265 /* CoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

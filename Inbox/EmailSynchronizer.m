@@ -364,16 +364,17 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@ AND folder = %@", message.uid,currentFolderModel];
             [emailRequest setPredicate:predicate];
             NSError* fetchError = nil;
-            NSArray* objects = [self.context executeFetchRequest:emailRequest error:&fetchError];
+            NSArray* matchingEmails = [[self.context executeFetchRequest:emailRequest error:&fetchError] retain];
             [emailRequest release];
             if (fetchError){
                 DDLogError(@"[%@] Can't test if the message already exist",emailAccountModel.login);
                 [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]]];
+                [matchingEmails release];
                 return false;   
             }
-            if ([objects count]>0){
+            if ([matchingEmails count]>0){
                 DDLogVerbose(@"[%@] email already exist for that folder, updating ",emailAccountModel.login);
-                emailModel = [objects objectAtIndex:0];
+                emailModel = [matchingEmails objectAtIndex:0];
             }else{
                 DDLogVerbose(@"[%@] email does not exist, creating",emailAccountModel.login);
                 @try {
@@ -382,9 +383,11 @@
                 @catch (NSException *exception) {
                     DDLogVerbose(@"[%@] error when creating the new email",emailAccountModel.login);
                     [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]]];
+                    [matchingEmails release];   
                     return false;   
                 }
             }
+            [matchingEmails release];
             NSEnumerator* enumerator = [message.from objectEnumerator];
             CTCoreAddress* from;
             

@@ -74,7 +74,7 @@ static int zIndex = INT_MAX;
 }
 
 -(void)offlineTests{
-    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
+    NSManagedObjectContext* context=[[AppDelegate sharedInstance].coreDataManager mainContext];
     for (int i=0;i<5;i++){
         EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
         [self putEmail:email];
@@ -84,7 +84,7 @@ static int zIndex = INT_MAX;
 -(void)onEnter{
     [super onEnter];
     return;
-    NSManagedObjectContext* context=[((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
+    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
     NSMutableArray* ff = [NSMutableArray array];
     for (int i=0;i<5;i++){
         FolderModel* folder = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];

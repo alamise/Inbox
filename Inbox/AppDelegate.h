@@ -26,17 +26,13 @@
 #import <CoreData/CoreData.h>
 #import "Logger.h"
 #import "BWQuincyManager.h"
+#import "CoreDataManager.h"
 @interface AppDelegate : NSObject <UIApplicationDelegate,BWQuincyManagerDelegate> {
 	UIWindow *window;
     UINavigationController* navigationController;
-    NSManagedObjectModel *managedObjectModel;
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectContext* mainContext;
-    NSManagedObjectContext* syncContext;
 }
-@property(readonly,nonatomic,retain) NSManagedObjectContext* mainContext;
-@property(readonly,nonatomic,retain) NSManagedObjectContext* syncContext;
+@property(nonatomic,retain,readonly) CoreDataManager* coreDataManager;
 @property (nonatomic, retain,readwrite) UIWindow *window;
 -(NSString*)plistPath;
--(void)resetDatabase;
++ (AppDelegate*)sharedInstance;
 @end

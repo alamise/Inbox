@@ -35,7 +35,7 @@
     }
     [synchronizers removeAllObjects];
     
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate mainContext];
+    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
@@ -64,7 +64,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
 
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (Synchronizer* sync in synchronizers){
             [sync startSync];
         }

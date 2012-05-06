@@ -80,19 +80,30 @@
 }
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{
-    [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
+    @try{
+        [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
+    }
+    @catch(NSException* exception){
+        NSLog(@"email deleted");
+    }
+    
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 -(void)archiveEmail:(EmailModel *)email{
     NSError* error;
-    FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
-    [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
+    @try{
+        FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
+        [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
+    }
+    @catch(NSException* exception){
+        NSLog(@"email deleted");
+    }
     
 }
 
 -(void)showEmail:(NSManagedObjectID*)emailId{
-    EmailModel* email = (EmailModel*)[[(AppDelegate*)[UIApplication sharedApplication].delegate mainContext] objectWithID:emailId];
+    EmailModel* email = (EmailModel*)[[[AppDelegate sharedInstance].coreDataManager mainContext] objectWithID:emailId];
     if (!email.htmlBody){
         [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
     }else{
@@ -183,7 +194,7 @@
 
 -(void)resetModel{
 
-    NSManagedObjectContext* context = [(AppDelegate*)[UIApplication sharedApplication].delegate mainContext];
+    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
     [self.modelsManager abortSync];
     
 

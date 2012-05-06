@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSManagedObjectContext* context = [((AppDelegate*)[UIApplication sharedApplication].delegate) mainContext];
+    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
     EmailModel* email = (EmailModel*)[context objectWithID:emailId];
     [webView loadHTMLString:email.htmlBody baseURL:nil];
     self.navigationController.navigationBar.barStyle=UIBarStyleBlack;

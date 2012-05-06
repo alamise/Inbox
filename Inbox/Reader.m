@@ -24,7 +24,7 @@ static Reader* instance;
 }
 
 -(NSManagedObjectContext*)sharedContext{
-    return [(AppDelegate*)[UIApplication sharedApplication].delegate mainContext];
+    return [((AppDelegate*)[UIApplication sharedApplication].delegate).coreDataManager mainContext];
 }
 
 @end
