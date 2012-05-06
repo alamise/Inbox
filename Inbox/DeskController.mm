@@ -150,7 +150,7 @@
         return;
     }
     
-    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInbox:&error];    
+    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] error:&error];    
     
     if (nextEmail==nil){
         if (isSyncing){
@@ -174,7 +174,6 @@
         [self performSelectorOnMainThread:@selector(hideLoadingHud) withObject:nil waitUntilDone:YES];
         [layer showFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
         
-        nextEmail.folder = nil;
         [layer putEmail:nextEmail];
         if ([layer elementsOnTheDesk] < MAX_ELEMENTS){
             [self nextStep];

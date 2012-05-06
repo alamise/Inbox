@@ -29,7 +29,7 @@
 -(EmailNode*)addEmail:(EmailModel*)emailModel{
     b2BodyDef bodyDef;
     
-	bodyDef.position.Set(200/PTM_RATIO,400/PTM_RATIO);
+	bodyDef.position.Set(150/PTM_RATIO,400/PTM_RATIO);
     bodyDef.linearDamping=10;
     bodyDef.linearVelocity = [self getLinearVelocityVector];
     bodyDef.angularDamping=4;

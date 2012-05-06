@@ -98,12 +98,12 @@
     return inboxes;
 }
 
--(EmailModel*)lastEmailFromInbox:(NSError**)error{
+-(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails error:(NSError**)error{
     NSManagedObjectContext* context = [self sharedContext];    
     NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
     EmailModel* returnValue = nil;
     for (FolderModel* obj in [self inboxes:error]){
-        EmailModel* lastEmail = [self lastEmailFromFolder:obj error:error];
+        EmailModel* lastEmail = [self lastEmailFromFolder:obj exclude:excludedMails error:error];
         if (*error){
             return nil;
         }
@@ -116,19 +116,17 @@
     return returnValue;
 }
 
-
--(EmailModel*)lastEmailFromFolder:(FolderModel *)folder error:(NSError**)error{
+- (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails error:(NSError**)error{
     *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folder = %@", folder];          
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder = %@) AND NOT(self IN %@)", folder,excludedMails];          
     [request setPredicate:predicate];
     NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];
     [sortBySentDate release];
-    //[request setPropertiesToFetch:[entity properties]];
     
     NSArray* objects = [context executeFetchRequest:request error:error];
     [request release];

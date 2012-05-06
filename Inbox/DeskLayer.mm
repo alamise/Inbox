@@ -167,6 +167,21 @@
     return [interactionsManager.visibleNodes count];
 }
 
+-(NSArray*)mailsOnDesk{
+    NSMutableArray* mails = [NSMutableArray array];
+    for (id<ElementNodeProtocol> element in interactionsManager.visibleNodes){
+        if ([element isKindOfClass:[EmailNode class]]){
+            [mails addObject:((EmailNode*)element).email];
+        }
+    }
+    return mails;
+}
+
+
+-(void) elementTouched:(id<ElementNodeProtocol>)element{
+    
+}
+
 -(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point{
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder != nil){

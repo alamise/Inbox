@@ -55,6 +55,11 @@
 @synthesize window,navigationController,mainContext,syncContext;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
+    self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
+    [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+    self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
+    [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+    
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
 
@@ -75,13 +80,7 @@
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
 
-    
-    
-    self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
-    [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-    self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
-    [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-    
+
 	[window makeKeyAndVisible];
 }
 

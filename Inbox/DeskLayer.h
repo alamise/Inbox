@@ -50,6 +50,7 @@
 -(int) elementsOnTheDesk;
 -(void) refresh;
 
+-(NSArray*)mailsOnDesk;
 -(void)setPercentage:(float)percentage labelCount:(int)count;
 -(void)showFolders:(NSArray*)folders;
 @end

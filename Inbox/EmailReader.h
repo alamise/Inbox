@@ -14,8 +14,8 @@
 +(EmailReader*)sharedInstance;
 
 - (void) fetchEmailBody:(EmailModel*)emailId error:(NSError**)error;
--(EmailModel*)lastEmailFromInbox:(NSError**)error;
-- (EmailModel*) lastEmailFromFolder:(FolderModel *)folderId error:(NSError**)error;
+-(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails error:(NSError**)error;
+- (EmailModel*) lastEmailFromFolder:(FolderModel *)folderId exclude:(NSArray*)excludedMails error:(NSError**)error;
 - (void) moveEmail:(EmailModel*)emailId toFolder:(FolderModel *)folderId error:(NSError**)error;
 - (NSArray*) foldersForAccount:(EmailAccountModel*)accountId error:(NSError**)error;
 -(int)emailsCountInInboxes:(NSError**)error;
