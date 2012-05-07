@@ -32,19 +32,19 @@
 
 @interface EmailNode ()
 -(void) draw:(NSString*)subject senderName:(NSString*)senderName;
+@property(nonatomic,retain) NSManagedObjectID* emailId;
 @end
 
 @implementation EmailNode
 
-@synthesize email,didMoved,isAppearing,isDisappearing;
+@synthesize didMoved,isAppearing,isDisappearing,emailId;
 
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
     self = [super init];
     if (self) {
         world = w;
-        self.email = model;
         [self draw:model.subject senderName:model.senderName];
-
+        self.emailId = model.objectID;
         // Body
         bodyDef.type = b2_dynamicBody;
         bodyDef.userData = self;
@@ -108,9 +108,9 @@
 }
 
 -(void)dealloc{
+    self.emailId = nil;
     body = nil;
     world = nil;
-    self.email = nil;
     [title release];
     [content release];
     [super dealloc];

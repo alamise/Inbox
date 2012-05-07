@@ -39,6 +39,7 @@
 #import "DrawingManager.h"
 #import "ContextualRightSidePanel.h"
 #import "FoldersTable.h"
+#import "NSArray+CoreData.h"
 #define ANIMATION_DELAY 0.2
 #define SCROLL 23435543
 static int zIndex = INT_MAX;
@@ -102,7 +103,6 @@ static int zIndex = INT_MAX;
 }
 
 #pragma mark add/remove/change elements methods
-static int plop = 2000;
 -(void) putEmail:(EmailModel*)model{
     id<ElementNodeProtocol> node = [drawingManager.inboxStack addEmail:model];
     [self addChild:[node visualNode] z:zIndex--]; // until I find a better solution :(
@@ -117,8 +117,12 @@ static int plop = 2000;
 #pragma mark - drag & drop
 
 -(void)showFolders:(NSArray*)folders{
-    if (![foldersTable.folders isEqualToArray:folders]){
-        [self showFolders_hideAndSet:folders];
+    NSArray* currentFolders = foldersTable.folders;
+    NSArray* newFolders = [folders ArrayOfManagedIds];
+    NSLog(@"%@",currentFolders);
+    NSLog(@"%@",newFolders);
+    if (![currentFolders isEqualToArray:newFolders]){
+        [self showFolders_hideAndSet:newFolders];
     }
 }
 
@@ -175,7 +179,10 @@ static int plop = 2000;
     NSMutableArray* mails = [NSMutableArray array];
     for (id<ElementNodeProtocol> element in interactionsManager.visibleNodes){
         if ([element isKindOfClass:[EmailNode class]]){
-            [mails addObject:((EmailNode*)element).email];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            if (emailModel){
+                [mails addObject:emailModel];
+            }
         }
     }
     return mails;
@@ -190,16 +197,23 @@ static int plop = 2000;
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder != nil){
         if ([element isKindOfClass:[EmailNode class]]){
-            [delegate moveEmail:((EmailNode*)element).email toFolder:folder];
-            [interactionsManager unregisterNode:element];
-            [drawingManager scaleOut:[element visualNode]];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            if (emailModel){
+                [delegate moveEmail:emailModel toFolder:folder];
+                [interactionsManager unregisterNode:element];
+                [drawingManager scaleOut:[element visualNode]];
+            }
         }
         return false;
     }else if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
         if ([element isKindOfClass:[EmailNode class]]){
-            [delegate archiveEmail:((EmailNode*)element).email];
-            [interactionsManager unregisterNode:element];
-            [drawingManager scaleOut:[element visualNode]];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            if (emailModel){
+                [delegate archiveEmail:emailModel];
+                [interactionsManager unregisterNode:element];
+                [drawingManager scaleOut:[element visualNode]];
+
+            }          
         }
         return false;
     }

@@ -10,6 +10,9 @@
 #import "DropZoneNode.h"
 #import "cocos2d.h"
 #import "FolderModel.h"
+#import "CoreDataManager.h"
+#import "AppDelegate.h"
+
 @interface FoldersTable()
 @end
 
@@ -40,15 +43,16 @@
     [table scrollToTop];
 }
 
+
 -(CGSize)cellSizeForTable:(SWTableView *)t{
     return CGSizeMake(240, 280);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)t cellAtIndex:(NSUInteger)idx{
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
-    
-    if (folders){
-        FolderModel* folder = [self.folders objectAtIndex:idx];
+
+    FolderModel* folder = (FolderModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:idx]];
+    if (folder){
         node.title = [folder hrTitle];
     }else{
         node.title =  @""; 
@@ -67,7 +71,7 @@
 -(FolderModel*) folderModelAtPoint:(CGPoint)point{
     int cellIndex = [table cellIndexAt:point];
     if (cellIndex!=-1){
-        FolderModel* folder = [self.folders objectAtIndex:cellIndex];
+        FolderModel* folder = (FolderModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:cellIndex]];
         return folder;
     }
     return nil;

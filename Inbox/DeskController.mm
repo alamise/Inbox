@@ -80,26 +80,14 @@
 }
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{
-    @try{
-        [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
-    }
-    @catch(NSException* exception){
-        NSLog(@"email deleted");
-    }
-    
+    [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
 
 -(void)archiveEmail:(EmailModel *)email{
     NSError* error;
-    @try{
-        FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
-        [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
-    }
-    @catch(NSException* exception){
-        NSLog(@"email deleted");
-    }
-    
+    FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
+    [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
 }
 
 -(void)showEmail:(NSManagedObjectID*)emailId{
