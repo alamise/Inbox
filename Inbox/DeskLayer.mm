@@ -59,7 +59,6 @@ static int zIndex = INT_MAX;
         interactionsManager = [[InteractionsManager alloc] initWithDelegate:self];
         drawingManager = [[DrawingManager alloc] initWithDelegate:self];
         foldersTable = [[FoldersTable alloc] init];
-        //[self offlineTests];
 	}
 	return self;
 }
@@ -84,6 +83,7 @@ static int zIndex = INT_MAX;
 
 -(void)onEnter{
     [super onEnter];
+    //[self offlineTests];
     return;
     NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
     NSMutableArray* ff = [NSMutableArray array];
@@ -179,7 +179,7 @@ static int zIndex = INT_MAX;
     NSMutableArray* mails = [NSMutableArray array];
     for (id<ElementNodeProtocol> element in interactionsManager.visibleNodes){
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [mails addObject:emailModel];
             }
@@ -197,7 +197,7 @@ static int zIndex = INT_MAX;
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder != nil){
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [delegate moveEmail:emailModel toFolder:folder];
                 [interactionsManager unregisterNode:element];
@@ -207,12 +207,11 @@ static int zIndex = INT_MAX;
         return false;
     }else if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:((EmailNode*)element).emailId];
+            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [delegate archiveEmail:emailModel];
                 [interactionsManager unregisterNode:element];
                 [drawingManager scaleOut:[element visualNode]];
-
             }          
         }
         return false;

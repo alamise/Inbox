@@ -219,6 +219,9 @@
     account.password = [[PrivateValues sharedInstance] myPassword]; // to test the sync
     NSError* error = nil;
     [context save:&error];
+    if (error){
+        NSLog(@"%@",error);
+    }
     [account release];
     [self.modelsManager startSync];
     [self nextStep];
@@ -264,6 +267,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    return;
     [layer refresh];
     [self nextStep];
     NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];

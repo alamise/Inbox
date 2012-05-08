@@ -85,7 +85,7 @@
         starMenu = [CCMenu menuWithItems:starMenuItem, nil];
         [layer addChild:starMenu z:0 tag:SETTINGS_BUTTON_TAG];        
     }
-    starMenu.position = CGPointMake(60,windowSize.height - 60);
+    starMenu.position = CGPointMake(250,50);
 }
 
 -(void)openSettings:(id)sender{

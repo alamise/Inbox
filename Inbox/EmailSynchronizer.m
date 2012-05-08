@@ -442,6 +442,7 @@
     }
     if (![coreAccount isConnected]){
         @try {
+            NSLog(@"%@",emailAccountModel);
             [coreAccount connectToServer:emailAccountModel.serverAddr port:[emailAccountModel.port intValue] connectionType:[emailAccountModel.conType intValue] authType:[emailAccountModel.authType intValue] login:emailAccountModel.login password:emailAccountModel.password];            
         }
         @catch (NSException *exception) {

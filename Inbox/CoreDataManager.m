@@ -37,11 +37,9 @@
 }
 
 -(void)mainContextDidSave:(NSNotification*)notif{
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self.syncContext lock];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
         [self.syncContext unlock];
-    });
 }
 
 -(void)syncContextDidSave:(NSNotification*)notif{
@@ -51,6 +49,8 @@
 }
 
 -(void)dealloc{
+    self.mainContext = nil;
+    self.syncContext = nil;
     [managedObjectModel release];
     [persistentStoreCoordinator release];
     [super dealloc];
