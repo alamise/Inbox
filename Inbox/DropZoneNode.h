@@ -31,4 +31,6 @@
     NSString* title;
 }
 @property(nonatomic,retain) NSString* title;
++ (CGPoint) visualCenterFromRealCenter:(CGPoint)point;
++(CGSize) fullSize;
 @end

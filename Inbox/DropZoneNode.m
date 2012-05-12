@@ -72,5 +72,14 @@
     }
 }
 
++ (CGPoint) visualCenterFromRealCenter:(CGPoint)point{
+    return ccpAdd(point, CGPointMake(2, 2));
+}
+
+
++(CGSize) fullSize{
+return CGSizeMake(240, 250);
+}
+
 
 @end

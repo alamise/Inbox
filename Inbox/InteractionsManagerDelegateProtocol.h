@@ -15,5 +15,5 @@
 -(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point;
 -(void) interactionStarted;
 -(void) interactionEnded;
-
+-(void) longTouchOnPoint:(CGPoint)point;
 @end

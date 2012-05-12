@@ -276,7 +276,7 @@
     DDLogVerbose(@"[%@] Syncing started",emailAccountModel.login);
     int currentFolderIndex = 0;
     int page = 0;
-    int pageSize = 20;
+    int pageSize = 100;
     CTCoreFolder *currentCoreFolder = nil;
     int updateRemoteCounter = 0;
     NSMutableDictionary* totalMessageCount = [NSMutableDictionary dictionary];

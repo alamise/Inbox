@@ -14,7 +14,7 @@
 #import "CCNode.h"
 
 #define TOUCHES_DELAY 0.1
-
+#define LONG_PRESS_DELAY 0.5
 @interface InteractionsManager()
 @property(nonatomic,retain) id<ElementNodeProtocol> draggedNode;
 
@@ -51,9 +51,10 @@
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    lastTouchTime = [NSDate timeIntervalSinceReferenceDate];
     self.draggedNode = nil;
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
-    for (id<ElementNodeProtocol> node in visibleNodes){        
+    for (id<ElementNodeProtocol> node in [visibleNodes reverseObjectEnumerator]){        
         CGRect rect = [node visualNode].boundingBox;
         if (CGRectContainsPoint(rect, location)) {
             self.draggedNode = node;
@@ -65,10 +66,12 @@
                     b->SetAngularVelocity(0);
                     b->SetTransform(b->GetPosition(), 0);
                     b->SetAwake(true);
+                    return true;
                 }
             }
         }
     }
+    
     return YES;
 }
 
@@ -103,8 +106,12 @@
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
-    if (self.draggedNode==nil){
-        return;
+    CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
+    if (self.draggedNode == nil){
+        if (lastTouchTime + LONG_PRESS_DELAY < [NSDate timeIntervalSinceReferenceDate]){
+            [delegate longTouchOnPoint:newLocation];
+            return;
+        }
     }
     [delegate interactionEnded];
     
@@ -112,7 +119,6 @@
         [delegate elementTouched:self.draggedNode];
         return;
     }else{
-        CGPoint newLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
         BOOL shouldAddLinearVelocity = [delegate element:self.draggedNode droppedAt:newLocation];
         if (shouldAddLinearVelocity){
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
@@ -193,6 +199,8 @@
         }
     }
 }
+
+
 
 -(void)registerNode:(id<ElementNodeProtocol>)node{
     [visibleNodes insertObject:node atIndex:0];

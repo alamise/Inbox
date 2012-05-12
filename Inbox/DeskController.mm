@@ -79,7 +79,7 @@
     [self presentModalViewController:navCtr animated:YES];
 }
 
--(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{
+-(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{// ya tout qui pete ici
     [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
 }
@@ -136,6 +136,10 @@
 
 -(void)stateChanged{
     [self nextStep];
+}
+
+-(EmailModel*) lastEmailFromFolder:(FolderModel*)folder{
+    return [[EmailReader sharedInstance] lastEmailFromFolder:folder exclude:nil read:YES error:nil];
 }
 
 -(void)nextStep{

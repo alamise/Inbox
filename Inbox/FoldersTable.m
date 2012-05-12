@@ -45,7 +45,7 @@
 
 
 -(CGSize)cellSizeForTable:(SWTableView *)t{
-    return CGSizeMake(240, 280);
+    return CGSizeMake([DropZoneNode fullSize].width, [DropZoneNode fullSize].width + 30);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)t cellAtIndex:(NSUInteger)idx{
@@ -75,6 +75,14 @@
         return folder;
     }
     return nil;
+}
+
+-(CGPoint) centerOfFolderAtPoint:(CGPoint)p{
+    int cellIndex = [table cellIndexAt:p];
+    CGSize size = [self cellSizeForTable:table];
+    CGPoint point = CGPointMake(size.width, size.height * cellIndex + size.height/2);
+    point = [DropZoneNode visualCenterFromRealCenter:point];
+    return [table.container convertToWorldSpace:point];
 }
 
 @end

@@ -15,4 +15,5 @@
 }
 -(id)initWithWorld:(b2World*)w;
 -(EmailNode*)addEmail:(EmailModel*)emailModel;
+-(EmailNode*)addEmail:(EmailModel *)emailModel onPoint:(CGPoint)point;
 @end

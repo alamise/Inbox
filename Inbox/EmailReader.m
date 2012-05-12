@@ -105,6 +105,11 @@
 
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
+    if (!error){
+        NSError* err;
+        error = &err; 
+    }
+        
     *error = nil;
     if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
@@ -151,6 +156,9 @@
 
 - (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
     *error = nil;
+    if (!excludedMails){
+        excludedMails = [NSArray array];
+    }
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];

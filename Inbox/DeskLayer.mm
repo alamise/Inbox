@@ -193,6 +193,33 @@ static int zIndex = INT_MAX;
     
 }
 
+
+-(void)longTouchOnPoint:(CGPoint)point{
+    FolderModel* folder = [foldersTable folderModelAtPoint:point];
+    if (folder == nil){
+        if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
+            folder = [delegate archiveFolder];   
+        }
+    }
+    
+    if (folder != nil){
+        EmailModel* email = [delegate lastEmailFromFolder:folder];
+        if (email != nil){
+            CGPoint popingPoint = CGPointZero;
+            if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
+                CGRect fastArchiveBoundingBox = drawingManager.fastArchiveZone.boundingBox;
+                CGPoint point = CGPointMake(fastArchiveBoundingBox.origin.x + fastArchiveBoundingBox.size.width/2, fastArchiveBoundingBox.origin.y + fastArchiveBoundingBox.size.height/2);
+                popingPoint = [DropZoneNode visualCenterFromRealCenter:point];
+            }else{
+                popingPoint = [foldersTable centerOfFolderAtPoint:point];
+            }
+            [drawingManager.inboxStack addEmail:email onPoint:popingPoint];
+        }
+    }
+}
+
+
+
 -(BOOL) element:(id<ElementNodeProtocol>)element droppedAt:(CGPoint)point{
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder != nil){
@@ -209,7 +236,7 @@ static int zIndex = INT_MAX;
         if ([element isKindOfClass:[EmailNode class]]){
             EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
-                [delegate archiveEmail:emailModel];
+                [delegate moveEmail:emailModel toFolder:[delegate archiveFolder]];
                 [interactionsManager unregisterNode:element];
                 [drawingManager scaleOut:[element visualNode]];
             }          

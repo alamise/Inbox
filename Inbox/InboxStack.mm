@@ -27,12 +27,17 @@
 
 
 -(EmailNode*)addEmail:(EmailModel*)emailModel{
+    return [self addEmail:emailModel onPoint:CGPointMake(150, 350)];
+}
+
+
+-(EmailNode*)addEmail:(EmailModel *)emailModel onPoint:(CGPoint)point{
     b2BodyDef bodyDef;
     
-	bodyDef.position.Set(150/PTM_RATIO,350/PTM_RATIO);
-    bodyDef.linearDamping=10;
+	bodyDef.position.Set(point.x/PTM_RATIO,point.y/PTM_RATIO);
+    bodyDef.linearDamping = 10;
     bodyDef.linearVelocity = [self getLinearVelocityVector];
-    bodyDef.angularDamping=4;
+    bodyDef.angularDamping = 4;
     bodyDef.angularVelocity=[self getAngularVelocity];
     
     EmailNode* node = [[EmailNode alloc] initWithEmailModel:emailModel bodyDef:bodyDef world:world];

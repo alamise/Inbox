@@ -16,5 +16,7 @@
 }
 @property(nonatomic,retain) NSArray* folders;
 -(FolderModel*) folderModelAtPoint:(CGPoint)point;
+-(CGPoint) centerOfFolderAtPoint:(CGPoint)point;
 -(CCNode*)view;
+
 @end

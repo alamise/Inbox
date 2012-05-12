@@ -37,11 +37,17 @@
 }
 
 -(void)mainContextDidSave:(NSNotification*)notif{
-    [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.syncContext lock];
+        [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
+        [self.syncContext unlock];
+    });
 }
 
 -(void)syncContextDidSave:(NSNotification*)notif{
+    [self.mainContext lock];
     [self.mainContext mergeChangesFromContextDidSaveNotification:notif];
+    [self.mainContext unlock];
 }
 
 -(void)dealloc{
