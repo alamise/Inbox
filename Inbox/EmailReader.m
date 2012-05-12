@@ -111,9 +111,6 @@
     }
     email.shouldPropagate = true;
     email.folder = folder;
-    NSLog(@"%@",[[AppDelegate sharedInstance].coreDataManager.mainContext deletedObjects]);
-    NSLog(@"%@",[[AppDelegate sharedInstance].coreDataManager.mainContext updatedObjects]);
-    NSLog(@"%@",[[AppDelegate sharedInstance].coreDataManager.mainContext insertedObjects]);
     [[AppDelegate sharedInstance].coreDataManager.mainContext save:error];
     if (*error){
         NSLog(@"%@",email);

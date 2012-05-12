@@ -195,7 +195,8 @@
                 if (account == nil){
                     return false;
                 }
-                folder = [account folderWithPath:email.serverPath];
+                folder = [account folderWithPath:email.serverPath];// bug la au reboot 
+                //+ cehck la difference entre messageId et UID sur un CTCoreMessge.
             }
             @catch (NSException *exception) {
                 skip = true;
@@ -227,7 +228,6 @@
                 return false; 
             }
         }else{
-            DDLogVerbose(@"[%@] error when getting the matching folder on the server, skipping this email",emailAccountModel.login);
             @try {
                 [folder moveMessage:email.folder.path forMessage:message];
             }
@@ -279,6 +279,8 @@
     int pageSize = 20;
     CTCoreFolder *currentCoreFolder = nil;
     int updateRemoteCounter = 0;
+    NSMutableDictionary* totalMessageCount = [NSMutableDictionary dictionary];
+    
     while ([folders count]!=0){
         if (updateRemoteCounter++%30 == 0){
             if (![self updateRemoteMessages]){/* This can take a long time! We should update the remote messages sometimes */
@@ -300,6 +302,9 @@
             [currentCoreFolder disconnect];
             currentCoreFolder = [account folderWithPath:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).path]; 
             [currentCoreFolder connect];
+            if (![totalMessageCount objectForKey:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).objectID]){
+                [totalMessageCount setObject:[NSNumber numberWithInt:[currentCoreFolder totalMessageCount]] forKey:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).objectID];
+            }
         }
         @catch (NSException *exception) {
             NSLog(@"%@",exception);
@@ -311,8 +316,12 @@
             return true;
         }
         @try {
-            NSLog(@"page: %d (%d %d)",page, page*pageSize+1, (page+1)*pageSize);
-            messagesBuffer = [currentCoreFolder messageObjectsFromIndex:page*pageSize+1 toIndex:(page+1)*pageSize];
+            int start = [((NSNumber*)[totalMessageCount objectForKey:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).objectID]) intValue] - (page+1) * pageSize; 
+            if (start<0) start = 0;
+            int end = [((NSNumber*)[totalMessageCount objectForKey:((FolderModel*)[folders objectAtIndex:currentFolderIndex]).objectID]) intValue] - (page) * pageSize;
+            if (end<0) end = 0;
+            NSLog(@"page: %d (%d %d)",page, start, end);
+            messagesBuffer = [currentCoreFolder messageObjectsFromIndex:start toIndex:end];
             NSLog(@"messages: %d",[messagesBuffer count]);
         }
         @catch (NSException *exception) {
@@ -397,6 +406,7 @@
             }else{
                 from = message.sender;
             }
+            DDLogVerbose(@"[%@] processing: %@",emailAccountModel.login,message.subject);
             emailModel.senderName = from.name;
             emailModel.senderEmail = from.email;
             emailModel.subject=message.subject;

@@ -37,15 +37,11 @@
 }
 
 -(void)mainContextDidSave:(NSNotification*)notif{
-        [self.syncContext lock];
-        [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
-        [self.syncContext unlock];
+    [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
 }
 
 -(void)syncContextDidSave:(NSNotification*)notif{
-    [self.mainContext lock];
     [self.mainContext mergeChangesFromContextDidSaveNotification:notif];
-    [self.mainContext unlock];
 }
 
 -(void)dealloc{

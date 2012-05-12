@@ -22,44 +22,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Inbox/LoginController.mm"
-         timestampString = "348945965.652056"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14">
-         <Locations>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController actionOnDismiss]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "358207233.826711"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "32"
-               endingLineNumber = "32">
-            </Location>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[LoginController setActionOnDismiss:]"
-               urlString = "file://localhost/Users/simon/Documents/projects/Inbox/Inbox/LoginController.mm"
-               timestampString = "358207233.827054"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "32"
-               endingLineNumber = "32">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "Inbox/LumberjackCrashLogger.m"
          timestampString = "350127681.203905"
          startingColumnNumber = "9223372036854775807"
@@ -370,11 +332,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358014021.128433"
+         timestampString = "358512906.690669"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305"
+         startingLineNumber = "309"
+         endingLineNumber = "309"
          landmarkName = "-updateLocalMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -448,11 +410,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358120916.543775"
+         timestampString = "358512906.690669"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "463"
-         endingLineNumber = "463"
+         startingLineNumber = "472"
+         endingLineNumber = "472"
          landmarkName = "-sync"
          landmarkType = "5">
       </FileBreakpoint>
@@ -500,11 +462,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailReader.m"
-         timestampString = "358206846.911376"
+         timestampString = "358508544.560683"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "120"
-         endingLineNumber = "120"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "-moveEmail:toFolder:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -513,11 +475,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358206979.873326"
+         timestampString = "358512561.359195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "286"
+         endingLineNumber = "286"
          landmarkName = "-updateLocalMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -526,38 +488,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358207022.992654"
+         timestampString = "358511706.495648"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
-         landmarkName = "-updateRemoteMessages"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358207039.898526"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "243"
-         endingLineNumber = "243"
-         landmarkName = "-updateRemoteMessages"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "358207095.507693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
-         landmarkName = "-updateRemoteMessages"
+         startingLineNumber = "251"
+         endingLineNumber = "251"
+         landmarkName = "-updateLocalMessages"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
