@@ -8,7 +8,8 @@
 
 #import "CoreDataManager.h"
 #import <CoreData/CoreData.h>
-
+#import "AppDelegate.h"
+#import "BackgroundThread.h"
 @interface CoreDataManager()
 @property(nonatomic,retain) NSManagedObjectContext* mainContext;
 @property(nonatomic,retain) NSManagedObjectContext* syncContext;
@@ -20,28 +21,27 @@
 -(id)init{
     if (self = [super init]){
         self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
-        [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-        
-        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
-            [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-        });
-        
-        
+        [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainContextDidSave:)
                                                      name:NSManagedObjectContextDidSaveNotification object:self.mainContext];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncContextDidSave:)
-                                                     name:NSManagedObjectContextDidSaveNotification object:self.syncContext];
+        
+
+        [[AppDelegate sharedInstance].backgroundThread performBlock:^{
+            self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
+            [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncContextDidSave:)
+                                                         name:NSManagedObjectContextDidSaveNotification object:self.syncContext];
+        } waitUntilDone:YES];
     }
     return self;
 }
 
 -(void)mainContextDidSave:(NSNotification*)notif{
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    [[AppDelegate sharedInstance].backgroundThread performBlock:^{
         [self.syncContext lock];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
         [self.syncContext unlock];
-    });
+    } waitUntilDone:YES];
 }
 
 -(void)syncContextDidSave:(NSNotification*)notif{

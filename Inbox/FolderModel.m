@@ -23,8 +23,7 @@
  */
 
 #import "FolderModel.h"
-@interface FolderModel(){
-}
+@interface FolderModel()
 @end
 
 @implementation FolderModel

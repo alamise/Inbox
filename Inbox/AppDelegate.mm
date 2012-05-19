@@ -38,19 +38,23 @@
 #import "BWQuincyManager.h"
 #import "FlurryAnalytics.h"
 #import "PrivateValues.h"
+#import "BackgroundThread.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
 @interface AppDelegate()
 @property (nonatomic, retain) UINavigationController* navigationController;
 @property(nonatomic,retain,readwrite) CoreDataManager* coreDataManager;
+@property(nonatomic,retain,readwrite) BackgroundThread* backgroundThread;
 @end
 
 @implementation AppDelegate
-@synthesize window, navigationController, coreDataManager;
+@synthesize window, navigationController, coreDataManager, backgroundThread;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
     self.coreDataManager = [[[CoreDataManager alloc] init] autorelease];
+    self.backgroundThread = [[[BackgroundThread alloc] init] autorelease];
+    [self.backgroundThread.thread start];
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
 
@@ -90,6 +94,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[[CCDirector sharedDirector] end];
 	[window release];
     [navigationController release];
+    [self.backgroundThread stop];
+    self.backgroundThread = nil;
 	[super dealloc];
 }
 
