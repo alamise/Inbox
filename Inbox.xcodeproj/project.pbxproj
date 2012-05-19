@@ -852,6 +852,8 @@
 				F406110D1534D42500A7CA0A /* NSObject+Queues.h */,
 				F406110E1534D42500A7CA0A /* NSObject+Queues.m */,
 				F41843091557CDDD00753265 /* NSArray+CoreData.h */,
+				F42223381567AA3F0050F268 /* BackgroundThread.h */,
+				F42223391567AA3F0050F268 /* BackgroundThread.m */,
 				F418430A1557CDDD00753265 /* NSArray+CoreData.m */,
 			);
 			name = system;
@@ -974,8 +976,6 @@
 				F44B060015334E6F003B801D /* ModelsManager.m */,
 				F418426B1556F31200753265 /* CoreDataManager.h */,
 				F418426C1556F31200753265 /* CoreDataManager.m */,
-				F42223381567AA3F0050F268 /* BackgroundThread.h */,
-				F42223391567AA3F0050F268 /* BackgroundThread.m */,
 			);
 			name = models;
 			sourceTree = "<group>";

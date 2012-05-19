@@ -52,9 +52,11 @@
 @synthesize window, navigationController, coreDataManager, backgroundThread;
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application{
-    self.coreDataManager = [[[CoreDataManager alloc] init] autorelease];
     self.backgroundThread = [[[BackgroundThread alloc] init] autorelease];
     [self.backgroundThread.thread start];
+    
+    self.coreDataManager = [[[CoreDataManager alloc] init] autorelease];
+    
     if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
 

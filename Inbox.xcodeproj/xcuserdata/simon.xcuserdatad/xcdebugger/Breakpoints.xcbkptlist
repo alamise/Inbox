@@ -341,19 +341,6 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/InboxStack.mm"
-         timestampString = "357510787.357913"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-getAngularVelocity"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -410,11 +397,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailSynchronizer.m"
-         timestampString = "359119421.044561"
+         timestampString = "359148782.679376"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "473"
-         endingLineNumber = "473"
+         startingLineNumber = "475"
+         endingLineNumber = "475"
          landmarkName = "-sync"
          landmarkType = "5">
       </FileBreakpoint>
@@ -436,11 +423,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/EmailReader.m"
-         timestampString = "358539867.803944"
+         timestampString = "359150349.763946"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
+         startingLineNumber = "126"
+         endingLineNumber = "126"
          landmarkName = "-moveEmail:toFolder:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -449,11 +436,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "358538947.552296"
+         timestampString = "359121194.127799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "-moveEmail:toFolder:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -461,26 +448,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/CoreDataManager.m"
-         timestampString = "359119847.498589"
+         filePath = "Inbox/DeskLayer.mm"
+         timestampString = "359154272.35209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
-         landmarkName = "-syncContextDidSave:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/CoreDataManager.m"
-         timestampString = "359119812.152346"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "-mainContextDidSave:"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
+         landmarkName = "-longTouchOnPoint:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

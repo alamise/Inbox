@@ -466,7 +466,9 @@
 
 -(BOOL)sync{
     NSLog(@"%@",emailAccountModelId);
+    
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
+    NSLog(@"=====>>> %@",emailAccountModel);
     DDLogVerbose(@"[%@] Sync started for account",emailAccountModel.login);
     if (![self updateLocalFolders] || ![self updateRemoteMessages] || ![self updateLocalMessages]){
         return false;

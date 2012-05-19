@@ -53,6 +53,10 @@
 
 
 -(FolderModel*)archiveFolderForEmail:(EmailModel*)email error:(NSError**)error{
+    if (!error){
+        NSError* err;
+        error = &err;
+    }
     *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -155,6 +159,10 @@
 }
 
 - (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
+    if (!error){
+        NSError* err;
+        error = &err;
+    }
     *error = nil;
     if (!excludedMails){
         excludedMails = [NSArray array];

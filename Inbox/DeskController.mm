@@ -57,7 +57,6 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
-        [self.modelsManager startSync];
 	}
 	return self;
 }
@@ -82,6 +81,10 @@
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel*)folder{// ya tout qui pete ici
     [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
     [self performSelectorOnMainThread:@selector(nextStep) withObject:nil waitUntilDone:nil];
+}
+
+-(FolderModel*) archiveFolderForEmail:(EmailModel*)email{
+    return [[EmailReader sharedInstance] archiveFolderForEmail:email error:nil];
 }
 
 -(void)archiveEmail:(EmailModel *)email{
@@ -271,22 +274,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    return;
     [layer refresh];
-    [self nextStep];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    if([plistDic valueForKey:@"email"] && [plistDic valueForKey:@"password"]){
-        [self resetModel];
-    }else{
-        TutorialController* tutorialCtr = [[TutorialController alloc] initWithNibName:@"TutorialView" bundle:nil];
-        tutorialCtr.actionOnDismiss = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(resetModel) object:nil] autorelease];
-        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:tutorialCtr];
-        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
-        [self presentModalViewController:navCtr animated:YES];
-    }
-    [plistDic release];
-    
+    [self resetModel];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

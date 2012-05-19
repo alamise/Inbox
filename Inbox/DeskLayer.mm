@@ -198,7 +198,7 @@ static int zIndex = INT_MAX;
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder == nil){
         if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
-            folder = [delegate archiveFolder];   
+            //folder = [delegate arch];   TODO
         }
     }
     
@@ -213,7 +213,11 @@ static int zIndex = INT_MAX;
             }else{
                 popingPoint = [foldersTable centerOfFolderAtPoint:point];
             }
-            [drawingManager.inboxStack addEmail:email onPoint:popingPoint];
+            NSLog(@"%@",NSStringFromCGPoint(popingPoint));
+            NSLog(@"%@",NSStringFromCGPoint(point));
+            id<ElementNodeProtocol> node = [drawingManager.inboxStack addEmail:email onPoint:popingPoint];
+            [self addChild:node z:3];le poping point est pas bon
+            [interactionsManager registerNode:node];
         }
     }
 }
@@ -236,7 +240,7 @@ static int zIndex = INT_MAX;
         if ([element isKindOfClass:[EmailNode class]]){
             EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
-                [delegate moveEmail:emailModel toFolder:[delegate archiveFolder]];
+                [delegate moveEmail:emailModel toFolder:[delegate archiveFolderForEmail:emailModel]];
                 [interactionsManager unregisterNode:element];
                 [drawingManager scaleOut:[element visualNode]];
             }          

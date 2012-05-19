@@ -49,6 +49,7 @@
     }
 
     for (EmailAccountModel* account in emailsModels){
+        NSLog(@"%@",account);
         EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
@@ -65,7 +66,6 @@
     runningSync = [synchronizers count];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-
     [[AppDelegate sharedInstance].backgroundThread performBlock:^{
         for (Synchronizer* sync in synchronizers){
             [sync startSync];
