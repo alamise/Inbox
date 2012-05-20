@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PersistMessagesSynchronizer.h"
+#import "PersistMessagesSubSync.h"
 #import <CoreData/CoreData.h>
 #import "EmailModel.h"
 #import "FolderModel.h"
@@ -15,22 +15,11 @@
 #import "CTCoreAccount.h"
 #import "CTCoreFolder.h"
 #import "EmailAccountModel.h"
-@interface PersistMessagesSynchronizer ()
-@property(nonatomic,retain) NSManagedObjectContext* context;
-@property(nonatomic,retain) EmailAccountModel* accountModel;
+@interface PersistMessagesSubSync ()
 @end
 
 
-@implementation PersistMessagesSynchronizer
-@synthesize accountModel, context;
-
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a {
-    if (self = [super init]){
-        self.context = c;
-        self.accountModel = a;
-    }
-    return self;
-}
+@implementation PersistMessagesSubSync
 
 -(void)syncWithError:(NSError**)error{
     [self updateRemoteMessagesWithError:error];

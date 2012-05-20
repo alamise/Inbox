@@ -6,35 +6,21 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FoldersSynchronizer.h"
+#import "FoldersSubSync.h"
 #import <CoreData/CoreData.h>
 #import "FolderModel.h"
 #import "EmailSynchronizer.h"
 #import "CTCoreAccount.h"
 #import "EmailAccountModel.h"
 
-@interface FoldersSynchronizer ()
-@property(nonatomic,retain) NSManagedObjectContext* context;
-@property(nonatomic,retain) EmailAccountModel* accountModel;
+@interface FoldersSubSync ()
 @end
 
-@implementation FoldersSynchronizer
-@synthesize context, accountModel;
+@implementation FoldersSubSync
 
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a {
-    if (self = [super init]){
-        self.context = c;
-        self.accountModel = a;
-    }
-    return self;
-}
 
--(void)dealloc{
-    self.context = nil;
-    self.accountModel = nil;
-    
+-(void)dealloc{    
     [super dealloc];
-
 }
 
 -(void)syncWithError:(NSError**)error{
@@ -160,23 +146,5 @@
     }
     
 }
-
--(CTCoreAccount*)coreAccountWithError:(NSError**)error {
-    if (coreAccount == nil){
-        coreAccount = [[CTCoreAccount alloc] init];
-    }
-    if (![coreAccount isConnected]){
-        @try {
-
-            [coreAccount connectToServer:self.accountModel.serverAddr port:[self.accountModel.port intValue] connectionType:[self.accountModel.conType intValue] authType:[self.accountModel.authType intValue] login:self.accountModel.login password:self.accountModel.password];            
-        }
-        @catch (NSException *exception) {
-            *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
-            return nil;
-        }
-    }
-    return coreAccount;
-}
-
 
 @end

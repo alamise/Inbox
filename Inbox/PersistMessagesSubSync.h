@@ -7,15 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EmailSubSync.h"
+
 @class EmailAccountModel;
 @class CTCoreAccount;
 
-@interface PersistMessagesSynchronizer : NSObject{
-    NSManagedObjectContext* context;
-    EmailAccountModel* accountModel;
-    CTCoreAccount* coreAccount;
+@interface PersistMessagesSubSync : EmailSubSync{
 }
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
 
 -(void)syncWithError:(NSError**)error;
 @end

@@ -1,5 +1,5 @@
 //
-//  UpdateMessagesSynchronizer.h
+//  EmailSubSync.h
 //  Inbox
 //
 //  Created by Simon Watiau on 5/20/12.
@@ -7,16 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-@class EmailAccountModel;
-@class CTCoreAccount;
-
-@interface UpdateMessagesSynchronizer : NSObject{
+@class NSManagedObjectContext, CTCoreAccount, EmailAccountModel;
+@interface EmailSubSync : NSObject{
     NSManagedObjectContext* context;
     EmailAccountModel* accountModel;
     CTCoreAccount* coreAccount;
-    void(^onStateChanged)();
 }
-
+@property(nonatomic,retain,readonly) NSManagedObjectContext* context;
+@property(nonatomic,retain,readonly) EmailAccountModel* accountModel;
+@property(nonatomic,retain,readonly) CTCoreAccount* coreAccount;
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
--(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc;
 @end

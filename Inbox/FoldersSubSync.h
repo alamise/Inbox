@@ -7,15 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EmailSubSync.h"
 
 @class EmailAccountModel;
 @class CTCoreAccount;
-@interface FoldersSynchronizer : NSObject{
-    NSManagedObjectContext* context;
-    EmailAccountModel* accountModel;
-    CTCoreAccount* coreAccount;
+@interface FoldersSubSync : EmailSubSync{
+
 }
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
 
 -(void)syncWithError:(NSError**)error;
 @end

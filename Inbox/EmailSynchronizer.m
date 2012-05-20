@@ -18,6 +18,9 @@
 #import "FolderModel.h"
 #import "EmailModel.h"
 #import "DDLog.h"
+#import "PersistMessagesSubSync.h"
+#import "UpdateMessagesSubSync.h"
+#import "FoldersSubSync.h"
 #define ddLogLevel LOG_LEVEL_VERBOSE
 
 @implementation EmailSynchronizer
@@ -63,16 +66,14 @@
 }
 
 
-#import "PersistMessagesSynchronizer.h"
-#import "UpdateMessagesSynchronizer.h"
-#import "FoldersSynchronizer.h"
+
 -(BOOL)sync{
     
     
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
     
     NSError* error = nil;
-    FoldersSynchronizer* foldersSync = [[FoldersSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    FoldersSubSync* foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [foldersSync syncWithError:&error];
     if (error){
         return false;
@@ -80,7 +81,7 @@
     [foldersSync release];
     
     
-    PersistMessagesSynchronizer* persistSync = [[PersistMessagesSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [persistSync syncWithError:&error];
     if (error){
         return false;
@@ -88,7 +89,7 @@
     [persistSync release];
     
     
-    UpdateMessagesSynchronizer* updateSync = [[UpdateMessagesSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [updateSync syncWithError:&error onStateChanged:^{
         [self onStateChanged];
     }];

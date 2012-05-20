@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "UpdateMessagesSynchronizer.h"
+#import "UpdateMessagesSubSync.h"
 #import <CoreData/CoreData.h>
 #import "EmailModel.h"
 #import "FolderModel.h"
@@ -19,23 +19,13 @@
 #import "CTCoreMessage.h"
 #import "CTCoreAddress.h"
 
-@interface UpdateMessagesSynchronizer ()
-@property(nonatomic,retain) NSManagedObjectContext* context;
-@property(nonatomic,retain) EmailAccountModel* accountModel;
+@interface UpdateMessagesSubSync ()
 @end
 
 
 
-@implementation UpdateMessagesSynchronizer
-@synthesize context, accountModel;
+@implementation UpdateMessagesSubSync
 
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a {
-    if (self = [super init]){
-        self.context = c;
-        self.accountModel = a;
-    }
-    return self;
-}
 
 -(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc{
     onStateChanged = [osc retain];
