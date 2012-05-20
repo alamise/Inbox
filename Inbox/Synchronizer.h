@@ -28,7 +28,7 @@
 -(void)onStateChanged;
 -(void)onError:(NSError*)error;
 -(NSString*)decodeImapString:(NSString*)input;
--(BOOL)saveContextWithError:(int)errorCode;
+-(void)saveContextWithError:(NSError**)error;
 @property(readonly,assign) BOOL shouldStopAsap;
 @property(nonatomic,retain) NSManagedObjectContext* context;
 @end

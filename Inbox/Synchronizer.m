@@ -43,31 +43,6 @@
     }
 }
 
--(NSString*)decodeImapString:(NSString*)input{
-    NSMutableDictionary* translationTable = [[NSMutableDictionary alloc] init];
-    [translationTable setObject:@"&" forKey:@"&-"];
-    [translationTable setObject:@"é" forKey:@"&AOk-"];
-    [translationTable setObject:@"â" forKey:@"&AOI-"];
-    [translationTable setObject:@"à" forKey:@"&AOA-"];
-    [translationTable setObject:@"è" forKey:@"&AOg"];
-    [translationTable setObject:@"ç" forKey:@"&AOc"];
-    [translationTable setObject:@"ù" forKey:@"&APk"];
-    [translationTable setObject:@"ê" forKey:@"&AOo"];
-    [translationTable setObject:@"î" forKey:@"&AO4"];
-    [translationTable setObject:@"ó" forKey:@"&APM"];
-    [translationTable setObject:@"ñ" forKey:@"&APE"];
-    [translationTable setObject:@"á" forKey:@"&AOE"];
-    [translationTable setObject:@"ô" forKey:@"&APQ"];                   
-    [translationTable setObject:@"É" forKey:@"&AMk"];
-    [translationTable setObject:@"ë" forKey:@"&AOs"];
-    
-    for (NSString* key in [translationTable allKeys]){
-        input = [input stringByReplacingOccurrencesOfString:key withString:[translationTable objectForKey:key]];
-    }
-    [translationTable release];
-    return input;
-}
-
 -(BOOL)startSync{
     [syncLock lock];
     self.context = [[AppDelegate sharedInstance].coreDataManager syncContext];
@@ -94,19 +69,18 @@
     [self stopAsap];
 }
 
--(BOOL)saveContextWithError:(int)errorCode{
-    NSError* error = nil;
-    [self.context save:&error];
-    if (error && !self.shouldStopAsap){
-        [self onError:[NSError errorWithDomain:SYNC_ERROR_DOMAIN code:errorCode userInfo:[NSDictionary dictionaryWithObject:error forKey:ROOT_ERROR]]];
-        return false;
-    }else{
-        return true;
+-(void)saveContextWithError:(NSError**)error{
+    if (!error){
+        NSError* err = nil;
+        error = &err;
     }
+    [self.context save:error];
+    return;
 }
 
 -(void)stopAsap{
     shouldStopAsap = true;
 }
+
 
 @end

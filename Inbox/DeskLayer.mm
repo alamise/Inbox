@@ -216,7 +216,7 @@ static int zIndex = INT_MAX;
             NSLog(@"%@",NSStringFromCGPoint(popingPoint));
             NSLog(@"%@",NSStringFromCGPoint(point));
             id<ElementNodeProtocol> node = [drawingManager.inboxStack addEmail:email onPoint:popingPoint];
-            [self addChild:node z:3];le poping point est pas bon
+            [self addChild:node z:3];//le poping point est pas bon
             [interactionsManager registerNode:node];
         }
     }

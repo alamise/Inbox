@@ -13,20 +13,27 @@
 #import "FolderModel.h"
 #import "EmailModel.h"
 #import "EmailAccountModel.h"
+#import "DDLog.h"
+
 @implementation EmailReader
 
-+(EmailReader*)sharedInstance{
-    if (![self getInstance]){
++(EmailReader*)sharedInstance {
+    if (![self getInstance]) {
         [self setInstance:[[[EmailReader alloc]init]autorelease]];
     }
     return (EmailReader*)[self getInstance];
 }
 
--(int)emailsCountInInboxes:(NSError**)error{
+-(int)emailsCountInInboxes:(NSError**)error {
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
     int returnvalue = 0;
-    for (FolderModel* inbox in [self inboxes:error]){
-        returnvalue+= [self emailsCountInFolder:inbox error:error];
-        if (error){
+    for (FolderModel* inbox in [self inboxes:error]) {
+        returnvalue += [self emailsCountInFolder:inbox error:error];
+        if (*error) {
             return returnvalue;
         }
     }
@@ -34,7 +41,11 @@
 }
 
 -(int)emailsCountInFolder:(FolderModel*)folder error:(NSError**)error{
-    error = nil;
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
@@ -44,8 +55,8 @@
     
     int count = [context countForFetchRequest:request error:error];
     [request release];
-    if (error){
-        return -1;
+    if (*error){
+        return 0;
     }else{
         return count;
     }
@@ -53,7 +64,7 @@
 
 
 -(FolderModel*)archiveFolderForEmail:(EmailModel*)email error:(NSError**)error{
-    if (!error){
+    if (!error) {
         NSError* err;
         error = &err;
     }
@@ -63,9 +74,11 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
 
-    NSMutableArray* array = [NSMutableArray array];
+    NSMutableArray* array = [[NSMutableArray alloc] init];
     [array addObject:@"[Gmail]/All Mail"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path IN %@) AND account = %@",array,email.folder.account];
+    [array release];
+    
     [request setPredicate:predicate];
     [request setFetchLimit:1];
     NSArray* folders = [context executeFetchRequest:request error:error];
@@ -83,7 +96,11 @@
 
 
 -(NSArray*)foldersForAccount:(EmailAccountModel*)account error:(NSError**)error{
-    error = nil;
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
@@ -95,7 +112,7 @@
     
     NSArray* folders = [context executeFetchRequest:request error:error];
     [request release];
-    if (error){
+    if (*error){
         return [NSArray array];
     }else{
         NSMutableArray* results = [NSMutableArray array];
@@ -109,11 +126,10 @@
 
 
 -(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
-    if (!error){
+    if (!error) {
         NSError* err;
-        error = &err; 
+        error = &err;
     }
-        
     *error = nil;
     if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
@@ -121,13 +137,13 @@
     email.shouldPropagate = true;
     email.folder = folder;
     [[AppDelegate sharedInstance].coreDataManager.mainContext save:error];
-    if (*error){
-        NSLog(@"%@",email);
-        NSLog(@"merdeu %@",*error);
-    }
 }
 
 -(NSArray*)inboxes:(NSError**)error{
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
     *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -137,10 +153,18 @@
     [request setPredicate:predicate];
     NSArray* inboxes = [context executeFetchRequest:request error:error];
     [request release];
+    if (*error){
+        return [NSArray array];
+    }
     return inboxes;
 }
 
 -(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
     NSManagedObjectContext* context = [self sharedContext];    
     NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
     EmailModel* returnValue = nil;
@@ -159,7 +183,7 @@
 }
 
 - (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
-    if (!error){
+    if (!error) {
         NSError* err;
         error = &err;
     }
@@ -192,6 +216,11 @@
 }
 
 -(void)fetchEmailBody:(EmailModel*)email error:(NSError**)error{
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
     NSManagedObjectContext* context = [self sharedContext];
     CTCoreAccount* account = [[CTCoreAccount alloc] init];
     @try {
@@ -202,7 +231,8 @@
         [account release];
         return;
     }
-    CTCoreFolder *inbox  = nil;
+    
+    CTCoreFolder *inbox = nil;
     @try {
         inbox = [account folderWithPath:email.folder.path];
     }
