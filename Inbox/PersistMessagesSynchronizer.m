@@ -32,6 +32,11 @@
     return self;
 }
 
+-(void)syncWithError:(NSError**)error{
+    [self updateRemoteMessagesWithError:error];
+}
+
+
 -(void)updateRemoteMessagesWithError:(NSError**)error{
     if (!error){
         NSError* err = nil;

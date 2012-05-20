@@ -37,7 +37,12 @@
     return self;
 }
 
-
+-(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc{
+    onStateChanged = [osc retain];
+    [self updateLocalMessagesWithError:error];
+    [osc release];
+    osc = nil;
+}
 
 -(void)updateLocalMessagesWithError:(NSError**)error {
 
@@ -51,8 +56,7 @@
     
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
-
-        return false;
+        return;
     }
     
 
@@ -64,6 +68,7 @@
     NSMutableDictionary* totalMessageCount = [NSMutableDictionary dictionary];
     
     while ([folders count]!=0){
+        NSLog(@"loop");
         if (updateRemoteCounter++%30 == 0){
             // TODO update remote messages sometimes
         }
@@ -101,7 +106,7 @@
         
         for (CTCoreMessage* message in messagesBuffer){
             FolderModel* currentFolderModel = nil;
-            
+                    NSLog(@"loop2");
             // get the email's folder model            
             NSFetchRequest *folderRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *folderEntity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
@@ -151,7 +156,7 @@
                 @catch (NSException *exception) {
                   *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
                     [matchingEmails release];   
-                    return false;   
+                    return;   
                 }
             }
             [matchingEmails release];
@@ -185,7 +190,7 @@
             return;
         }
         
-//        [self onStateChanged];
+        onStateChanged();
         /* process the following 20 mails of the next folder */
         currentFolderIndex = currentFolderIndex+1;
         currentFolderIndex = currentFolderIndex % [folders count];

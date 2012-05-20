@@ -63,29 +63,44 @@
 }
 
 
-
+#import "PersistMessagesSynchronizer.h"
+#import "UpdateMessagesSynchronizer.h"
+#import "FoldersSynchronizer.h"
 -(BOOL)sync{
-    NSLog(@"%@",emailAccountModelId);
+    
     
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
-    NSLog(@"=====>>> %@",emailAccountModel);
-    DDLogVerbose(@"[%@] Sync started for account",emailAccountModel.login);
-    if (![self updateLocalFolders] || ![self updateRemoteMessages] || ![self updateLocalMessages]){
+    
+    NSError* error = nil;
+    FoldersSynchronizer* foldersSync = [[FoldersSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    [foldersSync syncWithError:&error];
+    if (error){
         return false;
     }
-    if (self.shouldStopAsap){
-        return true;
-    }
-    DDLogVerbose(@"[%@] Sync done, saving context",emailAccountModel.login);
-    if ([self saveContextWithError:EMAIL_ERROR]){
-        DDLogVerbose(@"Context saved, DONE!");
-        return true;
-    }else{
-        DDLogError(@"[%@] Error when saving the context",emailAccountModel.login);
+    [foldersSync release];
+    
+    
+    PersistMessagesSynchronizer* persistSync = [[PersistMessagesSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    [persistSync syncWithError:&error];
+    if (error){
         return false;
     }
+    [persistSync release];
+    
+    
+    UpdateMessagesSynchronizer* updateSync = [[UpdateMessagesSynchronizer alloc] initWithContext:self.context account:emailAccountModel];
+    [updateSync syncWithError:&error onStateChanged:^{
+        [self onStateChanged];
+    }];
+    if (error){
+        return false;
+    }
+    [updateSync release];
+    
+    
     [emailAccountModel release];
     emailAccountModel = nil;
+    return true;
 }
 
 @end

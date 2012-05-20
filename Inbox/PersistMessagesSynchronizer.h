@@ -16,4 +16,6 @@
     CTCoreAccount* coreAccount;
 }
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
+
+-(void)syncWithError:(NSError**)error;
 @end

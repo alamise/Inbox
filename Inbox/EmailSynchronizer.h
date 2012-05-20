@@ -16,7 +16,5 @@
 }
 -(id)initWithAccountId:(NSManagedObjectID*)accountId;
 @property(nonatomic,readonly,retain) EmailAccountModel* emailAccountModel;
--(CTCoreAccount*)account;
--(NSSet*)disabledFolders;
 +(NSString*)decodeImapString:(NSString*)input;
 @end

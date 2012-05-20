@@ -14,6 +14,9 @@
     NSManagedObjectContext* context;
     EmailAccountModel* accountModel;
     CTCoreAccount* coreAccount;
+    void(^onStateChanged)();
 }
+
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
+-(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc;
 @end
