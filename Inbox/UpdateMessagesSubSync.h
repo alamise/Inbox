@@ -13,8 +13,9 @@
 
 @interface UpdateMessagesSubSync : EmailSubSync{
     void(^onStateChanged)();
+    void(^periodicCall)();
+    NSMutableDictionary* foldersMessageCount;
 }
 
--(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
--(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc;
+-(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc periodicCall:(void(^)()) periodic;
 @end

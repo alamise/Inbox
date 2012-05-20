@@ -17,4 +17,5 @@
 @property(nonatomic,retain,readonly) EmailAccountModel* accountModel;
 @property(nonatomic,retain,readonly) CTCoreAccount* coreAccount;
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a;
+-(CTCoreAccount*)coreAccountWithError:(NSError**)error;
 @end

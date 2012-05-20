@@ -41,7 +41,6 @@
     [request release];
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]];
-        [request release];
         return;
     }
     CTCoreFolder* folder = nil;
@@ -55,10 +54,10 @@
             @try {
                 account = [self coreAccountWithError:error];
                 if (*error){
+                    *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
                     return;
                 }
-                folder = [account folderWithPath:email.serverPath];// bug la au reboot 
-                //+ cehck la difference entre messageId et UID sur un CTCoreMessge.
+                folder = [account folderWithPath:email.serverPath];
             }
             @catch (NSException *exception) {
                 skip = true;
@@ -68,6 +67,7 @@
         CTCoreMessage* message;
         if (!skip){
             @try {
+                // TODO: Should I use the UID or the messageID?
                 message = [folder messageWithUID:email.uid];
             }
             @catch (NSException *exception) {
@@ -76,7 +76,7 @@
         }
         
         // If there were an issue finding the email on the server, the message is deleted.
-        if (skip){
+        if (skip) {
             @try {
                 [self.context deleteObject:email];
             }
@@ -84,37 +84,18 @@
                 *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
                 return;
             }
-        }else{
+        } else {
             @try {
                 [folder moveMessage:email.folder.path forMessage:message];
             }
             @catch (NSException* exception) {
                 *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
-                [request release];
                 return;
             }
             email.serverPath = folder.path;
             email.shouldPropagate = NO;
         }
     }
-    return;
-}
-
--(CTCoreAccount*)coreAccountWithError:(NSError**)error {
-    if (coreAccount == nil){
-        coreAccount = [[CTCoreAccount alloc] init];
-    }
-    if (![coreAccount isConnected]){
-        @try {
-            
-            [coreAccount connectToServer:self.accountModel.serverAddr port:[self.accountModel.port intValue] connectionType:[self.accountModel.conType intValue] authType:[self.accountModel.authType intValue] login:self.accountModel.login password:self.accountModel.password];            
-        }
-        @catch (NSException *exception) {
-            *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
-            return nil;
-        }
-    }
-    return coreAccount;
 }
 
 @end

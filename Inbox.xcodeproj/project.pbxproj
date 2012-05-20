@@ -698,11 +698,11 @@
 		F420671414D20FD700FE7A26 /* woodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woodBackground.png; sourceTree = "<group>"; };
 		F42223381567AA3F0050F268 /* BackgroundThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundThread.h; sourceTree = "<group>"; };
 		F42223391567AA3F0050F268 /* BackgroundThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundThread.m; sourceTree = "<group>"; };
-		F42223D715690F270050F268 /* FoldersSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FoldersSubSync.h; sourceTree = "<group>"; };
+		F42223D715690F270050F268 /* FoldersSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersSubSync.h; sourceTree = "<group>"; };
 		F42223D815690F270050F268 /* FoldersSubSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersSubSync.m; sourceTree = "<group>"; };
-		F42223DA15692CAF0050F268 /* PersistMessagesSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PersistMessagesSubSync.h; sourceTree = "<group>"; };
+		F42223DA15692CAF0050F268 /* PersistMessagesSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistMessagesSubSync.h; sourceTree = "<group>"; };
 		F42223DB15692CAF0050F268 /* PersistMessagesSubSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistMessagesSubSync.m; sourceTree = "<group>"; };
-		F42223DD15692EDE0050F268 /* UpdateMessagesSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UpdateMessagesSubSync.h; sourceTree = "<group>"; };
+		F42223DD15692EDE0050F268 /* UpdateMessagesSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateMessagesSubSync.h; sourceTree = "<group>"; };
 		F42223DE15692EDE0050F268 /* UpdateMessagesSubSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateMessagesSubSync.m; sourceTree = "<group>"; };
 		F42223E015693BCC0050F268 /* EmailSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSubSync.h; sourceTree = "<group>"; };
 		F42223E115693BCD0050F268 /* EmailSubSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSubSync.m; sourceTree = "<group>"; };
@@ -1014,8 +1014,16 @@
 		F42223D615690EE90050F268 /* Emails */ = {
 			isa = PBXGroup;
 			children = (
+				F42223E315693E9C0050F268 /* steps */,
 				F44B0608153365CE003B801D /* EmailSynchronizer.h */,
 				F44B0609153365CE003B801D /* EmailSynchronizer.m */,
+			);
+			name = Emails;
+			sourceTree = "<group>";
+		};
+		F42223E315693E9C0050F268 /* steps */ = {
+			isa = PBXGroup;
+			children = (
 				F42223D715690F270050F268 /* FoldersSubSync.h */,
 				F42223D815690F270050F268 /* FoldersSubSync.m */,
 				F42223DA15692CAF0050F268 /* PersistMessagesSubSync.h */,
@@ -1025,7 +1033,7 @@
 				F42223E015693BCC0050F268 /* EmailSubSync.h */,
 				F42223E115693BCD0050F268 /* EmailSubSync.m */,
 			);
-			name = Emails;
+			name = steps;
 			sourceTree = "<group>";
 		};
 		F427D837154F000F001953C4 /* desk */ = {

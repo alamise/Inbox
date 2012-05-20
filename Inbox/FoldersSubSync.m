@@ -12,7 +12,8 @@
 #import "EmailSynchronizer.h"
 #import "CTCoreAccount.h"
 #import "EmailAccountModel.h"
-
+#import "DDLog.h"
+#define ddLogLevel LOG_LEVEL_VERBOSE
 @interface FoldersSubSync ()
 @end
 
@@ -24,6 +25,7 @@
 }
 
 -(void)syncWithError:(NSError**)error{
+    DDLogVerbose(@"folders sync started");
     if (!error){
         NSError* err;
         error = &err;
@@ -63,9 +65,11 @@
     if (*error){
         return;
     }
-    
     [self.context save:error];
-
+    if (*error){
+        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+    }
+    DDLogVerbose(@"folders sync done");
 }
 
 -(NSSet*)disabledFolders {
@@ -92,11 +96,13 @@
     [request setPredicate:predicate];
     NSArray* foldersToDelete = [self.context executeFetchRequest:request error:error];
     [request release];
-    if (error){
+    
+    if (*error) {
+        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
         return;
     }
     
-    for (FolderModel* folder in foldersToDelete){
+    for (FolderModel* folder in foldersToDelete) {
 
         @try {
             [self.context deleteObject:folder];
@@ -128,6 +134,7 @@
         [request release];
         
         if (*error) {
+            *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
             return;
         }
         
@@ -144,7 +151,6 @@
             folderModel.account = self.accountModel;
         }
     }
-    
 }
 
 @end

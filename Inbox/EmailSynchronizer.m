@@ -68,8 +68,6 @@
 
 
 -(BOOL)sync{
-    
-    
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
     
     NSError* error = nil;
@@ -79,25 +77,29 @@
         return false;
     }
     [foldersSync release];
-    
+    foldersSync = nil;
     
     PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [persistSync syncWithError:&error];
     if (error){
         return false;
     }
-    [persistSync release];
-    
     
     UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [updateSync syncWithError:&error onStateChanged:^{
         [self onStateChanged];
+    } periodicCall:^{
+        [persistSync syncWithError:nil];
     }];
+    
     if (error){
         return false;
     }
-    [updateSync release];
     
+    [updateSync release];
+    updateSync = nil;
+    [persistSync release];
+    persistSync = nil;
     
     [emailAccountModel release];
     emailAccountModel = nil;
