@@ -10,6 +10,8 @@
 #import "NSObject+Queues.h"
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
+#import "Deps.h"
+#import "CoreDataManager.h"
 
 @implementation Synchronizer
 @synthesize shouldStopAsap;
@@ -45,7 +47,7 @@
 
 -(BOOL)startSync{
     [syncLock lock];
-    self.context = [[AppDelegate sharedInstance].coreDataManager syncContext];
+    self.context = [[Deps sharedInstance].coreDataManager syncContext];
     shouldStopAsap = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     BOOL returnValue = [self sync];

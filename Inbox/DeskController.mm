@@ -34,7 +34,8 @@
 #import "InboxEmptyController.h"
 #import "LoginController.h"
 #import "Math.h"
-#import "ModelsManager.h"
+#import "Deps.h"
+#import "CoreDataManager.h"
 #import "EmailReader.h"
 #import "CTCoreAccount.h"
 #import "EmailAccountModel.h"
@@ -52,7 +53,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.modelsManager = [[[ModelsManager alloc] init] autorelease];
         isSyncing = true;
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
@@ -189,7 +189,7 @@
 
 -(void)resetModel{
 
-    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
+    NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
     [self.modelsManager abortSync];
     
 
@@ -270,6 +270,9 @@
     }
     [director resume];
     [layer refresh];
+}
+
+-(void)syncDone{
 }
 
 -(void)viewDidAppear:(BOOL)animated{

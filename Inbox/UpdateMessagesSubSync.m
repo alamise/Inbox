@@ -70,13 +70,14 @@
     NSMutableDictionary* totalMessageCount = [NSMutableDictionary dictionary];
     
     while ([folders count] != 0) {
-        if (updateRemoteCounter++%30 == 0){
+        if (updateRemoteCounter++ % 30 == 0){
             periodicCall();
         }
 
         FolderModel* folderModel = [folders objectAtIndex:currentFolderIndex];
 
         CTCoreFolder* coreFolder = [self coreFolderForFolder:folderModel error:error];
+        [coreFolder connect];
         if (*error) {
             return;
         }
@@ -92,7 +93,8 @@
                 return;
             }
         }
-    
+        [coreFolder disconnect];
+        coreFolder = nil;
         if ([messagesBuffer count] == 0) {
             [folders removeObject:[folders objectAtIndex:currentFolderIndex]];
         }
@@ -109,7 +111,7 @@
         currentFolderIndex = currentFolderIndex+1;
         currentFolderIndex = currentFolderIndex % [folders count];
         
-        if (currentFolderIndex==0){
+        if (currentFolderIndex == 0){
             page++;
         }
     }
@@ -156,7 +158,7 @@
     CTCoreAddress* from;
     
     // The "sender" field is not valid
-    if ([message.from count]>0){
+    if ([message.from count]>0) {
         from = [enumerator nextObject];
     }else{
         from = message.sender;
@@ -203,9 +205,10 @@
 -(NSSet*) nextCoreMessagesForFolder:(FolderModel*)folder coreFolder:(CTCoreFolder*)coreFolder page:(int)page error:(NSError**)error{
         int coreFolderMessageCount = 0;
     if (![foldersMessageCount objectForKey:folder.objectID]){
-        [foldersMessageCount setObject:[NSNumber numberWithInt:[coreFolder totalMessageCount]] forKey:folder.objectID];
+        int count = [coreFolder totalMessageCount];
+        [foldersMessageCount setObject:[NSNumber numberWithInt:count] forKey:folder.objectID];
     }
-    coreFolderMessageCount = [[foldersMessageCount objectForKey:[NSNumber numberWithInt:[coreFolder totalMessageCount]]] intValue];
+    coreFolderMessageCount = [[foldersMessageCount objectForKey:folder.objectID] intValue];
 
     NSSet* messages = [NSSet set];
     @try {
@@ -213,6 +216,10 @@
         if (start<0) start = 0;
         int end = coreFolderMessageCount - (page) * DL_PAGE_SIZE;
         if (end<0) end = 0;
+        if ((start == 0) && (end == 0)) {
+            return [NSSet set];
+        }
+        
         messages = [coreFolder messageObjectsFromIndex:start toIndex:end];
     }
     @catch (NSException *exception) {

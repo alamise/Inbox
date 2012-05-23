@@ -41,7 +41,7 @@
         [self.syncContext lock];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
         [self.syncContext unlock];
-    } waitUntilDone:YES];
+    } waitUntilDone:NO];
 }
 
 -(void)syncContextDidSave:(NSNotification*)notif{

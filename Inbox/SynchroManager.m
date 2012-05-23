@@ -6,15 +6,16 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ModelsManager.h"
-#import "AppDelegate.h"
+#import "SynchroManager.h"
 #import "NSObject+Queues.h"
 #import "EmailSynchronizer.h"
 #import "Synchronizer.h"
 #import "EmailAccountModel.h"
 #import "BackgroundThread.h"
-
-@implementation ModelsManager
+#import "Deps.h"
+#import "CoreDataManager.h"
+#import "errorCodes.h"
+@implementation SynchroManager
 
 -(id)init{
     if (self = [super init]){
@@ -31,42 +32,63 @@
     [super dealloc];
 }
 
--(BOOL)refreshEmailAccounts{
+- (void) reloadAccountsWithError:(NSError**)error {
+    if (!error){
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
+    
+    [self refreshEmailAccountsWithError:error];
+    if (!*error) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_RELOADED object:nil];
+    }
+    
+}
+
+-(void) refreshEmailAccountsWithError:(NSError**)error {
+    if (!error){
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
+    
     for (Synchronizer* sync in synchronizers){
         [sync stopAsap];
     }
     [synchronizers removeAllObjects];
     
-    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
+    NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-    NSError* fetchError = nil;
-    NSArray* emailsModels = [context executeFetchRequest:request error:&fetchError];
-    if (fetchError){
+    NSArray* emailsModels = [context executeFetchRequest:request error:error];
+    if (*error){
         [request release];
-        return false;
+        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:REFRESH_ACCOUNT_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
     }
 
     for (EmailAccountModel* account in emailsModels){
-        NSLog(@"%@",account);
         EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
     [request release];
-    return true;
+    return;
 }
 
 
 -(void)startSync{
-    if(![self refreshEmailAccounts]){
+    NSError* error = nil;
+    [self refreshEmailAccountsWithError:&error];
+    if (error){
         [self onSyncFailed];
         return;
     }
+    
     runningSync = [synchronizers count];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-    [[AppDelegate sharedInstance].backgroundThread performBlock:^{
+    [[Deps sharedInstance].backgroundThread performBlock:^{
         for (Synchronizer* sync in synchronizers){
             [sync startSync];
         }
@@ -74,35 +96,37 @@
 }
 
 -(void)abortSync{
-    for (Synchronizer* sync in synchronizers){
-        [sync stopAsap];
-    }
+    [self stopSynchronizers];
     [synchronizers removeAllObjects];
     runningSync = 0;
 }
 
+
+-(void)stopSynchronizers{
+    [[Deps sharedInstance].backgroundThread performBlock:^{
+        for (Synchronizer* sync in synchronizers){
+            [sync stopAsap];
+        }
+    } waitUntilDone:NO];
+}
+
+//todo add dispatch on the main thread. how to get the main thread
 -(void)onSyncDone{
     @synchronized(self){
         runningSync--;
         if (runningSync==0){
-            [self executeOnMainQueueSync:^{
-                [synchronizers removeAllObjects];
-                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
-            }];
+            [synchronizers removeAllObjects];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
         }
     }
 }
 
 
 -(void)onSyncFailed{
-    for (Synchronizer* sync in synchronizers){
-        [sync stopAsap];
-    }
+    [self stopSynchronizers];
     [synchronizers removeAllObjects];
     runningSync = 0;
-    [self executeOnMainQueueSync:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
 }
 
 -(BOOL)isSyncing{

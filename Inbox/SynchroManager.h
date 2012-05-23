@@ -10,9 +10,11 @@
 #import "models.h"
 #define SYNC_DONE @"sync_done"
 #define SYNC_FAILED @"sync_failed"
-@interface ModelsManager : NSObject{
+#define SYNC_RELOADED @"sync_reloaded"
+@interface SynchroManager : NSObject{
     NSMutableArray* synchronizers;
     int runningSync;
+    ModelsManager* instance;
 }
 @property(readonly)BOOL isSyncing;
 -(void)startSync;

@@ -33,9 +33,6 @@
 	UIWindow *window;
     UINavigationController* navigationController;
 }
-@property(nonatomic,retain,readonly) CoreDataManager* coreDataManager;
-@property(nonatomic,retain,readonly) BackgroundThread* backgroundThread;
 @property (nonatomic, retain,readwrite) UIWindow *window;
--(NSString*)plistPath;
 + (AppDelegate*)sharedInstance;
 @end

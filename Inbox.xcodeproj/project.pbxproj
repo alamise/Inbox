@@ -58,7 +58,7 @@
 		F444C0E914BA024600D08560 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EB14BA024600D08560 /* LoginView.xib */; };
 		F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444C0EF14BA025A00D08560 /* EmailView.xib */; };
 		F444C0F714BA052200D08560 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444C0F514BA052200D08560 /* Localizable.strings */; };
-		F44B060115334E6F003B801D /* ModelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B060015334E6F003B801D /* ModelsManager.m */; };
+		F44B060115334E6F003B801D /* SynchroManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B060015334E6F003B801D /* SynchroManager.m */; };
 		F44B0607153365BE003B801D /* Synchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B0606153365BD003B801D /* Synchronizer.m */; };
 		F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B0609153365CE003B801D /* EmailSynchronizer.m */; };
 		F44B061015336E62003B801D /* EmailReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F44B060F15336E62003B801D /* EmailReader.m */; };
@@ -94,7 +94,6 @@
 		F484D0D91470156700F7CA1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F484D0D81470156700F7CA1A /* libiconv.dylib */; };
 		F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = F48E5B45154D41E20016B34D /* InboxStack.mm */; };
 		F49A766514A89AB500C8E133 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49A766414A89AB400C8E133 /* SystemConfiguration.framework */; };
-		F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */; };
 		F4E28094153040640093C3F5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E28093153040640093C3F5 /* libsqlite3.0.dylib */; };
 		F4E280961530407A0093C3F5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E280951530407A0093C3F5 /* CFNetwork.framework */; };
 		F4F80C8E14D4631500A7C356 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F80C8D14D4631500A7C356 /* ProgressIndicator.m */; };
@@ -116,6 +115,8 @@
 		F4FB8481146D2FEE00B08513 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8480146D2FEE00B08513 /* UIKit.framework */; };
 		F4FB8483146D2FEE00B08513 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8482146D2FEE00B08513 /* Foundation.framework */; };
 		F4FB8485146D2FEE00B08513 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4FB8484146D2FEE00B08513 /* CoreGraphics.framework */; };
+		F4FC7CEA156D882800290A1F /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FC7CE9156D882800290A1F /* LoginModel.m */; };
+		F4FC7CF7156D8C0300290A1F /* Deps.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FC7CF6156D8C0300290A1F /* Deps.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -731,8 +732,8 @@
 		F444C0EA14BA024600D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginView.xib; sourceTree = "<group>"; };
 		F444C0EE14BA025A00D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EmailView.xib; sourceTree = "<group>"; };
 		F444C0F614BA052200D08560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Inbox/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		F44B05FF15334E6E003B801D /* ModelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsManager.h; sourceTree = "<group>"; };
-		F44B060015334E6F003B801D /* ModelsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelsManager.m; sourceTree = "<group>"; };
+		F44B05FF15334E6E003B801D /* SynchroManager.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SynchroManager.h; sourceTree = "<group>"; };
+		F44B060015334E6F003B801D /* SynchroManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchroManager.m; sourceTree = "<group>"; };
 		F44B0605153365BD003B801D /* Synchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synchronizer.h; sourceTree = "<group>"; };
 		F44B0606153365BD003B801D /* Synchronizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Synchronizer.m; sourceTree = "<group>"; };
 		F44B0608153365CE003B801D /* EmailSynchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSynchronizer.h; sourceTree = "<group>"; };
@@ -790,8 +791,6 @@
 		F48E5B45154D41E20016B34D /* InboxStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InboxStack.mm; sourceTree = "<group>"; };
 		F49A766414A89AB400C8E133 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F4CCAB391555883D0025BEDC /* CCController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCController.h; sourceTree = "<group>"; };
-		F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsHelper.h; sourceTree = "<group>"; };
-		F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsHelper.m; sourceTree = "<group>"; };
 		F4E28093153040640093C3F5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F4E280951530407A0093C3F5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F4F80C8C14D4631500A7C356 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
@@ -822,6 +821,10 @@
 		F4FB8480146D2FEE00B08513 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4FB8482146D2FEE00B08513 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4FB8484146D2FEE00B08513 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F4FC7CE8156D882800290A1F /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
+		F4FC7CE9156D882800290A1F /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
+		F4FC7CF5156D8C0300290A1F /* Deps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deps.h; sourceTree = "<group>"; };
+		F4FC7CF6156D8C0300290A1F /* Deps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deps.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -861,12 +864,17 @@
 		F40611101534D44700A7CA0A /* system */ = {
 			isa = PBXGroup;
 			children = (
-				F406110D1534D42500A7CA0A /* NSObject+Queues.h */,
-				F406110E1534D42500A7CA0A /* NSObject+Queues.m */,
-				F41843091557CDDD00753265 /* NSArray+CoreData.h */,
+				F4FC7CF4156D8B3400290A1F /* base */,
+				F4FC7CEC156D898D00290A1F /* config */,
+				F4FC7CEB156D897600290A1F /* utils */,
+				F40B345614D59BB500F1598B /* Logger.h */,
 				F42223381567AA3F0050F268 /* BackgroundThread.h */,
 				F42223391567AA3F0050F268 /* BackgroundThread.m */,
-				F418430A1557CDDD00753265 /* NSArray+CoreData.m */,
+				F4CCAB391555883D0025BEDC /* CCController.h */,
+				F4FC7CF5156D8C0300290A1F /* Deps.h */,
+				F4FC7CF6156D8C0300290A1F /* Deps.m */,
+				F418426B1556F31200753265 /* CoreDataManager.h */,
+				F418426C1556F31200753265 /* CoreDataManager.m */,
 			);
 			name = system;
 			sourceTree = "<group>";
@@ -876,19 +884,9 @@
 			children = (
 				F40611101534D44700A7CA0A /* system */,
 				F41E666914A9D0B500BA4712 /* desk */,
-				F41E666814A9D09900BA4712 /* models */,
+				F41E666814A9D09900BA4712 /* model */,
 				F41E666314A9CFE300BA4712 /* views */,
 				F41E65A114A9CFB700BA4712 /* Resources */,
-				F41E658F14A9CFB700BA4712 /* GameConfig.h */,
-				F41E659814A9CFB700BA4712 /* main.m */,
-				F41E659E14A9CFB700BA4712 /* Prefix.pch */,
-				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
-				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
-				F40B345614D59BB500F1598B /* Logger.h */,
-				F47DBDB915331E35008A5373 /* PrivateValues.h */,
-				F47DBDBA15331E35008A5373 /* PrivateValues.m */,
-				F47DBDBC1533212E008A5373 /* Reachability.h */,
-				F47DBDBD1533212E008A5373 /* Reachability.m */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -896,31 +894,10 @@
 		F41E65A114A9CFB700BA4712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F47DBDB615331CE4008A5373 /* private.plist */,
-				F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */,
-				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
-				F444C0F514BA052200D08560 /* Localizable.strings */,
-				F41E65AC14A9CFB700BA4712 /* Info.plist */,
-				F43819F314AC79530017C9BC /* settingsUp.png */,
-				F43819F214AC79530017C9BC /* settingsDown.png */,
-				F426413F14AB718500040EC9 /* sticker.png */,
-				F41E669014A9E2D400BA4712 /* circle.png */,
-				F420671414D20FD700FE7A26 /* woodBackground.png */,
-				F41E65A314A9CFB700BA4712 /* buttonImage.png */,
-				F41E65A414A9CFB700BA4712 /* Default-Landscape~ipad.png */,
-				F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */,
-				F41E65A514A9CFB700BA4712 /* emailBackground.png */,
-				F41E65A614A9CFB700BA4712 /* fps_images.png */,
-				F41E65A814A9CFB700BA4712 /* Icon.png */,
-				F41E65A914A9CFB700BA4712 /* Icon@2x.png */,
-				F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */,
-				F427E77714D9FA7F007C3E64 /* Icon-Small.png */,
-				F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */,
-				F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */,
-				F41E65AA14A9CFB700BA4712 /* iconIpad.png */,
-				F41E65AB14A9CFB700BA4712 /* inboxZone.png */,
-				F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */,
-				F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */,
+				F4FC7CF3156D8B0D00290A1F /* system */,
+				F4FC7CF2156D8ACD00290A1F /* images */,
+				F4FC7CF1156D8AC200290A1F /* l10n */,
+				F4FC7CF0156D8AAC00290A1F /* base */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -953,6 +930,8 @@
 				F41E659514A9CFB700BA4712 /* LoginController.h */,
 				F41E659614A9CFB700BA4712 /* LoginController.mm */,
 				F444C0EB14BA024600D08560 /* LoginView.xib */,
+				F4FC7CE8156D882800290A1F /* LoginModel.h */,
+				F4FC7CE9156D882800290A1F /* LoginModel.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -977,25 +956,26 @@
 			name = tutorial;
 			sourceTree = "<group>";
 		};
-		F41E666814A9D09900BA4712 /* models */ = {
+		F41E666814A9D09900BA4712 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				F47DBDCC1533396C008A5373 /* DAO */,
-				F44B060B153365D4003B801D /* synchronizer */,
-				F44B060D15336E48003B801D /* reader */,
 				F47DBDCD15333B74008A5373 /* models.h */,
-				F44B05FF15334E6E003B801D /* ModelsManager.h */,
-				F44B060015334E6F003B801D /* ModelsManager.m */,
-				F418426B1556F31200753265 /* CoreDataManager.h */,
-				F418426C1556F31200753265 /* CoreDataManager.m */,
+				F4FC7CEF156D8A4A00290A1F /* synchro */,
+				F47DBDCC1533396C008A5373 /* DAO */,
 			);
-			name = models;
+			name = model;
 			sourceTree = "<group>";
 		};
 		F41E666914A9D0B500BA4712 /* desk */ = {
 			isa = PBXGroup;
 			children = (
-				F47A763A1555A6E000561E81 /* controllers */,
+				F41E658014A9CFB700BA4712 /* DeskController.h */,
+				F41E658114A9CFB700BA4712 /* DeskController.mm */,
+				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
+				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
+				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
+				F427D83E154F228C001953C4 /* interactions */,
+				F427D83F154F22A3001953C4 /* drawing */,
 				F4B4E61815362889008FDC7F /* graphical */,
 			);
 			name = desk;
@@ -1039,11 +1019,6 @@
 		F427D837154F000F001953C4 /* desk */ = {
 			isa = PBXGroup;
 			children = (
-				F427D83F154F22A3001953C4 /* drawing */,
-				F427D83E154F228C001953C4 /* interactions */,
-				F41E658214A9CFB700BA4712 /* DeskLayer.h */,
-				F41E658314A9CFB700BA4712 /* DeskLayer.mm */,
-				F427D83C154F1CFC001953C4 /* config.h */,
 			);
 			name = desk;
 			sourceTree = "<group>";
@@ -1240,15 +1215,6 @@
 			name = "inbox empty";
 			sourceTree = "<group>";
 		};
-		F47A763A1555A6E000561E81 /* controllers */ = {
-			isa = PBXGroup;
-			children = (
-				F41E658014A9CFB700BA4712 /* DeskController.h */,
-				F41E658114A9CFB700BA4712 /* DeskController.mm */,
-			);
-			name = controllers;
-			sourceTree = "<group>";
-		};
 		F47DBCA415331653008A5373 /* modules libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1323,8 +1289,6 @@
 				F43819F014AB90CA0017C9BC /* FolderModel.m */,
 				F47DBDC9153336E6008A5373 /* EmailAccountModel.h */,
 				F47DBDCA153336E6008A5373 /* EmailAccountModel.m */,
-				F4D93C6C15397CB400FF6EA1 /* RequestsHelper.h */,
-				F4D93C6D15397CB400FF6EA1 /* RequestsHelper.m */,
 			);
 			name = DAO;
 			sourceTree = "<group>";
@@ -1332,9 +1296,7 @@
 		F4B4E61815362889008FDC7F /* graphical */ = {
 			isa = PBXGroup;
 			children = (
-				F4CCAB391555883D0025BEDC /* CCController.h */,
 				F427D837154F000F001953C4 /* desk */,
-				F41E658414A9CFB700BA4712 /* DeskProtocol.h */,
 				F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */,
 			);
 			name = graphical;
@@ -1391,6 +1353,7 @@
 		F4FB8475146D2FEE00B08513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4FC7CEE156D89DF00290A1F /* Reachability */,
 				F47DBCA915331A46008A5373 /* QuincyKit */,
 				F47DBCA5153319B3008A5373 /* FlurryAnalytics */,
 				F47DBCA415331653008A5373 /* modules libs */,
@@ -1418,6 +1381,113 @@
 				F4FB8484146D2FEE00B08513 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4FC7CEB156D897600290A1F /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				F406110D1534D42500A7CA0A /* NSObject+Queues.h */,
+				F406110E1534D42500A7CA0A /* NSObject+Queues.m */,
+				F41843091557CDDD00753265 /* NSArray+CoreData.h */,
+				F418430A1557CDDD00753265 /* NSArray+CoreData.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		F4FC7CEC156D898D00290A1F /* config */ = {
+			isa = PBXGroup;
+			children = (
+				F41E658F14A9CFB700BA4712 /* GameConfig.h */,
+				F47DBDB915331E35008A5373 /* PrivateValues.h */,
+				F47DBDBA15331E35008A5373 /* PrivateValues.m */,
+				F427D83C154F1CFC001953C4 /* config.h */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
+		F4FC7CEE156D89DF00290A1F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				F47DBDBC1533212E008A5373 /* Reachability.h */,
+				F47DBDBD1533212E008A5373 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		F4FC7CEF156D8A4A00290A1F /* synchro */ = {
+			isa = PBXGroup;
+			children = (
+				F44B060B153365D4003B801D /* synchronizer */,
+				F44B060D15336E48003B801D /* reader */,
+				F44B05FF15334E6E003B801D /* SynchroManager.h */,
+				F44B060015334E6F003B801D /* SynchroManager.m */,
+			);
+			name = synchro;
+			sourceTree = "<group>";
+		};
+		F4FC7CF0156D8AAC00290A1F /* base */ = {
+			isa = PBXGroup;
+			children = (
+				F41E65AC14A9CFB700BA4712 /* Info.plist */,
+				F41E65A414A9CFB700BA4712 /* Default-Landscape~ipad.png */,
+				F41E65AA14A9CFB700BA4712 /* iconIpad.png */,
+				F41E65A814A9CFB700BA4712 /* Icon.png */,
+				F41E65A914A9CFB700BA4712 /* Icon@2x.png */,
+				F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */,
+				F427E77714D9FA7F007C3E64 /* Icon-Small.png */,
+				F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		F4FC7CF1156D8AC200290A1F /* l10n */ = {
+			isa = PBXGroup;
+			children = (
+				F444C0F514BA052200D08560 /* Localizable.strings */,
+			);
+			name = l10n;
+			sourceTree = "<group>";
+		};
+		F4FC7CF2156D8ACD00290A1F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */,
+				F43819F314AC79530017C9BC /* settingsUp.png */,
+				F43819F214AC79530017C9BC /* settingsDown.png */,
+				F426413F14AB718500040EC9 /* sticker.png */,
+				F41E669014A9E2D400BA4712 /* circle.png */,
+				F420671414D20FD700FE7A26 /* woodBackground.png */,
+				F41E65A314A9CFB700BA4712 /* buttonImage.png */,
+				F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */,
+				F41E65A514A9CFB700BA4712 /* emailBackground.png */,
+				F41E65A614A9CFB700BA4712 /* fps_images.png */,
+				F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */,
+				F41E65AB14A9CFB700BA4712 /* inboxZone.png */,
+				F4F80C8F14D4693F00A7C356 /* progressActivityBackground.png */,
+				F4F80C9014D4693F00A7C356 /* progressActivityForeground.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		F4FC7CF3156D8B0D00290A1F /* system */ = {
+			isa = PBXGroup;
+			children = (
+				F41E666D14A9D13100BA4712 /* coreDataSchema.xcdatamodeld */,
+				F47DBDB615331CE4008A5373 /* private.plist */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
+		F4FC7CF4156D8B3400290A1F /* base */ = {
+			isa = PBXGroup;
+			children = (
+				F41E659814A9CFB700BA4712 /* main.m */,
+				F41E659E14A9CFB700BA4712 /* Prefix.pch */,
+				F41E644014A9CFB700BA4712 /* AppDelegate.h */,
+				F41E644114A9CFB700BA4712 /* AppDelegate.mm */,
+			);
+			name = base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2074,13 +2144,12 @@
 				F47DBDBB15331E35008A5373 /* PrivateValues.m in Sources */,
 				F47DBDBE1533212E008A5373 /* Reachability.m in Sources */,
 				F47DBDCB153336E8008A5373 /* EmailAccountModel.m in Sources */,
-				F44B060115334E6F003B801D /* ModelsManager.m in Sources */,
+				F44B060115334E6F003B801D /* SynchroManager.m in Sources */,
 				F44B0607153365BE003B801D /* Synchronizer.m in Sources */,
 				F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */,
 				F44B061015336E62003B801D /* EmailReader.m in Sources */,
 				F44B061315336E6D003B801D /* Reader.m in Sources */,
 				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
-				F4D93C6E15397CB400FF6EA1 /* RequestsHelper.m in Sources */,
 				F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */,
 				F427D83A154F19B0001953C4 /* InteractionsManager.mm in Sources */,
 				F427D842154F2368001953C4 /* DrawingManager.mm in Sources */,
@@ -2093,6 +2162,8 @@
 				F42223DC15692CB00050F268 /* PersistMessagesSubSync.m in Sources */,
 				F42223DF15692EDE0050F268 /* UpdateMessagesSubSync.m in Sources */,
 				F42223E215693BD20050F268 /* EmailSubSync.m in Sources */,
+				F4FC7CEA156D882800290A1F /* LoginModel.m in Sources */,
+				F4FC7CF7156D8C0300290A1F /* Deps.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

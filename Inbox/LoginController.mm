@@ -27,6 +27,8 @@
 #import "DeskController.h"
 #import "models.h"
 #import "FlurryAnalytics.h"
+#import "LoginModel.h"
+#import "EmailAccountModel.h"
 
 @implementation LoginController
 @synthesize actionOnDismiss;
@@ -34,12 +36,22 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         shouldExecActionOnDismiss = NO;
-        self.title=NSLocalizedString(@"login.title", @"");
+        self.title = NSLocalizedString(@"login.title", @"");
+        UIBarButtonItem* closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
+        [self.navigationItem setRightBarButtonItem:closeButton];
+        [closeButton release];
+        model = [[LoginModel alloc] init];
     }
     return self;
 }
 
+
+-(void) close {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)dealloc {
+    [model release];
     self.actionOnDismiss = nil;
     [emailField release];
     [passwordField release];
@@ -47,39 +59,24 @@
     [super dealloc];
 }
 
-- (BOOL) validateEmail: (NSString *) candidate {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@gmail\\.com";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
-    return [emailTest evaluateWithObject:candidate];
-}
+
 
 #pragma mark - IBActions
 
 - (IBAction)onLogin:(id)sender {
-    if (![self validateEmail:emailField.text]){
+    if (![model validateEmail:emailField.text]){
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.invalidemail.title", @"title of the alert shown when the login email is invalid") message:NSLocalizedString(@"login.invalidemail.message", @"message of the alert shown when the login email is invalid") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.invalidemail.button", @"button title of the alert shown when the login email is invalid") otherButtonTitles:nil];
         [alert show];
-        [alert release];
-        [FlurryAnalytics logEvent:@"login - email invalid" timed:NO];
-        
+        [alert release];        
     }else if ([passwordField.text isEqualToString:@""]){
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.emptypassword.title","title of the alert shown when the login password is empty") message:NSLocalizedString(@"login.emptypassword.message", @"message of the alert shown when the login password is empty") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.emptypassword.button", @"button title of the alert shown when the login password is empty") otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [FlurryAnalytics logEvent:@"login - password invalid" timed:NO];
     }else{
-        NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-        NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        if (!plistDic){
-            plistDic = [[NSMutableDictionary alloc] initWithCapacity:2];
-        }
+        NSError* error = nil;
+        [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
         shouldExecActionOnDismiss = YES;
-        [plistDic setValue:emailField.text forKey:@"email"];
-        [plistDic setValue:passwordField.text forKey:@"password"];
-        [plistDic writeToFile:plistPath atomically:YES];
-        [plistDic release];
         [self dismissModalViewControllerAnimated:YES];
-        [FlurryAnalytics logEvent:@"login saved" timed:NO];
     }
 }
 
@@ -93,22 +90,20 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSString* plistPath = [(AppDelegate*)[UIApplication sharedApplication].delegate plistPath];
-    NSMutableDictionary* plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    if (plistPath){
-        emailField.text = [plistDic valueForKey:@"email"];
-        passwordField.text = [plistDic valueForKey:@"password"];
+    NSError* error = nil;
+    EmailAccountModel* account = [model firstAccountWithError:&error];
+    if ( !error && account ) {
+        emailField.text = account.login;
+        passwordField.text = account.password;
     }
-    [plistDic release];
-    self.navigationController.navigationBar.barStyle=UIBarStyleBlack;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [FlurryAnalytics logEvent:@"login" timed:NO];
 }
 
-
+todo finish this file
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if (shouldExecActionOnDismiss){

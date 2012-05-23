@@ -23,6 +23,7 @@
  */
 
 #import <UIKit/UIKit.h>
+@class LoginModel;
 @class DeskController;
 @interface LoginController : UIViewController {
     IBOutlet UITextField *emailField;
@@ -30,6 +31,7 @@
     IBOutlet UIButton *submitButton;
     BOOL shouldExecActionOnDismiss;
     NSInvocationOperation* actionOnDismiss;
+    LoginModel* model;
 }
 @property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 - (IBAction)onLogin:(id)sender;
