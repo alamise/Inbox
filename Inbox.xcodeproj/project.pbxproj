@@ -860,7 +860,7 @@
 				F4FC7CF4156D8B3400290A1F /* base */,
 				F4FC7CEC156D898D00290A1F /* config */,
 				F4FC7CEB156D897600290A1F /* utils */,
-				F40A01D615715F9A00D61AE3 /* singletongs */,
+				F40A01D615715F9A00D61AE3 /* singletons */,
 				F40B345614D59BB500F1598B /* Logger.h */,
 			);
 			name = system;
@@ -874,7 +874,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F40A01D615715F9A00D61AE3 /* singletongs */ = {
+		F40A01D615715F9A00D61AE3 /* singletons */ = {
 			isa = PBXGroup;
 			children = (
 				F4FC7CF5156D8C0300290A1F /* Deps.h */,
@@ -884,7 +884,7 @@
 				F418426B1556F31200753265 /* CoreDataManager.h */,
 				F418426C1556F31200753265 /* CoreDataManager.m */,
 			);
-			name = singletongs;
+			name = singletons;
 			sourceTree = "<group>";
 		};
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
@@ -1067,15 +1067,14 @@
 			name = elements;
 			sourceTree = "<group>";
 		};
-		F44B060B153365D4003B801D /* synchronizer */ = {
+		F44B060B153365D4003B801D /* synchronizers */ = {
 			isa = PBXGroup;
 			children = (
 				F42223D615690EE90050F268 /* Emails */,
 				F44B0605153365BD003B801D /* Synchronizer.h */,
 				F44B0606153365BD003B801D /* Synchronizer.m */,
-				F44B060C153369A9003B801D /* errorCodes.h */,
 			);
-			name = synchronizer;
+			name = synchronizers;
 			sourceTree = "<group>";
 		};
 		F44B060D15336E48003B801D /* reader */ = {
@@ -1348,6 +1347,7 @@
 		F4FC7CEC156D898D00290A1F /* config */ = {
 			isa = PBXGroup;
 			children = (
+				F44B060C153369A9003B801D /* errorCodes.h */,
 				F41E658F14A9CFB700BA4712 /* GameConfig.h */,
 				F47DBDB915331E35008A5373 /* PrivateValues.h */,
 				F47DBDBA15331E35008A5373 /* PrivateValues.m */,
@@ -1369,7 +1369,7 @@
 		F4FC7CEF156D8A4A00290A1F /* synchro */ = {
 			isa = PBXGroup;
 			children = (
-				F44B060B153365D4003B801D /* synchronizer */,
+				F44B060B153365D4003B801D /* synchronizers */,
 				F44B060D15336E48003B801D /* reader */,
 				F44B05FF15334E6E003B801D /* SynchroManager.h */,
 				F44B060015334E6F003B801D /* SynchroManager.m */,
