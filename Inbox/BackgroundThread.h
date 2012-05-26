@@ -14,5 +14,7 @@
 }
 @property(readonly,nonatomic,retain) NSThread* thread;
 -(void)stop;
--(void) performBlock:(void(^)())block waitUntilDone:(BOOL)wait;
+
+-(void)performBlockOnBackgroundThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone;
+-(void)performBlockOnMainThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone;
 @end

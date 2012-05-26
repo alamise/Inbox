@@ -28,24 +28,30 @@
 #import "DeskController.h"
 #import "models.h"
 #import "FlurryAnalytics.h"
+#import "Deps.h"
+
 @interface ErrorController()
 -(void)updateViewWithNetworkStatus:(NetworkStatus)status;
 @end
 
 @implementation ErrorController
-@synthesize actionOnDismiss;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        shouldExecActionOnDismiss = NO;
+@synthesize retryBlock;
+
+- (id)initWithRetryBlock:(void(^)())retry {
+    self = [self init];
+    if ( self ) {
+        shouldRetry = NO;
+        self.retryBlock = retry;
+        
         // The network status is checked once, when the view is loaded. See the revision [master 3dac19c] for the version that listen to network events.
         internetReachable = [[Reachability reachabilityWithHostName:@"www.google.fr"] retain];
+        self.title = NSLocalizedString(@"error.title", @"navigation title");
     }
     return self;
 }
 
 -(void)dealloc{
-    self.actionOnDismiss = nil;
+    self.retryBlock = nil;
     [internetReachable release];
     [connectionIsBackView release];
     [noConnectionView release];
@@ -71,15 +77,13 @@
     }
 }
 
--(IBAction)dismiss{
-    shouldExecActionOnDismiss = YES;
+- (IBAction)dismiss {
+    shouldRetry = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)editAccount{
-    [FlurryAnalytics logEvent:@"error - edit account" timed:NO];
     LoginController* loginController = [[LoginController alloc] initWithNibName:@"LoginView" bundle:nil];   
-    loginController.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginController animated:YES];
     [loginController release];
 }
@@ -87,14 +91,13 @@
 #pragma mark - View lifecycle
 
 -(void)viewDidDisappear:(BOOL)animated{
-    if (shouldExecActionOnDismiss){
-        [actionOnDismiss start];
+    if ( shouldRetry ) {
+        self.retryBlock();
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [FlurryAnalytics logEvent:@"error" timed:NO];
 }
 
 - (void)viewDidLoad{

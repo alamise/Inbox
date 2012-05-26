@@ -11,12 +11,15 @@
 #define SYNC_DONE @"sync_done"
 #define SYNC_FAILED @"sync_failed"
 #define SYNC_RELOADED @"sync_reloaded"
+
 @interface SynchroManager : NSObject{
-    NSMutableArray* synchronizers;
+    NSMutableArray *synchronizers;
     int runningSync;
-    ModelsManager* instance;
 }
+
 @property(readonly)BOOL isSyncing;
--(void)startSync;
--(void)abortSync;
+- (void)startSync;
+- (void)abortSync;
+
+- (void)reloadAccountsWithError:(NSError **)error; 
 @end

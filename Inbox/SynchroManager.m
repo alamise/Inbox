@@ -88,10 +88,10 @@
     runningSync = [synchronizers count];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-    [[Deps sharedInstance].backgroundThread performBlock:^{
+    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
         for (Synchronizer* sync in synchronizers){
             [sync startSync];
-        }
+        }    
     } waitUntilDone:NO];
 }
 
@@ -103,7 +103,7 @@
 
 
 -(void)stopSynchronizers{
-    [[Deps sharedInstance].backgroundThread performBlock:^{
+    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
         for (Synchronizer* sync in synchronizers){
             [sync stopAsap];
         }
@@ -111,13 +111,11 @@
 }
 
 //todo add dispatch on the main thread. how to get the main thread
--(void)onSyncDone{
-    @synchronized(self){
-        runningSync--;
-        if (runningSync==0){
-            [synchronizers removeAllObjects];
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
-        }
+- (void)onSyncDone {
+    runningSync--;
+    if ( runningSync == 0 ) {
+        [synchronizers removeAllObjects];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
     }
 }
 
@@ -129,8 +127,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
 }
 
--(BOOL)isSyncing{
-    return runningSync == 0;
+- (BOOL)isSyncing {
+    return runningSync != 0;
 }
 
 @end

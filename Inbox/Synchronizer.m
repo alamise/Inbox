@@ -29,7 +29,7 @@
     [super dealloc];
 }
 
--(void)onStateChanged{
+- (void)onStateChanged {
     if (!self.shouldStopAsap){
         [self executeOnMainQueueAsync:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];
@@ -37,7 +37,7 @@
     }
 }
 
--(void)onError:(NSError*)error{
+- (void)onError:(NSError *)error {
     if (!self.shouldStopAsap){
         [self executeOnMainQueueSync:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
@@ -45,7 +45,7 @@
     }
 }
 
--(BOOL)startSync{
+- (BOOL)startSync {
     [syncLock lock];
     self.context = [[Deps sharedInstance].coreDataManager syncContext];
     shouldStopAsap = false;

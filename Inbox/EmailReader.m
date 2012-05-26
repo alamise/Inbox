@@ -14,6 +14,7 @@
 #import "EmailModel.h"
 #import "EmailAccountModel.h"
 #import "DDLog.h"
+#import "Deps.h"
 
 @implementation EmailReader
 
@@ -136,7 +137,7 @@
     }
     email.shouldPropagate = true;
     email.folder = folder;
-    [[AppDelegate sharedInstance].coreDataManager.mainContext save:error];
+    [[Deps sharedInstance].coreDataManager.mainContext save:error];
 }
 
 -(NSArray*)inboxes:(NSError**)error{

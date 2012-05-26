@@ -40,6 +40,8 @@
 #import "ContextualRightSidePanel.h"
 #import "FoldersTable.h"
 #import "NSArray+CoreData.h"
+#import "Deps.h"
+
 #define ANIMATION_DELAY 0.2
 #define SCROLL 23435543
 static int zIndex = INT_MAX;
@@ -74,7 +76,7 @@ static int zIndex = INT_MAX;
 }
 
 -(void)offlineTests{
-    NSManagedObjectContext* context=[[AppDelegate sharedInstance].coreDataManager mainContext];
+    NSManagedObjectContext* context=[[Deps sharedInstance].coreDataManager mainContext];
     for (int i=0;i<5;i++){
         EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
         [self putEmail:email];
@@ -85,7 +87,7 @@ static int zIndex = INT_MAX;
     [super onEnter];
     //[self offlineTests];
     return;
-    NSManagedObjectContext* context = [[AppDelegate sharedInstance].coreDataManager mainContext];
+    NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
     NSMutableArray* ff = [NSMutableArray array];
     for (int i=0;i<5;i++){
         FolderModel* folder = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
@@ -179,7 +181,7 @@ static int zIndex = INT_MAX;
     NSMutableArray* mails = [NSMutableArray array];
     for (id<ElementNodeProtocol> element in interactionsManager.visibleNodes){
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
+            EmailModel* emailModel = (EmailModel*)[[Deps sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [mails addObject:emailModel];
             }
@@ -228,7 +230,7 @@ static int zIndex = INT_MAX;
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder != nil){
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
+            EmailModel* emailModel = (EmailModel*)[[Deps sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [delegate moveEmail:emailModel toFolder:folder];
                 [interactionsManager unregisterNode:element];
@@ -238,7 +240,7 @@ static int zIndex = INT_MAX;
         return false;
     }else if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
         if ([element isKindOfClass:[EmailNode class]]){
-            EmailModel* emailModel = (EmailModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
+            EmailModel* emailModel = (EmailModel*)[[Deps sharedInstance].coreDataManager.mainContext existingObjectWithID:((EmailNode*)element).emailId error:nil];
             if (emailModel){
                 [delegate moveEmail:emailModel toFolder:[delegate archiveFolderForEmail:emailModel]];
                 [interactionsManager unregisterNode:element];
@@ -251,7 +253,8 @@ static int zIndex = INT_MAX;
 }
 
 -(void)cleanDesk{
-    for (id<ElementNodeProtocol> node in interactionsManager.visibleNodes){
+    NSArray *visibleNodes = [NSArray arrayWithArray:interactionsManager.visibleNodes];
+    for (id<ElementNodeProtocol> node in visibleNodes){
         [interactionsManager unregisterNode:node];
         [drawingManager scaleOut:[node visualNode]];
     }

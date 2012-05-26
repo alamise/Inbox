@@ -20,6 +20,15 @@
 
 
 - (void) changeToGmailAccountWithLogin:(NSString*)login password:(NSString*)password error:(NSError**)error {
+    if ( !error ) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
+    if (![self validateEmail:login]){
+        *error = [NSError errorWithDomain:LOGIN_ERROR_DOMAIN code:EMAIL_INVALID_ERROR userInfo:nil];
+        return;
+    }
     [self changeAccountWithLogin:login
                     password:password
                     conType:CONNECTION_TYPE_TLS
@@ -56,6 +65,7 @@
         error = &err;
     }
     *error = nil;
+
     NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
     SynchroManager* synchroManager = [Deps sharedInstance].synchroManager;
     

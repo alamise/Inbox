@@ -12,6 +12,7 @@
 #import "FolderModel.h"
 #import "CoreDataManager.h"
 #import "AppDelegate.h"
+#import "Deps.h"
 
 @interface FoldersTable()
 @end
@@ -51,7 +52,7 @@
 -(SWTableViewCell *)table:(SWTableView *)t cellAtIndex:(NSUInteger)idx{
     DropZoneNode* node =  [[[DropZoneNode alloc] init] autorelease];
 
-    FolderModel* folder = (FolderModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:idx]];
+    FolderModel* folder = (FolderModel*)[[Deps sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:idx]];
     if (folder){
         node.title = [folder hrTitle];
     }else{
@@ -71,7 +72,7 @@
 -(FolderModel*) folderModelAtPoint:(CGPoint)point{
     int cellIndex = [table cellIndexAt:point];
     if (cellIndex!=-1){
-        FolderModel* folder = (FolderModel*)[[AppDelegate sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:cellIndex]];
+        FolderModel* folder = (FolderModel*)[[Deps sharedInstance].coreDataManager.mainContext objectWithID:[self.folders objectAtIndex:cellIndex]];
         return folder;
     }
     return nil;

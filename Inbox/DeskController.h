@@ -31,13 +31,10 @@
     
     
     DeskLayer* layer;
-    BOOL isLoading;
     EAGLView* glView;
     MBProgressHUD* loadingHud;
     BOOL isWaiting;
-    BOOL isSyncing;
     int totalEmailsInThisSession;
 }
 @property(nonatomic,retain,readonly) ModelsManager* modelsManager;
--(void)resetModel;
 @end

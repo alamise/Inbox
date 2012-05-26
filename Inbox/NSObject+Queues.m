@@ -8,21 +8,6 @@
 
 #import "NSObject+Queues.h"
 
-@implementation NSObject (Queues)
--(void)executeOnMainQueueSync:(dispatch_block_t) block{
-    if (dispatch_get_current_queue() == dispatch_get_main_queue()){
-        block();
-    }else{
-        dispatch_sync(dispatch_get_main_queue(), block);   
-    }
-}
-
--(void)executeOnMainQueueAsync:(dispatch_block_t) block{
-    if (dispatch_get_current_queue() == dispatch_get_main_queue()){
-        block();
-    }else{
-        dispatch_sync(dispatch_get_main_queue(), block);   
-    }
-}
+@implementation NSObject (Threads)
 
 @end

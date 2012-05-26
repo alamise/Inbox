@@ -63,19 +63,15 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [FlurryAnalytics logEvent:@"inbox empty" timed:NO];
 }
 
 - (IBAction)onRefresh {
-    [FlurryAnalytics logEvent:@"inbox empty - refresh" timed:NO];
     shouldExecActionOnDismiss = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)onEditAccount {
-    [FlurryAnalytics logEvent:@"inbox empty - edit account" timed:NO];
     LoginController* loginCtr = [[[LoginController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
-    loginCtr.actionOnDismiss = self.actionOnDismiss;
     [self.navigationController pushViewController:loginCtr animated:YES];
 }
 

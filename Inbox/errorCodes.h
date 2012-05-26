@@ -18,3 +18,4 @@
  
 #define LOGIN_ERROR_DOMAIN @"login_error_domain"
 #define CHANGE_ACCOUNT_ERROR -7
+#define EMAIL_INVALID_ERROR -8

@@ -28,16 +28,19 @@
 @interface ErrorController : UIViewController{
     Reachability* internetReachable;
     BOOL isInternetReachable;
+    
     IBOutlet UIView *connectionIsBackView;
     IBOutlet UIView *noConnectionView;
     IBOutlet UIView *errorView;
     IBOutlet UIView *loadingView;
-    BOOL shouldExecActionOnDismiss;
-    NSDate* viewAppearsDate;
-    NSInvocationOperation* actionOnDismiss;
-}
-@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
--(IBAction)dismiss;
--(IBAction)editAccount;
     
+    BOOL shouldRetry;
+    void (^retryBlock)();
+    
+}
+@property(nonatomic,retain) void(^retryBlock)();
+
+- (IBAction)dismiss;
+- (IBAction)editAccount;
+- (id)initWithRetryBlock:(void(^)())retry;   
 @end

@@ -17,5 +17,5 @@
 @property(readonly,nonatomic,retain) NSManagedObjectContext* mainContext;
 @property(readonly,nonatomic,retain) NSManagedObjectContext* syncContext;
 -(void)resetDatabase;
-
+- (void)postInit;
 @end

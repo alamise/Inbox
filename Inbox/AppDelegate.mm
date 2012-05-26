@@ -31,7 +31,6 @@
 #import "CTCoreAccount.h"
 #import "models.h"
 #import "LoginController.h"
-#import "TutorialController.h"
 #import "models.h"
 #import "Logger.h"
 #import "DDTTYLogger.h"

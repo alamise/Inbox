@@ -28,18 +28,16 @@
     shouldStop = YES;
 }
 
--(void) performBlock:(void(^)())block waitUntilDone:(BOOL)wait {
-    [self performSelector:@selector(doBlock:) onThread:thread withObject:Block_copy(block) waitUntilDone:wait];
+-(void)performBlockOnBackgroundThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
+    [self performSelectorOnMainThread:@selector(doBlock:) withObject:block waitUntilDone:waitUntilDone];
+}
+
+-(void)performBlockOnMainThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
+    [self performSelectorOnMainThread:@selector(doBlock:) withObject:block waitUntilDone:waitUntilDone];
 }
 
 -(void)doBlock:(void(^)())block{
-    @try {
-        block();
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",exception);
-    }
-    
+    block();
 }
 
 -(void)keepAliveTimerAction:(NSTimer*)timer{
@@ -64,7 +62,6 @@
     
     [pool release];
 }
-
 
 
 @end

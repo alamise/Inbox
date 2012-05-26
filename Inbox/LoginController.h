@@ -30,9 +30,7 @@
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *submitButton;
     BOOL shouldExecActionOnDismiss;
-    NSInvocationOperation* actionOnDismiss;
     LoginModel* model;
 }
-@property(nonatomic,retain) NSInvocationOperation* actionOnDismiss;
 - (IBAction)onLogin:(id)sender;
 @end

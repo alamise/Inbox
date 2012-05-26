@@ -26,6 +26,7 @@ static Deps* instance;
 + (Deps*) sharedInstance{
     if (!instance){
         instance = [[Deps alloc] init];
+        [instance.coreDataManager postInit];
     }
     return instance;
 }

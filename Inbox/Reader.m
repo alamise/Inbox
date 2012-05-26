@@ -7,6 +7,8 @@
 //
 
 #import "Reader.h"
+#import "Deps.h"
+
 static Reader* instance;
 @implementation Reader
 
@@ -24,7 +26,7 @@ static Reader* instance;
 }
 
 -(NSManagedObjectContext*)sharedContext{
-    return [((AppDelegate*)[UIApplication sharedApplication].delegate).coreDataManager mainContext];
+    return [[[Deps sharedInstance] coreDataManager] mainContext];
 }
 
 @end

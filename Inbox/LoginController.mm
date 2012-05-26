@@ -29,14 +29,17 @@
 #import "FlurryAnalytics.h"
 #import "LoginModel.h"
 #import "EmailAccountModel.h"
+#import "Deps.h"
+#import "SynchroManager.h"
+#import "ErrorController.h"
 
 @implementation LoginController
-@synthesize actionOnDismiss;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         shouldExecActionOnDismiss = NO;
-        self.title = NSLocalizedString(@"login.title", @"");
+        self.title = NSLocalizedString(@"login.title", @"Navigation title");
         UIBarButtonItem* closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
         [self.navigationItem setRightBarButtonItem:closeButton];
         [closeButton release];
@@ -46,35 +49,26 @@
 }
 
 
--(void) close {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)dealloc {
     [model release];
-    self.actionOnDismiss = nil;
     [emailField release];
     [passwordField release];
     [submitButton release];
     [super dealloc];
 }
 
-
-
 #pragma mark - IBActions
+
+- (void)close {
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 - (IBAction)onLogin:(id)sender {
     if (![model validateEmail:emailField.text]){
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.invalidemail.title", @"title of the alert shown when the login email is invalid") message:NSLocalizedString(@"login.invalidemail.message", @"message of the alert shown when the login email is invalid") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.invalidemail.button", @"button title of the alert shown when the login email is invalid") otherButtonTitles:nil];
-        [alert show];
-        [alert release];        
+        [self onInvalidEmail];       
     }else if ([passwordField.text isEqualToString:@""]){
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.emptypassword.title","title of the alert shown when the login password is empty") message:NSLocalizedString(@"login.emptypassword.message", @"message of the alert shown when the login password is empty") delegate:nil cancelButtonTitle:NSLocalizedString(@"login.emptypassword.button", @"button title of the alert shown when the login password is empty") otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        [self onInvalidPassword];
     }else{
-        NSError* error = nil;
-        [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
         shouldExecActionOnDismiss = YES;
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -103,11 +97,12 @@
     [super viewWillAppear:animated];
 }
 
-todo finish this file
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    if (shouldExecActionOnDismiss){
-        [actionOnDismiss start];
+    NSError* error = nil;
+    [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
+    if ( error ) {
+        [self onUnknownError];
     }
 }
 
@@ -121,8 +116,37 @@ todo finish this file
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+
+#pragma mark messages
+
+- (void)onInvalidPassword {
+    NSString *title = NSLocalizedString(@"login.error.emptypassword.title","");
+    NSString *message = NSLocalizedString(@"login.error.emptypassword.message", @"");
+    NSString *ok = NSLocalizedString(@"login.error.emptypassword.button", @"");
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:ok, nil];
+    [alert show];
+    [alert release];
+}
+
+- (void)onInvalidEmail {
+    NSString *title = NSLocalizedString(@"login.error.invalidemail.title", @"");
+    NSString *message = NSLocalizedString(@"login.error.invalidemail.message", @"");
+    NSString *ok = NSLocalizedString(@"login.error.invalidemail.button", @"");
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:ok, nil];
+    [alert show];
+    [alert release]; 
+}
+
+- (void)onUnknownError {
+    NSString *title = NSLocalizedString(@"login.error.unknown.title","");
+    NSString *message = NSLocalizedString(@"login.error.unknown.message", @"");
+    NSString *ok = NSLocalizedString(@"login.error.unknown.button", @"");
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:ok, nil];
+    [alert show];
+    [alert release];    
 }
 
 @end

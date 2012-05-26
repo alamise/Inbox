@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "BackgroundThread.h"
+#import "Deps.h"
+
 @interface CoreDataManager()
 @property(nonatomic,retain) NSManagedObjectContext* mainContext;
 @property(nonatomic,retain) NSManagedObjectContext* syncContext;
@@ -23,21 +25,23 @@
         self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
         [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainContextDidSave:)
-                                                     name:NSManagedObjectContextDidSaveNotification object:self.mainContext];
-        
-
-        [[AppDelegate sharedInstance].backgroundThread performBlock:^{
-            self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
-            [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncContextDidSave:)
-                                                         name:NSManagedObjectContextDidSaveNotification object:self.syncContext];
-        } waitUntilDone:YES];
+                                                    name:NSManagedObjectContextDidSaveNotification object:self.mainContext];
     }
     return self;
 }
 
+- (void)postInit {
+    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
+        self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
+        [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncContextDidSave:)
+                                                     name:NSManagedObjectContextDidSaveNotification object:self.syncContext];
+    } waitUntilDone:YES];
+
+}
+
 -(void)mainContextDidSave:(NSNotification*)notif{
-    [[AppDelegate sharedInstance].backgroundThread performBlock:^{
+    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
         [self.syncContext lock];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
         [self.syncContext unlock];
