@@ -15,6 +15,8 @@
 #import "CTCoreAccount.h"
 #import "CTCoreFolder.h"
 #import "EmailAccountModel.h"
+#import "DDLog.h"
+#import "Logger.h"
 @interface PersistMessagesSubSync ()
 @end
 
@@ -27,6 +29,8 @@
 
 
 -(void)updateRemoteMessagesWithError:(NSError**)error{
+    DDLogVerbose(@"Update remote messages started");
+
     if (!error){
         NSError* err = nil;
         error = &err;
@@ -41,6 +45,7 @@
     [request release];
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]];
+        DDLogError(@"Update remote messages ended with an error");
         return;
     }
     CTCoreFolder* folder = nil;
@@ -55,6 +60,7 @@
                 account = [self coreAccountWithError:error];
                 if (*error){
                     *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+                    DDLogError(@"Update remote messages ended with an error");
                     return;
                 }
                 folder = [account folderWithPath:email.serverPath];
@@ -75,13 +81,14 @@
             }
         }
         
-        // If there were an issue finding the email on the server, the message is deleted.
+        // If there were an issue finding the email on the server, the message is deleted locally.
         if (skip) {
             @try {
                 [self.context deleteObject:email];
             }
             @catch (NSException *exception) {
                 *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+                DDLogError(@"Update remote messages ended with an error");
                 return;
             }
         } else {
@@ -90,12 +97,14 @@
             }
             @catch (NSException* exception) {
                 *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+                DDLogError(@"Update remote messages ended with an error");
                 return;
             }
             email.serverPath = folder.path;
             email.shouldPropagate = NO;
         }
     }
+    DDLogVerbose(@"Update remote messages successful");
 }
 
 @end

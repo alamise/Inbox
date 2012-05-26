@@ -26,7 +26,6 @@
 #import "Reachability.h"
 #import "LoginController.h"
 #import "DeskController.h"
-#import "models.h"
 #import "FlurryAnalytics.h"
 #import "Deps.h"
 

@@ -18,6 +18,8 @@
 #import "EmailSynchronizer.h"
 #import "CTCoreMessage.h"
 #import "CTCoreAddress.h"
+#import "DDLog.h"
+#import "Logger.h"
 #define DL_PAGE_SIZE 100
 
 @interface UpdateMessagesSubSync ()
@@ -28,6 +30,7 @@
 @implementation UpdateMessagesSubSync
 
 -(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc periodicCall:(void(^)()) periodic{
+    DDLogVerbose(@"Update local messages started");
     if (!error){
         NSError* err;
         error = &err;
@@ -37,10 +40,14 @@
     onStateChanged = [osc retain];
     periodicCall = [periodic retain];
     [self updateLocalMessagesWithError:error];
+    if ( *error ) {
+        DDLogVerbose(@"Update local messages ended with an error");
+    }
     [onStateChanged release];
     onStateChanged = nil;
     [periodicCall release];
     periodicCall = nil;
+    DDLogVerbose(@"Update local messages successful");
 }
 
 -(void)dealloc{
@@ -60,6 +67,7 @@
     
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+        DDLogError(@"error when getting the local folders");
         return;
     }
 
@@ -71,25 +79,31 @@
     
     while ([folders count] != 0) {
         if (updateRemoteCounter++ % 30 == 0){
+            DDLogInfo(@"periodicCall block performed");
             periodicCall();
         }
 
         FolderModel* folderModel = [folders objectAtIndex:currentFolderIndex];
-
+        
+        DDLogVerbose(@"processing folder %@",folderModel.path);
         CTCoreFolder* coreFolder = [self coreFolderForFolder:folderModel error:error];
         [coreFolder connect];
         if (*error) {
+            DDLogError(@"error when getting the CTCoreFolder");
             return;
         }
-        
+        DDLogVerbose(@"building message buffer (page %d)",page);
         NSSet *messagesBuffer = [self nextCoreMessagesForFolder:folderModel coreFolder:coreFolder page:page error:error];
         if (*error) {
+            DDLogError(@"error when getting the next CTCoreMessage for a the folder: %@",folderModel.path);
             return;
         }
         
-        for (CTCoreMessage* message in messagesBuffer) {
+        for ( CTCoreMessage* message in messagesBuffer ) {
+            DDLogVerbose(@"processing a message");
             [self processCoreEmail:message folder:folderModel coreFolder:coreFolder error:error];
-            if (*error){
+            if ( *error ) {
+                DDLogError(@"error When processing the current message");
                 return;
             }
         }
@@ -103,15 +117,17 @@
         
         if (*error){
             *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+            DDLogError(@"error when saving the CoreData context");
             return;
         }
-        
+        DDLogInfo(@"onStateChanged block performed");
         onStateChanged();
 
         currentFolderIndex = currentFolderIndex+1;
         currentFolderIndex = currentFolderIndex % [folders count];
         
         if (currentFolderIndex == 0){
+            DDLogVerbose(@"switching to page %d", page);
             page++;
         }
     }
@@ -219,11 +235,12 @@
         if ((start == 0) && (end == 0)) {
             return [NSSet set];
         }
-        
+        DDLogVerbose(@"message buffer build from index %d to index %d", start, end);
         messages = [coreFolder messageObjectsFromIndex:start toIndex:end];
     }
     @catch (NSException *exception) {
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+        DDLogVerbose(@"error when building the message buffer for page %d (total:%d)", page, coreFolderMessageCount);
         return [NSSet set];
     }
 

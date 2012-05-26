@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "models.h"
 #define SYNC_DONE @"sync_done"
 #define SYNC_FAILED @"sync_failed"
 #define SYNC_RELOADED @"sync_reloaded"

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "models.h"
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 

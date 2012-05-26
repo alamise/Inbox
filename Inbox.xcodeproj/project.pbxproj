@@ -770,7 +770,6 @@
 		F47DBDBD1533212E008A5373 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F47DBDC9153336E6008A5373 /* EmailAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAccountModel.h; sourceTree = "<group>"; };
 		F47DBDCA153336E6008A5373 /* EmailAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAccountModel.m; sourceTree = "<group>"; };
-		F47DBDCD15333B74008A5373 /* models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = models.h; sourceTree = "<group>"; };
 		F482021C14917FC800C0576C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F484D0D81470156700F7CA1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		F48E5B44154D41E10016B34D /* InboxStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxStack.h; sourceTree = "<group>"; };
@@ -957,7 +956,6 @@
 		F41E666814A9D09900BA4712 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				F47DBDCD15333B74008A5373 /* models.h */,
 				F4FC7CEF156D8A4A00290A1F /* synchro */,
 				F47DBDCC1533396C008A5373 /* DAO */,
 			);
@@ -1002,14 +1000,14 @@
 		F42223E315693E9C0050F268 /* steps */ = {
 			isa = PBXGroup;
 			children = (
+				F42223E015693BCC0050F268 /* EmailSubSync.h */,
+				F42223E115693BCD0050F268 /* EmailSubSync.m */,
 				F42223D715690F270050F268 /* FoldersSubSync.h */,
 				F42223D815690F270050F268 /* FoldersSubSync.m */,
 				F42223DA15692CAF0050F268 /* PersistMessagesSubSync.h */,
 				F42223DB15692CAF0050F268 /* PersistMessagesSubSync.m */,
 				F42223DD15692EDE0050F268 /* UpdateMessagesSubSync.h */,
 				F42223DE15692EDE0050F268 /* UpdateMessagesSubSync.m */,
-				F42223E015693BCC0050F268 /* EmailSubSync.h */,
-				F42223E115693BCD0050F268 /* EmailSubSync.m */,
 			);
 			name = steps;
 			sourceTree = "<group>";

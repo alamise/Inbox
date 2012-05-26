@@ -28,7 +28,6 @@
 #import "MBProgressHUD.h"
 #import "EmailController.h"
 #import "ErrorController.h"
-#import "models.h"
 #import "cocos2d.h"
 #import "InboxEmptyController.h"
 #import "LoginController.h"

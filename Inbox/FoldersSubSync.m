@@ -25,7 +25,7 @@
 }
 
 -(void)syncWithError:(NSError**)error{
-    DDLogVerbose(@"folders sync started");
+    DDLogVerbose(@"syncing folders");
     if (!error){
         NSError* err;
         error = &err;
@@ -39,6 +39,7 @@
     
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:@"No account set" forKey:ROOT_MESSAGE]];
+        DDLogError(@"syncing folders ended with an error");
         return;
     }
     
@@ -47,29 +48,34 @@
     }
     @catch (NSException *exception) {
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+        DDLogError(@"syncing folders ended with an error");
         return;
     }
     
     NSSet* disabledFolders = [self disabledFolders];
     NSMutableSet* foldersToProcess = [NSMutableSet setWithSet:folders];
-    for (NSArray* f in disabledFolders){
+    for ( NSArray* f in disabledFolders ) {
         [foldersToProcess removeObject:f];
     }
     
     [self deleteFoldersExcept:foldersToProcess error:error];
     if (*error){
+        DDLogError(@"syncing folders ended with an error");
         return;
     }
     
     [self createOrUpdateFolders:foldersToProcess error:error];
     if (*error){
+        DDLogError(@"syncing folders ended with an error");
         return;
     }
     [self.context save:error];
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+        DDLogError(@"syncing folders ended with an error");
+        return;
     }
-    DDLogVerbose(@"folders sync done");
+    DDLogVerbose(@"folders sync successful");
 }
 
 -(NSSet*)disabledFolders {
@@ -103,12 +109,13 @@
     }
     
     for (FolderModel* folder in foldersToDelete) {
-
+        DDLogInfo(@"Deleting the local folder: %@",folder.path);
         @try {
             [self.context deleteObject:folder];
         }
         @catch (NSException *exception) {
             *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+            DDLogError(@"Error when deleting a folder");
             return;
         }
     }
@@ -135,16 +142,19 @@
         
         if (*error) {
             *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+            DDLogError(@"error when creating/updating local folders");
             return;
         }
         
         if (folders == 0) {
+            DDLogInfo(@"Creating the folder: %@", path);
             FolderModel* folderModel;
             @try {
                 folderModel = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:self.context];
             }
             @catch (NSException *exception) {
                 *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+                    DDLogError(@"error when creating a new local folder");
                 return;
             }
             folderModel.path = path;

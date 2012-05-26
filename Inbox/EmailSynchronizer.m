@@ -68,7 +68,7 @@
 
 
 - (void)sync:(NSError **)error {
-    
+    DDLogVerbose(@"sync started");
     if ( !error ) {
         NSError* err = nil;
         error = &err;
@@ -78,6 +78,7 @@
     FoldersSubSync *foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [foldersSync syncWithError:error];
     if ( *error ) {
+        DDLogError(@"sync ended with an error");
         return;
     }
     [foldersSync release];
@@ -86,6 +87,7 @@
     PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [persistSync syncWithError:error];
     if ( *error ) {
+        DDLogError(@"sync ended with an error");
         return;
     }
     
@@ -97,6 +99,7 @@
     }];
     
     if ( *error ){
+        DDLogError(@"sync ended with an error");
         return;
     }
     
@@ -107,6 +110,7 @@
     
     [emailAccountModel release];
     emailAccountModel = nil;
+    DDLogVerbose(@"sync successful");
     return;
 }
 

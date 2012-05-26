@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "errorCodes.h"
-#import "models.h"
 #import "FlurryAnalytics.h"
 
 #define INTERNAL_SYNC_FAILED @"int_sync_failed"

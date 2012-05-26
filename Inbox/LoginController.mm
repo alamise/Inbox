@@ -25,7 +25,6 @@
 #import "LoginController.h"
 #import "AppDelegate.h"
 #import "DeskController.h"
-#import "models.h"
 #import "FlurryAnalytics.h"
 #import "LoginModel.h"
 #import "EmailAccountModel.h"
