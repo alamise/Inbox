@@ -27,14 +27,14 @@
 @class  MBProgressHUD,DeskLayer,EAGLView,ModelsManager;
 
 @interface DeskController : UIViewController<DeskProtocol> {
-    ModelsManager* modelsManager;
+    ModelsManager *modelsManager;
     
     
-    DeskLayer* layer;
-    EAGLView* glView;
-    MBProgressHUD* loadingHud;
+    DeskLayer *layer;
+    EAGLView *glView;
+    MBProgressHUD *loadingHud;
     BOOL isWaiting;
     int totalEmailsInThisSession;
 }
-@property(nonatomic,retain,readonly) ModelsManager* modelsManager;
+@property(nonatomic,retain,readonly) ModelsManager *modelsManager;
 @end

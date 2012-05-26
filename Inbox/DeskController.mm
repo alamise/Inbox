@@ -43,7 +43,7 @@
 #import "SynchroManager.h"
 #define MAX_ELEMENTS 5
 @interface DeskController ()
-@property(nonatomic,retain,readwrite) ModelsManager* modelsManager;
+@property(nonatomic,retain,readwrite) ModelsManager *modelsManager;
 -(void)nextStep;
 @end
 
