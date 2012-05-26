@@ -18,16 +18,15 @@
 @interface Synchronizer : NSObject{
     BOOL shouldStopAsap;
     NSLock* syncLock;
-    NSManagedObjectContext* context;
+    NSManagedObjectContext *context;
 }
--(BOOL)startSync;
--(void)stopAsap;
+- (void)startSync:(NSError **)error;
+- (void)stopAsap;
 
 // internal
--(BOOL)sync;
--(void)onStateChanged;
--(void)onError:(NSError*)error;
--(void)saveContextWithError:(NSError**)error;
+- (void)sync:(NSError **)error;
+- (void)onStateChanged;
+- (void)saveContextWithError:(NSError **)error;
 @property(readonly,assign) BOOL shouldStopAsap;
-@property(nonatomic,retain) NSManagedObjectContext* context;
+@property(nonatomic,retain) NSManagedObjectContext *context;
 @end

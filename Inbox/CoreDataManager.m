@@ -9,7 +9,7 @@
 #import "CoreDataManager.h"
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
-#import "BackgroundThread.h"
+#import "ThreadsManager.h"
 #import "Deps.h"
 
 @interface CoreDataManager()
@@ -31,7 +31,7 @@
 }
 
 - (void)postInit {
-    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
+    [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
         self.syncContext = [[[NSManagedObjectContext alloc] init] autorelease];
         [self.syncContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncContextDidSave:)
@@ -41,7 +41,7 @@
 }
 
 -(void)mainContextDidSave:(NSNotification*)notif{
-    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
+    [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
         [self.syncContext lock];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
         [self.syncContext unlock];

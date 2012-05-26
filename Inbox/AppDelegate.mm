@@ -37,7 +37,7 @@
 #import "BWQuincyManager.h"
 #import "FlurryAnalytics.h"
 #import "PrivateValues.h"
-#import "BackgroundThread.h"
+#import "ThreadsManager.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"

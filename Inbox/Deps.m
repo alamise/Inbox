@@ -7,21 +7,21 @@
 //
 
 #import "Deps.h"
-#import "BackgroundThread.h"
+#import "ThreadsManager.h"
 #import "CoreDataManager.h"
 #import "SynchroManager.h"
 
 static Deps* instance;
 
 @interface Deps ()
-@property(nonatomic, retain, readwrite) CoreDataManager* coreDataManager;
-@property(nonatomic, retain, readwrite) BackgroundThread* backgroundThread;
-@property(nonatomic, retain, readwrite) SynchroManager* synchroManager;
+@property(nonatomic, retain, readwrite) CoreDataManager *coreDataManager;
+@property(nonatomic, retain, readwrite) ThreadsManager *threadsManager;
+@property(nonatomic, retain, readwrite) SynchroManager *synchroManager;
 @end
 
 @implementation Deps
 @synthesize coreDataManager;
-@synthesize backgroundThread;
+@synthesize threadsManager;
 @synthesize synchroManager;
 + (Deps*) sharedInstance{
     if (!instance){
@@ -34,15 +34,15 @@ static Deps* instance;
 
 - (void) dealloc {
     self.coreDataManager = nil;
-    self.backgroundThread = nil;
+    self.threadsManager = nil;
     self.synchroManager = nil;
     [super dealloc];
 }
 
 - (id) init {
     if (self = [super init]){
-        self.backgroundThread = [[[BackgroundThread alloc] init] autorelease];
-        [self.backgroundThread.thread start];
+        self.threadsManager = [[[ThreadsManager alloc] init] autorelease];
+        [self.threadsManager.thread start];
         
         self.coreDataManager = [[[CoreDataManager alloc] init] autorelease];
 

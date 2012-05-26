@@ -7,11 +7,10 @@
 //
 
 #import "SynchroManager.h"
-#import "NSObject+Queues.h"
 #import "EmailSynchronizer.h"
 #import "Synchronizer.h"
 #import "EmailAccountModel.h"
-#import "BackgroundThread.h"
+#import "ThreadsManager.h"
 #import "Deps.h"
 #import "CoreDataManager.h"
 #import "errorCodes.h"
@@ -47,13 +46,13 @@
 }
 
 -(void) refreshEmailAccountsWithError:(NSError**)error {
-    if (!error){
+    if ( !error ) {
         NSError* err;
         error = &err;
     }
     *error = nil;
     
-    for (Synchronizer* sync in synchronizers){
+    for ( Synchronizer* sync in synchronizers ) {
         [sync stopAsap];
     }
     [synchronizers removeAllObjects];
@@ -63,12 +62,12 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     request.entity = entity;
     NSArray* emailsModels = [context executeFetchRequest:request error:error];
-    if (*error){
+    if ( *error ) {
         [request release];
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:REFRESH_ACCOUNT_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
     }
 
-    for (EmailAccountModel* account in emailsModels){
+    for ( EmailAccountModel* account in emailsModels ) {
         EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
@@ -80,7 +79,7 @@
 -(void)startSync{
     NSError* error = nil;
     [self refreshEmailAccountsWithError:&error];
-    if (error){
+    if ( error ) {
         [self onSyncFailed];
         return;
     }
@@ -88,29 +87,38 @@
     runningSync = [synchronizers count];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
-        for (Synchronizer* sync in synchronizers){
-            [sync startSync];
-        }    
-    } waitUntilDone:NO];
+    for ( Synchronizer* sync in synchronizers ) {
+        [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{            
+            NSError *error = nil;
+            [sync startSync:&error];
+            if ( error ){
+                [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+                    [self onSyncFailed];
+                } waitUntilDone:NO];
+            } else {
+                [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+                    [self onSyncDone];
+                } waitUntilDone:NO];            
+            }
+        } waitUntilDone:NO];
+    }
 }
 
--(void)abortSync{
+- (void)abortSync {
     [self stopSynchronizers];
     [synchronizers removeAllObjects];
     runningSync = 0;
 }
 
 
--(void)stopSynchronizers{
-    [[Deps sharedInstance].backgroundThread performBlockOnBackgroundThread:^{
-        for (Synchronizer* sync in synchronizers){
+- (void)stopSynchronizers {
+    for ( Synchronizer* sync in synchronizers ) {
+        [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
             [sync stopAsap];
-        }
-    } waitUntilDone:NO];
+        } waitUntilDone:NO];
+    }
 }
 
-//todo add dispatch on the main thread. how to get the main thread
 - (void)onSyncDone {
     runningSync--;
     if ( runningSync == 0 ) {
@@ -120,7 +128,7 @@
 }
 
 
--(void)onSyncFailed{
+- (void)onSyncFailed {
     [self stopSynchronizers];
     [synchronizers removeAllObjects];
     runningSync = 0;

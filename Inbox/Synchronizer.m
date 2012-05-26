@@ -7,7 +7,7 @@
 //
 
 #import "Synchronizer.h"
-#import "NSObject+Queues.h"
+#import "ThreadsManager.h"
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "Deps.h"
@@ -31,47 +31,32 @@
 
 - (void)onStateChanged {
     if (!self.shouldStopAsap){
-        [self executeOnMainQueueAsync:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];
-        }];
+        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:STATE_UPDATED object:nil];        
+        } waitUntilDone:NO];
     }
 }
 
-- (void)onError:(NSError *)error {
-    if (!self.shouldStopAsap){
-        [self executeOnMainQueueSync:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_FAILED object:nil];
-        }];
+- (void)startSync:(NSError **)error {
+    if ( !error ) {
+        NSError *err = nil;
+        error = &err;
     }
-}
-
-- (BOOL)startSync {
+    *error = nil;
     [syncLock lock];
     self.context = [[Deps sharedInstance].coreDataManager syncContext];
     shouldStopAsap = false;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncFailed) name:INTERNAL_SYNC_FAILED object:nil];
-    BOOL returnValue = [self sync];
+    [self sync:error];
     self.context = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:INTERNAL_SYNC_FAILED object:nil];
     [syncLock unlock];
-    if (!self.shouldStopAsap){
-        [self executeOnMainQueueSync:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:INTERNAL_SYNC_DONE object:nil];
-        }];
-    }
-    return returnValue;
 }
 
--(BOOL)sync{
-    return true;
+/* Overriden */
+- (void)sync:(NSError **)error{
+
 }
 
--(void)syncFailed{
-    [syncLock unlock];
-    [self stopAsap];
-}
-
--(void)saveContextWithError:(NSError**)error{
+- (void)saveContextWithError:(NSError **)error{
     if (!error){
         NSError* err = nil;
         error = &err;

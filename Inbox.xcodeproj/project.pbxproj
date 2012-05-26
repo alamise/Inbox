@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */; };
 		F405B91D156ED3F40048E4C4 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = F405B8FC156ED3F40048E4C4 /* iRate.m */; };
-		F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */ = {isa = PBXBuildFile; fileRef = F406110E1534D42500A7CA0A /* NSObject+Queues.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F418426D1556F31500753265 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F418426C1556F31200753265 /* CoreDataManager.m */; };
@@ -37,7 +36,7 @@
 		F41E669114A9E2D400BA4712 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E669014A9E2D400BA4712 /* circle.png */; };
 		F420671314D20ECA00FE7A26 /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */; };
 		F420671514D20FD800FE7A26 /* woodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F420671414D20FD700FE7A26 /* woodBackground.png */; };
-		F422233A1567AA3F0050F268 /* BackgroundThread.m in Sources */ = {isa = PBXBuildFile; fileRef = F42223391567AA3F0050F268 /* BackgroundThread.m */; };
+		F422233A1567AA3F0050F268 /* ThreadsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42223391567AA3F0050F268 /* ThreadsManager.m */; };
 		F42223D915690F270050F268 /* FoldersSubSync.m in Sources */ = {isa = PBXBuildFile; fileRef = F42223D815690F270050F268 /* FoldersSubSync.m */; };
 		F42223DC15692CB00050F268 /* PersistMessagesSubSync.m in Sources */ = {isa = PBXBuildFile; fileRef = F42223DB15692CAF0050F268 /* PersistMessagesSubSync.m */; };
 		F42223DF15692EDE0050F268 /* UpdateMessagesSubSync.m in Sources */ = {isa = PBXBuildFile; fileRef = F42223DE15692EDE0050F268 /* UpdateMessagesSubSync.m */; };
@@ -646,8 +645,6 @@
 		F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldersWoodBackground.png; sourceTree = "<group>"; };
 		F405B8FB156ED3F40048E4C4 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = iRate/iRate.h; sourceTree = "<group>"; };
 		F405B8FC156ED3F40048E4C4 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = iRate/iRate.m; sourceTree = "<group>"; };
-		F406110D1534D42500A7CA0A /* NSObject+Queues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Queues.h"; sourceTree = "<group>"; };
-		F406110E1534D42500A7CA0A /* NSObject+Queues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Queues.m"; sourceTree = "<group>"; };
 		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
@@ -692,8 +689,8 @@
 		F41EAEA0153304EA00928BD7 /* MailCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MailCore.xcodeproj; path = MailCore/MailCore.xcodeproj; sourceTree = "<group>"; };
 		F420671214D20ECA00FE7A26 /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialSettingsButton.png; sourceTree = "<group>"; };
 		F420671414D20FD700FE7A26 /* woodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woodBackground.png; sourceTree = "<group>"; };
-		F42223381567AA3F0050F268 /* BackgroundThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundThread.h; sourceTree = "<group>"; };
-		F42223391567AA3F0050F268 /* BackgroundThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundThread.m; sourceTree = "<group>"; };
+		F42223381567AA3F0050F268 /* ThreadsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadsManager.h; sourceTree = "<group>"; };
+		F42223391567AA3F0050F268 /* ThreadsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadsManager.m; sourceTree = "<group>"; };
 		F42223D715690F270050F268 /* FoldersSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersSubSync.h; sourceTree = "<group>"; };
 		F42223D815690F270050F268 /* FoldersSubSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersSubSync.m; sourceTree = "<group>"; };
 		F42223DA15692CAF0050F268 /* PersistMessagesSubSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistMessagesSubSync.h; sourceTree = "<group>"; };
@@ -864,14 +861,8 @@
 				F4FC7CF4156D8B3400290A1F /* base */,
 				F4FC7CEC156D898D00290A1F /* config */,
 				F4FC7CEB156D897600290A1F /* utils */,
+				F40A01D615715F9A00D61AE3 /* singletongs */,
 				F40B345614D59BB500F1598B /* Logger.h */,
-				F42223381567AA3F0050F268 /* BackgroundThread.h */,
-				F42223391567AA3F0050F268 /* BackgroundThread.m */,
-				F4CCAB391555883D0025BEDC /* CCController.h */,
-				F4FC7CF5156D8C0300290A1F /* Deps.h */,
-				F4FC7CF6156D8C0300290A1F /* Deps.m */,
-				F418426B1556F31200753265 /* CoreDataManager.h */,
-				F418426C1556F31200753265 /* CoreDataManager.m */,
 			);
 			name = system;
 			sourceTree = "<group>";
@@ -882,6 +873,19 @@
 				F40A013A1570EB1500D61AE3 /* libQuincyLib.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F40A01D615715F9A00D61AE3 /* singletongs */ = {
+			isa = PBXGroup;
+			children = (
+				F4FC7CF5156D8C0300290A1F /* Deps.h */,
+				F4FC7CF6156D8C0300290A1F /* Deps.m */,
+				F42223381567AA3F0050F268 /* ThreadsManager.h */,
+				F42223391567AA3F0050F268 /* ThreadsManager.m */,
+				F418426B1556F31200753265 /* CoreDataManager.h */,
+				F418426C1556F31200753265 /* CoreDataManager.m */,
+			);
+			name = singletongs;
 			sourceTree = "<group>";
 		};
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
@@ -1245,6 +1249,7 @@
 		F4B4E61815362889008FDC7F /* graphical */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCAB391555883D0025BEDC /* CCController.h */,
 				F427D837154F000F001953C4 /* desk */,
 				F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */,
 			);
@@ -1336,8 +1341,6 @@
 		F4FC7CEB156D897600290A1F /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				F406110D1534D42500A7CA0A /* NSObject+Queues.h */,
-				F406110E1534D42500A7CA0A /* NSObject+Queues.m */,
 				F41843091557CDDD00753265 /* NSArray+CoreData.h */,
 				F418430A1557CDDD00753265 /* NSArray+CoreData.m */,
 			);
@@ -2094,7 +2097,6 @@
 				F44B060A153365CE003B801D /* EmailSynchronizer.m in Sources */,
 				F44B061015336E62003B801D /* EmailReader.m in Sources */,
 				F44B061315336E6D003B801D /* Reader.m in Sources */,
-				F406110F1534D42500A7CA0A /* NSObject+Queues.m in Sources */,
 				F48E5B46154D41E20016B34D /* InboxStack.mm in Sources */,
 				F427D83A154F19B0001953C4 /* InteractionsManager.mm in Sources */,
 				F427D842154F2368001953C4 /* DrawingManager.mm in Sources */,
@@ -2102,7 +2104,7 @@
 				F427D84B154F3D53001953C4 /* FoldersTable.m in Sources */,
 				F418426D1556F31500753265 /* CoreDataManager.m in Sources */,
 				F418430B1557CDDD00753265 /* NSArray+CoreData.m in Sources */,
-				F422233A1567AA3F0050F268 /* BackgroundThread.m in Sources */,
+				F422233A1567AA3F0050F268 /* ThreadsManager.m in Sources */,
 				F42223D915690F270050F268 /* FoldersSubSync.m in Sources */,
 				F42223DC15692CB00050F268 /* PersistMessagesSubSync.m in Sources */,
 				F42223DF15692EDE0050F268 /* UpdateMessagesSubSync.m in Sources */,

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BackgroundThread.h"
+#import "ThreadsManager.h"
 
-@implementation BackgroundThread
+@implementation ThreadsManager
 @synthesize thread;
 
 -(id)init {

@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 @class CoreDataManager;
-@class BackgroundThread;
+@class ThreadsManager;
 @class SynchroManager;
 @interface Deps : NSObject{
-    CoreDataManager* coreDataManager;
-    BackgroundThread* backgroundThread;
-    SynchroManager* synchroManager;
+    CoreDataManager *coreDataManager;
+    ThreadsManager *backgroundThread;
+    SynchroManager *synchroManager;
 }
-+ (Deps*) sharedInstance;
++ (Deps *)sharedInstance;
 
-@property(nonatomic,retain,readonly) SynchroManager* synchroManager;
-@property(nonatomic,retain,readonly) CoreDataManager* coreDataManager;
-@property(nonatomic,retain,readonly) BackgroundThread* backgroundThread;
+@property(nonatomic,retain,readonly) SynchroManager *synchroManager;
+@property(nonatomic,retain,readonly) CoreDataManager *coreDataManager;
+@property(nonatomic,retain,readonly) ThreadsManager *threadsManager;
 
 @end

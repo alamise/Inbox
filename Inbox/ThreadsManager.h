@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BackgroundThread : NSObject{
+@interface ThreadsManager : NSObject{
     BOOL shouldStop;
     NSThread* thread;
 }

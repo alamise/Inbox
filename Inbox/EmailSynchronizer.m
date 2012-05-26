@@ -26,21 +26,21 @@
 @implementation EmailSynchronizer
 @synthesize emailAccountModel;
 
--(id)initWithAccountId:(id)accountId{
-    if (self = [super init]){
+- (id)initWithAccountId:(id)accountId {
+    if ( self = [super init] ) {
         emailAccountModelId = [accountId retain];
     }
     return self;
 }
 
--(void)dealloc{
+- (void)dealloc {
     [emailAccountModel release];
     [emailAccountModelId release];
     [super dealloc];
 }
 
 
-+(NSString*)decodeImapString:(NSString*)input {
++ (NSString *)decodeImapString:(NSString *)input {
     NSMutableDictionary* translationTable = [[NSMutableDictionary alloc] init];
     [translationTable setObject:@"&" forKey:@"&-"];
     [translationTable setObject:@"é" forKey:@"&AOk-"];
@@ -58,7 +58,7 @@
     [translationTable setObject:@"É" forKey:@"&AMk"];
     [translationTable setObject:@"ë" forKey:@"&AOs"];
     
-    for (NSString* key in [translationTable allKeys]){
+    for ( NSString* key in [translationTable allKeys] ) {
         input = [input stringByReplacingOccurrencesOfString:key withString:[translationTable objectForKey:key]];
     }
     [translationTable release];
@@ -67,33 +67,37 @@
 
 
 
--(BOOL)sync{
+- (void)sync:(NSError **)error {
+    
+    if ( !error ) {
+        NSError* err = nil;
+        error = &err;
+    }
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
     
-    NSError* error = nil;
-    FoldersSubSync* foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
-    [foldersSync syncWithError:&error];
-    if (error){
-        return false;
+    FoldersSubSync *foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
+    [foldersSync syncWithError:error];
+    if ( *error ) {
+        return;
     }
     [foldersSync release];
     foldersSync = nil;
     
     PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
-    [persistSync syncWithError:&error];
-    if (error){
-        return false;
+    [persistSync syncWithError:error];
+    if ( *error ) {
+        return;
     }
     
     UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
-    [updateSync syncWithError:&error onStateChanged:^{
+    [updateSync syncWithError:error onStateChanged:^{
         [self onStateChanged];
     } periodicCall:^{
         [persistSync syncWithError:nil];
     }];
     
-    if (error){
-        return false;
+    if ( *error ){
+        return;
     }
     
     [updateSync release];
@@ -103,7 +107,7 @@
     
     [emailAccountModel release];
     emailAccountModel = nil;
-    return true;
+    return;
 }
 
 @end
