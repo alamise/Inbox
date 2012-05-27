@@ -59,6 +59,11 @@
 
 }
 
+- (void)abortSync:(void(^)())nextStep {
+    SynchroManager* synchroManager = [Deps sharedInstance].synchroManager;
+    [synchroManager abortSync:nextStep];
+}
+
 - (void) changeAccountWithLogin:(NSString*)login password:(NSString*)password conType:(int)conType authType:(int) authType port:(int)port server:(NSString*)server error:(NSError**)error {
     if (!error){
         NSError* err = nil;
@@ -67,10 +72,6 @@
     *error = nil;
 
     NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
-    SynchroManager* synchroManager = [Deps sharedInstance].synchroManager;
-    
-    [synchroManager abortSync];
-    
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailAccountModel entityName] inManagedObjectContext:context];

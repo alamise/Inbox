@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */; };
 		F405B91D156ED3F40048E4C4 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = F405B8FC156ED3F40048E4C4 /* iRate.m */; };
+		F40A01D91572C19C00D61AE3 /* FolderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A01D81572C19C00D61AE3 /* FolderModel.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
 		F40BDEA914B9F17600F2DC5F /* tutorialSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */; };
 		F418426D1556F31500753265 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F418426C1556F31200753265 /* CoreDataManager.m */; };
@@ -49,7 +50,6 @@
 		F427E77914D9FA7F007C3E64 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */; };
 		F427E77A14D9FA7F007C3E64 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77714D9FA7F007C3E64 /* Icon-Small.png */; };
 		F427E77B14D9FA7F007C3E64 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */; };
-		F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43819F014AB90CA0017C9BC /* FolderModel.m */; };
 		F43819F414AC79530017C9BC /* settingsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F214AC79530017C9BC /* settingsDown.png */; };
 		F43819F514AC79530017C9BC /* settingsUp.png in Resources */ = {isa = PBXBuildFile; fileRef = F43819F314AC79530017C9BC /* settingsUp.png */; };
 		F444C0E414B9FB5E00D08560 /* formSheetWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */; };
@@ -645,6 +645,8 @@
 		F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldersWoodBackground.png; sourceTree = "<group>"; };
 		F405B8FB156ED3F40048E4C4 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = iRate/iRate.h; sourceTree = "<group>"; };
 		F405B8FC156ED3F40048E4C4 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = iRate/iRate.m; sourceTree = "<group>"; };
+		F40A01D71572C19C00D61AE3 /* FolderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderModel.h; path = Inbox/FolderModel.h; sourceTree = SOURCE_ROOT; };
+		F40A01D81572C19C00D61AE3 /* FolderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FolderModel.m; path = Inbox/FolderModel.m; sourceTree = SOURCE_ROOT; };
 		F40B345614D59BB500F1598B /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F40BDEA814B9F17600F2DC5F /* tutorialSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorialSettingsButton.png; path = /Users/simon/Documents/projects/Inbox/Inbox/Resources/tutorialSettingsButton.png; sourceTree = "<absolute>"; };
@@ -715,8 +717,6 @@
 		F427E77614D9FA7F007C3E64 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		F427E77714D9FA7F007C3E64 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		F427E77814D9FA7F007C3E64 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		F43819EF14AB90CA0017C9BC /* FolderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderModel.h; sourceTree = "<group>"; };
-		F43819F014AB90CA0017C9BC /* FolderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderModel.m; sourceTree = "<group>"; };
 		F43819F214AC79530017C9BC /* settingsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsDown.png; sourceTree = "<group>"; };
 		F43819F314AC79530017C9BC /* settingsUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsUp.png; sourceTree = "<group>"; };
 		F444C0E314B9FB5E00D08560 /* formSheetWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formSheetWoodBackground.png; sourceTree = "<group>"; };
@@ -991,7 +991,6 @@
 			isa = PBXGroup;
 			children = (
 				F42223E315693E9C0050F268 /* steps */,
-				F44B0608153365CE003B801D /* EmailSynchronizer.h */,
 			);
 			name = Emails;
 			sourceTree = "<group>";
@@ -1072,6 +1071,7 @@
 				F42223D615690EE90050F268 /* Emails */,
 				F44B0605153365BD003B801D /* Synchronizer.h */,
 				F44B0606153365BD003B801D /* Synchronizer.m */,
+				F44B0608153365CE003B801D /* EmailSynchronizer.h */,
 				F44B0609153365CE003B801D /* EmailSynchronizer.m */,
 			);
 			name = synchronizers;
@@ -1233,10 +1233,10 @@
 		F47DBDCC1533396C008A5373 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
+				F40A01D71572C19C00D61AE3 /* FolderModel.h */,
+				F40A01D81572C19C00D61AE3 /* FolderModel.m */,
 				F41E658714A9CFB700BA4712 /* EmailModel.h */,
 				F41E658814A9CFB700BA4712 /* EmailModel.m */,
-				F43819EF14AB90CA0017C9BC /* FolderModel.h */,
-				F43819F014AB90CA0017C9BC /* FolderModel.m */,
 				F47DBDC9153336E6008A5373 /* EmailAccountModel.h */,
 				F47DBDCA153336E6008A5373 /* EmailAccountModel.m */,
 			);
@@ -2068,7 +2068,6 @@
 				F41E664F14A9CFB800BA4712 /* main.m in Sources */,
 				F41E666F14A9D13100BA4712 /* coreDataSchema.xcdatamodeld in Sources */,
 				F41E667914A9E1F800BA4712 /* DropZoneNode.m in Sources */,
-				F43819F114AB90CA0017C9BC /* FolderModel.m in Sources */,
 				F44CB71114C1946B00EB24E8 /* MBProgressHUD.m in Sources */,
 				F44CB81F14C1964700EB24E8 /* GLES-Render.mm in Sources */,
 				F44CB82E14C196E000EB24E8 /* CCNode+Autolayout.m in Sources */,
@@ -2110,6 +2109,7 @@
 				F4FC7CEA156D882800290A1F /* LoginModel.m in Sources */,
 				F4FC7CF7156D8C0300290A1F /* Deps.m in Sources */,
 				F405B91D156ED3F40048E4C4 /* iRate.m in Sources */,
+				F40A01D91572C19C00D61AE3 /* FolderModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2171,7 +2171,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
@@ -2195,7 +2195,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";

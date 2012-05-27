@@ -14,8 +14,14 @@
 #import "Deps.h"
 #import "CoreDataManager.h"
 #import "errorCodes.h"
-@implementation SynchroManager
 
+@interface SynchroManager()
+@property(nonatomic, retain) void(^onceAbortedBlock)();
+
+@end
+
+@implementation SynchroManager
+@synthesize onceAbortedBlock;
 -(id)init{
     if (self = [super init]){
         synchronizers = [[NSMutableArray alloc] init];
@@ -24,6 +30,7 @@
 }
 
 -(void)dealloc{
+    self.onceAbortedBlock = nil;
     for (Synchronizer* sync in synchronizers){
         [sync stopAsap];
     }
@@ -77,42 +84,42 @@
 
 
 -(void)startSync{
+    self.onceAbortedBlock = nil;
     NSError* error = nil;
     [self refreshEmailAccountsWithError:&error];
     if ( error ) {
-        [self onSyncFailed];
+        [self syncFailed];
         return;
     }
     
     runningSync = [synchronizers count];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-
     [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{            
         for ( Synchronizer* sync in synchronizers ) {
             NSError *error = nil;
             [sync startSync:&error];
             if ( error ){
-                [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-                    [self onSyncFailed];
-                } waitUntilDone:NO];
+                [self syncFailed];
             } else {
-                [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-                    [self onSyncDone];
-                } waitUntilDone:NO];            
+                [self syncDone];
             }
         }
     } waitUntilDone:NO];
 }
 
-- (void)abortSync {
-    [self stopSynchronizers];
-    [synchronizers removeAllObjects];
-    runningSync = 0;
+- (void)abortSync:(void(^)())onceAborted {
+    self.onceAbortedBlock = Block_copy(onceAborted);
+    if ( [self isSyncing] ) {
+        [self callStopAsapOnSynchronizers];
+    } else {
+        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+            self.onceAbortedBlock();
+            self.onceAbortedBlock = nil;
+        } waitUntilDone:NO];
+    }
 }
 
 
-- (void)stopSynchronizers {
+- (void)callStopAsapOnSynchronizers {
     for ( Synchronizer* sync in synchronizers ) {
         [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
             [sync stopAsap];
@@ -120,20 +127,35 @@
     }
 }
 
-- (void)onSyncDone {
+- (void)syncDone {
     runningSync--;
+    if ( runningSync < 0 ) runningSync = 0; /* this can be called before any sync start */
     if ( runningSync == 0 ) {
         [synchronizers removeAllObjects];
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
+        if ( self.onceAbortedBlock == nil ) {
+            [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
+            } waitUntilDone:NO];
+        } else {
+            self.onceAbortedBlock();
+            self.onceAbortedBlock = nil;
+        }
     }
 }
 
-
-- (void)onSyncFailed {
-    [self stopSynchronizers];
-    [synchronizers removeAllObjects];
-    runningSync = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
+- (void)syncFailed {
+    runningSync--;
+    if (runningSync < 0) runningSync = 0; /* this can be called before any sync start */
+    if ( !self.onceAbortedBlock ) {
+        self.onceAbortedBlock = ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
+        };
+    }
+    if ( runningSync == 0 ) {
+        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+        self.onceAbortedBlock();
+        } waitUntilDone:NO];
+    }
 }
 
 - (BOOL)isSyncing {

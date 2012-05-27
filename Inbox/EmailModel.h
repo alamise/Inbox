@@ -27,16 +27,6 @@
 @class EmailAccountModel;
 @class FolderModel;
 @interface EmailModel : NSManagedObject{
-    NSString *uid;
-    NSString *subject;
-    NSString *serverPath;
-    NSDate *sentDate; /* GMT time */
-    NSString *senderName;
-    NSString *senderEmail;
-    NSString *htmlBody; 
-    NSNumber *read; /* Boolean value */
-    NSNumber *shouldPropagate; /* Boolean value */
-    FolderModel *folder;
 }
 @property(nonatomic,retain) NSString *uid;
 @property(nonatomic,retain) NSString *subject;

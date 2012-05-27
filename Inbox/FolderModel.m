@@ -69,8 +69,8 @@
 
 -(NSString*)hrTitle{
     NSString* str = self.path;
-    if ([path hasPrefix:@"[Gmail]/"]){
-        str = [path substringFromIndex:8];
+    if ([self.path hasPrefix:@"[Gmail]/"]){
+        str = [self.path substringFromIndex:8];
     }
     if ([str isEqualToString:@"All Mail"]){
         return @"Archive";

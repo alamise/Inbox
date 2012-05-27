@@ -103,12 +103,14 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    NSError* error = nil;
     if ( shouldExecActionOnDismiss ) {
-        [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
-        if ( error ) {
-            [self onUnknownError];
-        }
+        [[Deps sharedInstance].synchroManager abortSync:^{
+            NSError* error = nil;
+            [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
+            if ( error ) {
+                [self onUnknownError];
+            }        
+        }];
     }
 }
 

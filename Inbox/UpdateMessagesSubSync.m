@@ -20,6 +20,7 @@
 #import "CTCoreAddress.h"
 #import "DDLog.h"
 #import "Logger.h"
+#import "NSArray+CoreData.h"
 #define DL_PAGE_SIZE 100
 
 @interface UpdateMessagesSubSync ()
@@ -64,6 +65,7 @@
     foldersRequest.entity = folderDescription;
 
     NSMutableArray* folders = [NSMutableArray arrayWithArray:[self.context executeFetchRequest:foldersRequest error:error]];
+    folders = [NSMutableArray arrayWithArray:[folders ArrayOfManagedIds]];
     [foldersRequest release];
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
@@ -80,60 +82,65 @@
     
     while ([folders count] != 0) {
         if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-        if (updateRemoteCounter++ % 30 == 0){
+        if (updateRemoteCounter++ % 10 == 0){
             DDLogInfo(@"periodicCall block performed");
             periodicCall();
         }
 
-        FolderModel* folderModel = [folders objectAtIndex:currentFolderIndex];
-        
-        DDLogVerbose(@"processing folder %@",folderModel.path);
-        CTCoreFolder* coreFolder = [self coreFolderForFolder:folderModel error:error];
-        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-        if ( *error ) {
-            DDLogError(@"error when getting the CTCoreFolder");
-            return;
-        }
-        [coreFolder connect];
-        
-        DDLogVerbose(@"building message buffer (page %d)",page);
-        NSSet *messagesBuffer = [self nextCoreMessagesForFolder:folderModel coreFolder:coreFolder page:page error:error];
-        if ( *error ) {
-            DDLogError(@"error when getting the next CTCoreMessage for a the folder: %@",folderModel.path);
-            return;
-        }
-        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-        for ( CTCoreMessage* message in messagesBuffer ) {
+        NSManagedObjectID *folderModelId = [folders objectAtIndex:currentFolderIndex];
+        FolderModel* folderModel = (FolderModel *)[self.context objectRegisteredForID:folderModelId];
+        if( !folderModel ){
+            [folders removeObjectAtIndex:currentFolderIndex];
+        }else{
+            [self.context refreshObject:folderModel mergeChanges:NO];
+            DDLogVerbose(@"processing folder %@",folderModel.path);
+            CTCoreFolder* coreFolder = [self coreFolderForFolder:folderModel error:error];
             if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-            DDLogVerbose(@"processing a message");
-            [self processCoreEmail:message folder:folderModel coreFolder:coreFolder error:error];
             if ( *error ) {
-                DDLogError(@"error When processing the current message");
+                DDLogError(@"error when getting the CTCoreFolder");
                 return;
             }
-        }
-        [coreFolder disconnect];
-        coreFolder = nil;
-        if ([messagesBuffer count] == 0) {
-            [folders removeObject:[folders objectAtIndex:currentFolderIndex]];
-        }
-
-        [self.context save:error];
-        
-        if (*error){
-            *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
-            DDLogError(@"error when saving the CoreData context");
-            return;
-        }
-        DDLogInfo(@"onStateChanged block performed");
-        onStateChanged();
-
-        currentFolderIndex = currentFolderIndex+1;
-        currentFolderIndex = currentFolderIndex % [folders count];
-        
-        if (currentFolderIndex == 0){
-            DDLogVerbose(@"switching to page %d", page);
-            page++;
+            [coreFolder connect];
+            
+            DDLogVerbose(@"building message buffer (page %d)",page);
+            NSSet *messagesBuffer = [self nextCoreMessagesForFolder:folderModel coreFolder:coreFolder page:page error:error];
+            if ( *error ) {
+                DDLogError(@"error when getting the next CTCoreMessage for a the folder: %@",folderModel.path);
+                return;
+            }
+            if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+            for ( CTCoreMessage* message in messagesBuffer ) {
+                if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+                DDLogVerbose(@"processing a message");
+                [self processCoreEmail:message folder:folderModel coreFolder:coreFolder error:error];
+                if ( *error ) {
+                    DDLogError(@"error When processing the current message");
+                    return;
+                }
+            }
+            [coreFolder disconnect];
+            coreFolder = nil;
+            if ([messagesBuffer count] == 0) {
+                [folders removeObject:[folders objectAtIndex:currentFolderIndex]];
+            }
+            if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+            [self.context save:error];
+            
+            if (*error){
+                *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+                DDLogError(@"error when saving the CoreData context");
+                return;
+            }
+            DDLogInfo(@"onStateChanged block performed");
+            onStateChanged();
+            
+            currentFolderIndex = currentFolderIndex+1;
+            currentFolderIndex = currentFolderIndex % [folders count];
+            
+            if (currentFolderIndex == 0){
+                DDLogVerbose(@"switching to page %d", page);
+                page++;
+            }    
         }
     }
 }
@@ -188,12 +195,16 @@
     
     emailModel.senderName = from.name;
     emailModel.senderEmail = from.email;
-    emailModel.subject=message.subject;
+    emailModel.subject = message.subject;
     emailModel.sentDate = message.sentDateGMT;
     emailModel.uid = message.uid;
-    emailModel.serverPath = folder.path;
     emailModel.read = [NSNumber numberWithBool:!message.isUnread];
-    emailModel.folder = folder;
+    emailModel.serverPath = folder.path;
+    if ( ![((NSNumber*)emailModel.shouldPropagate) boolValue] ) {
+        emailModel.folder = folder;
+    } else {
+        DDLogVerbose(@"message's folder (server:%@ | local:%@) not changed : %@",emailModel.folder.path, emailModel.serverPath, emailModel.subject);
+    }
 }
 
 - (CTCoreFolder *)coreFolderForFolder:(FolderModel *)folder error:(NSError **)error {

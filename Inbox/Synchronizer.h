@@ -10,8 +10,6 @@
 #import "errorCodes.h"
 #import "FlurryAnalytics.h"
 
-#define INTERNAL_SYNC_FAILED @"int_sync_failed"
-#define INTERNAL_SYNC_DONE @"int_sync_done"
 #define STATE_UPDATED @"state_updated"
 @class NSManagedObjectContext;
 @interface Synchronizer : NSObject{

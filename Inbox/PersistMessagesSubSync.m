@@ -17,6 +17,7 @@
 #import "EmailAccountModel.h"
 #import "DDLog.h"
 #import "Logger.h"
+#import "NSArray+CoreData.h"
 @interface PersistMessagesSubSync ()
 @end
 
@@ -44,6 +45,7 @@
     [request setPredicate:predicate];
     NSError* fetchError = nil;
     NSArray* models = [self.context executeFetchRequest:request error:error];
+    models = [models ArrayOfManagedIds];
     [request release];
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
@@ -55,62 +57,72 @@
     BOOL skip;
     CTCoreAccount* account = nil;
 
-    for (EmailModel* email in models){
+    for (NSManagedObjectID* emailId in models){
         if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         skip = false;
-        if (folder==nil || ![folder.path isEqualToString:email.folder.path]){
-            [folder disconnect];
-            @try {
-                account = [self coreAccountWithError:error];
-                if (*error){
-                    *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+        EmailModel* email = (EmailModel *)[self.context objectRegisteredForID:emailId];
+        
+        if ( email ) {
+            [self.context refreshObject:email mergeChanges:NO];
+            if (folder==nil || ![folder.path isEqualToString:email.folder.path]){
+                [folder disconnect];
+                @try {
+                    account = [self coreAccountWithError:error];
+                    if (*error){
+                        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+                        DDLogError(@"Update remote messages ended with an error");
+                        return;
+                    }
+                    folder = [account folderWithPath:email.serverPath];
+                }
+                @catch (NSException *exception) {
+                    skip = true;
+                }
+            }
+            
+            CTCoreMessage* message;
+            if (!skip){
+                @try {
+                    // TODO: Should I use the UID or the messageID?
+                    message = [folder messageWithUID:email.uid];
+                }
+                @catch (NSException *exception) {
+                    skip = true;
+                }
+            }
+            if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+            // If there were an issue finding the email on the server, the message is deleted locally.
+            if (skip) {
+                DDLogVerbose(@"Skip email %@",email.subject);
+                @try {
+                    [email.folder removeEmailsObject:email];
+                    [self.context deleteObject:email];
+                    [self.context propagatesDeletesAtEndOfEvent];
+                }
+                @catch (NSException *exception) {
+                    *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
                     DDLogError(@"Update remote messages ended with an error");
                     return;
                 }
-                folder = [account folderWithPath:email.serverPath];
+            } else {
+                DDLogVerbose(@"move from %@ to %@ email %@",email.serverPath, email.folder.path, email.subject);
+                @try {
+                    [folder moveMessage:email.folder.path forMessage:message];
+                }
+                @catch (NSException* exception) {
+                    *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+                    DDLogError(@"Update remote messages ended with an error");
+                    return;
+                }
+                email.serverPath = folder.path;
+                email.shouldPropagate = [NSNumber numberWithBool:NO];
             }
-            @catch (NSException *exception) {
-                skip = true;
-            }
-        }
-        
-        CTCoreMessage* message;
-        if (!skip){
-            @try {
-                // TODO: Should I use the UID or the messageID?
-                message = [folder messageWithUID:email.uid];
-            }
-            @catch (NSException *exception) {
-                skip = true;
-            }
-        }
-        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-        // If there were an issue finding the email on the server, the message is deleted locally.
-        if (skip) {
-            @try {
-                [self.context deleteObject:email];
-            }
-            @catch (NSException *exception) {
-                *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
-                DDLogError(@"Update remote messages ended with an error");
-                return;
-            }
-        } else {
-            @try {
-                [folder moveMessage:email.folder.path forMessage:message];
-            }
-            @catch (NSException* exception) {
-                *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
-                DDLogError(@"Update remote messages ended with an error");
-                return;
-            }
-            email.serverPath = folder.path;
-            email.shouldPropagate = [NSNumber numberWithBool:NO];
         }
     }
     [self.context save:error];
     if ( *error ) {
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+        NSLog(@"%@",*error);
         DDLogError(@"Update remote messages ended with an error");
         return;
     }

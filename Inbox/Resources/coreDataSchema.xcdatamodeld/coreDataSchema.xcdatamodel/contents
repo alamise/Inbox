@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Email" representedClassName="EmailModel">
         <attribute name="htmlBody" optional="YES" attributeType="String"/>
         <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -27,8 +27,8 @@
         <relationship name="emails" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Email" inverseName="folder" inverseEntity="Email" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Email" positionX="-63" positionY="-18" width="128" height="195"/>
-        <element name="EmailAccount" positionX="-290" positionY="-18" width="128" height="150"/>
-        <element name="Folder" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Email" positionX="-477" positionY="84" width="128" height="195"/>
+        <element name="EmailAccount" positionX="-324" positionY="90" width="128" height="150"/>
+        <element name="Folder" positionX="-99" positionY="189" width="128" height="90"/>
     </elements>
 </model>

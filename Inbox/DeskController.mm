@@ -143,7 +143,7 @@
         return;
     }
     
-    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] read:false error:&error];    
+    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] read:true error:&error];    
     
     if ( error ) {
         [self putInErrorState];
@@ -190,14 +190,15 @@
  * Stop the synchro and present the error view
  */
 - (void)putInErrorState {
-    [[Deps sharedInstance].synchroManager abortSync];
-    isWaiting = false;
-    [self hideLoadingHud];
-    ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
-        [self startSyncIfNeeded];
+    [[Deps sharedInstance].synchroManager abortSync:^{
+        isWaiting = false;
+        [self hideLoadingHud];
+        ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
+            [self startSyncIfNeeded];
+        }];
+        [self presentInNavigationController: errorController];
+        [errorController release];
     }];
-    [self presentInNavigationController: errorController];
-    [errorController release];
 }
 
 - (void)startSyncIfNeeded {
@@ -286,7 +287,11 @@
 }
 
 - (void)moveEmail:(EmailModel *)email toFolder:(FolderModel *)folder {
-    [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:nil];
+    NSError *error = nil;
+    [[EmailReader sharedInstance] moveEmail:email toFolder:folder error:&error];
+    if ( error ) {
+        DDLogVerbose( @"Error when moving the email %@",email.subject );
+    }
     if (![[Deps sharedInstance].synchroManager isSyncing]) {
         [[Deps sharedInstance].synchroManager startSync];
     }

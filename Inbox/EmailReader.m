@@ -127,7 +127,8 @@
 
 
 - (void)moveEmail:(EmailModel *)email toFolder:(FolderModel *)folder error:(NSError **)error {
-    if (!error) {
+    DDLogVerbose(@"changed current folder to %@ for email %@", folder.path, email.subject);
+    if ( !error ) {
         NSError* err;
         error = &err;
     }
@@ -136,8 +137,12 @@
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
     email.shouldPropagate = [NSNumber numberWithBool:YES];
-    email.folder = folder;
+    if ( email.folder ) { 
+        [email.folder removeEmailsObject:email];
+    }
+    [folder addEmailsObject:email];
     [[Deps sharedInstance].coreDataManager.mainContext save:error];
+    
 }
 
 -(NSArray*)inboxes:(NSError**)error{

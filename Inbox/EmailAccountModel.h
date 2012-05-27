@@ -26,13 +26,7 @@
 #import <CoreData/CoreData.h> 
 
 @interface EmailAccountModel : NSManagedObject{
-    NSNumber* authType;
-    NSNumber* conType;
-    NSString* login;
-    NSString* password;
-    NSNumber* port;
-    NSString* serverAddr;
-    NSMutableSet* folders;
+
 }
 @property(nonatomic,retain) NSNumber* authType;
 @property(nonatomic,retain) NSNumber* conType;
