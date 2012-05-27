@@ -68,6 +68,11 @@
     }else if ([passwordField.text isEqualToString:@""]){
         [self onInvalidPassword];
     }else{
+        NSError *error = nil; 
+        [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
+        if ( error ) {
+            [self onUnknownError];
+        }
         shouldExecActionOnDismiss = YES;
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -99,9 +104,11 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     NSError* error = nil;
-    [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
-    if ( error ) {
-        [self onUnknownError];
+    if ( shouldExecActionOnDismiss ) {
+        [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
+        if ( error ) {
+            [self onUnknownError];
+        }
     }
 }
 

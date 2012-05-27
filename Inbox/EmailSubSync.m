@@ -16,10 +16,11 @@
 @property(nonatomic,retain,readwrite) NSManagedObjectContext* context;
 @property(nonatomic,retain,readwrite) EmailAccountModel* accountModel;
 @property(nonatomic,retain,readwrite) CTCoreAccount* coreAccount;
+
 @end
 
 @implementation EmailSubSync
-@synthesize context, accountModel, coreAccount;
+@synthesize context, accountModel, coreAccount, shouldStopAsap;
 
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a{
     if (self = [self init]){
@@ -35,9 +36,16 @@
     [super dealloc];
 }
 
-
+- (void)stopAsap {
+    shouldStopAsap = true;
+}
 
 -(CTCoreAccount*)coreAccountWithError:(NSError**)error {
+    if ( !error ) {
+        NSError *err = nil;
+        error = &err;
+    }
+    *error = nil;
     if (coreAccount == nil){
         coreAccount = [[CTCoreAccount alloc] init];
     }

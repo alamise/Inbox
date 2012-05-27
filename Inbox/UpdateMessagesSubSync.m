@@ -1,4 +1,4 @@
-//
+ //
 //  UpdateMessagesSynchronizer.m
 //  Inbox
 //
@@ -30,6 +30,7 @@
 @implementation UpdateMessagesSubSync
 
 -(void)syncWithError:(NSError**)error onStateChanged:(void(^)()) osc periodicCall:(void(^)()) periodic{
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     DDLogVerbose(@"Update local messages started");
     if (!error){
         NSError* err;
@@ -55,16 +56,16 @@
     [super dealloc];
 }
 
--(void)updateLocalMessagesWithError:(NSError**)error {
-
+- (void)updateLocalMessagesWithError:(NSError **)error {
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     /* get the folders model */
     NSFetchRequest *foldersRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *folderDescription = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
-    foldersRequest.entity =folderDescription;
+    foldersRequest.entity = folderDescription;
 
     NSMutableArray* folders = [NSMutableArray arrayWithArray:[self.context executeFetchRequest:foldersRequest error:error]];
     [foldersRequest release];
-    
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
         DDLogError(@"error when getting the local folders");
@@ -78,6 +79,7 @@
     NSMutableDictionary* totalMessageCount = [NSMutableDictionary dictionary];
     
     while ([folders count] != 0) {
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         if (updateRemoteCounter++ % 30 == 0){
             DDLogInfo(@"periodicCall block performed");
             periodicCall();
@@ -87,19 +89,22 @@
         
         DDLogVerbose(@"processing folder %@",folderModel.path);
         CTCoreFolder* coreFolder = [self coreFolderForFolder:folderModel error:error];
-        [coreFolder connect];
-        if (*error) {
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+        if ( *error ) {
             DDLogError(@"error when getting the CTCoreFolder");
             return;
         }
+        [coreFolder connect];
+        
         DDLogVerbose(@"building message buffer (page %d)",page);
         NSSet *messagesBuffer = [self nextCoreMessagesForFolder:folderModel coreFolder:coreFolder page:page error:error];
-        if (*error) {
+        if ( *error ) {
             DDLogError(@"error when getting the next CTCoreMessage for a the folder: %@",folderModel.path);
             return;
         }
-        
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         for ( CTCoreMessage* message in messagesBuffer ) {
+            if ( self.shouldStopAsap ) return ;/* STOP ASAP */
             DDLogVerbose(@"processing a message");
             [self processCoreEmail:message folder:folderModel coreFolder:coreFolder error:error];
             if ( *error ) {
@@ -151,6 +156,7 @@
     
     NSArray* matchingEmails = [self.context executeFetchRequest:emailRequest error:error];
     [emailRequest release];
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
         return;   
@@ -174,7 +180,7 @@
     CTCoreAddress* from;
     
     // The "sender" field is not valid
-    if ([message.from count]>0) {
+    if ( [message.from count] > 0 ) {
         from = [enumerator nextObject];
     }else{
         from = message.sender;
@@ -186,11 +192,12 @@
     emailModel.sentDate = message.sentDateGMT;
     emailModel.uid = message.uid;
     emailModel.serverPath = folder.path;
-    emailModel.read = !message.isUnread;
+    emailModel.read = [NSNumber numberWithBool:!message.isUnread];
     emailModel.folder = folder;
 }
 
--(CTCoreFolder*)coreFolderForFolder:(FolderModel*)folder error:(NSError**)error{
+- (CTCoreFolder *)coreFolderForFolder:(FolderModel *)folder error:(NSError **)error {
+    if ( self.shouldStopAsap ) return nil;/* STOP ASAP */
     if (!error){
         NSError* err = nil;
         error = &err;        
@@ -218,15 +225,20 @@
 
 }
 
--(NSSet*) nextCoreMessagesForFolder:(FolderModel*)folder coreFolder:(CTCoreFolder*)coreFolder page:(int)page error:(NSError**)error{
-        int coreFolderMessageCount = 0;
+-(NSSet*) nextCoreMessagesForFolder:(FolderModel*)folder coreFolder:(CTCoreFolder*)coreFolder page:(int)page error:(NSError **)error{
+    if ( !error ){
+        NSError *err;
+        error = &err;
+    }
+    *error = nil;
+    int coreFolderMessageCount = 0;
     if (![foldersMessageCount objectForKey:folder.objectID]){
         int count = [coreFolder totalMessageCount];
         [foldersMessageCount setObject:[NSNumber numberWithInt:count] forKey:folder.objectID];
     }
     coreFolderMessageCount = [[foldersMessageCount objectForKey:folder.objectID] intValue];
 
-    NSSet* messages = [NSSet set];
+    NSSet *messages = [NSSet set];
     @try {
         int start = coreFolderMessageCount - (page+1) * DL_PAGE_SIZE; 
         if (start<0) start = 0;
@@ -240,6 +252,7 @@
     }
     @catch (NSException *exception) {
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
+        NSLog(@"%@",exception);
         DDLogVerbose(@"error when building the message buffer for page %d (total:%d)", page, coreFolderMessageCount);
         return [NSSet set];
     }

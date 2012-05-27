@@ -39,7 +39,7 @@
     *error = nil;
     
     [self refreshEmailAccountsWithError:error];
-    if (!*error) {
+    if ( !*error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_RELOADED object:nil];
     }
     
@@ -87,8 +87,9 @@
     runningSync = [synchronizers count];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncFailed) name:INTERNAL_SYNC_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncDone) name:INTERNAL_SYNC_DONE object:nil];
-    for ( Synchronizer* sync in synchronizers ) {
-        [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{            
+
+    [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{            
+        for ( Synchronizer* sync in synchronizers ) {
             NSError *error = nil;
             [sync startSync:&error];
             if ( error ){
@@ -100,8 +101,8 @@
                     [self onSyncDone];
                 } waitUntilDone:NO];            
             }
-        } waitUntilDone:NO];
-    }
+        }
+    } waitUntilDone:NO];
 }
 
 - (void)abortSync {

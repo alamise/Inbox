@@ -13,6 +13,7 @@
     EmailAccountModel* emailAccountModel;
     CTCoreAccount* coreAccount;
     NSManagedObjectID* emailAccountModelId;
+    NSMutableArray *subSyncs;
 }
 -(id)initWithAccountId:(NSManagedObjectID*)accountId;
 @property(nonatomic,readonly,retain) EmailAccountModel* emailAccountModel;

@@ -25,6 +25,7 @@
 }
 
 -(void)syncWithError:(NSError**)error{
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     DDLogVerbose(@"syncing folders");
     if (!error){
         NSError* err;
@@ -36,7 +37,7 @@
     
     NSSet* folders = nil;
     CTCoreAccount* cAccount = [self coreAccountWithError:error];
-    
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_ERROR userInfo:[NSDictionary dictionaryWithObject:@"No account set" forKey:ROOT_MESSAGE]];
         DDLogError(@"syncing folders ended with an error");
@@ -51,7 +52,7 @@
         DDLogError(@"syncing folders ended with an error");
         return;
     }
-    
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     NSSet* disabledFolders = [self disabledFolders];
     NSMutableSet* foldersToProcess = [NSMutableSet setWithSet:folders];
     for ( NSArray* f in disabledFolders ) {
@@ -89,6 +90,7 @@
 
 
 -(void)deleteFoldersExcept:(NSSet*)foldersToKeep error:(NSError**)error{
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (!error){
         NSError* err = nil;
         error = &err;
@@ -109,6 +111,7 @@
     }
     
     for (FolderModel* folder in foldersToDelete) {
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         DDLogInfo(@"Deleting the local folder: %@",folder.path);
         @try {
             [self.context deleteObject:folder];
@@ -123,13 +126,14 @@
 
 
 -(void)createOrUpdateFolders:(NSSet*)folders error:(NSError**)error{
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (!error){
         NSError* err = nil;
         error = &err;
     }
     *error = nil;
     for (NSString* path in folders) {
-        
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:self.context];
         request.entity = entity;
@@ -139,7 +143,7 @@
         
         int folders = [self.context countForFetchRequest:request error:error];
         [request release];
-        
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         if (*error) {
             *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
             DDLogError(@"error when creating/updating local folders");

@@ -992,7 +992,6 @@
 			children = (
 				F42223E315693E9C0050F268 /* steps */,
 				F44B0608153365CE003B801D /* EmailSynchronizer.h */,
-				F44B0609153365CE003B801D /* EmailSynchronizer.m */,
 			);
 			name = Emails;
 			sourceTree = "<group>";
@@ -1073,6 +1072,7 @@
 				F42223D615690EE90050F268 /* Emails */,
 				F44B0605153365BD003B801D /* Synchronizer.h */,
 				F44B0606153365BD003B801D /* Synchronizer.m */,
+				F44B0609153365CE003B801D /* EmailSynchronizer.m */,
 			);
 			name = synchronizers;
 			sourceTree = "<group>";

@@ -29,11 +29,11 @@
 }
 
 -(void)performBlockOnBackgroundThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
-    [self performSelectorOnMainThread:@selector(doBlock:) withObject:block waitUntilDone:waitUntilDone];
+    [self performSelector:@selector(doBlock:) onThread:thread withObject:Block_copy(block) waitUntilDone:waitUntilDone];
 }
 
 -(void)performBlockOnMainThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
-    [self performSelectorOnMainThread:@selector(doBlock:) withObject:block waitUntilDone:waitUntilDone];
+    [self performSelectorOnMainThread:@selector(doBlock:) withObject:Block_copy(block) waitUntilDone:waitUntilDone];
 }
 
 -(void)doBlock:(void(^)())block{

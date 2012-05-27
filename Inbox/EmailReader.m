@@ -126,7 +126,7 @@
 }
 
 
--(void)moveEmail:(EmailModel*)email toFolder:(FolderModel *)folder error:(NSError**)error{
+- (void)moveEmail:(EmailModel *)email toFolder:(FolderModel *)folder error:(NSError **)error {
     if (!error) {
         NSError* err;
         error = &err;
@@ -135,7 +135,7 @@
     if (folder.account != email.folder.account){
         *error = [NSError errorWithDomain:READER_ERROR_DOMAIN code:DATA_INVALID userInfo:[NSDictionary dictionaryWithObject:@"folder.account != email.account" forKey:ROOT_MESSAGE]];
     }
-    email.shouldPropagate = true;
+    email.shouldPropagate = [NSNumber numberWithBool:YES];
     email.folder = folder;
     [[Deps sharedInstance].coreDataManager.mainContext save:error];
 }

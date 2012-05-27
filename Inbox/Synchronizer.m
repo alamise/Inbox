@@ -48,6 +48,9 @@
     shouldStopAsap = false;
     [self sync:error];
     self.context = nil;
+    if ( self.shouldStopAsap ) {
+        *error = nil;
+    }
     [syncLock unlock];
 }
 

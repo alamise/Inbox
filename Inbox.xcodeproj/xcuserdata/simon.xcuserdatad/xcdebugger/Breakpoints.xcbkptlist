@@ -175,19 +175,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "MailCore/Source/CTCoreFolder.m"
-         timestampString = "356177376.245795"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "387"
-         endingLineNumber = "387"
-         landmarkName = "-messageObjectsFromIndex:toIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Inbox/EmailNode.mm"
          timestampString = "357510787.357913"
          startingColumnNumber = "9223372036854775807"
@@ -241,11 +228,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskLayer.mm"
-         timestampString = "359725845.533725"
+         timestampString = "359801703.059421"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
          landmarkName = "-longTouchOnPoint:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -306,51 +293,64 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/SynchroManager.m"
-         timestampString = "359727199.480339"
+         timestampString = "359803674.49329"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-isSyncing"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "-startSync"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/SynchroManager.m"
-         timestampString = "359727174.411247"
+         filePath = "Inbox/UpdateMessagesSubSync.m"
+         timestampString = "359813669.932573"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
-         landmarkName = "-abortSync"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "-updateLocalMessagesWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/SynchroManager.m"
-         timestampString = "359727180.709751"
+         filePath = "Inbox/UpdateMessagesSubSync.m"
+         timestampString = "359813669.932573"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
-         landmarkName = "-onSyncDone"
+         startingLineNumber = "255"
+         endingLineNumber = "255"
+         landmarkName = "-nextCoreMessagesForFolder:coreFolder:page:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/SynchroManager.m"
-         timestampString = "359727181.919757"
+         filePath = "Inbox/UpdateMessagesSubSync.m"
+         timestampString = "359813669.932573"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
-         landmarkName = "-onSyncFailed"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-updateLocalMessagesWithError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/PersistMessagesSubSync.m"
+         timestampString = "359815594.553218"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-updateRemoteMessagesWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -358,11 +358,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/DeskController.mm"
-         timestampString = "359727618.663723"
+         timestampString = "359816292.481147"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "@implementation DeskController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskController.mm"
+         timestampString = "359816445.394927"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
          landmarkName = "-nextStep"
          landmarkType = "5">
       </FileBreakpoint>
@@ -370,26 +383,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/Deps.m"
-         timestampString = "359749983.070738"
+         filePath = "Inbox/EmailReader.m"
+         timestampString = "359816500.18534"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "20"
-         endingLineNumber = "20"
-         landmarkName = "@interface Deps()"
-         landmarkType = "2">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Inbox/SynchroManager.m"
-         timestampString = "359751351.022144"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "108"
-         endingLineNumber = "108"
-         landmarkName = "-abortSync"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "-lastEmailFromInboxExcluded:read:error:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

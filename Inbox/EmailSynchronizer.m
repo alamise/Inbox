@@ -21,6 +21,7 @@
 #import "PersistMessagesSubSync.h"
 #import "UpdateMessagesSubSync.h"
 #import "FoldersSubSync.h"
+#import "EmailSubSync.h"
 #define ddLogLevel LOG_LEVEL_VERBOSE
 
 @implementation EmailSynchronizer
@@ -29,11 +30,13 @@
 - (id)initWithAccountId:(id)accountId {
     if ( self = [super init] ) {
         emailAccountModelId = [accountId retain];
+        subSyncs = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)dealloc {
+    [subSyncs release];
     [emailAccountModel release];
     [emailAccountModelId release];
     [super dealloc];
@@ -65,7 +68,12 @@
     return input;
 }
 
-
+- (void)stopAsap {
+    [super stopAsap];
+    for (EmailSubSync* subSync in subSyncs) {
+        [subSync stopAsap];
+    }
+}
 
 - (void)sync:(NSError **)error {
     DDLogVerbose(@"sync started");
@@ -74,8 +82,15 @@
         error = &err;
     }
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
     FoldersSubSync *foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
+    PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
+    UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
+    [subSyncs addObject:foldersSync];
+    [subSyncs addObject:persistSync];
+    [subSyncs addObject:updateSync];
+    
     [foldersSync syncWithError:error];
     if ( *error ) {
         DDLogError(@"sync ended with an error");
@@ -83,15 +98,16 @@
     }
     [foldersSync release];
     foldersSync = nil;
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
-    PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
+    
     [persistSync syncWithError:error];
     if ( *error ) {
         DDLogError(@"sync ended with an error");
         return;
     }
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
-    UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     [updateSync syncWithError:error onStateChanged:^{
         [self onStateChanged];
     } periodicCall:^{
@@ -102,7 +118,7 @@
         DDLogError(@"sync ended with an error");
         return;
     }
-    
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     [updateSync release];
     updateSync = nil;
     [persistSync release];

@@ -28,13 +28,15 @@
 }
 
 
--(void)updateRemoteMessagesWithError:(NSError**)error{
+- (void)updateRemoteMessagesWithError:(NSError **)error {
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     DDLogVerbose(@"Update remote messages started");
 
     if (!error){
         NSError* err = nil;
         error = &err;
     }
+    *error = nil;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:self.context];
     request.entity = entity;
@@ -43,6 +45,7 @@
     NSError* fetchError = nil;
     NSArray* models = [self.context executeFetchRequest:request error:error];
     [request release];
+    if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     if (*error){
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_MESSAGES_ERROR userInfo:[NSDictionary dictionaryWithObject:fetchError forKey:ROOT_ERROR]];
         DDLogError(@"Update remote messages ended with an error");
@@ -53,6 +56,7 @@
     CTCoreAccount* account = nil;
 
     for (EmailModel* email in models){
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         skip = false;
         if (folder==nil || ![folder.path isEqualToString:email.folder.path]){
             [folder disconnect];
@@ -80,7 +84,7 @@
                 skip = true;
             }
         }
-        
+        if ( self.shouldStopAsap ) return ;/* STOP ASAP */
         // If there were an issue finding the email on the server, the message is deleted locally.
         if (skip) {
             @try {
@@ -101,9 +105,16 @@
                 return;
             }
             email.serverPath = folder.path;
-            email.shouldPropagate = NO;
+            email.shouldPropagate = [NSNumber numberWithBool:NO];
         }
     }
+    [self.context save:error];
+    if ( *error ) {
+        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:EMAIL_FOLDERS_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+        DDLogError(@"Update remote messages ended with an error");
+        return;
+    }
+
     DDLogVerbose(@"Update remote messages successful");
 }
 
