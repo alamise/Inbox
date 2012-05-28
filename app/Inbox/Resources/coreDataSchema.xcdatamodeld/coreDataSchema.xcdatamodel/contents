@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Email" representedClassName="EmailModel">
+        <attribute name="htmlBody" optional="YES" attributeType="String"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="senderEmail" optional="YES" attributeType="String"/>
+        <attribute name="senderName" optional="YES" attributeType="String"/>
+        <attribute name="sentDate" optional="YES" attributeType="Date"/>
+        <attribute name="serverPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shouldPropagate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String"/>
+        <relationship name="folder" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="emails" inverseEntity="Folder" syncable="YES"/>
+    </entity>
+    <entity name="EmailAccount" representedClassName="EmailAccountModel" syncable="YES">
+        <attribute name="authType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="conType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverAddr" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="folders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Folder" inverseName="account" inverseEntity="Folder" syncable="YES"/>
+    </entity>
+    <entity name="Folder" representedClassName="FolderModel" syncable="YES">
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EmailAccount" inverseName="folders" inverseEntity="EmailAccount" syncable="YES"/>
+        <relationship name="emails" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Email" inverseName="folder" inverseEntity="Email" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Email" positionX="-477" positionY="84" width="128" height="195"/>
+        <element name="EmailAccount" positionX="-324" positionY="90" width="128" height="150"/>
+        <element name="Folder" positionX="-99" positionY="189" width="128" height="90"/>
+    </elements>
+</model>
