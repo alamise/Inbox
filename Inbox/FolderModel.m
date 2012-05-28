@@ -31,15 +31,15 @@
 @dynamic account;
 @dynamic emails;
 
-+(void)initialize{
++ (void)initialize {
     
 }
 
-+(NSString*)entityName{
++ (NSString*)entityName {
     return @"Folder";
 }
 
-- (NSComparisonResult) compare:(FolderModel*) other{
+- (NSComparisonResult)compare:(FolderModel *)other {
     NSMutableArray* order = [[NSMutableArray alloc] init];
     [order addObject:NSLocalizedString(@"folderModel.path.archives", @"Localized Archives folder's path en: \"[Gmail]/All Mail\"")];
     [order addObject:NSLocalizedString(@"folderModel.path.starred", @"Localized Starred folder's path en:\"[Gmail]/Starred\"")];

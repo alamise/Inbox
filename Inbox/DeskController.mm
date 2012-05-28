@@ -190,15 +190,13 @@
  * Stop the synchro and present the error view
  */
 - (void)putInErrorState {
-    [[Deps sharedInstance].synchroManager abortSync:^{
-        isWaiting = false;
-        [self hideLoadingHud];
-        ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
-            [self startSyncIfNeeded];
-        }];
-        [self presentInNavigationController: errorController];
-        [errorController release];
+    isWaiting = false;
+    [self hideLoadingHud];
+    ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
+        [self startSyncIfNeeded];
     }];
+    [self presentInNavigationController: errorController];
+    [errorController release];
 }
 
 - (void)startSyncIfNeeded {

@@ -14,12 +14,11 @@
 @interface SynchroManager : NSObject{
     NSMutableArray *synchronizers;
     int runningSync;
-    void(^onceAbortedBlock)();
+    void(^onSyncStopped)();
 }
 
-@property(readonly)BOOL isSyncing;
+@property(readonly) BOOL isSyncing;
 - (void)startSync;
-- (void)abortSync:(void(^)())onceAborted;
-
+- (void)abortSync:(void(^)())onSyncStopped;
 - (void)reloadAccountsWithError:(NSError **)error; 
 @end

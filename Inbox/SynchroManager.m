@@ -14,45 +14,47 @@
 #import "Deps.h"
 #import "CoreDataManager.h"
 #import "errorCodes.h"
+#import "DDLog.h"
+#import "Logger.h"
 
 @interface SynchroManager()
-@property(nonatomic, retain) void(^onceAbortedBlock)();
+@property(nonatomic, retain) void(^onSyncStopped)();
 
 @end
 
 @implementation SynchroManager
-@synthesize onceAbortedBlock;
--(id)init{
-    if (self = [super init]){
+@synthesize onSyncStopped;
+
+- (id)init {
+    if ( self = [super init] ) {
         synchronizers = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
--(void)dealloc{
-    self.onceAbortedBlock = nil;
-    for (Synchronizer* sync in synchronizers){
-        [sync stopAsap];
-    }
+- (void)dealloc {
+    self.onSyncStopped = nil;
+    [self callStopAsapOnSynchronizers]; 
     [synchronizers release];
     [super dealloc];
 }
 
-- (void) reloadAccountsWithError:(NSError**)error {
-    if (!error){
+- (void)reloadAccountsWithError:(NSError**)error {
+    if ( !error ) {
         NSError* err;
         error = &err;
     }
     *error = nil;
     
     [self refreshEmailAccountsWithError:error];
-    if ( !*error) {
+    if ( !*error ) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_RELOADED object:nil];
     }
     
 }
 
--(void) refreshEmailAccountsWithError:(NSError**)error {
+/* private */
+- (void)refreshEmailAccountsWithError:(NSError **)error {
     if ( !error ) {
         NSError* err;
         error = &err;
@@ -83,11 +85,17 @@
 }
 
 
--(void)startSync{
-    self.onceAbortedBlock = nil;
+- (void)startSync {
+    DDLogVerbose(@"sync started");
+    self.onSyncStopped = ^{
+        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
+        } waitUntilDone:NO];
+    };
     NSError* error = nil;
     [self refreshEmailAccountsWithError:&error];
     if ( error ) {
+        DDLogError(@"error when refreshing the accounts list");
         [self syncFailed];
         return;
     }
@@ -107,13 +115,13 @@
 }
 
 - (void)abortSync:(void(^)())onceAborted {
-    self.onceAbortedBlock = Block_copy(onceAborted);
+    DDLogVerbose(@"sync aborted");
+    self.onSyncStopped = Block_copy(onceAborted);
     if ( [self isSyncing] ) {
         [self callStopAsapOnSynchronizers];
     } else {
         [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-            self.onceAbortedBlock();
-            self.onceAbortedBlock = nil;
+            self.onSyncStopped();
         } waitUntilDone:NO];
     }
 }
@@ -128,34 +136,38 @@
 }
 
 - (void)syncDone {
+    DDLogVerbose(@"Synchronizer ended successfully");
     runningSync--;
     if ( runningSync < 0 ) runningSync = 0; /* this can be called before any sync start */
     if ( runningSync == 0 ) {
-        [synchronizers removeAllObjects];
-        if ( self.onceAbortedBlock == nil ) {
-            [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
-            } waitUntilDone:NO];
-        } else {
-            self.onceAbortedBlock();
-            self.onceAbortedBlock = nil;
-        }
+        DDLogVerbose(@"No more synchronizers to wait for");
+        [self syncEnded];
     }
 }
 
 - (void)syncFailed {
+    DDLogError(@"Synchronizer ended with an error");
     runningSync--;
     if (runningSync < 0) runningSync = 0; /* this can be called before any sync start */
-    if ( !self.onceAbortedBlock ) {
-        self.onceAbortedBlock = ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
-        };
-    }
+
+    self.onSyncStopped = ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
+    };
+    
+    [self callStopAsapOnSynchronizers];
+    
     if ( runningSync == 0 ) {
-        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-        self.onceAbortedBlock();
-        } waitUntilDone:NO];
+        DDLogVerbose(@"No more synchronizers to wait for");
+        [self syncEnded];
     }
+}
+
+- (void)syncEnded {
+    DDLogVerbose(@"Calling the onSyncStopped block");
+    [synchronizers removeAllObjects];
+    [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
+        self.onSyncStopped();
+    } waitUntilDone:NO];
 }
 
 - (BOOL)isSyncing {

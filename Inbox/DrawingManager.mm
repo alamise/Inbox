@@ -41,7 +41,7 @@
     [self drawFastArchiveZone];
 }
 
--(void)drawGround{
+- (void)drawGround {
     CCSprite* sprite = (CCSprite*)[layer getChildByTag:BACKGROUND_TAG];
     if (!sprite){
         sprite = [CCSprite spriteWithFile:@"woodBackground.png"];    
@@ -51,13 +51,13 @@
     sprite.position=CGPointMake(0,0);    
 }
 
--(void)setupContextualRightSideManager{
+- (void)setupContextualRightSideManager {
     if (!rightSidePanel){
         rightSidePanel = [[ContextualRightSidePanel alloc] initWithLayer:layer];
     }
 }
 
--(void)drawProgressIndicator{
+- (void)drawProgressIndicator {
     progressIndicator = (ProgressIndicator*)[layer getChildByTag:PROGRESS_INDICATOR_TAG];
     if (!progressIndicator){
         progressIndicator = [[ProgressIndicator alloc] init];
@@ -66,7 +66,7 @@
     progressIndicator.position = CGPointMake(105, 100);
 }
 
--(void)drawFastArchiveZone{
+- (void)drawFastArchiveZone {
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     fastArchiveZone = (DropZoneNode*)[layer getChildByTag:FAST_ARCHIVE_TAG];
     if (!fastArchiveZone){
@@ -77,7 +77,7 @@
     fastArchiveZone.title = NSLocalizedString(@"Archive", @"");
 }
 
--(void)drawSettingsButton{
+- (void)drawSettingsButton {
     CGSize windowSize = [CCDirector sharedDirector].winSize;
     CCMenu *starMenu = (CCMenu*)[layer getChildByTag:SETTINGS_BUTTON_TAG];
     if (!starMenu){
@@ -88,12 +88,12 @@
     starMenu.position = CGPointMake(250,50);
 }
 
--(void)openSettings:(id)sender{
+- (void)openSettings:(id)sender {
     [delegate settingsButtonTapped];
 }
 
 
--(void)scaleOut:(CCNode*)node{
+-(void)scaleOut:(CCNode *)node {
     CCFiniteTimeAction* scale = [CCScaleTo actionWithDuration:0.5 scale:0];
     CCFiniteTimeAction* callback = [CCCallBlock actionWithBlock:^{
         [self removeChildAndBody:node];
@@ -103,7 +103,7 @@
     [node runAction:sequence];
 }
 
--(void)removeChildAndBody:(CCNode*)node{    
+- (void)removeChildAndBody:(CCNode *)node {    
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData()==node){
             world->DestroyBody(b);
