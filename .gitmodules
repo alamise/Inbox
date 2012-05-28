@@ -1,27 +1,27 @@
 [submodule "MailCore"]
-	path = MailCore
+	path = app/MailCore
 	url = git://github.com/mronge/MailCore.git
 [submodule "MBProgressHUD"]
-	path = MBProgressHUD
+	path = app/MBProgressHUD
 	url = git://github.com/jdg/MBProgressHUD.git
 [submodule "cocos2d-iphone"]
-	path = cocos2d-iphone
+	path = app/cocos2d-iphone
 	url = git://github.com/cocos2d/cocos2d-iphone.git
 [submodule "CrashKit"]
-	path = CrashKit
+	path = app/CrashKit
 	url = git://github.com/kaler/CrashKit.git
 [submodule "iRate"]
-	path = iRate
+	path = app/iRate
 	url = git://github.com/nicklockwood/iRate.git
 [submodule "RegexKitLite"]
-	path = RegexKitLite
+	path = app/RegexKitLite
 	url = git://github.com/wezm/RegexKitLite.git
 [submodule "GoogleAnalytics-SDK-iOS"]
-	path = GoogleAnalytics-SDK-iOS
+	path = app/GoogleAnalytics-SDK-iOS
 	url = git://github.com/danielctull/GoogleAnalytics-SDK-iOS.git
 [submodule "CocoaLumberjack"]
-	path = CocoaLumberjack
+	path = app/CocoaLumberjack
 	url = git://github.com/robbiehanson/CocoaLumberjack.git
 [submodule "QuincyKit"]
-	path = QuincyKit
+	path = app/QuincyKit
 	url = https://github.com/TheRealKerni/QuincyKit.git
