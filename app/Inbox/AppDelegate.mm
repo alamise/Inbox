@@ -65,16 +65,17 @@
 	[window addSubview: navigationController.view];    
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
-    [FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
+    //[FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
     //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[window makeKeyAndVisible];
 }
-
+/*
 void uncaughtExceptionHandler(NSException *exception) {
     [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
+ */
 
 -(void) asyncActivityStarted{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];   

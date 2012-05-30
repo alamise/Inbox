@@ -25,7 +25,7 @@
     return (EmailReader*)[self getInstance];
 }
 
--(int)emailsCountInInboxes:(NSError**)error {
+-(int)emailsCountInInboxes:(NSError **)error {
     if (!error) {
         NSError* err;
         error = &err;

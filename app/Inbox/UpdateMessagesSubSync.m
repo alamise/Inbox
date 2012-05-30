@@ -39,8 +39,8 @@
     }
     *error = nil;
     foldersMessageCount = [[NSMutableDictionary alloc] init];
-    onStateChanged = [osc retain];
-    periodicCall = [periodic retain];
+    onStateChanged = Block_copy(osc);
+    periodicCall = Block_copy(periodic);
     [self updateLocalMessagesWithError:error];
     if ( *error ) {
         DDLogVerbose(@"Update local messages ended with an error");
@@ -142,7 +142,7 @@
             currentFolderIndex = currentFolderIndex+1;
             currentFolderIndex = currentFolderIndex % [folders count];
             
-            if (currentFolderIndex == 0){
+            if ( currentFolderIndex == 0 ) {
                 DDLogVerbose(@"switching to page %d", page);
                 page++;
             }    

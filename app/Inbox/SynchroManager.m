@@ -18,7 +18,7 @@
 #import "Logger.h"
 
 @interface SynchroManager()
-@property(nonatomic, retain) void(^onSyncStopped)();
+@property(nonatomic, assign) void(^onSyncStopped)();
 
 @end
 
