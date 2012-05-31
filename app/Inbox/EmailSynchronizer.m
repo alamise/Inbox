@@ -84,6 +84,7 @@
     emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
+    DDLogVerbose(@"create sub syncs");
     FoldersSubSync *foldersSync = [[FoldersSubSync alloc] initWithContext:self.context account:emailAccountModel];
     PersistMessagesSubSync* persistSync = [[PersistMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
     UpdateMessagesSubSync* updateSync = [[UpdateMessagesSubSync alloc] initWithContext:self.context account:emailAccountModel];
@@ -91,6 +92,7 @@
     [subSyncs addObject:persistSync];
     [subSyncs addObject:updateSync];
     
+    DDLogVerbose(@"start folder subsync");
     [foldersSync syncWithError:error];
     if ( *error ) {
         DDLogError(@"sync ended with an error");
@@ -100,25 +102,26 @@
     foldersSync = nil;
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
-    
+    DDLogVerbose(@"start persist subsync");
     [persistSync syncWithError:error];
     if ( *error ) {
         DDLogError(@"sync ended with an error");
         return;
     }
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
-    
+    DDLogVerbose(@"start update subsync");
     [updateSync syncWithError:error onStateChanged:^{
         [self onStateChanged];
     } periodicCall:^{
         [persistSync syncWithError:nil];
     }];
-    
     if ( *error ){
         DDLogError(@"sync ended with an error");
         return;
     }
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
+    
+    DDLogVerbose(@"releasing subsyncs");
     [updateSync release];
     updateSync = nil;
     [persistSync release];

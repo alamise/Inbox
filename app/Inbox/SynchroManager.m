@@ -18,7 +18,7 @@
 #import "Logger.h"
 
 @interface SynchroManager()
-@property(nonatomic, assign) void(^onSyncStopped)();
+@property(nonatomic, copy) void(^onSyncStopped)();
 
 @end
 
@@ -120,18 +120,13 @@
     if ( [self isSyncing] ) {
         [self callStopAsapOnSynchronizers];
     } else {
-        [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-            self.onSyncStopped();
-        } waitUntilDone:NO];
+        self.onSyncStopped();
     }
 }
 
-
 - (void)callStopAsapOnSynchronizers {
     for ( Synchronizer* sync in synchronizers ) {
-        [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
-            [sync stopAsap];
-        } waitUntilDone:NO];
+        [sync stopAsap];
     }
 }
 

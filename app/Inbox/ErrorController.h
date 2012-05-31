@@ -38,7 +38,7 @@
     void (^retryBlock)();
     
 }
-@property(nonatomic,retain) void(^retryBlock)();
+@property(nonatomic, copy) void(^retryBlock)();
 
 - (IBAction)dismiss;
 - (IBAction)editAccount;

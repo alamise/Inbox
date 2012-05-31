@@ -28,12 +28,15 @@
     shouldStop = YES;
 }
 
+/*
+ * While the synchro is running, nothing can be run on the background thread (we stay in the same cycle ot the runloop)
+ */
 -(void)performBlockOnBackgroundThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
-    [self performSelector:@selector(doBlock:) onThread:thread withObject:Block_copy(block) waitUntilDone:waitUntilDone];
+    [self performSelector:@selector(doBlock:) onThread:thread withObject:[[block copy] autorelease] waitUntilDone:waitUntilDone];
 }
 
 -(void)performBlockOnMainThread:(void(^)()) block waitUntilDone:(BOOL)waitUntilDone {
-    [self performSelectorOnMainThread:@selector(doBlock:) withObject:Block_copy(block) waitUntilDone:waitUntilDone];
+    [self performSelectorOnMainThread:@selector(doBlock:) withObject:[[block copy] autorelease] waitUntilDone:waitUntilDone];
 }
 
 -(void)doBlock:(void(^)())block{

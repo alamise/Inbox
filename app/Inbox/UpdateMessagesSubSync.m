@@ -53,6 +53,8 @@
 }
 
 -(void)dealloc{
+    [onStateChanged release];
+    [periodicCall release];
     [foldersMessageCount release];
     [super dealloc];
 }
@@ -117,12 +119,14 @@
             for ( CTCoreMessage* message in messagesBuffer ) {
                 if ( self.shouldStopAsap ) return ;/* STOP ASAP */
                 DDLogVerbose(@"processing a message");
+                
                 [self processCoreEmail:message folder:folderModel coreFolder:coreFolder error:error];
                 if ( *error ) {
                     DDLogError(@"error When processing the current message");
                     return;
                 }
             }
+            DDLogVerbose(@"message buffer processed");
             [coreFolder disconnect];
             coreFolder = nil;
             if ([messagesBuffer count] == 0) {

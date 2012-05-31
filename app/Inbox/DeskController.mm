@@ -41,6 +41,8 @@
 #import "Synchronizer.h"
 #import "PrivateValues.h"
 #import "SynchroManager.h"
+#import "ThreadsManager.h"
+
 #define MAX_ELEMENTS 5
 @interface DeskController ()
 @property(nonatomic,retain,readwrite) ModelsManager *modelsManager;
@@ -225,6 +227,14 @@
     }
     [director resume];
     [layer refresh];
+    UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    b.frame = CGRectMake(100, 100, 40, 40);
+    [b addTarget:self action:@selector(dodododo) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:b];
+}
+
+- (void)dodododo {
+    [[Deps sharedInstance].synchroManager callStopAsapOnSynchronizers];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
