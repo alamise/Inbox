@@ -1,11 +1,3 @@
-//
-//  config.h
-//  Inbox
-//
-//  Created by Simon Watiau on 4/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 /* Box2D collisions */
 #define EMAIL_CATEGORY 0x0001
 #define GROUND_CATEGORY 0x0002

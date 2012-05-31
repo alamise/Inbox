@@ -1,11 +1,3 @@
-//
-//  FoldersSynchronizer.m
-//  Inbox
-//
-//  Created by Simon Watiau on 5/20/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "FoldersSubSync.h"
 #import <CoreData/CoreData.h>
 #import "FolderModel.h"

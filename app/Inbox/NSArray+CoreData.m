@@ -1,11 +1,3 @@
-//
-//  NSArray+CoreData.m
-//  Inbox
-//
-//  Created by Simon Watiau on 5/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "NSArray+CoreData.h"
 #import <CoreData/CoreData.h>
 @implementation NSArray (CoreData)

@@ -1004,13 +1004,6 @@
 			name = steps;
 			sourceTree = "<group>";
 		};
-		F427D837154F000F001953C4 /* desk */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = desk;
-			sourceTree = "<group>";
-		};
 		F427D83E154F228C001953C4 /* interactions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1241,7 +1234,6 @@
 			isa = PBXGroup;
 			children = (
 				F4CCAB391555883D0025BEDC /* CCController.h */,
-				F427D837154F000F001953C4 /* desk */,
 				F427D83B154F1A87001953C4 /* ElementNodeProtocol.h */,
 			);
 			name = graphical;

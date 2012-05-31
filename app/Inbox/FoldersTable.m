@@ -1,11 +1,3 @@
-//
-//  FoldersComponent.m
-//  Inbox
-//
-//  Created by Simon Watiau on 4/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "FoldersTable.h"
 #import "DropZoneNode.h"
 #import "cocos2d.h"

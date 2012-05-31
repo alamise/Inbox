@@ -1,11 +1,3 @@
-//
-//  ContextualRightSidePanel.m
-//  Inbox
-//
-//  Created by Simon Watiau on 4/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "ContextualRightSidePanel.h"
 #import "CCLayer.h"
 #import "cocos2d.h"

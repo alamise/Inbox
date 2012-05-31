@@ -1,11 +1,3 @@
-//
-//  BackgroundThread.h
-//  Inbox
-//
-//  Created by Simon Watiau on 5/19/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @interface ThreadsManager : NSObject{
