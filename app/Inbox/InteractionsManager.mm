@@ -58,6 +58,8 @@
         CGRect rect = [node visualNode].boundingBox;
         if (CGRectContainsPoint(rect, location)) {
             self.draggedNode = node;
+            lastTouchTime = [NSDate timeIntervalSinceReferenceDate];
+            lastTouchPosition = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
             [delegate interactionStarted];
             didDraggedNodeMoved = false;
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
@@ -99,9 +101,9 @@
 		}	
 	}
     
-    if (lastTouchTime+TOUCHES_DELAY<[NSDate timeIntervalSinceReferenceDate]){
-        lastTouchTime=[NSDate timeIntervalSinceReferenceDate];
-        lastTouchPosition=[[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
+    if (lastTouchTime + TOUCHES_DELAY < [NSDate timeIntervalSinceReferenceDate]){
+        lastTouchTime = [NSDate timeIntervalSinceReferenceDate];
+        lastTouchPosition = [[CCDirector sharedDirector] convertToGL:[touch locationInView: [[CCDirector sharedDirector] openGLView]]];
     }
 }
 
@@ -191,7 +193,7 @@
         CGSize windowSize = [CCDirector sharedDirector].winSize;
         if (!CGRectContainsRect(CGRectMake(0, 0, windowSize.width, windowSize.height),rect)){
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()){
-                if (b->GetUserData() ==node) {
+                if (b->GetUserData() == node) {
                     b->SetTransform(b2Vec2(windowSize.width/PTM_RATIO/2, windowSize.height/PTM_RATIO/2), b->GetAngle());
                     b->SetAwake(true);
                 }	
@@ -199,8 +201,6 @@
         }
     }
 }
-
-
 
 -(void)registerNode:(id<ElementNodeProtocol>)node{
     [visibleNodes insertObject:node atIndex:0];
