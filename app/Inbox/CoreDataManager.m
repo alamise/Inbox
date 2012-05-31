@@ -41,12 +41,10 @@
 }
 
 - (void)mainContextDidSave:(NSNotification*)notif {
-    [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
-        [self.syncContext lock];
-        [self.syncContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
-        [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
-        [self.syncContext unlock];
-    } waitUntilDone:NO];
+    [self.syncContext lock];
+    [self.syncContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+    [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
+    [self.syncContext unlock];
 }
 
 - (void)syncContextDidSave:(NSNotification*)notif {

@@ -228,13 +228,13 @@
     [director resume];
     [layer refresh];
     UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    b.frame = CGRectMake(100, 100, 40, 40);
-    [b addTarget:self action:@selector(dodododo) forControlEvents:UIControlEventTouchUpInside];
+    b.frame = CGRectMake(400, 20, 40, 40);
+    [b addTarget:self action:@selector(theMagicButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:b];
 }
 
-- (void)dodododo {
-    [[Deps sharedInstance].synchroManager callStopAsapOnSynchronizers];
+- (void)theMagicButtonAction {
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{

@@ -20,7 +20,7 @@
 		F41E664614A9CFB800BA4712 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658814A9CFB700BA4712 /* EmailModel.m */; };
 		F41E664714A9CFB800BA4712 /* EmailNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E658A14A9CFB700BA4712 /* EmailNode.mm */; };
 		F41E664914A9CFB800BA4712 /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E658D14A9CFB700BA4712 /* ErrorController.m */; };
-		F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* ErrorView.xib */; };
+		F41E664A14A9CFB800BA4712 /* Error.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41E658E14A9CFB700BA4712 /* Error.xib */; };
 		F41E664D14A9CFB800BA4712 /* LoginController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F41E659614A9CFB700BA4712 /* LoginController.mm */; };
 		F41E664F14A9CFB800BA4712 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F41E659814A9CFB700BA4712 /* main.m */; };
 		F41E665514A9CFB800BA4712 /* buttonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F41E65A314A9CFB700BA4712 /* buttonImage.png */; };
@@ -665,7 +665,7 @@
 		F41E658A14A9CFB700BA4712 /* EmailNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailNode.mm; sourceTree = "<group>"; };
 		F41E658C14A9CFB700BA4712 /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
 		F41E658D14A9CFB700BA4712 /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
-		F41E658E14A9CFB700BA4712 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		F41E658E14A9CFB700BA4712 /* Error.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Error.xib; sourceTree = "<group>"; };
 		F41E658F14A9CFB700BA4712 /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		F41E659514A9CFB700BA4712 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		F41E659614A9CFB700BA4712 /* LoginController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginController.mm; sourceTree = "<group>"; };
@@ -942,7 +942,7 @@
 			children = (
 				F41E658C14A9CFB700BA4712 /* ErrorController.h */,
 				F41E658D14A9CFB700BA4712 /* ErrorController.m */,
-				F41E658E14A9CFB700BA4712 /* ErrorView.xib */,
+				F41E658E14A9CFB700BA4712 /* Error.xib */,
 			);
 			name = error;
 			sourceTree = "<group>";
@@ -2011,7 +2011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F444C0ED14BA025A00D08560 /* EmailView.xib in Resources */,
-				F41E664A14A9CFB800BA4712 /* ErrorView.xib in Resources */,
+				F41E664A14A9CFB800BA4712 /* Error.xib in Resources */,
 				F444C0E914BA024600D08560 /* LoginView.xib in Resources */,
 				F41E665514A9CFB800BA4712 /* buttonImage.png in Resources */,
 				F41E665614A9CFB800BA4712 /* Default-Landscape~ipad.png in Resources */,

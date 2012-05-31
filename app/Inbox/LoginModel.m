@@ -55,8 +55,9 @@
     if ( [emailsModels count] == 0 ) {
         return nil;
     }
-    return [emailsModels lastObject];    
-
+    EmailAccountModel* model = [emailsModels lastObject];
+    [context refreshObject:model mergeChanges:YES];
+    return model;
 }
 
 - (void)abortSync:(void(^)())nextStep {
