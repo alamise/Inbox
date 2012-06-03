@@ -45,7 +45,6 @@
         [self onInvalidPassword];
     }else{
         NSError *error = nil; 
-        [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
         if ( error ) {
             [self onUnknownError];
         }
@@ -79,11 +78,14 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    
     if ( shouldExecActionOnDismiss ) {
         [[Deps sharedInstance].synchroManager abortSync:^{
-            NSError* error = nil;
+            NSError *error = nil;
+            [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
             [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
             if ( error ) {
+                DDLogVerbose(@"Error occured when refreshing the account list");
                 [self onUnknownError];
             }        
         }];

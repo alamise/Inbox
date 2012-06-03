@@ -38,7 +38,7 @@
     }
     *error = nil;
     
-    [self refreshEmailAccountsWithError:error];
+    //[self refreshEmailAccountsWithError:error];
     if ( !*error ) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_RELOADED object:nil];
     }
@@ -47,6 +47,8 @@
 
 /* private */
 - (void)refreshEmailAccountsWithError:(NSError **)error {
+    DDLogVerbose(@"building synchronizer list");
+    
     if ( !error ) {
         NSError* err;
         error = &err;
@@ -69,6 +71,7 @@
     }
 
     for ( EmailAccountModel* account in emailsModels ) {
+        DDLogVerbose(@"refreshing synchronizers with account %@",account.objectID);
         EmailSynchronizer* sync = [[EmailSynchronizer alloc] initWithAccountId:account.objectID];
         [synchronizers addObject:sync];
     }
@@ -84,7 +87,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_DONE object:nil];
         } waitUntilDone:NO];
     };
-    NSError* error = nil;
+    NSError *error = nil;
     [self refreshEmailAccountsWithError:&error];
     if ( error ) {
         DDLogError(@"error when refreshing the accounts list");
@@ -107,7 +110,8 @@
 }
 
 - (void)abortSync:(void(^)())onceAborted {
-    DDLogVerbose(@"sync aborted");
+    DDLogVerbose(@"sync aborting (sending event)");
+    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STOPPING object:nil];
     self.onSyncStopped = Block_copy(onceAborted);
     if ( [self isSyncing] ) {
         [self callStopAsapOnSynchronizers];
@@ -123,9 +127,9 @@
 }
 
 - (void)syncDone {
-    DDLogVerbose(@"Synchronizer ended successfully");
     runningSync--;
     if ( runningSync < 0 ) runningSync = 0; /* this can be called before any sync start */
+    DDLogVerbose(@"Synchronizer ended successfully (%d)", runningSync);
     if ( runningSync == 0 ) {
         DDLogVerbose(@"No more synchronizers to wait for");
         [self syncEnded];
@@ -133,9 +137,9 @@
 }
 
 - (void)syncFailed {
-    DDLogError(@"Synchronizer ended with an error");
     runningSync--;
     if (runningSync < 0) runningSync = 0; /* this can be called before any sync start */
+    DDLogError(@"Synchronizer ended with an error (%d)", runningSync);
 
     self.onSyncStopped = ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];

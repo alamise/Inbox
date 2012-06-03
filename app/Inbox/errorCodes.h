@@ -17,8 +17,9 @@
 /* sync manager */
 #define SYNC_MANAGER_ERROR_DOMAIN @"sync_manager_error"
 #define REFRESH_ACCOUNT_ERROR -6
+#define INVALID_ACCOUNT_ID_ERROR -7
  
 /* login */
 #define LOGIN_ERROR_DOMAIN @"login_error_domain"
-#define CHANGE_ACCOUNT_ERROR -7
-#define EMAIL_INVALID_ERROR -8
+#define CHANGE_ACCOUNT_ERROR -8
+#define EMAIL_INVALID_ERROR -9

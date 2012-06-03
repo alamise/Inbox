@@ -73,7 +73,12 @@
         NSError* err = nil;
         error = &err;
     }
-    emailAccountModel = (EmailAccountModel*)[[self.context objectWithID:emailAccountModelId] retain];
+    *error = nil;
+    emailAccountModel = (EmailAccountModel*)[[self.context objectRegisteredForID:emailAccountModelId] retain];
+    if ( !emailAccountModel ) {
+        *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:INVALID_ACCOUNT_ID_ERROR userInfo:nil];
+        return;
+    }
     if ( self.shouldStopAsap ) return ;/* STOP ASAP */
     
     DDLogVerbose(@"create sub syncs");

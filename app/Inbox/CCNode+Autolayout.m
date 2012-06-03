@@ -33,6 +33,7 @@
 #import "CCGrid.h"
 
 @implementation CCNode (Autolayout)
+#pragma GCC diagnostic ignored
 - (void) visit
 {
 	// quick return if not visible

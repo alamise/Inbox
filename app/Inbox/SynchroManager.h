@@ -2,6 +2,7 @@
 #define SYNC_DONE @"sync_done"
 #define SYNC_FAILED @"sync_failed"
 #define SYNC_RELOADED @"sync_reloaded"
+#define SYNC_STOPPING @"sync_stopping" /* a SYNC_DONE event is sent once the snchro is done */
 
 @interface SynchroManager : NSObject{
     NSMutableArray *synchronizers;

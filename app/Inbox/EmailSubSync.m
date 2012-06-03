@@ -43,7 +43,7 @@
     }
     if (![coreAccount isConnected]){
         @try {
-            
+            #warning after multiple connection errors, self.accountModel was nil 
             [coreAccount connectToServer:self.accountModel.serverAddr port:[self.accountModel.port intValue] connectionType:[self.accountModel.conType intValue] authType:[self.accountModel.authType intValue] login:self.accountModel.login password:self.accountModel.password];            
         }
         @catch (NSException *exception) {

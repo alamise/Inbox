@@ -33,9 +33,10 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncReloaded) name:SYNC_RELOADED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncStopping) name:SYNC_STOPPING object:nil];
 	}
 	return self;
 }
@@ -75,18 +76,22 @@
     }
 }
 
--(void)showLoadingHud{
-    if (loadingHud.alpha==0.0f){
+- (void)showLoadingHud {
+    if ( loadingHud.alpha == 0.0f ) {
         [loadingHud show:YES];    
     }
 }
 
--(void)hideLoadingHud{
+- (void)hideLoadingHud {
     [loadingHud hide:YES];
 }
 
--(void)stateChanged{
+- (void)stateChanged {
     [self nextStep];
+}
+
+- (void)onSyncStopping {
+    [self showLoadingHud];
 }
 
 #pragma mark update everything
@@ -118,7 +123,8 @@
         return;
     }
     
-    if ([layer elementsOnTheDesk] >= MAX_ELEMENTS){
+    if ( [layer elementsOnTheDesk] >= MAX_ELEMENTS ) {
+        [self hideLoadingHud];
         return;
     }
     
