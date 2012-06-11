@@ -115,7 +115,7 @@
 }
 
 - (void)nextStep {
-    NSError* error = nil;
+    NSError *error = nil;
 
     [self updateCounterWithError:&error];
     if ( error ) {
@@ -128,7 +128,7 @@
         return;
     }
     
-    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] read:true error:&error];    
+    EmailModel* nextEmail = [[EmailReader sharedInstance] lastEmailFromInboxExcluded:[layer mailsOnDesk] error:&error];    
     
     if ( error ) {
         [self putInErrorState];
@@ -137,16 +137,14 @@
     
     if ( nextEmail == nil ) {
         if ([[Deps sharedInstance].synchroManager isSyncing]) {
-            isWaiting = YES;
-            [self showLoadingHud];
-            
+            if ( [layer elementsOnTheDesk] == 0 ) {
+                [self showLoadingHud];
+            }
         } else {
-            isWaiting = NO;
             [self hideLoadingHud];
             // Inbox empty
         }
     } else {
-        isWaiting = NO;
         [self hideLoadingHud];
         [layer showFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
         
@@ -175,7 +173,6 @@
  * Stop the synchro and present the error view
  */
 - (void)putInErrorState {
-    isWaiting = false;
     [self hideLoadingHud];
     ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
         [self startSyncIfNeeded];
@@ -210,10 +207,12 @@
     }
     [director resume];
     [layer refresh];
-    UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    b.frame = CGRectMake(400, 20, 40, 40);
-    [b addTarget:self action:@selector(theMagicButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:b];
+    #ifdef DEBUG
+        UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        b.frame = CGRectMake(400, 20, 40, 40);
+        [b addTarget:self action:@selector(theMagicButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:b];
+    #endif
 }
 
 - (void)theMagicButtonAction {

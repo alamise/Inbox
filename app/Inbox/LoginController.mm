@@ -83,6 +83,10 @@
         [[Deps sharedInstance].synchroManager abortSync:^{
             NSError *error = nil;
             [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
+            if ( error ) {
+                DDLogVerbose(@"Error occured when refreshing the account list");
+                [self onUnknownError];
+            }        
             [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
             if ( error ) {
                 DDLogVerbose(@"Error occured when refreshing the account list");
@@ -135,4 +139,7 @@
     [alert release];    
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
 @end

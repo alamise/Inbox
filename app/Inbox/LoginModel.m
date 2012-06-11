@@ -64,7 +64,7 @@
 
 - (void) changeAccountWithLogin:(NSString*)login password:(NSString*)password conType:(int)conType authType:(int) authType port:(int)port server:(NSString*)server error:(NSError**)error {
     DDLogInfo(@"changing the account");
-    if (!error){
+    if ( !error){
         NSError* err = nil;
         error = &err;
     }
@@ -84,13 +84,12 @@
         DDLogVerbose(@"Previous account deleted with ID %@",account.objectID);
         [context deleteObject:account];
     }
-    [context processPendingChanges];
     EmailAccountModel* account = nil;
     @try {
         DDLogVerbose(@"creating a new account");
         account = [NSEntityDescription insertNewObjectForEntityForName:[EmailAccountModel entityName] inManagedObjectContext:context];
     }
-    @catch (NSException *exception) {
+    @catch ( NSException *exception ) {
         *error = [NSError errorWithDomain:LOGIN_ERROR_DOMAIN code:CHANGE_ACCOUNT_ERROR userInfo:[NSDictionary dictionaryWithObject:exception forKey:ROOT_EXCEPTION]];
         return;
     }
@@ -102,11 +101,10 @@
     account.login = login;
     account.password = password;
     [context save:error];
-    if (*error){
+    if ( *error ) {
         DDLogError(@"changing the account ended with an error");
         *error = [NSError errorWithDomain:LOGIN_ERROR_DOMAIN code:CHANGE_ACCOUNT_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
     }
-    [account release];
 }
 
 - (BOOL) validateEmail: (NSString *) candidate {

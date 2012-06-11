@@ -293,11 +293,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/LoginController.mm"
-         timestampString = "360407840.510173"
+         timestampString = "360451771.828592"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
          landmarkName = "-onInvalidPassword"
          landmarkType = "5">
       </FileBreakpoint>
@@ -319,11 +319,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Inbox/SynchroManager.m"
-         timestampString = "360421799.403821"
+         timestampString = "361040481.742801"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
          landmarkName = "-abortSync:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -331,26 +331,117 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/DeskController.mm"
-         timestampString = "360420334.618306"
+         filePath = "Inbox/EmailSubSync.m"
+         timestampString = "361041343.444316"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
-         landmarkName = "-onSyncReloaded"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "-coreAccountWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Inbox/SynchroManager.m"
-         timestampString = "360422082.790795"
+         filePath = "Inbox/LoginModel.m"
+         timestampString = "361043464.081257"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
-         landmarkName = "-startSync"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-changeAccountWithLogin:password:conType:authType:port:server:error:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/LoginModel.m"
+         timestampString = "361043558.214152"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "-changeToGmailAccountWithLogin:password:error:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/LoginController.mm"
+         timestampString = "361043579.964829"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-viewDidDisappear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskLayer.mm"
+         timestampString = "361059321.00083"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
+         landmarkName = "-longTouchOnPoint:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskLayer.mm"
+         timestampString = "361059217.371965"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
+         landmarkName = "-longTouchOnPoint:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskLayer.mm"
+         timestampString = "361059228.872168"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "149"
+         endingLineNumber = "149"
+         landmarkName = "-elementTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/InteractionsManager.mm"
+         timestampString = "361059333.89094"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "-ccTouchEnded:withEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Inbox/DeskLayer.mm"
+         timestampString = "361059377.712588"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
+         landmarkName = "-longTouchOnPoint:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

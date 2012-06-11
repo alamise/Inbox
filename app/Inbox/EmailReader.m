@@ -180,6 +180,29 @@
     return returnValue;
 }
 
+-(EmailModel*)lastEmailFromInboxExcluded:(NSArray*)excludedMails error:(NSError**)error{
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
+    NSManagedObjectContext* context = [self sharedContext];    
+    NSDate *lastEmailDate = [NSDate dateWithTimeIntervalSince1970:0];
+    EmailModel* returnValue = nil;
+    for (FolderModel* obj in [self inboxes:error]){
+        EmailModel* lastEmail = [self lastEmailFromFolder:obj exclude:excludedMails error:error];
+        if (*error){
+            return nil;
+        }
+        NSDate* currentEmailDate = lastEmail.sentDate;
+        if ([currentEmailDate timeIntervalSince1970] > [lastEmailDate timeIntervalSince1970]){
+            lastEmailDate = currentEmailDate;
+            returnValue = lastEmail;
+        }
+    }
+    return returnValue;
+}
+
 - (EmailModel*) lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray*)excludedMails read:(bool)read error:(NSError**)error{
     if (!error) {
         NSError* err;
@@ -212,6 +235,40 @@
         }
     }
 }
+
+- (EmailModel *)lastEmailFromFolder:(FolderModel *)folder exclude:(NSArray *)excludedMails error:(NSError **)error {
+    if (!error) {
+        NSError* err;
+        error = &err;
+    }
+    *error = nil;
+    if (!excludedMails){
+        excludedMails = [NSArray array];
+    }
+    NSManagedObjectContext* context = [self sharedContext];    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel entityName] inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(folder = %@) AND NOT(self IN %@)", folder, excludedMails];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sortBySentDate = [[NSSortDescriptor alloc] initWithKey:@"sentDate" ascending:NO];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortBySentDate, nil]];
+    [sortBySentDate release];
+    
+    NSArray* objects = [context executeFetchRequest:request error:error];
+    [request release];
+    if (*error){
+        return nil;
+    }else{
+        if ([objects count]>0){
+            EmailModel* model = [objects objectAtIndex:0];
+            return model;
+        }else{
+            return nil;
+        }
+    }
+}
+
 
 -(void)fetchEmailBody:(EmailModel*)email error:(NSError**)error{
     if (!error) {

@@ -881,6 +881,13 @@
 			name = singletons;
 			sourceTree = "<group>";
 		};
+		F41727F91583ADAC0003265F /* actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = actions;
+			sourceTree = "<group>";
+		};
 		F41E643F14A9CFB700BA4712 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -984,6 +991,7 @@
 		F42223D615690EE90050F268 /* Emails */ = {
 			isa = PBXGroup;
 			children = (
+				F41727F91583ADAC0003265F /* actions */,
 				F42223E315693E9C0050F268 /* steps */,
 			);
 			name = Emails;

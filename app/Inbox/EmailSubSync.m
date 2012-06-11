@@ -17,6 +17,7 @@
 -(id)initWithContext:(NSManagedObjectContext*)c account:(EmailAccountModel*)a{
     if (self = [self init]){
         self.context = c;
+        NSAssert(a != nil, @"the account must not be nil");
         self.accountModel = a;
     }
     return self;

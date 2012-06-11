@@ -27,8 +27,8 @@ static int zIndex = INT_MAX;
 
 @implementation DeskLayer
 
--(id) initWithDelegate:(id<DeskProtocol>)d{
-	if( (self=[super init])) {
+- (id)initWithDelegate:(id<DeskProtocol>)d {
+	if ( self = [super init] ) {
         delegate = d;
         self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
@@ -40,42 +40,21 @@ static int zIndex = INT_MAX;
 	return self;
 }
 
--(void)registerWithTouchDispatcher {
+- (void)registerWithTouchDispatcher {
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:interactionsManager priority:1 swallowsTouches:NO];
 }
 
-- (void) dealloc{
+- (void)dealloc {
     [interactionsManager release];
     [drawingManager release];
 	[super dealloc];
 }
 
--(void)offlineTests{
-    NSManagedObjectContext* context=[[Deps sharedInstance].coreDataManager mainContext];
-    for (int i=0;i<5;i++){
-        EmailModel* email = [NSEntityDescription insertNewObjectForEntityForName:[EmailModel entityName] inManagedObjectContext:context];
-        [self putEmail:email];
-    }  
-}
-
--(void)onEnter{
-    [super onEnter];
-    //[self offlineTests];
-    return;
-    NSManagedObjectContext* context = [[Deps sharedInstance].coreDataManager mainContext];
-    NSMutableArray* ff = [NSMutableArray array];
-    for (int i=0;i<5;i++){
-        FolderModel* folder = [NSEntityDescription insertNewObjectForEntityForName:[FolderModel entityName] inManagedObjectContext:context];
-        [ff addObject:folder];
-    }
-    [self performSelector:@selector(showFolders:) withObject:ff afterDelay:1];
-}
-
--(CCLayer*)layer {
+- (CCLayer *)layer {
     return self;
 }
 
--(b2World*)world{
+- (b2World *)world{
     return interactionsManager.world;
 }
 
@@ -96,17 +75,16 @@ static int zIndex = INT_MAX;
 -(void)showFolders:(NSArray*)folders{
     NSArray* currentFolders = foldersTable.folders;
     NSArray* newFolders = [folders ArrayOfManagedIds];
-    NSLog(@"%@",currentFolders);
-    NSLog(@"%@",newFolders);
+    #warning the order is not the same !!
     if (![currentFolders isEqualToArray:newFolders]){
         [self showFolders_hideAndSet:newFolders];
     }
 }
 
--(void)showFolders_hideAndSet:(NSArray *)folders{
-    if (!drawingManager.rightSidePanel.isHidden){
+- (void)showFolders_hideAndSet:(NSArray *)folders {
+    if ( !drawingManager.rightSidePanel.isHidden ) {
         [drawingManager.rightSidePanel hideAnimated:NO callback:^{
-            if (!foldersTable.view.parent){
+            if ( !foldersTable.view.parent ) {
                 [self addChild:foldersTable.view];
             }
             [drawingManager.rightSidePanel setController:foldersTable];        
@@ -136,7 +114,9 @@ static int zIndex = INT_MAX;
 #pragma mark - draw battlefield
 
 -(void) draw{
-    [interactionsManager drawDebugData];
+    #ifdef DEBUG
+        [interactionsManager drawDebugData];
+    #endif
 }
 
 -(void)refresh{
@@ -175,11 +155,12 @@ static int zIndex = INT_MAX;
     FolderModel* folder = [foldersTable folderModelAtPoint:point];
     if (folder == nil){
         if (CGRectContainsPoint(drawingManager.fastArchiveZone.boundingBox, point)) {
-            //folder = [delegate arch];   TODO
+            // on touch on archive zone:  fails
+            NSLog(@"");
         }
     }
     
-    if (folder != nil){
+    if ( folder != nil ) {
         EmailModel* email = [delegate lastEmailFromFolder:folder];
         if (email != nil){
             CGPoint popingPoint = CGPointZero;
@@ -190,8 +171,6 @@ static int zIndex = INT_MAX;
             }else{
                 popingPoint = [foldersTable centerOfFolderAtPoint:point];
             }
-            NSLog(@"%@",NSStringFromCGPoint(popingPoint));
-            NSLog(@"%@",NSStringFromCGPoint(point));
             id<ElementNodeProtocol> node = [drawingManager.inboxStack addEmail:email onPoint:popingPoint];
             [self addChild:node z:3];//le poping point est pas bon
             [interactionsManager registerNode:node];
