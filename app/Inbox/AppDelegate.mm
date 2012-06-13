@@ -11,6 +11,8 @@
 #import "FlurryAnalytics.h"
 #import "PrivateValues.h"
 #import "ThreadsManager.h"
+#import "Deps.h"
+#import "SynchroManager.h"
 
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
@@ -38,7 +40,7 @@
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-	navigationController = [[UINavigationController alloc] initWithRootViewController:[[[DeskController alloc] init] autorelease]];
+	navigationController = [[UINavigationController alloc] initWithRootViewController:[Deps sharedInstance].deskController];
 	[window addSubview: navigationController.view];    
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
@@ -85,6 +87,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[[CCDirector sharedDirector] resume];
+    if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
+        [[Deps sharedInstance].synchroManager startSync];
+    }
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
@@ -100,6 +105,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 -(void) applicationWillEnterForeground:(UIApplication*)application {
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
     [[CCDirector sharedDirector] startAnimation];
+    if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
+        [[Deps sharedInstance].synchroManager startSync];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

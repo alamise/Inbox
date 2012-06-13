@@ -6,10 +6,12 @@
     ModelsManager *modelsManager;
     DeskLayer *layer;
     EAGLView *glView;
-    MBProgressHUD *loadingHud;
     int totalEmailsInThisSession;
+    UIActivityIndicatorView *loadingIndicator;
 }
 
 @property(nonatomic,retain,readonly) ModelsManager *modelsManager;
 
+- (void)cleanDesk;
+- (void)setLoaderVisible:(BOOL)visible;
 @end

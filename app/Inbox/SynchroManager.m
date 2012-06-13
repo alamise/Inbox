@@ -112,7 +112,6 @@
 - (void)abortSync:(void(^)())onceAborted {
     DDLogVerbose(@"sync aborting (sending event)");
     self.onSyncStopped = onceAborted;
-    [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_STOPPING object:nil];
     if ( [self isSyncing] ) {
         [self callStopAsapOnSynchronizers];
     } else {
@@ -142,11 +141,9 @@
     runningSync--;
     if (runningSync < 0) runningSync = 0; /* this can be called before any sync start */
     DDLogError(@"Synchronizer ended with an error (%d)", runningSync);
-    if ( !self.onSyncStopped ) {
-        self.onSyncStopped = ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
-        };
-    }
+    self.onSyncStopped = ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_FAILED object:nil];
+    };
     [self callStopAsapOnSynchronizers];
     
     if ( runningSync == 0 ) {

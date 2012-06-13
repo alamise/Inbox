@@ -4,6 +4,7 @@
 #import "ThreadsManager.h"
 #import "Deps.h"
 #import "EmailAccountModel.h"
+#import "errorCodes.h"
 
 @interface CoreDataManager()
 @property(nonatomic,retain) NSManagedObjectContext* mainContext;
@@ -37,18 +38,6 @@
 
 - (void)mainContextDidSave:(NSNotification*)notif {
     [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
-        NSArray *deletedObjects = [[notif userInfo] objectForKey:@"deleted"];
-        for ( NSObject *obj in deletedObjects ) {
-            if ([obj isKindOfClass:[EmailAccountModel class]]) {
-                NSLog(@"MERGE DEL IN SYNC> %@", obj);
-            }
-        }
-        deletedObjects = [[notif userInfo] objectForKey:@"inserted"];
-        for ( NSObject *obj in deletedObjects ) {
-            if ([obj isKindOfClass:[EmailAccountModel class]]) {
-                NSLog(@"MERGE INS IN SYNC> %@", obj);
-            }
-        }
         [self.syncContext lock];
         [self.syncContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [self.syncContext mergeChangesFromContextDidSaveNotification:notif];
@@ -58,18 +47,6 @@
 
 - (void)syncContextDidSave:(NSNotification*)notif {
     [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
-        NSArray *deletedObjects = [[notif userInfo] objectForKey:@"deleted"];
-        for ( NSObject *obj in deletedObjects ) {
-            if ([obj isKindOfClass:[EmailAccountModel class]]) {
-                NSLog(@"MERGE DEL IN MAIN> %@", obj);
-            }
-        }
-        deletedObjects = [[notif userInfo] objectForKey:@"inserted"];
-        for ( NSObject *obj in deletedObjects ) {
-            if ([obj isKindOfClass:[EmailAccountModel class]]) {
-                NSLog(@"MERGE INS IN MAIN> %@", obj);
-            }
-        }
         [self.mainContext lock];
         [self.mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [self.mainContext mergeChangesFromContextDidSaveNotification:notif];
@@ -122,6 +99,37 @@
 - (NSString *)databasePath {
     NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [path stringByAppendingPathComponent: @"coredata.sqlite"];
+}
+
+
+- (NSManagedObject *)objectFromId:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context error:(NSError **)error {
+    if ( !error ) {
+        NSError *err = nil;
+        error = &err;
+    }
+    *error = nil;
+    
+    NSManagedObject *object = [context objectWithID:objectID];
+    if ( ![object isFault] ) {
+        return object;
+    }
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [object entity];
+    request.predicate = [NSPredicate predicateWithFormat:@"SELF = %@",object];
+    NSArray* objects = [context executeFetchRequest:request error:error];
+    if ( *error ) {
+        [request release];
+        *error = [NSError errorWithDomain:nil code:0 userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
+    }
+    [request release];
+    
+    if ( [objects count] == 0 ) {
+        return nil;
+    }
+    
+    return [objects objectAtIndex:0];
 }
 
 -(void)resetDatabase{

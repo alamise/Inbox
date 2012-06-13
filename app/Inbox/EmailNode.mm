@@ -5,7 +5,7 @@
 #import "config.h"
 #import "AppDelegate.h"
 #import "DeskLayer.h"
-#define ANIMATION_DELAY 0.3
+#define ANIMATION_DURATION_VALUE 0.3
 
 @interface EmailNode ()
 -(void) draw:(NSString*)subject senderName:(NSString*)senderName;
@@ -70,9 +70,13 @@
     //[self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
 }
 
++ (int)ANIMATION_DURATION {
+    return ANIMATION_DURATION_VALUE;
+}
+
 -(void)scaleOut{
     world->DestroyBody(body);
-    [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:0]];
+    [self runAction:[CCScaleTo actionWithDuration:ANIMATION_DURATION_VALUE scale:0]];
     [CCCallFunc actionWithTarget:self selector:@selector(remove)];
 }
 

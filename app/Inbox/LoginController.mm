@@ -78,22 +78,28 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    
     if ( shouldExecActionOnDismiss ) {
-        [[Deps sharedInstance].synchroManager abortSync:^{
-            NSError *error = nil;
-            [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
-            if ( error ) {
-                DDLogVerbose(@"Error occured when refreshing the account list");
-                [self onUnknownError];
-            }        
-            [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
-            if ( error ) {
-                DDLogVerbose(@"Error occured when refreshing the account list");
-                [self onUnknownError];
-            }        
-        }];
+        [[Deps sharedInstance].deskController cleanDesk];
+        [self performSelector:@selector(triggerRefresh) withObject:nil afterDelay:0.8];
     }
+}
+
+- (void)triggerRefresh {
+    
+    [[Deps sharedInstance].deskController setLoaderVisible:YES];
+    [[Deps sharedInstance].synchroManager abortSync:^{
+        NSError *error = nil;
+        [model changeToGmailAccountWithLogin:emailField.text password:passwordField.text error:&error];
+        if ( error ) {
+            DDLogVerbose(@"Error occured when refreshing the account list");
+            [self onUnknownError];
+        }        
+        [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
+        if ( error ) {
+            DDLogVerbose(@"Error occured when refreshing the account list");
+            [self onUnknownError];
+        }        
+    }];
 }
 
 - (void)viewDidUnload{

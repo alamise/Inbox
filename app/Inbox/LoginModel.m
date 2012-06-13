@@ -105,6 +105,7 @@
         DDLogError(@"changing the account ended with an error");
         *error = [NSError errorWithDomain:LOGIN_ERROR_DOMAIN code:CHANGE_ACCOUNT_ERROR userInfo:[NSDictionary dictionaryWithObject:*error forKey:ROOT_ERROR]];
     }
+    DDLogVerbose(@"account updated");
 }
 
 - (BOOL) validateEmail: (NSString *) candidate {

@@ -14,6 +14,7 @@
 #import "UpdateMessagesSubSync.h"
 #import "FoldersSubSync.h"
 #import "EmailSubSync.h"
+#import "Deps.h"
 #define ddLogLevel LOG_LEVEL_VERBOSE
 
 @implementation EmailSynchronizer
@@ -74,7 +75,9 @@
         error = &err;
     }
     *error = nil;
-    emailAccountModel = (EmailAccountModel*)[[self.context objectRegisteredForID:emailAccountModelId] retain];
+    emailAccountModel = (EmailAccountModel *)[[Deps sharedInstance].coreDataManager objectFromId:emailAccountModelId inContext:self.context error:nil];
+    [emailAccountModel retain];
+    DDLogVerbose(@"init with account ID %@",emailAccountModelId);
     if ( !emailAccountModel ) {
         *error = [NSError errorWithDomain:SYNC_ERROR_DOMAIN code:INVALID_ACCOUNT_ID_ERROR userInfo:nil];
         return;

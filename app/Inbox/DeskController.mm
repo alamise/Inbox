@@ -19,6 +19,7 @@
 #import "PrivateValues.h"
 #import "SynchroManager.h"
 #import "ThreadsManager.h"
+#import "EmailNode.h"
 
 #define MAX_ELEMENTS 5
 @interface DeskController ()
@@ -31,12 +32,10 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncReloaded) name:SYNC_RELOADED object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncStopping) name:SYNC_STOPPING object:nil];
 	}
 	return self;
 }
@@ -53,7 +52,7 @@
 - (void)showEmail:(NSManagedObjectID *)emailId {
     EmailModel* email = (EmailModel*)[[[Deps sharedInstance].coreDataManager mainContext] objectWithID:emailId];
     if (!email.htmlBody){
-        [loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
+        //[loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
     }else{
         EmailController* emailController = [[EmailController alloc] initWithEmail:emailId];
         [self presentInNavigationController:emailController];
@@ -76,22 +75,25 @@
     }
 }
 
-- (void)showLoadingHud {
-    if ( loadingHud.alpha == 0.0f ) {
-        [loadingHud show:YES];    
-    }
+- (UIActivityIndicatorView *)buildLoader {
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [indicator setHidesWhenStopped:YES];
+    indicator.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
+    indicator.layer.cornerRadius = 5;
+    indicator.frame = CGRectMake(0, 0, 217, 135);
+    return [indicator autorelease];
 }
 
-- (void)hideLoadingHud {
-    [loadingHud hide:YES];
+- (void)showLoader {
+    [loadingIndicator startAnimating];
+}
+
+- (void)hideLoader {
+    [loadingIndicator stopAnimating];
 }
 
 - (void)stateChanged {
     [self nextStep];
-}
-
-- (void)onSyncStopping {
-    [self showLoadingHud];
 }
 
 #pragma mark update everything
@@ -124,7 +126,7 @@
     }
     
     if ( [layer elementsOnTheDesk] >= MAX_ELEMENTS ) {
-        [self hideLoadingHud];
+        [self hideLoader];
         return;
     }
     
@@ -138,14 +140,14 @@
     if ( nextEmail == nil ) {
         if ([[Deps sharedInstance].synchroManager isSyncing]) {
             if ( [layer elementsOnTheDesk] == 0 ) {
-                [self showLoadingHud];
+                [self showLoader];
             }
         } else {
-            [self hideLoadingHud];
+            [self hideLoader];
             // Inbox empty
         }
     } else {
-        [self hideLoadingHud];
+        [self hideLoader];
         [layer showFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
         
         [layer putEmail:nextEmail];
@@ -155,6 +157,17 @@
     }    
 }
 
+- (void)cleanDesk {
+    [layer cleanDesk];
+}
+
+- (void)setLoaderVisible:(BOOL)visible {
+    if ( visible ) {
+        [self showLoader];
+    } else {
+        [self hideLoader];
+    }
+}
 - (void)onSyncReloaded{
     [layer cleanDesk];
     [self startSyncIfNeeded];
@@ -173,7 +186,7 @@
  * Stop the synchro and present the error view
  */
 - (void)putInErrorState {
-    [self hideLoadingHud];
+    [self hideLoader];
     ErrorController* errorController = [[ErrorController alloc] initWithRetryBlock:^{
         [self startSyncIfNeeded];
     }];
@@ -238,10 +251,9 @@
     [self.view addSubview:glView];
     [self setView:glView];
     layer = [[DeskLayer alloc] initWithDelegate:self];
-    loadingHud = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
-    loadingHud.labelText = NSLocalizedString(@"desk.loadinghud.title",@"");
-    loadingHud.detailsLabelText = NSLocalizedString(@"desk.loadinghud.message",@"");
-    [self.view addSubview:loadingHud];
+    loadingIndicator = [self buildLoader];
+    loadingIndicator.center = CGPointMake(145, 400);
+    [self.view addSubview:loadingIndicator];
 }
 
 - (void)viewDidUnload {
@@ -249,7 +261,6 @@
     [layer release];
     [glView removeFromSuperview];
     [glView release];
-    [loadingHud release];
 }
 
 - (void)presentInNavigationController:(UIViewController *)controller {
@@ -296,6 +307,10 @@
     NSError* error = nil;
     FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
     [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
+}
+
+- (void)performBlock:(void(^)())onCleaned {
+    onCleaned();
 }
 
 @end
