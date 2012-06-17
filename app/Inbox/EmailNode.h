@@ -19,8 +19,8 @@
 
 + (int)ANIMATION_DURATION;
 
-- (id) initWithEmailModel:(EmailModel *)model bodyDef:(b2BodyDef)bodyDef world:(b2World *)world;
-- (void) scaleOut;
+- (id)initWithEmailModel:(EmailModel *)model bodyDef:(b2BodyDef)bodyDef world:(b2World *)world;
+- (void)scaleOut;
 
 
 @end

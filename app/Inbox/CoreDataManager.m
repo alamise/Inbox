@@ -14,8 +14,8 @@
 @implementation CoreDataManager
 @synthesize mainContext, syncContext;
 
--(id)init{
-    if (self = [super init]){
+- (id)init {
+    if ( self = [super init] ) {
         self.mainContext = [[[NSManagedObjectContext alloc] init] autorelease];
         [self.mainContext setStalenessInterval:0];
         [self.mainContext setPersistentStoreCoordinator: self.persistentStoreCoordinator];        
@@ -36,7 +36,7 @@
 
 }
 
-- (void)mainContextDidSave:(NSNotification*)notif {
+- (void)mainContextDidSave:(NSNotification *)notif {
     [[Deps sharedInstance].threadsManager performBlockOnBackgroundThread:^{
         [self.syncContext lock];
         [self.syncContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
@@ -45,7 +45,7 @@
     } waitUntilDone:NO];
 }
 
-- (void)syncContextDidSave:(NSNotification*)notif {
+- (void)syncContextDidSave:(NSNotification *)notif {
     [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
         [self.mainContext lock];
         [self.mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
@@ -54,7 +54,7 @@
     } waitUntilDone:NO];
 }
 
--(void)dealloc{
+- (void)dealloc {
     self.mainContext = nil;
     self.syncContext = nil;
     [managedObjectModel release];

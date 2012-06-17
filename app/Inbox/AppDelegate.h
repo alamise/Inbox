@@ -11,5 +11,9 @@
     UINavigationController* navigationController;
 }
 @property (nonatomic, retain,readwrite) UIWindow *window;
-+ (AppDelegate*)sharedInstance;
+
++ (AppDelegate *)sharedInstance;
+- (void)asyncActivityStarted;
+- (void)asyncActivityEnded;
+
 @end

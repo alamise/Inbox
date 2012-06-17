@@ -22,39 +22,53 @@
 @property(nonatomic, retain) UINavigationController *navigationController;
 @property(nonatomic, retain, readwrite) CoreDataManager *coreDataManager;
 @property(nonatomic, retain, readwrite) BackgroundThread *backgroundThread;
+
 @end
 
 @implementation AppDelegate
 @synthesize window, navigationController, coreDataManager, backgroundThread;
 
-- (void) applicationDidFinishLaunching:(UIApplication*)application{
-    if (![CCDirector setDirectorType:kCCDirectorTypeDisplayLink]) {
+- (void)applicationDidFinishLaunching:(UIApplication*)application {
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    [self setupDirector];
+	[self setupWindow];
+    [FlurryAnalytics logEvent:@"app in use" timed:YES];
+}
+
+#pragma mark - setup method
+
+-(void)setupLogger {
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    #ifndef DEBUG
+        [FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
+        [[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
+        NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    #endif
+}
+
+- (void)setupDirector {
+    if ( ![CCDirector setDirectorType:kCCDirectorTypeDisplayLink] ) {
         [CCDirector setDirectorType:kCCDirectorTypeDefault];
     }
-
     CCDirector *director = [CCDirector sharedDirector];
     [director setAnimationInterval:1.0/60];
     [director setDisplayFPS:YES];
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     [director setDeviceOrientation:kCCDeviceOrientationPortrait];
-	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
 
-    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+- (void)setupWindow {
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:[Deps sharedInstance].deskController];
 	[window addSubview: navigationController.view];    
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-
-    //[FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
-    //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
-    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [FlurryAnalytics logEvent:@"app in use" timed:YES];
     [window makeKeyAndVisible];
 }
-/*
-void uncaughtExceptionHandler(NSException *exception) {
-    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
-}
- */
+
+#ifndef DEBUG
+    void uncaughtExceptionHandler(NSException *exception) {
+        [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
+    }
+#endif
 
 - (void)asyncActivityStarted {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -64,20 +78,16 @@ void uncaughtExceptionHandler(NSException *exception) {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
-- (void)dealloc {
-    self.coreDataManager = nil;
-    [[CCDirector sharedDirector] end];
-    [window release];
-    [navigationController release];
-    [self.backgroundThread stop];
-    self.backgroundThread = nil;
-    [super dealloc];
-}
-
 - (NSString *)plistPath {
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     return [documentsDirectory stringByAppendingPathComponent:@"infos.plist"];
 }
+
++ (AppDelegate *)sharedInstance {
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+#pragma mark - ApplicationDelegate's methods
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [FlurryAnalytics endTimedEvent:@"app in use" withParameters:nil];
@@ -90,10 +100,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
         [[Deps sharedInstance].synchroManager startSync];
     }
-}
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    [[CCDirector sharedDirector] purgeCachedData];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication *)application {
@@ -124,8 +130,18 @@ void uncaughtExceptionHandler(NSException *exception) {
     [[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
-+(AppDelegate*)sharedInstance {
-    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    [[CCDirector sharedDirector] purgeCachedData];
+}
+
+- (void)dealloc {
+    self.coreDataManager = nil;
+    [[CCDirector sharedDirector] end];
+    [window release];
+    [navigationController release];
+    [self.backgroundThread stop];
+    self.backgroundThread = nil;
+    [super dealloc];
 }
 
 @end

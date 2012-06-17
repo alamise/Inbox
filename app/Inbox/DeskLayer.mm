@@ -75,7 +75,6 @@ static int zIndex = INT_MAX;
 -(void)showFolders:(NSArray*)folders{
     NSArray* currentFolders = foldersTable.folders;
     NSArray* newFolders = [folders ArrayOfManagedIds];
-    #warning the order is not the same !!
     if (![currentFolders isEqualToArray:newFolders]){
         [self showFolders_hideAndSet:newFolders];
     }

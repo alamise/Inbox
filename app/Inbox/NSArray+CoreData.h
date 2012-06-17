@@ -2,5 +2,6 @@
 
 @interface NSArray (CoreData)
 
--(NSArray*)ArrayOfManagedIds;
+- (NSArray *)ArrayOfManagedIds;
+
 @end

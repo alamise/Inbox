@@ -35,7 +35,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDone) name:SYNC_DONE object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onError) name:SYNC_FAILED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stateChanged) name:STATE_UPDATED object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSyncReloaded) name:SYNC_RELOADED object:nil];
 	}
 	return self;
 }
@@ -148,10 +147,14 @@
         }
     } else {
         [self hideLoader];
-        [layer showFolders:[[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error]];
-        
+        NSArray *folders = [[EmailReader sharedInstance] foldersForAccount:nextEmail.folder.account error:&error];
+        if ( error ) {
+            [self putInErrorState];
+            return;
+        }
+        [layer showFolders:folders];
         [layer putEmail:nextEmail];
-        if ([layer elementsOnTheDesk] < MAX_ELEMENTS){
+        if ( [layer elementsOnTheDesk] < MAX_ELEMENTS ) {
             [self nextStep];
         }
     }    
@@ -168,16 +171,12 @@
         [self hideLoader];
     }
 }
-- (void)onSyncReloaded{
-    [layer cleanDesk];
-    [self startSyncIfNeeded];
-}
 
--(void)onError {
+- (void)onError {
     [self putInErrorState];
 }
 
--(void)syncDone{
+- (void)syncDone {
 }
 
 #pragma mark display views
@@ -232,12 +231,12 @@
 
 }
 
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [layer refresh];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated {
 	CCDirector *director = [CCDirector sharedDirector];
     [director popScene];
     [director pause];
@@ -273,7 +272,7 @@
 
 #pragma mark desk protocol implementation
 
-- (void)emailTouched:(NSManagedObjectID *)emailId{
+- (void)emailTouched:(NSManagedObjectID *)emailId {
     [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES]; 
 }
 
@@ -299,18 +298,18 @@
     [self nextStep];
 }
 
-- (FolderModel*)archiveFolderForEmail:(EmailModel*)email {
+- (FolderModel *)archiveFolderForEmail:(EmailModel *)email {
     return [[EmailReader sharedInstance] archiveFolderForEmail:email error:nil];
 }
 
--(void)archiveEmail:(EmailModel *)email {
+- (void)archiveEmail:(EmailModel *)email {
     NSError* error = nil;
     FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:email error:&error];
     [[EmailReader sharedInstance] moveEmail:email toFolder:archiveFolder error:&error];
 }
 
-- (void)performBlock:(void(^)())onCleaned {
-    onCleaned();
+- (void)performBlock:(void(^)())block {
+    block();
 }
 
 @end

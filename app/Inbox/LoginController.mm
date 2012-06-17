@@ -85,7 +85,6 @@
 }
 
 - (void)triggerRefresh {
-    
     [[Deps sharedInstance].deskController setLoaderVisible:YES];
     [[Deps sharedInstance].synchroManager abortSync:^{
         NSError *error = nil;
@@ -94,7 +93,7 @@
             DDLogVerbose(@"Error occured when refreshing the account list");
             [self onUnknownError];
         }        
-        [[Deps sharedInstance].synchroManager reloadAccountsWithError:&error];
+        [[Deps sharedInstance].synchroManager startSync];
         if ( error ) {
             DDLogVerbose(@"Error occured when refreshing the account list");
             [self onUnknownError];

@@ -17,8 +17,7 @@
 @synthesize didMoved,isAppearing,isDisappearing,emailId;
 
 - (id)initWithEmailModel:(EmailModel*)model bodyDef:(b2BodyDef)bodyDef world:(b2World*)w{
-    self = [super init];
-    if (self) {
+    if ( self = [super init] ) {
         world = w;
         [self draw:model.subject senderName:model.senderName];
         self.emailId = model.objectID;
@@ -38,7 +37,6 @@
         fixtureDef.filter.categoryBits = EMAIL_CATEGORY;
         fixtureDef.filter.maskBits = EMAIL_MASK;
         body->CreateFixture(&fixtureDef);
-        //self.scale=0;
         free(dynamicBox);
     }
     return self;    
@@ -63,11 +61,6 @@
     [self setContentSize:CGSizeMake(217, 135)];
     [self setAnchorPoint:CGPointMake(0.5, 0.5)];
 
-}
-
--(void)onEnter{
-    [super onEnter];
-    //[self runAction:[CCScaleTo actionWithDuration:ANIMATION_DELAY scale:1]];
 }
 
 + (int)ANIMATION_DURATION {

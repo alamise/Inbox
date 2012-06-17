@@ -31,20 +31,6 @@
     [super dealloc];
 }
 
-- (void)reloadAccountsWithError:(NSError**)error {
-    if ( !error ) {
-        NSError* err;
-        error = &err;
-    }
-    *error = nil;
-    
-    //[self refreshEmailAccountsWithError:error];
-    if ( !*error ) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_RELOADED object:nil];
-    }
-    
-}
-
 /* private */
 - (void)refreshEmailAccountsWithError:(NSError **)error {
     DDLogVerbose(@"building synchronizer list");
@@ -81,6 +67,9 @@
 
 
 - (void)startSync {
+    if ( [self isSyncing] ) {
+        DDLogWarn(@"Sync started twice");
+    }
     DDLogVerbose(@"sync started");
     self.onSyncStopped = ^{
         [[Deps sharedInstance].threadsManager performBlockOnMainThread:^{
