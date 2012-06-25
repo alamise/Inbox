@@ -1,7 +1,3 @@
 #!/bin/bash
-ftp -inv ftp.inbox.tf << EOF
-user inbox $1
-cd www
+lftp ftp://inbox@ftp.inbox.tf -e "mirror -e -R . / ; quit"
 
-bye
-EOF 
