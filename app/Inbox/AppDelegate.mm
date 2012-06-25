@@ -13,7 +13,7 @@
 #import "ThreadsManager.h"
 #import "Deps.h"
 #import "SynchroManager.h"
-
+#import "config.h"
 #define APP_WILL_TERMINATE @"shouldSaveContext"
 #define APP_DID_ENTER_BACKGROUND @"didEnterBackground"
 

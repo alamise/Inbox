@@ -37,3 +37,4 @@
 
 #endif
 
+#define DEBUG
