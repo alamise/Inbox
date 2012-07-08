@@ -55,8 +55,7 @@
     }
 }
 
-
--(FolderModel*)archiveFolderForEmail:(EmailModel*)email error:(NSError**)error{
+-(FolderModel *)archiveFolderForAccount:(EmailAccountModel *)account error:(NSError **)error {
     if (!error) {
         NSError* err;
         error = &err;
@@ -66,10 +65,10 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:[FolderModel entityName] inManagedObjectContext:context];
     request.entity = entity;
-
+    
     NSMutableArray* array = [[NSMutableArray alloc] init];
     [array addObject:@"[Gmail]/All Mail"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path IN %@) AND account = %@",array,email.folder.account];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(path IN %@) AND account = %@", array, account];
     [array release];
     
     [request setPredicate:predicate];
@@ -80,15 +79,19 @@
         return nil;
     }else{
         if ([folders count] < 1){
-            return email.folder;
+            return nil;
         }else{
             return [folders lastObject];
         }
     }
 }
 
+- (FolderModel *)archiveFolderForEmail:(EmailModel*)email error:(NSError**)error{
+    return [self archiveFolderForAccount:email.folder.account error:error];
+}
 
--(NSArray*)foldersForAccount:(EmailAccountModel*)account error:(NSError**)error{
+
+- (NSArray*)foldersForAccount:(EmailAccountModel*)account error:(NSError**)error{
     if (!error) {
         NSError* err;
         error = &err;

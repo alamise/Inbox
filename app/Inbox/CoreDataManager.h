@@ -9,6 +9,7 @@
 @property(readonly,nonatomic,retain) NSManagedObjectContext* mainContext;
 @property(readonly,nonatomic,retain) NSManagedObjectContext* syncContext;
 -(void)resetDatabase;
+- (NSManagedObject *)objectFromIdInMainContext:(NSManagedObjectID *)objectID error:(NSError **)error;
 - (NSManagedObject *)objectFromId:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context error:(NSError **)error;
 - (void)postInit;
 @end

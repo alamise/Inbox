@@ -64,6 +64,12 @@
     [window makeKeyAndVisible];
 }
 
+- (void)startSync {
+    if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
+        [[Deps sharedInstance].synchroManager startSync];
+    }
+}
+
 #ifndef DEBUG
     void uncaughtExceptionHandler(NSException *exception) {
         [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
@@ -97,9 +103,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
 	[[CCDirector sharedDirector] resume];
-    if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
-        [[Deps sharedInstance].synchroManager startSync];
-    }
+    [self startSync];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication *)application {
@@ -111,9 +115,7 @@
 -(void) applicationWillEnterForeground:(UIApplication*)application {
     [FlurryAnalytics logEvent:@"app in use" timed:YES];
     [[CCDirector sharedDirector] startAnimation];
-    if ( ![[Deps sharedInstance].synchroManager isSyncing] ) {
-        [[Deps sharedInstance].synchroManager startSync];
-    }
+    [self startSync];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

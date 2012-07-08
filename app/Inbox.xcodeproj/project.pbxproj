@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F4020DB714F9135D00C93EE6 /* foldersWoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */; };
+		F402288F15A838D20042F63D /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F402288E15A838D20042F63D /* ActivityManager.m */; };
 		F405B91D156ED3F40048E4C4 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = F405B8FC156ED3F40048E4C4 /* iRate.m */; };
 		F40A01D91572C19C00D61AE3 /* FolderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A01D81572C19C00D61AE3 /* FolderModel.m */; };
 		F40BDEA514B9D20E00F2DC5F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40BDEA414B9D20D00F2DC5F /* MessageUI.framework */; };
@@ -640,6 +641,8 @@
 
 /* Begin PBXFileReference section */
 		F4020DB614F9135D00C93EE6 /* foldersWoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldersWoodBackground.png; sourceTree = "<group>"; };
+		F402288D15A838D20042F63D /* ActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
+		F402288E15A838D20042F63D /* ActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
 		F405B8FB156ED3F40048E4C4 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = iRate/iRate.h; sourceTree = "<group>"; };
 		F405B8FC156ED3F40048E4C4 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = iRate/iRate.m; sourceTree = "<group>"; };
 		F40A01D71572C19C00D61AE3 /* FolderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderModel.h; path = Inbox/FolderModel.h; sourceTree = SOURCE_ROOT; };
@@ -877,6 +880,8 @@
 				F42223391567AA3F0050F268 /* ThreadsManager.m */,
 				F418426B1556F31200753265 /* CoreDataManager.h */,
 				F418426C1556F31200753265 /* CoreDataManager.m */,
+				F402288D15A838D20042F63D /* ActivityManager.h */,
+				F402288E15A838D20042F63D /* ActivityManager.m */,
 			);
 			name = singletons;
 			sourceTree = "<group>";
@@ -2099,6 +2104,7 @@
 				F4FC7CF7156D8C0300290A1F /* Deps.m in Sources */,
 				F405B91D156ED3F40048E4C4 /* iRate.m in Sources */,
 				F40A01D91572C19C00D61AE3 /* FolderModel.m in Sources */,
+				F402288F15A838D20042F63D /* ActivityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

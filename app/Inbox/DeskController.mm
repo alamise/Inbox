@@ -20,11 +20,13 @@
 #import "SynchroManager.h"
 #import "ThreadsManager.h"
 #import "EmailNode.h"
+#import "ActivityManager.h"
 
 #define MAX_ELEMENTS 5
+
 @interface DeskController ()
-@property(nonatomic,retain,readwrite) ModelsManager *modelsManager;
--(void)nextStep;
+    @property(nonatomic,retain,readwrite) ModelsManager *modelsManager;
+    - (void)nextStep;
 @end
 
 @implementation DeskController
@@ -47,13 +49,16 @@
     [super dealloc];
 }
 
-
-- (void)showEmail:(NSManagedObjectID *)emailId {
-    EmailModel* email = (EmailModel*)[[[Deps sharedInstance].coreDataManager mainContext] objectWithID:emailId];
+- (void)showEmail:(EmailModel *)email {
+    NSError *error = nil;
+    if ( error ) {
+        [self putInErrorState];
+        return;
+    }
     if (!email.htmlBody){
-        //[loadingHud showWhileExecuting:@selector(fetchEmailBody:) onTarget:self withObject:emailId animated:YES];    
+        [self performSelectorOnMainThread:@selector(fetchEmailBody:) withObject:email waitUntilDone:NO];
     }else{
-        EmailController* emailController = [[EmailController alloc] initWithEmail:emailId];
+        EmailController* emailController = [[EmailController alloc] initWithEmail:email.objectID];
         [self presentInNavigationController:emailController];
         [emailController release];
     }
@@ -61,17 +66,14 @@
 
 - (void)fetchEmailBody:(EmailModel*)email {
     NSError* error = nil;
+    [[Deps sharedInstance].activityManager activityStarted];
     [[EmailReader sharedInstance] fetchEmailBody:email error:&error];
     if (!error){
         [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES];
     }else{
-        ErrorController* errorController = [[ErrorController alloc] initWithNibName:@"ErrorView" bundle:nil];
-        UINavigationController* navCtr = [[UINavigationController alloc] initWithRootViewController:errorController];
-        [navCtr.navigationBar setBarStyle:UIBarStyleBlack];
-        navCtr.modalPresentationStyle=UIModalPresentationFormSheet;
-        navCtr.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:navCtr animated:YES];
+        [self putInErrorState];
     }
+    [[Deps sharedInstance].activityManager activityEnded];
 }
 
 - (UIActivityIndicatorView *)buildLoader {
@@ -152,6 +154,12 @@
             [self putInErrorState];
             return;
         }
+        
+        FolderModel* archiveFolder = [[EmailReader sharedInstance] archiveFolderForEmail:nextEmail error:&error];
+        NSMutableArray *newFolders = [NSMutableArray arrayWithArray:folders];
+        [newFolders removeObject:archiveFolder];
+        folders = newFolders;
+        
         [layer showFolders:folders];
         [layer putEmail:nextEmail];
         if ( [layer elementsOnTheDesk] < MAX_ELEMENTS ) {
@@ -272,8 +280,8 @@
 
 #pragma mark desk protocol implementation
 
-- (void)emailTouched:(NSManagedObjectID *)emailId {
-    [self performSelectorOnMainThread:@selector(showEmail:) withObject:emailId waitUntilDone:YES]; 
+- (void)emailTouched:(EmailModel *)email {
+    [self performSelectorOnMainThread:@selector(showEmail:) withObject:email waitUntilDone:YES]; 
 }
 
 - (EmailModel*) lastEmailFromFolder:(FolderModel *)folder {

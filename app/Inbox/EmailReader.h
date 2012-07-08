@@ -16,4 +16,5 @@
 - (int)emailsCountInInboxes:(NSError **)error;
 - (int) emailsCountInFolder:(FolderModel *)folderId error:(NSError **)error;
 -(FolderModel *)archiveFolderForEmail:(EmailModel *)email error:(NSError **)error;
+-(FolderModel *)archiveFolderForAccount:(EmailAccountModel *)account error:(NSError **)error;
 @end

@@ -146,7 +146,17 @@ static int zIndex = INT_MAX;
 
 
 -(void) elementTouched:(id<ElementNodeProtocol>)element{
-    
+    if ( [element isKindOfClass:[EmailNode class]] ) {
+        
+        EmailNode *emailNode = (EmailNode *)element;
+        NSManagedObjectContext *context = [[Deps sharedInstance].coreDataManager mainContext];
+        NSError *error = nil;
+        
+        EmailModel *email = (EmailModel *)[[Deps sharedInstance].coreDataManager objectFromId:emailNode.emailId inContext:context error:&error];
+        if ( !error ) {
+            [delegate emailTouched:email];        
+        }
+    }
 }
 
 

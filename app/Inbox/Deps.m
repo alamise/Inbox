@@ -3,6 +3,7 @@
 #import "CoreDataManager.h"
 #import "SynchroManager.h"
 #import "DeskController.h"
+#import "ActivityManager.h"
 
 static Deps* instance;
 
@@ -11,6 +12,7 @@ static Deps* instance;
 @property(nonatomic, retain, readwrite) ThreadsManager *threadsManager;
 @property(nonatomic, retain, readwrite) SynchroManager *synchroManager;
 @property(nonatomic, retain, readwrite) DeskController *deskController;
+@property(nonatomic, retain, readwrite) ActivityManager *activityManager;
 @end
 
 @implementation Deps
@@ -19,6 +21,7 @@ static Deps* instance;
 @synthesize threadsManager;
 @synthesize synchroManager;
 @synthesize deskController;
+@synthesize activityManager;
 
 + (Deps*) sharedInstance{
     if (!instance){
@@ -33,6 +36,7 @@ static Deps* instance;
     self.coreDataManager = nil;
     self.threadsManager = nil;
     self.synchroManager = nil;
+    self.activityManager = nil;
     [super dealloc];
 }
 
@@ -40,7 +44,7 @@ static Deps* instance;
     if (self = [super init]){
         self.threadsManager = [[[ThreadsManager alloc] init] autorelease];
         [self.threadsManager.thread start];
-        
+        self.activityManager = [[[ActivityManager alloc] init] autorelease];
         self.coreDataManager = [[[CoreDataManager alloc] init] autorelease];
         self.deskController = [[[DeskController alloc] init] autorelease];
         self.synchroManager = [[[SynchroManager alloc] init] autorelease];

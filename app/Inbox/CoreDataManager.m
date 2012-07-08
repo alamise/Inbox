@@ -101,6 +101,11 @@
     return [path stringByAppendingPathComponent: @"coredata.sqlite"];
 }
 
+- (NSManagedObject *)objectFromIdInMainContext:(NSManagedObjectID *)objectID error:(NSError **)error {
+    NSManagedObjectContext *mainCtx = [self mainContext];
+    return [self objectFromId:objectID inContext:mainCtx error:error];
+}
+
 
 - (NSManagedObject *)objectFromId:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context error:(NSError **)error {
     if ( !error ) {
@@ -108,7 +113,6 @@
         error = &err;
     }
     *error = nil;
-    
     NSManagedObject *object = [context objectWithID:objectID];
     if ( ![object isFault] ) {
         return object;
