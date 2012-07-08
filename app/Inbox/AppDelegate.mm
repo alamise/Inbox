@@ -41,7 +41,7 @@
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     #ifndef DEBUG
         [FlurryAnalytics startSession:[[PrivateValues sharedInstance]flurryApiKey]];
-        [[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
+        //[[BWQuincyManager sharedQuincyManager] setSubmissionURL:[[PrivateValues sharedInstance] quincyServer]];
         NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     #endif
 }

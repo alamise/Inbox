@@ -2160,8 +2160,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -2175,8 +2175,8 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
 				SDKROOT = iphoneos5.1;
 				SKIP_INSTALL = NO;
 			};
@@ -2186,8 +2186,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Watiau (D6Y8H6ER4F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon Watiau";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon Watiau";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2200,8 +2200,8 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Inbox;
-				PROVISIONING_PROFILE = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC7D6F91-ABEC-43D5-AF67-BC6348860967";
+				PROVISIONING_PROFILE = "148E5614-639A-4247-BFD1-5239ED562FF7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "148E5614-639A-4247-BFD1-5239ED562FF7";
 				SDKROOT = iphoneos5.1;
 				SKIP_INSTALL = NO;
 			};
